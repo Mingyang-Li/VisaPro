@@ -25,7 +25,7 @@ model EmploymentHistory {
   updatedAt DateTime @updatedAt
 }
 
-model EducationHiatory {
+model EducationHistory {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
   updatedAt DateTime @updatedAt

@@ -13,10 +13,10 @@ import { EmploymentHistoryList } from "./employmentHistory/EmploymentHistoryList
 import { EmploymentHistoryCreate } from "./employmentHistory/EmploymentHistoryCreate";
 import { EmploymentHistoryEdit } from "./employmentHistory/EmploymentHistoryEdit";
 import { EmploymentHistoryShow } from "./employmentHistory/EmploymentHistoryShow";
-import { EducationHiatoryList } from "./educationHiatory/EducationHiatoryList";
-import { EducationHiatoryCreate } from "./educationHiatory/EducationHiatoryCreate";
-import { EducationHiatoryEdit } from "./educationHiatory/EducationHiatoryEdit";
-import { EducationHiatoryShow } from "./educationHiatory/EducationHiatoryShow";
+import { EducationHistoryList } from "./educationHistory/EducationHistoryList";
+import { EducationHistoryCreate } from "./educationHistory/EducationHistoryCreate";
+import { EducationHistoryEdit } from "./educationHistory/EducationHistoryEdit";
+import { EducationHistoryShow } from "./educationHistory/EducationHistoryShow";
 import { TravelHistoryList } from "./travelHistory/TravelHistoryList";
 import { TravelHistoryCreate } from "./travelHistory/TravelHistoryCreate";
 import { TravelHistoryEdit } from "./travelHistory/TravelHistoryEdit";
@@ -66,11 +66,11 @@ const App = (): React.ReactElement => {
           show={EmploymentHistoryShow}
         />
         <Resource
-          name="EducationHiatory"
-          list={EducationHiatoryList}
-          edit={EducationHiatoryEdit}
-          create={EducationHiatoryCreate}
-          show={EducationHiatoryShow}
+          name="EducationHistory"
+          list={EducationHistoryList}
+          edit={EducationHistoryEdit}
+          create={EducationHistoryCreate}
+          show={EducationHistoryShow}
         />
         <Resource
           name="TravelHistory"

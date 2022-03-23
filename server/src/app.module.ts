@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { UserModule } from "./user/user.module";
 import { EmploymentHistoryModule } from "./employmentHistory/employmentHistory.module";
-import { EducationHiatoryModule } from "./educationHiatory/educationHiatory.module";
+import { EducationHistoryModule } from "./educationHistory/educationHistory.module";
 import { TravelHistoryModule } from "./travelHistory/travelHistory.module";
 import { FamilyMemberModule } from "./familyMember/familyMember.module";
 import { ACLModule } from "./auth/acl.module";
@@ -19,7 +19,7 @@ import { GraphQLModule } from "@nestjs/graphql";
   imports: [
     UserModule,
     EmploymentHistoryModule,
-    EducationHiatoryModule,
+    EducationHistoryModule,
     TravelHistoryModule,
     FamilyMemberModule,
     ACLModule,
