@@ -1,0 +1,19 @@
+{
+  "dataServiceGeneratorVersion": "0.12.1",
+  "appInfo": {
+    "name": "VisaPro",
+    "description": "",
+    "version": "vm7nevm7",
+    "id": "cl13f55te158651601s6ehjibqeo",
+    "url": "https://app.amplication.com/cl13f55te158651601s6ehjibqeo",
+    "settings": {
+      "dbHost": "localhost",
+      "dbName": "",
+      "dbPassword": "admin",
+      "dbPort": 5432,
+      "dbUser": "admin",
+      "appId": "cl13f55te158651601s6ehjibqeo",
+      "authProvider": "Jwt"
+    }
+  }
+}
