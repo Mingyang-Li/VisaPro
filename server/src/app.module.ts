@@ -38,7 +38,7 @@ import { GraphQLModule } from "@nestjs/graphql";
         return {
           autoSchemaFile: "schema.graphql",
           sortSchema: true,
-          playground,
+          playground: true,
           introspection: playground || introspection,
         };
       },
