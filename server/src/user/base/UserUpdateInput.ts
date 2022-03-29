@@ -11,9 +11,100 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional } from "class-validator";
+import { ApplicantUpdateManyWithoutUsersInput } from "./ApplicantUpdateManyWithoutUsersInput";
+import { ValidateNested, IsOptional, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import { EducationHistoryUpdateManyWithoutUsersInput } from "./EducationHistoryUpdateManyWithoutUsersInput";
+import { EmploymentHistoryUpdateManyWithoutUsersInput } from "./EmploymentHistoryUpdateManyWithoutUsersInput";
+import { FamilyMemberUpdateManyWithoutUsersInput } from "./FamilyMemberUpdateManyWithoutUsersInput";
+import { PersonalInfoUpdateManyWithoutUsersInput } from "./PersonalInfoUpdateManyWithoutUsersInput";
+import { TravelHistoryUpdateManyWithoutUsersInput } from "./TravelHistoryUpdateManyWithoutUsersInput";
 @InputType()
 class UserUpdateInput {
+  @ApiProperty({
+    required: false,
+    type: () => ApplicantUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => ApplicantUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => ApplicantUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  applicants?: ApplicantUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => ApplicantUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => ApplicantUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => ApplicantUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  applicantsArchived?: ApplicantUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => ApplicantUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => ApplicantUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => ApplicantUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  applicantsCreated?: ApplicantUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => ApplicantUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => ApplicantUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => ApplicantUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  applicantsUpdated?: ApplicantUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => EducationHistoryUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => EducationHistoryUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => EducationHistoryUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  educationHistoriesArchived?: EducationHistoryUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => EducationHistoryUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => EducationHistoryUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => EducationHistoryUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  educationHistoriesCreated?: EducationHistoryUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => EducationHistoryUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => EducationHistoryUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => EducationHistoryUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  educationHistoriesUpdated?: EducationHistoryUpdateManyWithoutUsersInput;
+
   @ApiProperty({
     required: false,
     type: String,
@@ -24,6 +115,78 @@ class UserUpdateInput {
     nullable: true,
   })
   email?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => EmploymentHistoryUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => EmploymentHistoryUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => EmploymentHistoryUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  employmentHistoriesArchived?: EmploymentHistoryUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => EmploymentHistoryUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => EmploymentHistoryUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => EmploymentHistoryUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  employmentHistoriesCreated?: EmploymentHistoryUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => EmploymentHistoryUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => EmploymentHistoryUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => EmploymentHistoryUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  employmentHistoriesUpdated?: EmploymentHistoryUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => FamilyMemberUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => FamilyMemberUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => FamilyMemberUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  familyMembersArchived?: FamilyMemberUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => FamilyMemberUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => FamilyMemberUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => FamilyMemberUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  familyMembersCreated?: FamilyMemberUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => FamilyMemberUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => FamilyMemberUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => FamilyMemberUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  familyMembersUpdated?: FamilyMemberUpdateManyWithoutUsersInput;
 
   @ApiProperty({
     required: false,
@@ -60,6 +223,42 @@ class UserUpdateInput {
 
   @ApiProperty({
     required: false,
+    type: () => PersonalInfoUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => PersonalInfoUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => PersonalInfoUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  personalInfosArchived?: PersonalInfoUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => PersonalInfoUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => PersonalInfoUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => PersonalInfoUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  personalInfosCreated?: PersonalInfoUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => PersonalInfoUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => PersonalInfoUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => PersonalInfoUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  personalInfosUpdated?: PersonalInfoUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
     type: [String],
   })
   @IsString({
@@ -70,6 +269,42 @@ class UserUpdateInput {
     nullable: true,
   })
   roles?: Array<string>;
+
+  @ApiProperty({
+    required: false,
+    type: () => TravelHistoryUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => TravelHistoryUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => TravelHistoryUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  travelHistoriesArchived?: TravelHistoryUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => TravelHistoryUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => TravelHistoryUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => TravelHistoryUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  travelHistoriesCreated?: TravelHistoryUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => TravelHistoryUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => TravelHistoryUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => TravelHistoryUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  travelHistoriesUpdated?: TravelHistoryUpdateManyWithoutUsersInput;
 
   @ApiProperty({
     required: false,

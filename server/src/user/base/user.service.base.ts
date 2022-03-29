@@ -10,7 +10,18 @@ https://docs.amplication.com/docs/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "nestjs-prisma";
-import { Prisma, User } from "@prisma/client";
+
+import {
+  Prisma,
+  User,
+  Applicant,
+  EducationHistory,
+  EmploymentHistory,
+  FamilyMember,
+  PersonalInfo,
+  TravelHistory,
+} from "@prisma/client";
+
 import { PasswordService } from "../../auth/password.service";
 import { transformStringFieldUpdateInput } from "../../prisma.util";
 
@@ -70,5 +81,214 @@ export class UserServiceBase {
     args: Prisma.SelectSubset<T, Prisma.UserDeleteArgs>
   ): Promise<User> {
     return this.prisma.user.delete(args);
+  }
+
+  async findApplicants(
+    parentId: string,
+    args: Prisma.ApplicantFindManyArgs
+  ): Promise<Applicant[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .applicants(args);
+  }
+
+  async findApplicantsArchived(
+    parentId: string,
+    args: Prisma.ApplicantFindManyArgs
+  ): Promise<Applicant[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .applicantsArchived(args);
+  }
+
+  async findApplicantsCreated(
+    parentId: string,
+    args: Prisma.ApplicantFindManyArgs
+  ): Promise<Applicant[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .applicantsCreated(args);
+  }
+
+  async findApplicantsUpdated(
+    parentId: string,
+    args: Prisma.ApplicantFindManyArgs
+  ): Promise<Applicant[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .applicantsUpdated(args);
+  }
+
+  async findEducationHistoriesArchived(
+    parentId: string,
+    args: Prisma.EducationHistoryFindManyArgs
+  ): Promise<EducationHistory[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .educationHistoriesArchived(args);
+  }
+
+  async findEducationHistoriesCreated(
+    parentId: string,
+    args: Prisma.EducationHistoryFindManyArgs
+  ): Promise<EducationHistory[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .educationHistoriesCreated(args);
+  }
+
+  async findEducationHistoriesUpdated(
+    parentId: string,
+    args: Prisma.EducationHistoryFindManyArgs
+  ): Promise<EducationHistory[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .educationHistoriesUpdated(args);
+  }
+
+  async findEmploymentHistoriesArchived(
+    parentId: string,
+    args: Prisma.EmploymentHistoryFindManyArgs
+  ): Promise<EmploymentHistory[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .employmentHistoriesArchived(args);
+  }
+
+  async findEmploymentHistoriesCreated(
+    parentId: string,
+    args: Prisma.EmploymentHistoryFindManyArgs
+  ): Promise<EmploymentHistory[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .employmentHistoriesCreated(args);
+  }
+
+  async findEmploymentHistoriesUpdated(
+    parentId: string,
+    args: Prisma.EmploymentHistoryFindManyArgs
+  ): Promise<EmploymentHistory[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .employmentHistoriesUpdated(args);
+  }
+
+  async findFamilyMembersArchived(
+    parentId: string,
+    args: Prisma.FamilyMemberFindManyArgs
+  ): Promise<FamilyMember[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .familyMembersArchived(args);
+  }
+
+  async findFamilyMembersCreated(
+    parentId: string,
+    args: Prisma.FamilyMemberFindManyArgs
+  ): Promise<FamilyMember[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .familyMembersCreated(args);
+  }
+
+  async findFamilyMembersUpdated(
+    parentId: string,
+    args: Prisma.FamilyMemberFindManyArgs
+  ): Promise<FamilyMember[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .familyMembersUpdated(args);
+  }
+
+  async findPersonalInfosArchived(
+    parentId: string,
+    args: Prisma.PersonalInfoFindManyArgs
+  ): Promise<PersonalInfo[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .personalInfosArchived(args);
+  }
+
+  async findPersonalInfosCreated(
+    parentId: string,
+    args: Prisma.PersonalInfoFindManyArgs
+  ): Promise<PersonalInfo[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .personalInfosCreated(args);
+  }
+
+  async findPersonalInfosUpdated(
+    parentId: string,
+    args: Prisma.PersonalInfoFindManyArgs
+  ): Promise<PersonalInfo[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .personalInfosUpdated(args);
+  }
+
+  async findTravelHistoriesArchived(
+    parentId: string,
+    args: Prisma.TravelHistoryFindManyArgs
+  ): Promise<TravelHistory[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .travelHistoriesArchived(args);
+  }
+
+  async findTravelHistoriesCreated(
+    parentId: string,
+    args: Prisma.TravelHistoryFindManyArgs
+  ): Promise<TravelHistory[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .travelHistoriesCreated(args);
+  }
+
+  async findTravelHistoriesUpdated(
+    parentId: string,
+    args: Prisma.TravelHistoryFindManyArgs
+  ): Promise<TravelHistory[]> {
+    return this.prisma.user
+      .findUnique({
+        where: { id: parentId },
+      })
+      .travelHistoriesUpdated(args);
   }
 }

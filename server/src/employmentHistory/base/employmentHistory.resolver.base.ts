@@ -19,10 +19,14 @@ import * as gqlUserRoles from "../../auth/gqlUserRoles.decorator";
 import * as abacUtil from "../../auth/abac.util";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+import { CreateEmploymentHistoryArgs } from "./CreateEmploymentHistoryArgs";
+import { UpdateEmploymentHistoryArgs } from "./UpdateEmploymentHistoryArgs";
 import { DeleteEmploymentHistoryArgs } from "./DeleteEmploymentHistoryArgs";
 import { EmploymentHistoryFindManyArgs } from "./EmploymentHistoryFindManyArgs";
 import { EmploymentHistoryFindUniqueArgs } from "./EmploymentHistoryFindUniqueArgs";
 import { EmploymentHistory } from "./EmploymentHistory";
+import { Applicant } from "../../applicant/base/Applicant";
+import { User } from "../../user/base/User";
 import { EmploymentHistoryService } from "../employmentHistory.service";
 
 @graphql.Resolver(() => EmploymentHistory)
@@ -98,6 +102,143 @@ export class EmploymentHistoryResolverBase {
   @graphql.Mutation(() => EmploymentHistory)
   @nestAccessControl.UseRoles({
     resource: "EmploymentHistory",
+    action: "create",
+    possession: "any",
+  })
+  async createEmploymentHistory(
+    @graphql.Args() args: CreateEmploymentHistoryArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<EmploymentHistory> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "create",
+      possession: "any",
+      resource: "EmploymentHistory",
+    });
+    const invalidAttributes = abacUtil.getInvalidAttributes(
+      permission,
+      args.data
+    );
+    if (invalidAttributes.length) {
+      const properties = invalidAttributes
+        .map((attribute: string) => JSON.stringify(attribute))
+        .join(", ");
+      const roles = userRoles
+        .map((role: string) => JSON.stringify(role))
+        .join(",");
+      throw new apollo.ApolloError(
+        `providing the properties: ${properties} on ${"EmploymentHistory"} creation is forbidden for roles: ${roles}`
+      );
+    }
+    // @ts-ignore
+    return await this.service.create({
+      ...args,
+      data: {
+        ...args.data,
+
+        applicant: args.data.applicant
+          ? {
+              connect: args.data.applicant,
+            }
+          : undefined,
+
+        archivedBy: args.data.archivedBy
+          ? {
+              connect: args.data.archivedBy,
+            }
+          : undefined,
+
+        createdBy: args.data.createdBy
+          ? {
+              connect: args.data.createdBy,
+            }
+          : undefined,
+
+        updatedBy: args.data.updatedBy
+          ? {
+              connect: args.data.updatedBy,
+            }
+          : undefined,
+      },
+    });
+  }
+
+  @graphql.Mutation(() => EmploymentHistory)
+  @nestAccessControl.UseRoles({
+    resource: "EmploymentHistory",
+    action: "update",
+    possession: "any",
+  })
+  async updateEmploymentHistory(
+    @graphql.Args() args: UpdateEmploymentHistoryArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<EmploymentHistory | null> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "update",
+      possession: "any",
+      resource: "EmploymentHistory",
+    });
+    const invalidAttributes = abacUtil.getInvalidAttributes(
+      permission,
+      args.data
+    );
+    if (invalidAttributes.length) {
+      const properties = invalidAttributes
+        .map((attribute: string) => JSON.stringify(attribute))
+        .join(", ");
+      const roles = userRoles
+        .map((role: string) => JSON.stringify(role))
+        .join(",");
+      throw new apollo.ApolloError(
+        `providing the properties: ${properties} on ${"EmploymentHistory"} update is forbidden for roles: ${roles}`
+      );
+    }
+    try {
+      // @ts-ignore
+      return await this.service.update({
+        ...args,
+        data: {
+          ...args.data,
+
+          applicant: args.data.applicant
+            ? {
+                connect: args.data.applicant,
+              }
+            : undefined,
+
+          archivedBy: args.data.archivedBy
+            ? {
+                connect: args.data.archivedBy,
+              }
+            : undefined,
+
+          createdBy: args.data.createdBy
+            ? {
+                connect: args.data.createdBy,
+              }
+            : undefined,
+
+          updatedBy: args.data.updatedBy
+            ? {
+                connect: args.data.updatedBy,
+              }
+            : undefined,
+        },
+      });
+    } catch (error) {
+      if (isRecordNotFoundError(error)) {
+        throw new apollo.ApolloError(
+          `No resource was found for ${JSON.stringify(args.where)}`
+        );
+      }
+      throw error;
+    }
+  }
+
+  @graphql.Mutation(() => EmploymentHistory)
+  @nestAccessControl.UseRoles({
+    resource: "EmploymentHistory",
     action: "delete",
     possession: "any",
   })
@@ -115,5 +256,101 @@ export class EmploymentHistoryResolverBase {
       }
       throw error;
     }
+  }
+
+  @graphql.ResolveField(() => Applicant, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "EmploymentHistory",
+    action: "read",
+    possession: "any",
+  })
+  async applicant(
+    @graphql.Parent() parent: EmploymentHistory,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<Applicant | null> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "Applicant",
+    });
+    const result = await this.service.getApplicant(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return permission.filter(result);
+  }
+
+  @graphql.ResolveField(() => User, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "EmploymentHistory",
+    action: "read",
+    possession: "any",
+  })
+  async archivedBy(
+    @graphql.Parent() parent: EmploymentHistory,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<User | null> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "User",
+    });
+    const result = await this.service.getArchivedBy(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return permission.filter(result);
+  }
+
+  @graphql.ResolveField(() => User, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "EmploymentHistory",
+    action: "read",
+    possession: "any",
+  })
+  async createdBy(
+    @graphql.Parent() parent: EmploymentHistory,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<User | null> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "User",
+    });
+    const result = await this.service.getCreatedBy(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return permission.filter(result);
+  }
+
+  @graphql.ResolveField(() => User, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "EmploymentHistory",
+    action: "read",
+    possession: "any",
+  })
+  async updatedBy(
+    @graphql.Parent() parent: EmploymentHistory,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<User | null> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "User",
+    });
+    const result = await this.service.getUpdatedBy(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return permission.filter(result);
   }
 }

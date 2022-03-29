@@ -8,40 +8,167 @@ generator client {
 }
 
 model User {
-  createdAt DateTime @default(now())
-  email     String?
-  firstName String?
-  id        String   @id @default(cuid())
-  lastName  String?
-  password  String
-  roles     String[]
-  updatedAt DateTime @updatedAt
-  username  String   @unique
+  applicants                  Applicant[]         @relation(name: "ApplicantsOnUser")
+  applicantsArchived          Applicant[]         @relation(name: "applicantsArchived")
+  applicantsCreated           Applicant[]         @relation(name: "applicantsCreated")
+  applicantsUpdated           Applicant[]         @relation(name: "applicantsUpdated")
+  createdAt                   DateTime            @default(now())
+  educationHistoriesArchived  EducationHistory[]  @relation(name: "educationHistoriesArchived")
+  educationHistoriesCreated   EducationHistory[]  @relation(name: "educationHistoriesCreated")
+  educationHistoriesUpdated   EducationHistory[]  @relation(name: "educationHistoriesUpdated")
+  email                       String?
+  employmentHistoriesArchived EmploymentHistory[] @relation(name: "employmentHistoriesArchived")
+  employmentHistoriesCreated  EmploymentHistory[] @relation(name: "employmentHistoriesCreated")
+  employmentHistoriesUpdated  EmploymentHistory[] @relation(name: "employmentHistoriesUpdated")
+  familyMembersArchived       FamilyMember[]      @relation(name: "familyMembersArchived")
+  familyMembersCreated        FamilyMember[]      @relation(name: "familyMembersCreated")
+  familyMembersUpdated        FamilyMember[]      @relation(name: "familyMembersUpdated")
+  firstName                   String?
+  id                          String              @id @default(cuid())
+  lastName                    String?
+  password                    String
+  personalInfosArchived       PersonalInfo[]      @relation(name: "personalInfosArchived")
+  personalInfosCreated        PersonalInfo[]      @relation(name: "personalInfosCreated")
+  personalInfosUpdated        PersonalInfo[]      @relation(name: "personalInfosUpdated")
+  roles                       String[]
+  travelHistoriesArchived     TravelHistory[]     @relation(name: "travelHistoriesArchived")
+  travelHistoriesCreated      TravelHistory[]     @relation(name: "travelHistoriesCreated")
+  travelHistoriesUpdated      TravelHistory[]     @relation(name: "travelHistoriesUpdated")
+  updatedAt                   DateTime            @updatedAt
+  username                    String              @unique
 }
 
 model EmploymentHistory {
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  updatedAt DateTime @updatedAt
+  additionalInfo   String?
+  applicant        Applicant? @relation(fields: [applicantId], references: [id])
+  applicantId      String?
+  archived         Boolean?
+  archivedBy       User?      @relation(name: "employmentHistoriesArchived", fields: [archivedById], references: [id])
+  archivedById     String?
+  cityOfWokrk      String
+  companyName      String
+  countryOfWork    String
+  createdAt        DateTime   @default(now())
+  createdBy        User?      @relation(name: "employmentHistoriesCreated", fields: [createdById], references: [id])
+  createdById      String?
+  duties           String?
+  endDate          DateTime?
+  id               String     @id @default(cuid())
+  isCurrentJob     Boolean?
+  jobTitle         String
+  nzBusinessNumber String
+  startDate        DateTime
+  updatedAt        DateTime   @updatedAt
+  updatedBy        User?      @relation(name: "employmentHistoriesUpdated", fields: [updatedById], references: [id])
+  updatedById      String?
 }
 
-model EducationHiatory {
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  updatedAt DateTime @updatedAt
+model EducationHistory {
+  additionalInfo       String?
+  applicant            Applicant? @relation(fields: [applicantId], references: [id])
+  applicantId          String?
+  archived             Boolean?
+  archivedBy           User?      @relation(name: "educationHistoriesArchived", fields: [archivedById], references: [id])
+  archivedById         String?
+  city                 String
+  country              String
+  createdAt            DateTime   @default(now())
+  createdBy            User?      @relation(name: "educationHistoriesCreated", fields: [createdById], references: [id])
+  createdById          String?
+  endDate              DateTime?
+  id                   String     @id @default(cuid())
+  institutionName      String
+  isCurrentInstitution Boolean?
+  qualificationGained  String?
+  startDate            DateTime
+  updatedAt            DateTime   @updatedAt
+  updatedBy            User?      @relation(name: "educationHistoriesUpdated", fields: [updatedById], references: [id])
+  updatedById          String?
 }
 
 model TravelHistory {
-  createdAt          DateTime @default(now())
+  applicant          Applicant? @relation(fields: [applicantId], references: [id])
+  applicantId        String?
+  archived           Boolean?
+  archivedBy         User?      @relation(name: "travelHistoriesArchived", fields: [archivedById], references: [id])
+  archivedById       String?
+  createdAt          DateTime   @default(now())
+  createdBy          User?      @relation(name: "travelHistoriesCreated", fields: [createdById], references: [id])
+  createdById        String?
+  dateDeparted       DateTime?
+  dateEntered        DateTime
   destinationAirport String?
   destinationCity    String?
   destinationCountry String?
-  id                 String   @id @default(cuid())
-  updatedAt          DateTime @updatedAt
+  id                 String     @id @default(cuid())
+  reasonOfTravel     String
+  updatedAt          DateTime   @updatedAt
+  updatedBy          User?      @relation(name: "travelHistoriesUpdated", fields: [updatedById], references: [id])
+  updatedById        String?
 }
 
 model FamilyMember {
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  updatedAt DateTime @updatedAt
+  applicants              Applicant[]
+  archived                Boolean?
+  archivedBy              User?       @relation(name: "familyMembersArchived", fields: [archivedById], references: [id])
+  archivedById            String?
+  countriesOfCitizenship  String
+  countryOfBirth          String
+  createdAt               DateTime    @default(now())
+  createdBy               User?       @relation(name: "familyMembersCreated", fields: [createdById], references: [id])
+  createdById             String?
+  dateOfBirth             DateTime?
+  firstName               String
+  id                      String      @id @default(cuid())
+  lastName                String
+  relationshipToApplicant String
+  updatedAt               DateTime    @updatedAt
+  updatedBy               User?       @relation(name: "familyMembersUpdated", fields: [updatedById], references: [id])
+  updatedById             String?
+}
+
+model PersonalInfo {
+  applicant              Applicant
+  archived               Boolean?
+  archivedBy             User?     @relation(name: "personalInfosArchived", fields: [archivedById], references: [id])
+  archivedById           String?
+  countriesOfCitizenship String
+  countryOfBirth         String
+  createdAt              DateTime  @default(now())
+  createdBy              User?     @relation(name: "personalInfosCreated", fields: [createdById], references: [id])
+  createdById            String?
+  dateOfBirth            DateTime
+  email                  String?
+  firstName              String
+  homeCountryAddress     String?
+  id                     String    @id @default(cuid())
+  inzClientNumber        String?
+  lastName               String
+  modile                 String?
+  nzAddress              String?
+  passportNumber         String?
+  updatedAt              DateTime  @updatedAt
+  updatedBy              User?     @relation(name: "personalInfosUpdated", fields: [updatedById], references: [id])
+  updatedById            String?
+}
+
+model Applicant {
+  archived            Boolean?
+  archivedAt          DateTime?
+  archivedBy          User?               @relation(name: "applicantsArchived", fields: [archivedById], references: [id])
+  archivedById        String?
+  createdAt           DateTime            @default(now())
+  createdBy           User?               @relation(name: "applicantsCreated", fields: [createdById], references: [id])
+  createdById         String?
+  educationHistories  EducationHistory[]
+  employmentHistories EmploymentHistory[]
+  familyMembers       FamilyMember[]
+  id                  String              @id @default(cuid())
+  personalInfo        PersonalInfo?       @relation(fields: [personalInfoId], references: [id])
+  personalInfoId      String?
+  travelHistories     TravelHistory[]
+  updatedAt           DateTime            @updatedAt
+  updatedBy           User[]              @relation(name: "applicantsUpdated")
+  user                User?               @relation(name: "ApplicantsOnUser", fields: [userId], references: [id])
+  userId              String?
 }

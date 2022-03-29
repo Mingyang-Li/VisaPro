@@ -1,9 +1,11 @@
 import { Module } from "@nestjs/common";
 import { UserModule } from "./user/user.module";
 import { EmploymentHistoryModule } from "./employmentHistory/employmentHistory.module";
-import { EducationHiatoryModule } from "./educationHiatory/educationHiatory.module";
+import { EducationHistoryModule } from "./educationHistory/educationHistory.module";
 import { TravelHistoryModule } from "./travelHistory/travelHistory.module";
 import { FamilyMemberModule } from "./familyMember/familyMember.module";
+import { PersonalInfoModule } from "./personalInfo/personalInfo.module";
+import { ApplicantModule } from "./applicant/applicant.module";
 import { ACLModule } from "./auth/acl.module";
 import { AuthModule } from "./auth/auth.module";
 import { HealthModule } from "./health/health.module";
@@ -19,9 +21,11 @@ import { GraphQLModule } from "@nestjs/graphql";
   imports: [
     UserModule,
     EmploymentHistoryModule,
-    EducationHiatoryModule,
+    EducationHistoryModule,
     TravelHistoryModule,
     FamilyMemberModule,
+    PersonalInfoModule,
+    ApplicantModule,
     ACLModule,
     AuthModule,
     HealthModule,
@@ -38,7 +42,7 @@ import { GraphQLModule } from "@nestjs/graphql";
         return {
           autoSchemaFile: "schema.graphql",
           sortSchema: true,
-          playground: true,
+          playground,
           introspection: playground || introspection,
         };
       },

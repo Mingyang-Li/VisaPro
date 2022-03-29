@@ -11,10 +11,52 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, IsOptional } from "class-validator";
+import { Applicant } from "../../applicant/base/Applicant";
+import { ValidateNested, IsOptional, IsDate, IsString } from "class-validator";
 import { Type } from "class-transformer";
+import { EducationHistory } from "../../educationHistory/base/EducationHistory";
+import { EmploymentHistory } from "../../employmentHistory/base/EmploymentHistory";
+import { FamilyMember } from "../../familyMember/base/FamilyMember";
+import { PersonalInfo } from "../../personalInfo/base/PersonalInfo";
+import { TravelHistory } from "../../travelHistory/base/TravelHistory";
 @ObjectType()
 class User {
+  @ApiProperty({
+    required: false,
+    type: () => [Applicant],
+  })
+  @ValidateNested()
+  @Type(() => Applicant)
+  @IsOptional()
+  applicants?: Array<Applicant>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Applicant],
+  })
+  @ValidateNested()
+  @Type(() => Applicant)
+  @IsOptional()
+  applicantsArchived?: Array<Applicant>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Applicant],
+  })
+  @ValidateNested()
+  @Type(() => Applicant)
+  @IsOptional()
+  applicantsCreated?: Array<Applicant>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Applicant],
+  })
+  @ValidateNested()
+  @Type(() => Applicant)
+  @IsOptional()
+  applicantsUpdated?: Array<Applicant>;
+
   @ApiProperty({
     required: true,
   })
@@ -22,6 +64,33 @@ class User {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: () => [EducationHistory],
+  })
+  @ValidateNested()
+  @Type(() => EducationHistory)
+  @IsOptional()
+  educationHistoriesArchived?: Array<EducationHistory>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [EducationHistory],
+  })
+  @ValidateNested()
+  @Type(() => EducationHistory)
+  @IsOptional()
+  educationHistoriesCreated?: Array<EducationHistory>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [EducationHistory],
+  })
+  @ValidateNested()
+  @Type(() => EducationHistory)
+  @IsOptional()
+  educationHistoriesUpdated?: Array<EducationHistory>;
 
   @ApiProperty({
     required: false,
@@ -33,6 +102,60 @@ class User {
     nullable: true,
   })
   email!: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => [EmploymentHistory],
+  })
+  @ValidateNested()
+  @Type(() => EmploymentHistory)
+  @IsOptional()
+  employmentHistoriesArchived?: Array<EmploymentHistory>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [EmploymentHistory],
+  })
+  @ValidateNested()
+  @Type(() => EmploymentHistory)
+  @IsOptional()
+  employmentHistoriesCreated?: Array<EmploymentHistory>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [EmploymentHistory],
+  })
+  @ValidateNested()
+  @Type(() => EmploymentHistory)
+  @IsOptional()
+  employmentHistoriesUpdated?: Array<EmploymentHistory>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [FamilyMember],
+  })
+  @ValidateNested()
+  @Type(() => FamilyMember)
+  @IsOptional()
+  familyMembersArchived?: Array<FamilyMember>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [FamilyMember],
+  })
+  @ValidateNested()
+  @Type(() => FamilyMember)
+  @IsOptional()
+  familyMembersCreated?: Array<FamilyMember>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [FamilyMember],
+  })
+  @ValidateNested()
+  @Type(() => FamilyMember)
+  @IsOptional()
+  familyMembersUpdated?: Array<FamilyMember>;
 
   @ApiProperty({
     required: false,
@@ -65,6 +188,33 @@ class User {
   lastName!: string | null;
 
   @ApiProperty({
+    required: false,
+    type: () => [PersonalInfo],
+  })
+  @ValidateNested()
+  @Type(() => PersonalInfo)
+  @IsOptional()
+  personalInfosArchived?: Array<PersonalInfo>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [PersonalInfo],
+  })
+  @ValidateNested()
+  @Type(() => PersonalInfo)
+  @IsOptional()
+  personalInfosCreated?: Array<PersonalInfo>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [PersonalInfo],
+  })
+  @ValidateNested()
+  @Type(() => PersonalInfo)
+  @IsOptional()
+  personalInfosUpdated?: Array<PersonalInfo>;
+
+  @ApiProperty({
     required: true,
     type: [String],
   })
@@ -73,6 +223,33 @@ class User {
   })
   @Field(() => [String])
   roles!: Array<string>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [TravelHistory],
+  })
+  @ValidateNested()
+  @Type(() => TravelHistory)
+  @IsOptional()
+  travelHistoriesArchived?: Array<TravelHistory>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [TravelHistory],
+  })
+  @ValidateNested()
+  @Type(() => TravelHistory)
+  @IsOptional()
+  travelHistoriesCreated?: Array<TravelHistory>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [TravelHistory],
+  })
+  @ValidateNested()
+  @Type(() => TravelHistory)
+  @IsOptional()
+  travelHistoriesUpdated?: Array<TravelHistory>;
 
   @ApiProperty({
     required: true,

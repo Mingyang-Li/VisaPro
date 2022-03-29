@@ -70,11 +70,75 @@ export class EmploymentHistoryControllerBase {
       );
     }
     return await this.service.create({
-      data: data,
+      data: {
+        ...data,
+
+        applicant: data.applicant
+          ? {
+              connect: data.applicant,
+            }
+          : undefined,
+
+        archivedBy: data.archivedBy
+          ? {
+              connect: data.archivedBy,
+            }
+          : undefined,
+
+        createdBy: data.createdBy
+          ? {
+              connect: data.createdBy,
+            }
+          : undefined,
+
+        updatedBy: data.updatedBy
+          ? {
+              connect: data.updatedBy,
+            }
+          : undefined,
+      },
       select: {
+        additionalInfo: true,
+
+        applicant: {
+          select: {
+            id: true,
+          },
+        },
+
+        archived: true,
+
+        archivedBy: {
+          select: {
+            id: true,
+          },
+        },
+
+        cityOfWokrk: true,
+        companyName: true,
+        countryOfWork: true,
         createdAt: true,
+
+        createdBy: {
+          select: {
+            id: true,
+          },
+        },
+
+        duties: true,
+        endDate: true,
         id: true,
+        isCurrentJob: true,
+        jobTitle: true,
+        nzBusinessNumber: true,
+        startDate: true,
         updatedAt: true,
+
+        updatedBy: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
   }
@@ -108,9 +172,47 @@ export class EmploymentHistoryControllerBase {
     const results = await this.service.findMany({
       ...args,
       select: {
+        additionalInfo: true,
+
+        applicant: {
+          select: {
+            id: true,
+          },
+        },
+
+        archived: true,
+
+        archivedBy: {
+          select: {
+            id: true,
+          },
+        },
+
+        cityOfWokrk: true,
+        companyName: true,
+        countryOfWork: true,
         createdAt: true,
+
+        createdBy: {
+          select: {
+            id: true,
+          },
+        },
+
+        duties: true,
+        endDate: true,
         id: true,
+        isCurrentJob: true,
+        jobTitle: true,
+        nzBusinessNumber: true,
+        startDate: true,
         updatedAt: true,
+
+        updatedBy: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
     return results.map((result) => permission.filter(result));
@@ -143,9 +245,47 @@ export class EmploymentHistoryControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        additionalInfo: true,
+
+        applicant: {
+          select: {
+            id: true,
+          },
+        },
+
+        archived: true,
+
+        archivedBy: {
+          select: {
+            id: true,
+          },
+        },
+
+        cityOfWokrk: true,
+        companyName: true,
+        countryOfWork: true,
         createdAt: true,
+
+        createdBy: {
+          select: {
+            id: true,
+          },
+        },
+
+        duties: true,
+        endDate: true,
         id: true,
+        isCurrentJob: true,
+        jobTitle: true,
+        nzBusinessNumber: true,
+        startDate: true,
         updatedAt: true,
+
+        updatedBy: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
     if (result === null) {
@@ -197,11 +337,75 @@ export class EmploymentHistoryControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          applicant: data.applicant
+            ? {
+                connect: data.applicant,
+              }
+            : undefined,
+
+          archivedBy: data.archivedBy
+            ? {
+                connect: data.archivedBy,
+              }
+            : undefined,
+
+          createdBy: data.createdBy
+            ? {
+                connect: data.createdBy,
+              }
+            : undefined,
+
+          updatedBy: data.updatedBy
+            ? {
+                connect: data.updatedBy,
+              }
+            : undefined,
+        },
         select: {
+          additionalInfo: true,
+
+          applicant: {
+            select: {
+              id: true,
+            },
+          },
+
+          archived: true,
+
+          archivedBy: {
+            select: {
+              id: true,
+            },
+          },
+
+          cityOfWokrk: true,
+          companyName: true,
+          countryOfWork: true,
           createdAt: true,
+
+          createdBy: {
+            select: {
+              id: true,
+            },
+          },
+
+          duties: true,
+          endDate: true,
           id: true,
+          isCurrentJob: true,
+          jobTitle: true,
+          nzBusinessNumber: true,
+          startDate: true,
           updatedAt: true,
+
+          updatedBy: {
+            select: {
+              id: true,
+            },
+          },
         },
       });
     } catch (error) {
@@ -235,9 +439,47 @@ export class EmploymentHistoryControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          additionalInfo: true,
+
+          applicant: {
+            select: {
+              id: true,
+            },
+          },
+
+          archived: true,
+
+          archivedBy: {
+            select: {
+              id: true,
+            },
+          },
+
+          cityOfWokrk: true,
+          companyName: true,
+          countryOfWork: true,
           createdAt: true,
+
+          createdBy: {
+            select: {
+              id: true,
+            },
+          },
+
+          duties: true,
+          endDate: true,
           id: true,
+          isCurrentJob: true,
+          jobTitle: true,
+          nzBusinessNumber: true,
+          startDate: true,
           updatedAt: true,
+
+          updatedBy: {
+            select: {
+              id: true,
+            },
+          },
         },
       });
     } catch (error) {

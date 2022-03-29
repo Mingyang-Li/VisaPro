@@ -25,6 +25,8 @@ import { DeleteTravelHistoryArgs } from "./DeleteTravelHistoryArgs";
 import { TravelHistoryFindManyArgs } from "./TravelHistoryFindManyArgs";
 import { TravelHistoryFindUniqueArgs } from "./TravelHistoryFindUniqueArgs";
 import { TravelHistory } from "./TravelHistory";
+import { Applicant } from "../../applicant/base/Applicant";
+import { User } from "../../user/base/User";
 import { TravelHistoryService } from "../travelHistory.service";
 
 @graphql.Resolver(() => TravelHistory)
@@ -131,7 +133,33 @@ export class TravelHistoryResolverBase {
     // @ts-ignore
     return await this.service.create({
       ...args,
-      data: args.data,
+      data: {
+        ...args.data,
+
+        applicant: args.data.applicant
+          ? {
+              connect: args.data.applicant,
+            }
+          : undefined,
+
+        archivedBy: args.data.archivedBy
+          ? {
+              connect: args.data.archivedBy,
+            }
+          : undefined,
+
+        createdBy: args.data.createdBy
+          ? {
+              connect: args.data.createdBy,
+            }
+          : undefined,
+
+        updatedBy: args.data.updatedBy
+          ? {
+              connect: args.data.updatedBy,
+            }
+          : undefined,
+      },
     });
   }
 
@@ -170,7 +198,33 @@ export class TravelHistoryResolverBase {
       // @ts-ignore
       return await this.service.update({
         ...args,
-        data: args.data,
+        data: {
+          ...args.data,
+
+          applicant: args.data.applicant
+            ? {
+                connect: args.data.applicant,
+              }
+            : undefined,
+
+          archivedBy: args.data.archivedBy
+            ? {
+                connect: args.data.archivedBy,
+              }
+            : undefined,
+
+          createdBy: args.data.createdBy
+            ? {
+                connect: args.data.createdBy,
+              }
+            : undefined,
+
+          updatedBy: args.data.updatedBy
+            ? {
+                connect: args.data.updatedBy,
+              }
+            : undefined,
+        },
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -202,5 +256,101 @@ export class TravelHistoryResolverBase {
       }
       throw error;
     }
+  }
+
+  @graphql.ResolveField(() => Applicant, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "TravelHistory",
+    action: "read",
+    possession: "any",
+  })
+  async applicant(
+    @graphql.Parent() parent: TravelHistory,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<Applicant | null> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "Applicant",
+    });
+    const result = await this.service.getApplicant(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return permission.filter(result);
+  }
+
+  @graphql.ResolveField(() => User, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "TravelHistory",
+    action: "read",
+    possession: "any",
+  })
+  async archivedBy(
+    @graphql.Parent() parent: TravelHistory,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<User | null> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "User",
+    });
+    const result = await this.service.getArchivedBy(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return permission.filter(result);
+  }
+
+  @graphql.ResolveField(() => User, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "TravelHistory",
+    action: "read",
+    possession: "any",
+  })
+  async createdBy(
+    @graphql.Parent() parent: TravelHistory,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<User | null> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "User",
+    });
+    const result = await this.service.getCreatedBy(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return permission.filter(result);
+  }
+
+  @graphql.ResolveField(() => User, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "TravelHistory",
+    action: "read",
+    possession: "any",
+  })
+  async updatedBy(
+    @graphql.Parent() parent: TravelHistory,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<User | null> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "User",
+    });
+    const result = await this.service.getUpdatedBy(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return permission.filter(result);
   }
 }

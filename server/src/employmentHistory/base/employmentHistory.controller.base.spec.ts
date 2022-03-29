@@ -11,25 +11,69 @@ import { EmploymentHistoryService } from "../employmentHistory.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  additionalInfo: "exampleAdditionalInfo",
+  archived: "true",
+  cityOfWokrk: "exampleCityOfWokrk",
+  companyName: "exampleCompanyName",
+  countryOfWork: "exampleCountryOfWork",
   createdAt: new Date(),
+  duties: "exampleDuties",
+  endDate: new Date(),
   id: "exampleId",
+  isCurrentJob: "true",
+  jobTitle: "exampleJobTitle",
+  nzBusinessNumber: "exampleNzBusinessNumber",
+  startDate: new Date(),
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  additionalInfo: "exampleAdditionalInfo",
+  archived: "true",
+  cityOfWokrk: "exampleCityOfWokrk",
+  companyName: "exampleCompanyName",
+  countryOfWork: "exampleCountryOfWork",
   createdAt: new Date(),
+  duties: "exampleDuties",
+  endDate: new Date(),
   id: "exampleId",
+  isCurrentJob: "true",
+  jobTitle: "exampleJobTitle",
+  nzBusinessNumber: "exampleNzBusinessNumber",
+  startDate: new Date(),
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
+    additionalInfo: "exampleAdditionalInfo",
+    archived: "true",
+    cityOfWokrk: "exampleCityOfWokrk",
+    companyName: "exampleCompanyName",
+    countryOfWork: "exampleCountryOfWork",
     createdAt: new Date(),
+    duties: "exampleDuties",
+    endDate: new Date(),
     id: "exampleId",
+    isCurrentJob: "true",
+    jobTitle: "exampleJobTitle",
+    nzBusinessNumber: "exampleNzBusinessNumber",
+    startDate: new Date(),
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
+  additionalInfo: "exampleAdditionalInfo",
+  archived: "true",
+  cityOfWokrk: "exampleCityOfWokrk",
+  companyName: "exampleCompanyName",
+  countryOfWork: "exampleCountryOfWork",
   createdAt: new Date(),
+  duties: "exampleDuties",
+  endDate: new Date(),
   id: "exampleId",
+  isCurrentJob: "true",
+  jobTitle: "exampleJobTitle",
+  nzBusinessNumber: "exampleNzBusinessNumber",
+  startDate: new Date(),
   updatedAt: new Date(),
 };
 
@@ -97,6 +141,8 @@ describe("EmploymentHistory", () => {
       .expect({
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
+        endDate: CREATE_RESULT.endDate.toISOString(),
+        startDate: CREATE_RESULT.startDate.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       });
   });
@@ -109,6 +155,8 @@ describe("EmploymentHistory", () => {
         {
           ...FIND_MANY_RESULT[0],
           createdAt: FIND_MANY_RESULT[0].createdAt.toISOString(),
+          endDate: FIND_MANY_RESULT[0].endDate.toISOString(),
+          startDate: FIND_MANY_RESULT[0].startDate.toISOString(),
           updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
         },
       ]);
@@ -117,9 +165,9 @@ describe("EmploymentHistory", () => {
   test("GET /employmentHistories/:id non existing", async () => {
     await request(app.getHttpServer())
       .get(`${"/employmentHistories"}/${nonExistingId}`)
-      .expect(404)
+      .expect(HttpStatus.NOT_FOUND)
       .expect({
-        statusCode: 404,
+        statusCode: HttpStatus.NOT_FOUND,
         message: `No resource was found for {"${"id"}":"${nonExistingId}"}`,
         error: "Not Found",
       });
@@ -132,6 +180,8 @@ describe("EmploymentHistory", () => {
       .expect({
         ...FIND_ONE_RESULT,
         createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
+        endDate: FIND_ONE_RESULT.endDate.toISOString(),
+        startDate: FIND_ONE_RESULT.startDate.toISOString(),
         updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
       });
   });
