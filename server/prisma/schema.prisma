@@ -128,7 +128,7 @@ model FamilyMember {
 }
 
 model PersonalInfo {
-  applicant              Applicant
+  applicant              Applicant?
   archived               Boolean?
   archivedBy             User?     @relation(name: "personalInfosArchived", fields: [archivedById], references: [id])
   archivedById           String?

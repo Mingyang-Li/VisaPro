@@ -2,6 +2,113 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Applicant {
+  archived: Boolean
+  archivedAt: DateTime
+  archivedBy: User
+  createdAt: DateTime!
+  createdBy: User
+  educationHistories(orderBy: [EducationHistoryOrderByInput!], skip: Float, take: Float, where: EducationHistoryWhereInput): [EducationHistory!]!
+  employmentHistories(orderBy: [EmploymentHistoryOrderByInput!], skip: Float, take: Float, where: EmploymentHistoryWhereInput): [EmploymentHistory!]!
+  familyMembers(orderBy: [FamilyMemberOrderByInput!], skip: Float, take: Float, where: FamilyMemberWhereInput): [FamilyMember!]!
+  id: String!
+  personalInfo: PersonalInfo
+  travelHistories(orderBy: [TravelHistoryOrderByInput!], skip: Float, take: Float, where: TravelHistoryWhereInput): [TravelHistory!]!
+  updatedAt: DateTime!
+  updatedBy(orderBy: [UserOrderByInput!], skip: Float, take: Float, where: UserWhereInput): [User!]!
+  user: User
+}
+
+input ApplicantCreateInput {
+  archived: Boolean
+  archivedAt: DateTime
+  archivedBy: UserWhereUniqueInput
+  createdBy: UserWhereUniqueInput
+  educationHistories: EducationHistoryCreateNestedManyWithoutApplicantsInput
+  employmentHistories: EmploymentHistoryCreateNestedManyWithoutApplicantsInput
+  familyMembers: FamilyMemberCreateNestedManyWithoutApplicantsInput
+  personalInfo: PersonalInfoWhereUniqueInput
+  travelHistories: TravelHistoryCreateNestedManyWithoutApplicantsInput
+  updatedBy: UserCreateNestedManyWithoutApplicantsInput
+  user: UserWhereUniqueInput
+}
+
+input ApplicantCreateNestedManyWithoutFamilyMembersInput {
+  connect: [ApplicantWhereUniqueInput!]
+}
+
+input ApplicantCreateNestedManyWithoutUsersInput {
+  connect: [ApplicantWhereUniqueInput!]
+}
+
+input ApplicantListRelationFilter {
+  every: ApplicantWhereInput
+  none: ApplicantWhereInput
+  some: ApplicantWhereInput
+}
+
+input ApplicantOrderByInput {
+  archived: SortOrder
+  archivedAt: SortOrder
+  archivedById: SortOrder
+  createdAt: SortOrder
+  createdById: SortOrder
+  id: SortOrder
+  personalInfoId: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
+}
+
+input ApplicantUpdateInput {
+  archived: Boolean
+  archivedAt: DateTime
+  archivedBy: UserWhereUniqueInput
+  createdBy: UserWhereUniqueInput
+  educationHistories: EducationHistoryUpdateManyWithoutApplicantsInput
+  employmentHistories: EmploymentHistoryUpdateManyWithoutApplicantsInput
+  familyMembers: FamilyMemberUpdateManyWithoutApplicantsInput
+  personalInfo: PersonalInfoWhereUniqueInput
+  travelHistories: TravelHistoryUpdateManyWithoutApplicantsInput
+  updatedBy: UserUpdateManyWithoutApplicantsInput
+  user: UserWhereUniqueInput
+}
+
+input ApplicantUpdateManyWithoutFamilyMembersInput {
+  connect: [ApplicantWhereUniqueInput!]
+  disconnect: [ApplicantWhereUniqueInput!]
+  set: [ApplicantWhereUniqueInput!]
+}
+
+input ApplicantUpdateManyWithoutUsersInput {
+  connect: [ApplicantWhereUniqueInput!]
+  disconnect: [ApplicantWhereUniqueInput!]
+  set: [ApplicantWhereUniqueInput!]
+}
+
+input ApplicantWhereInput {
+  archived: BooleanNullableFilter
+  archivedAt: DateTimeNullableFilter
+  archivedBy: UserWhereUniqueInput
+  createdBy: UserWhereUniqueInput
+  educationHistories: EducationHistoryListRelationFilter
+  employmentHistories: EmploymentHistoryListRelationFilter
+  familyMembers: FamilyMemberListRelationFilter
+  id: StringFilter
+  personalInfo: PersonalInfoWhereUniqueInput
+  travelHistories: TravelHistoryListRelationFilter
+  updatedBy: UserListRelationFilter
+  user: UserWhereUniqueInput
+}
+
+input ApplicantWhereUniqueInput {
+  id: String!
+}
+
+input BooleanNullableFilter {
+  equals: Boolean
+  not: Boolean
+}
+
 input Credentials {
   password: String!
   username: String!
@@ -12,40 +119,266 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type EducationHiatory {
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: DateTime
+  notIn: [DateTime!]
+}
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: DateTime
+  notIn: [DateTime!]
+}
+
+type EducationHistory {
+  additionalInfo: String
+  applicant: Applicant
+  archived: Boolean
+  archivedBy: User
+  city: String!
+  country: String!
   createdAt: DateTime!
+  createdBy: User
+  endDate: DateTime
   id: String!
+  institutionName: String!
+  isCurrentInstitution: Boolean
+  qualificationGained: String
+  startDate: DateTime!
   updatedAt: DateTime!
+  updatedBy: User
 }
 
-input EducationHiatoryOrderByInput {
+input EducationHistoryCreateInput {
+  additionalInfo: String
+  applicant: ApplicantWhereUniqueInput
+  archived: Boolean
+  archivedBy: UserWhereUniqueInput
+  city: String!
+  country: String!
+  createdBy: UserWhereUniqueInput
+  endDate: DateTime
+  institutionName: String!
+  isCurrentInstitution: Boolean
+  qualificationGained: String
+  startDate: DateTime!
+  updatedBy: UserWhereUniqueInput
+}
+
+input EducationHistoryCreateNestedManyWithoutApplicantsInput {
+  connect: [EducationHistoryWhereUniqueInput!]
+}
+
+input EducationHistoryCreateNestedManyWithoutUsersInput {
+  connect: [EducationHistoryWhereUniqueInput!]
+}
+
+input EducationHistoryListRelationFilter {
+  every: EducationHistoryWhereInput
+  none: EducationHistoryWhereInput
+  some: EducationHistoryWhereInput
+}
+
+input EducationHistoryOrderByInput {
+  additionalInfo: SortOrder
+  applicantId: SortOrder
+  archived: SortOrder
+  archivedById: SortOrder
+  city: SortOrder
+  country: SortOrder
   createdAt: SortOrder
+  createdById: SortOrder
+  endDate: SortOrder
   id: SortOrder
+  institutionName: SortOrder
+  isCurrentInstitution: SortOrder
+  qualificationGained: SortOrder
+  startDate: SortOrder
   updatedAt: SortOrder
+  updatedById: SortOrder
 }
 
-input EducationHiatoryWhereInput {
+input EducationHistoryUpdateInput {
+  additionalInfo: String
+  applicant: ApplicantWhereUniqueInput
+  archived: Boolean
+  archivedBy: UserWhereUniqueInput
+  city: String
+  country: String
+  createdBy: UserWhereUniqueInput
+  endDate: DateTime
+  institutionName: String
+  isCurrentInstitution: Boolean
+  qualificationGained: String
+  startDate: DateTime
+  updatedBy: UserWhereUniqueInput
+}
+
+input EducationHistoryUpdateManyWithoutApplicantsInput {
+  connect: [EducationHistoryWhereUniqueInput!]
+  disconnect: [EducationHistoryWhereUniqueInput!]
+  set: [EducationHistoryWhereUniqueInput!]
+}
+
+input EducationHistoryUpdateManyWithoutUsersInput {
+  connect: [EducationHistoryWhereUniqueInput!]
+  disconnect: [EducationHistoryWhereUniqueInput!]
+  set: [EducationHistoryWhereUniqueInput!]
+}
+
+input EducationHistoryWhereInput {
+  additionalInfo: StringNullableFilter
+  applicant: ApplicantWhereUniqueInput
+  archived: BooleanNullableFilter
+  archivedBy: UserWhereUniqueInput
+  city: StringFilter
+  country: StringFilter
+  createdBy: UserWhereUniqueInput
+  endDate: DateTimeNullableFilter
   id: StringFilter
+  institutionName: StringFilter
+  isCurrentInstitution: BooleanNullableFilter
+  qualificationGained: StringNullableFilter
+  startDate: DateTimeFilter
+  updatedBy: UserWhereUniqueInput
 }
 
-input EducationHiatoryWhereUniqueInput {
+input EducationHistoryWhereUniqueInput {
   id: String!
 }
 
 type EmploymentHistory {
+  additionalInfo: String
+  applicant: Applicant
+  archived: Boolean
+  archivedBy: User
+  cityOfWokrk: String!
+  companyName: String!
+  countryOfWork: String!
   createdAt: DateTime!
+  createdBy: User
+  duties: String
+  endDate: DateTime
   id: String!
+  isCurrentJob: Boolean
+  jobTitle: String!
+  nzBusinessNumber: String!
+  startDate: DateTime!
   updatedAt: DateTime!
+  updatedBy: User
+}
+
+input EmploymentHistoryCreateInput {
+  additionalInfo: String
+  applicant: ApplicantWhereUniqueInput
+  archived: Boolean
+  archivedBy: UserWhereUniqueInput
+  cityOfWokrk: String!
+  companyName: String!
+  countryOfWork: String!
+  createdBy: UserWhereUniqueInput
+  duties: String
+  endDate: DateTime
+  isCurrentJob: Boolean
+  jobTitle: String!
+  nzBusinessNumber: String!
+  startDate: DateTime!
+  updatedBy: UserWhereUniqueInput
+}
+
+input EmploymentHistoryCreateNestedManyWithoutApplicantsInput {
+  connect: [EmploymentHistoryWhereUniqueInput!]
+}
+
+input EmploymentHistoryCreateNestedManyWithoutUsersInput {
+  connect: [EmploymentHistoryWhereUniqueInput!]
+}
+
+input EmploymentHistoryListRelationFilter {
+  every: EmploymentHistoryWhereInput
+  none: EmploymentHistoryWhereInput
+  some: EmploymentHistoryWhereInput
 }
 
 input EmploymentHistoryOrderByInput {
+  additionalInfo: SortOrder
+  applicantId: SortOrder
+  archived: SortOrder
+  archivedById: SortOrder
+  cityOfWokrk: SortOrder
+  companyName: SortOrder
+  countryOfWork: SortOrder
   createdAt: SortOrder
+  createdById: SortOrder
+  duties: SortOrder
+  endDate: SortOrder
   id: SortOrder
+  isCurrentJob: SortOrder
+  jobTitle: SortOrder
+  nzBusinessNumber: SortOrder
+  startDate: SortOrder
   updatedAt: SortOrder
+  updatedById: SortOrder
+}
+
+input EmploymentHistoryUpdateInput {
+  additionalInfo: String
+  applicant: ApplicantWhereUniqueInput
+  archived: Boolean
+  archivedBy: UserWhereUniqueInput
+  cityOfWokrk: String
+  companyName: String
+  countryOfWork: String
+  createdBy: UserWhereUniqueInput
+  duties: String
+  endDate: DateTime
+  isCurrentJob: Boolean
+  jobTitle: String
+  nzBusinessNumber: String
+  startDate: DateTime
+  updatedBy: UserWhereUniqueInput
+}
+
+input EmploymentHistoryUpdateManyWithoutApplicantsInput {
+  connect: [EmploymentHistoryWhereUniqueInput!]
+  disconnect: [EmploymentHistoryWhereUniqueInput!]
+  set: [EmploymentHistoryWhereUniqueInput!]
+}
+
+input EmploymentHistoryUpdateManyWithoutUsersInput {
+  connect: [EmploymentHistoryWhereUniqueInput!]
+  disconnect: [EmploymentHistoryWhereUniqueInput!]
+  set: [EmploymentHistoryWhereUniqueInput!]
 }
 
 input EmploymentHistoryWhereInput {
+  additionalInfo: StringNullableFilter
+  applicant: ApplicantWhereUniqueInput
+  archived: BooleanNullableFilter
+  archivedBy: UserWhereUniqueInput
+  cityOfWokrk: StringFilter
+  companyName: StringFilter
+  countryOfWork: StringFilter
+  createdBy: UserWhereUniqueInput
+  duties: StringNullableFilter
+  endDate: DateTimeNullableFilter
   id: StringFilter
+  isCurrentJob: BooleanNullableFilter
+  jobTitle: StringFilter
+  nzBusinessNumber: StringFilter
+  startDate: DateTimeFilter
+  updatedBy: UserWhereUniqueInput
 }
 
 input EmploymentHistoryWhereUniqueInput {
@@ -53,19 +386,105 @@ input EmploymentHistoryWhereUniqueInput {
 }
 
 type FamilyMember {
+  applicants(orderBy: [ApplicantOrderByInput!], skip: Float, take: Float, where: ApplicantWhereInput): [Applicant!]!
+  archived: Boolean
+  archivedBy: User
+  countriesOfCitizenship: String!
+  countryOfBirth: String!
   createdAt: DateTime!
+  createdBy: User
+  dateOfBirth: DateTime
+  firstName: String!
   id: String!
+  lastName: String!
+  relationshipToApplicant: String!
   updatedAt: DateTime!
+  updatedBy: User
+}
+
+input FamilyMemberCreateInput {
+  applicants: ApplicantCreateNestedManyWithoutFamilyMembersInput
+  archived: Boolean
+  archivedBy: UserWhereUniqueInput
+  countriesOfCitizenship: String!
+  countryOfBirth: String!
+  createdBy: UserWhereUniqueInput
+  dateOfBirth: DateTime
+  firstName: String!
+  lastName: String!
+  relationshipToApplicant: String!
+  updatedBy: UserWhereUniqueInput
+}
+
+input FamilyMemberCreateNestedManyWithoutApplicantsInput {
+  connect: [FamilyMemberWhereUniqueInput!]
+}
+
+input FamilyMemberCreateNestedManyWithoutUsersInput {
+  connect: [FamilyMemberWhereUniqueInput!]
+}
+
+input FamilyMemberListRelationFilter {
+  every: FamilyMemberWhereInput
+  none: FamilyMemberWhereInput
+  some: FamilyMemberWhereInput
 }
 
 input FamilyMemberOrderByInput {
+  archived: SortOrder
+  archivedById: SortOrder
+  countriesOfCitizenship: SortOrder
+  countryOfBirth: SortOrder
   createdAt: SortOrder
+  createdById: SortOrder
+  dateOfBirth: SortOrder
+  firstName: SortOrder
   id: SortOrder
+  lastName: SortOrder
+  relationshipToApplicant: SortOrder
   updatedAt: SortOrder
+  updatedById: SortOrder
+}
+
+input FamilyMemberUpdateInput {
+  applicants: ApplicantUpdateManyWithoutFamilyMembersInput
+  archived: Boolean
+  archivedBy: UserWhereUniqueInput
+  countriesOfCitizenship: String
+  countryOfBirth: String
+  createdBy: UserWhereUniqueInput
+  dateOfBirth: DateTime
+  firstName: String
+  lastName: String
+  relationshipToApplicant: String
+  updatedBy: UserWhereUniqueInput
+}
+
+input FamilyMemberUpdateManyWithoutApplicantsInput {
+  connect: [FamilyMemberWhereUniqueInput!]
+  disconnect: [FamilyMemberWhereUniqueInput!]
+  set: [FamilyMemberWhereUniqueInput!]
+}
+
+input FamilyMemberUpdateManyWithoutUsersInput {
+  connect: [FamilyMemberWhereUniqueInput!]
+  disconnect: [FamilyMemberWhereUniqueInput!]
+  set: [FamilyMemberWhereUniqueInput!]
 }
 
 input FamilyMemberWhereInput {
+  applicants: ApplicantListRelationFilter
+  archived: BooleanNullableFilter
+  archivedBy: UserWhereUniqueInput
+  countriesOfCitizenship: StringFilter
+  countryOfBirth: StringFilter
+  createdBy: UserWhereUniqueInput
+  dateOfBirth: DateTimeNullableFilter
+  firstName: StringFilter
   id: StringFilter
+  lastName: StringFilter
+  relationshipToApplicant: StringFilter
+  updatedBy: UserWhereUniqueInput
 }
 
 input FamilyMemberWhereUniqueInput {
@@ -77,30 +496,170 @@ type MetaQueryPayload {
 }
 
 type Mutation {
+  createApplicant(data: ApplicantCreateInput!): Applicant!
+  createEducationHistory(data: EducationHistoryCreateInput!): EducationHistory!
+  createEmploymentHistory(data: EmploymentHistoryCreateInput!): EmploymentHistory!
+  createFamilyMember(data: FamilyMemberCreateInput!): FamilyMember!
+  createPersonalInfo(data: PersonalInfoCreateInput!): PersonalInfo!
   createTravelHistory(data: TravelHistoryCreateInput!): TravelHistory!
   createUser(data: UserCreateInput!): User!
-  deleteEducationHiatory(where: EducationHiatoryWhereUniqueInput!): EducationHiatory!
+  deleteApplicant(where: ApplicantWhereUniqueInput!): Applicant!
+  deleteEducationHistory(where: EducationHistoryWhereUniqueInput!): EducationHistory!
   deleteEmploymentHistory(where: EmploymentHistoryWhereUniqueInput!): EmploymentHistory!
   deleteFamilyMember(where: FamilyMemberWhereUniqueInput!): FamilyMember!
+  deletePersonalInfo(where: PersonalInfoWhereUniqueInput!): PersonalInfo!
   deleteTravelHistory(where: TravelHistoryWhereUniqueInput!): TravelHistory!
   deleteUser(where: UserWhereUniqueInput!): User!
   login(credentials: Credentials!): UserInfo!
+  updateApplicant(data: ApplicantUpdateInput!, where: ApplicantWhereUniqueInput!): Applicant!
+  updateEducationHistory(data: EducationHistoryUpdateInput!, where: EducationHistoryWhereUniqueInput!): EducationHistory!
+  updateEmploymentHistory(data: EmploymentHistoryUpdateInput!, where: EmploymentHistoryWhereUniqueInput!): EmploymentHistory!
+  updateFamilyMember(data: FamilyMemberUpdateInput!, where: FamilyMemberWhereUniqueInput!): FamilyMember!
+  updatePersonalInfo(data: PersonalInfoUpdateInput!, where: PersonalInfoWhereUniqueInput!): PersonalInfo!
   updateTravelHistory(data: TravelHistoryUpdateInput!, where: TravelHistoryWhereUniqueInput!): TravelHistory!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
 }
 
+type PersonalInfo {
+  applicant: Applicant
+  archived: Boolean
+  archivedBy: User
+  countriesOfCitizenship: String!
+  countryOfBirth: String!
+  createdAt: DateTime!
+  createdBy: User
+  dateOfBirth: DateTime!
+  email: String
+  firstName: String!
+  homeCountryAddress: String
+  id: String!
+  inzClientNumber: String
+  lastName: String!
+  modile: String
+  nzAddress: String
+  passportNumber: String
+  updatedAt: DateTime!
+  updatedBy: User
+}
+
+input PersonalInfoCreateInput {
+  applicant: ApplicantWhereUniqueInput
+  archived: Boolean
+  archivedBy: UserWhereUniqueInput
+  countriesOfCitizenship: String!
+  countryOfBirth: String!
+  createdBy: UserWhereUniqueInput
+  dateOfBirth: DateTime!
+  email: String
+  firstName: String!
+  homeCountryAddress: String
+  inzClientNumber: String
+  lastName: String!
+  modile: String
+  nzAddress: String
+  passportNumber: String
+  updatedBy: UserWhereUniqueInput
+}
+
+input PersonalInfoCreateNestedManyWithoutUsersInput {
+  connect: [PersonalInfoWhereUniqueInput!]
+}
+
+input PersonalInfoListRelationFilter {
+  every: PersonalInfoWhereInput
+  none: PersonalInfoWhereInput
+  some: PersonalInfoWhereInput
+}
+
+input PersonalInfoOrderByInput {
+  applicantId: SortOrder
+  archived: SortOrder
+  archivedById: SortOrder
+  countriesOfCitizenship: SortOrder
+  countryOfBirth: SortOrder
+  createdAt: SortOrder
+  createdById: SortOrder
+  dateOfBirth: SortOrder
+  email: SortOrder
+  firstName: SortOrder
+  homeCountryAddress: SortOrder
+  id: SortOrder
+  inzClientNumber: SortOrder
+  lastName: SortOrder
+  modile: SortOrder
+  nzAddress: SortOrder
+  passportNumber: SortOrder
+  updatedAt: SortOrder
+  updatedById: SortOrder
+}
+
+input PersonalInfoUpdateInput {
+  applicant: ApplicantWhereUniqueInput
+  archived: Boolean
+  archivedBy: UserWhereUniqueInput
+  countriesOfCitizenship: String
+  countryOfBirth: String
+  createdBy: UserWhereUniqueInput
+  dateOfBirth: DateTime
+  email: String
+  firstName: String
+  homeCountryAddress: String
+  inzClientNumber: String
+  lastName: String
+  modile: String
+  nzAddress: String
+  passportNumber: String
+  updatedBy: UserWhereUniqueInput
+}
+
+input PersonalInfoUpdateManyWithoutUsersInput {
+  connect: [PersonalInfoWhereUniqueInput!]
+  disconnect: [PersonalInfoWhereUniqueInput!]
+  set: [PersonalInfoWhereUniqueInput!]
+}
+
+input PersonalInfoWhereInput {
+  applicant: ApplicantWhereUniqueInput
+  archived: BooleanNullableFilter
+  archivedBy: UserWhereUniqueInput
+  countriesOfCitizenship: StringFilter
+  countryOfBirth: StringFilter
+  createdBy: UserWhereUniqueInput
+  dateOfBirth: DateTimeFilter
+  email: StringNullableFilter
+  firstName: StringFilter
+  homeCountryAddress: StringNullableFilter
+  id: StringFilter
+  inzClientNumber: StringNullableFilter
+  lastName: StringFilter
+  modile: StringNullableFilter
+  nzAddress: StringNullableFilter
+  passportNumber: StringNullableFilter
+  updatedBy: UserWhereUniqueInput
+}
+
+input PersonalInfoWhereUniqueInput {
+  id: String!
+}
+
 type Query {
-  _educationHiatoriesMeta(orderBy: [EducationHiatoryOrderByInput!], skip: Float, take: Float, where: EducationHiatoryWhereInput): MetaQueryPayload!
+  _applicantsMeta(orderBy: [ApplicantOrderByInput!], skip: Float, take: Float, where: ApplicantWhereInput): MetaQueryPayload!
+  _educationHistoriesMeta(orderBy: [EducationHistoryOrderByInput!], skip: Float, take: Float, where: EducationHistoryWhereInput): MetaQueryPayload!
   _employmentHistoriesMeta(orderBy: [EmploymentHistoryOrderByInput!], skip: Float, take: Float, where: EmploymentHistoryWhereInput): MetaQueryPayload!
   _familyMembersMeta(orderBy: [FamilyMemberOrderByInput!], skip: Float, take: Float, where: FamilyMemberWhereInput): MetaQueryPayload!
+  _personalInfosMeta(orderBy: [PersonalInfoOrderByInput!], skip: Float, take: Float, where: PersonalInfoWhereInput): MetaQueryPayload!
   _travelHistoriesMeta(orderBy: [TravelHistoryOrderByInput!], skip: Float, take: Float, where: TravelHistoryWhereInput): MetaQueryPayload!
   _usersMeta(orderBy: [UserOrderByInput!], skip: Float, take: Float, where: UserWhereInput): MetaQueryPayload!
-  educationHiatories(orderBy: [EducationHiatoryOrderByInput!], skip: Float, take: Float, where: EducationHiatoryWhereInput): [EducationHiatory!]!
-  educationHiatory(where: EducationHiatoryWhereUniqueInput!): EducationHiatory
+  applicant(where: ApplicantWhereUniqueInput!): Applicant
+  applicants(orderBy: [ApplicantOrderByInput!], skip: Float, take: Float, where: ApplicantWhereInput): [Applicant!]!
+  educationHistories(orderBy: [EducationHistoryOrderByInput!], skip: Float, take: Float, where: EducationHistoryWhereInput): [EducationHistory!]!
+  educationHistory(where: EducationHistoryWhereUniqueInput!): EducationHistory
   employmentHistories(orderBy: [EmploymentHistoryOrderByInput!], skip: Float, take: Float, where: EmploymentHistoryWhereInput): [EmploymentHistory!]!
   employmentHistory(where: EmploymentHistoryWhereUniqueInput!): EmploymentHistory
   familyMember(where: FamilyMemberWhereUniqueInput!): FamilyMember
   familyMembers(orderBy: [FamilyMemberOrderByInput!], skip: Float, take: Float, where: FamilyMemberWhereInput): [FamilyMember!]!
+  personalInfo(where: PersonalInfoWhereUniqueInput!): PersonalInfo
+  personalInfos(orderBy: [PersonalInfoOrderByInput!], skip: Float, take: Float, where: PersonalInfoWhereInput): [PersonalInfo!]!
   travelHistories(orderBy: [TravelHistoryOrderByInput!], skip: Float, take: Float, where: TravelHistoryWhereInput): [TravelHistory!]!
   travelHistory(where: TravelHistoryWhereUniqueInput!): TravelHistory
   user(where: UserWhereUniqueInput!): User
@@ -149,40 +708,106 @@ input StringNullableFilter {
 }
 
 type TravelHistory {
+  applicant: Applicant
+  archived: Boolean
+  archivedBy: User
   createdAt: DateTime!
+  createdBy: User
+  dateDeparted: DateTime
+  dateEntered: DateTime!
   destinationAirport: String
   destinationCity: String
   destinationCountry: String
   id: String!
+  reasonOfTravel: String!
   updatedAt: DateTime!
+  updatedBy: User
 }
 
 input TravelHistoryCreateInput {
+  applicant: ApplicantWhereUniqueInput
+  archived: Boolean
+  archivedBy: UserWhereUniqueInput
+  createdBy: UserWhereUniqueInput
+  dateDeparted: DateTime
+  dateEntered: DateTime!
   destinationAirport: String
   destinationCity: String
   destinationCountry: String
+  reasonOfTravel: String!
+  updatedBy: UserWhereUniqueInput
+}
+
+input TravelHistoryCreateNestedManyWithoutApplicantsInput {
+  connect: [TravelHistoryWhereUniqueInput!]
+}
+
+input TravelHistoryCreateNestedManyWithoutUsersInput {
+  connect: [TravelHistoryWhereUniqueInput!]
+}
+
+input TravelHistoryListRelationFilter {
+  every: TravelHistoryWhereInput
+  none: TravelHistoryWhereInput
+  some: TravelHistoryWhereInput
 }
 
 input TravelHistoryOrderByInput {
+  applicantId: SortOrder
+  archived: SortOrder
+  archivedById: SortOrder
   createdAt: SortOrder
+  createdById: SortOrder
+  dateDeparted: SortOrder
+  dateEntered: SortOrder
   destinationAirport: SortOrder
   destinationCity: SortOrder
   destinationCountry: SortOrder
   id: SortOrder
+  reasonOfTravel: SortOrder
   updatedAt: SortOrder
+  updatedById: SortOrder
 }
 
 input TravelHistoryUpdateInput {
+  applicant: ApplicantWhereUniqueInput
+  archived: Boolean
+  archivedBy: UserWhereUniqueInput
+  createdBy: UserWhereUniqueInput
+  dateDeparted: DateTime
+  dateEntered: DateTime
   destinationAirport: String
   destinationCity: String
   destinationCountry: String
+  reasonOfTravel: String
+  updatedBy: UserWhereUniqueInput
+}
+
+input TravelHistoryUpdateManyWithoutApplicantsInput {
+  connect: [TravelHistoryWhereUniqueInput!]
+  disconnect: [TravelHistoryWhereUniqueInput!]
+  set: [TravelHistoryWhereUniqueInput!]
+}
+
+input TravelHistoryUpdateManyWithoutUsersInput {
+  connect: [TravelHistoryWhereUniqueInput!]
+  disconnect: [TravelHistoryWhereUniqueInput!]
+  set: [TravelHistoryWhereUniqueInput!]
 }
 
 input TravelHistoryWhereInput {
+  applicant: ApplicantWhereUniqueInput
+  archived: BooleanNullableFilter
+  archivedBy: UserWhereUniqueInput
+  createdBy: UserWhereUniqueInput
+  dateDeparted: DateTimeNullableFilter
+  dateEntered: DateTimeFilter
   destinationAirport: StringNullableFilter
   destinationCity: StringNullableFilter
   destinationCountry: StringNullableFilter
   id: StringFilter
+  reasonOfTravel: StringFilter
+  updatedBy: UserWhereUniqueInput
 }
 
 input TravelHistoryWhereUniqueInput {
@@ -190,29 +815,77 @@ input TravelHistoryWhereUniqueInput {
 }
 
 type User {
+  applicants(orderBy: [ApplicantOrderByInput!], skip: Float, take: Float, where: ApplicantWhereInput): [Applicant!]!
+  applicantsArchived(orderBy: [ApplicantOrderByInput!], skip: Float, take: Float, where: ApplicantWhereInput): [Applicant!]!
+  applicantsCreated(orderBy: [ApplicantOrderByInput!], skip: Float, take: Float, where: ApplicantWhereInput): [Applicant!]!
+  applicantsUpdated(orderBy: [ApplicantOrderByInput!], skip: Float, take: Float, where: ApplicantWhereInput): [Applicant!]!
   createdAt: DateTime!
+  educationHistoriesArchived(orderBy: [EducationHistoryOrderByInput!], skip: Float, take: Float, where: EducationHistoryWhereInput): [EducationHistory!]!
+  educationHistoriesCreated(orderBy: [EducationHistoryOrderByInput!], skip: Float, take: Float, where: EducationHistoryWhereInput): [EducationHistory!]!
+  educationHistoriesUpdated(orderBy: [EducationHistoryOrderByInput!], skip: Float, take: Float, where: EducationHistoryWhereInput): [EducationHistory!]!
   email: String
+  employmentHistoriesArchived(orderBy: [EmploymentHistoryOrderByInput!], skip: Float, take: Float, where: EmploymentHistoryWhereInput): [EmploymentHistory!]!
+  employmentHistoriesCreated(orderBy: [EmploymentHistoryOrderByInput!], skip: Float, take: Float, where: EmploymentHistoryWhereInput): [EmploymentHistory!]!
+  employmentHistoriesUpdated(orderBy: [EmploymentHistoryOrderByInput!], skip: Float, take: Float, where: EmploymentHistoryWhereInput): [EmploymentHistory!]!
+  familyMembersArchived(orderBy: [FamilyMemberOrderByInput!], skip: Float, take: Float, where: FamilyMemberWhereInput): [FamilyMember!]!
+  familyMembersCreated(orderBy: [FamilyMemberOrderByInput!], skip: Float, take: Float, where: FamilyMemberWhereInput): [FamilyMember!]!
+  familyMembersUpdated(orderBy: [FamilyMemberOrderByInput!], skip: Float, take: Float, where: FamilyMemberWhereInput): [FamilyMember!]!
   firstName: String
   id: String!
   lastName: String
+  personalInfosArchived(orderBy: [PersonalInfoOrderByInput!], skip: Float, take: Float, where: PersonalInfoWhereInput): [PersonalInfo!]!
+  personalInfosCreated(orderBy: [PersonalInfoOrderByInput!], skip: Float, take: Float, where: PersonalInfoWhereInput): [PersonalInfo!]!
+  personalInfosUpdated(orderBy: [PersonalInfoOrderByInput!], skip: Float, take: Float, where: PersonalInfoWhereInput): [PersonalInfo!]!
   roles: [String!]!
+  travelHistoriesArchived(orderBy: [TravelHistoryOrderByInput!], skip: Float, take: Float, where: TravelHistoryWhereInput): [TravelHistory!]!
+  travelHistoriesCreated(orderBy: [TravelHistoryOrderByInput!], skip: Float, take: Float, where: TravelHistoryWhereInput): [TravelHistory!]!
+  travelHistoriesUpdated(orderBy: [TravelHistoryOrderByInput!], skip: Float, take: Float, where: TravelHistoryWhereInput): [TravelHistory!]!
   updatedAt: DateTime!
   username: String!
 }
 
 input UserCreateInput {
+  applicants: ApplicantCreateNestedManyWithoutUsersInput
+  applicantsArchived: ApplicantCreateNestedManyWithoutUsersInput
+  applicantsCreated: ApplicantCreateNestedManyWithoutUsersInput
+  applicantsUpdated: ApplicantCreateNestedManyWithoutUsersInput
+  educationHistoriesArchived: EducationHistoryCreateNestedManyWithoutUsersInput
+  educationHistoriesCreated: EducationHistoryCreateNestedManyWithoutUsersInput
+  educationHistoriesUpdated: EducationHistoryCreateNestedManyWithoutUsersInput
   email: String
+  employmentHistoriesArchived: EmploymentHistoryCreateNestedManyWithoutUsersInput
+  employmentHistoriesCreated: EmploymentHistoryCreateNestedManyWithoutUsersInput
+  employmentHistoriesUpdated: EmploymentHistoryCreateNestedManyWithoutUsersInput
+  familyMembersArchived: FamilyMemberCreateNestedManyWithoutUsersInput
+  familyMembersCreated: FamilyMemberCreateNestedManyWithoutUsersInput
+  familyMembersUpdated: FamilyMemberCreateNestedManyWithoutUsersInput
   firstName: String
   lastName: String
   password: String!
+  personalInfosArchived: PersonalInfoCreateNestedManyWithoutUsersInput
+  personalInfosCreated: PersonalInfoCreateNestedManyWithoutUsersInput
+  personalInfosUpdated: PersonalInfoCreateNestedManyWithoutUsersInput
   roles: [String!]!
+  travelHistoriesArchived: TravelHistoryCreateNestedManyWithoutUsersInput
+  travelHistoriesCreated: TravelHistoryCreateNestedManyWithoutUsersInput
+  travelHistoriesUpdated: TravelHistoryCreateNestedManyWithoutUsersInput
   username: String!
+}
+
+input UserCreateNestedManyWithoutApplicantsInput {
+  connect: [UserWhereUniqueInput!]
 }
 
 type UserInfo {
   accessToken: String
   roles: [String!]!
   username: String!
+}
+
+input UserListRelationFilter {
+  every: UserWhereInput
+  none: UserWhereInput
+  some: UserWhereInput
 }
 
 input UserOrderByInput {
@@ -228,19 +901,63 @@ input UserOrderByInput {
 }
 
 input UserUpdateInput {
+  applicants: ApplicantUpdateManyWithoutUsersInput
+  applicantsArchived: ApplicantUpdateManyWithoutUsersInput
+  applicantsCreated: ApplicantUpdateManyWithoutUsersInput
+  applicantsUpdated: ApplicantUpdateManyWithoutUsersInput
+  educationHistoriesArchived: EducationHistoryUpdateManyWithoutUsersInput
+  educationHistoriesCreated: EducationHistoryUpdateManyWithoutUsersInput
+  educationHistoriesUpdated: EducationHistoryUpdateManyWithoutUsersInput
   email: String
+  employmentHistoriesArchived: EmploymentHistoryUpdateManyWithoutUsersInput
+  employmentHistoriesCreated: EmploymentHistoryUpdateManyWithoutUsersInput
+  employmentHistoriesUpdated: EmploymentHistoryUpdateManyWithoutUsersInput
+  familyMembersArchived: FamilyMemberUpdateManyWithoutUsersInput
+  familyMembersCreated: FamilyMemberUpdateManyWithoutUsersInput
+  familyMembersUpdated: FamilyMemberUpdateManyWithoutUsersInput
   firstName: String
   lastName: String
   password: String
+  personalInfosArchived: PersonalInfoUpdateManyWithoutUsersInput
+  personalInfosCreated: PersonalInfoUpdateManyWithoutUsersInput
+  personalInfosUpdated: PersonalInfoUpdateManyWithoutUsersInput
   roles: [String!]
+  travelHistoriesArchived: TravelHistoryUpdateManyWithoutUsersInput
+  travelHistoriesCreated: TravelHistoryUpdateManyWithoutUsersInput
+  travelHistoriesUpdated: TravelHistoryUpdateManyWithoutUsersInput
   username: String
 }
 
+input UserUpdateManyWithoutApplicantsInput {
+  connect: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+}
+
 input UserWhereInput {
+  applicants: ApplicantListRelationFilter
+  applicantsArchived: ApplicantListRelationFilter
+  applicantsCreated: ApplicantListRelationFilter
+  applicantsUpdated: ApplicantListRelationFilter
+  educationHistoriesArchived: EducationHistoryListRelationFilter
+  educationHistoriesCreated: EducationHistoryListRelationFilter
+  educationHistoriesUpdated: EducationHistoryListRelationFilter
   email: StringNullableFilter
+  employmentHistoriesArchived: EmploymentHistoryListRelationFilter
+  employmentHistoriesCreated: EmploymentHistoryListRelationFilter
+  employmentHistoriesUpdated: EmploymentHistoryListRelationFilter
+  familyMembersArchived: FamilyMemberListRelationFilter
+  familyMembersCreated: FamilyMemberListRelationFilter
+  familyMembersUpdated: FamilyMemberListRelationFilter
   firstName: StringNullableFilter
   id: StringFilter
   lastName: StringNullableFilter
+  personalInfosArchived: PersonalInfoListRelationFilter
+  personalInfosCreated: PersonalInfoListRelationFilter
+  personalInfosUpdated: PersonalInfoListRelationFilter
+  travelHistoriesArchived: TravelHistoryListRelationFilter
+  travelHistoriesCreated: TravelHistoryListRelationFilter
+  travelHistoriesUpdated: TravelHistoryListRelationFilter
   username: StringFilter
 }
 
