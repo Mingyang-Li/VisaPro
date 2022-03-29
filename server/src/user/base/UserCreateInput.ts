@@ -11,9 +11,100 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional } from "class-validator";
+import { ApplicantCreateNestedManyWithoutUsersInput } from "./ApplicantCreateNestedManyWithoutUsersInput";
+import { ValidateNested, IsOptional, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import { EducationHistoryCreateNestedManyWithoutUsersInput } from "./EducationHistoryCreateNestedManyWithoutUsersInput";
+import { EmploymentHistoryCreateNestedManyWithoutUsersInput } from "./EmploymentHistoryCreateNestedManyWithoutUsersInput";
+import { FamilyMemberCreateNestedManyWithoutUsersInput } from "./FamilyMemberCreateNestedManyWithoutUsersInput";
+import { PersonalInfoCreateNestedManyWithoutUsersInput } from "./PersonalInfoCreateNestedManyWithoutUsersInput";
+import { TravelHistoryCreateNestedManyWithoutUsersInput } from "./TravelHistoryCreateNestedManyWithoutUsersInput";
 @InputType()
 class UserCreateInput {
+  @ApiProperty({
+    required: false,
+    type: () => ApplicantCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => ApplicantCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => ApplicantCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  applicants?: ApplicantCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => ApplicantCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => ApplicantCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => ApplicantCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  applicantsArchived?: ApplicantCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => ApplicantCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => ApplicantCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => ApplicantCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  applicantsCreated?: ApplicantCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => ApplicantCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => ApplicantCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => ApplicantCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  applicantsUpdated?: ApplicantCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => EducationHistoryCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => EducationHistoryCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => EducationHistoryCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  educationHistoriesArchived?: EducationHistoryCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => EducationHistoryCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => EducationHistoryCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => EducationHistoryCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  educationHistoriesCreated?: EducationHistoryCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => EducationHistoryCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => EducationHistoryCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => EducationHistoryCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  educationHistoriesUpdated?: EducationHistoryCreateNestedManyWithoutUsersInput;
+
   @ApiProperty({
     required: false,
     type: String,
@@ -24,6 +115,78 @@ class UserCreateInput {
     nullable: true,
   })
   email?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => EmploymentHistoryCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => EmploymentHistoryCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => EmploymentHistoryCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  employmentHistoriesArchived?: EmploymentHistoryCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => EmploymentHistoryCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => EmploymentHistoryCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => EmploymentHistoryCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  employmentHistoriesCreated?: EmploymentHistoryCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => EmploymentHistoryCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => EmploymentHistoryCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => EmploymentHistoryCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  employmentHistoriesUpdated?: EmploymentHistoryCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => FamilyMemberCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => FamilyMemberCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => FamilyMemberCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  familyMembersArchived?: FamilyMemberCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => FamilyMemberCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => FamilyMemberCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => FamilyMemberCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  familyMembersCreated?: FamilyMemberCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => FamilyMemberCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => FamilyMemberCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => FamilyMemberCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  familyMembersUpdated?: FamilyMemberCreateNestedManyWithoutUsersInput;
 
   @ApiProperty({
     required: false,
@@ -56,6 +219,42 @@ class UserCreateInput {
   password!: string;
 
   @ApiProperty({
+    required: false,
+    type: () => PersonalInfoCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => PersonalInfoCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => PersonalInfoCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  personalInfosArchived?: PersonalInfoCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => PersonalInfoCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => PersonalInfoCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => PersonalInfoCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  personalInfosCreated?: PersonalInfoCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => PersonalInfoCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => PersonalInfoCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => PersonalInfoCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  personalInfosUpdated?: PersonalInfoCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
     required: true,
     type: [String],
   })
@@ -64,6 +263,42 @@ class UserCreateInput {
   })
   @Field(() => [String])
   roles!: Array<string>;
+
+  @ApiProperty({
+    required: false,
+    type: () => TravelHistoryCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => TravelHistoryCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => TravelHistoryCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  travelHistoriesArchived?: TravelHistoryCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => TravelHistoryCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => TravelHistoryCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => TravelHistoryCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  travelHistoriesCreated?: TravelHistoryCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
+    type: () => TravelHistoryCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => TravelHistoryCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => TravelHistoryCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  travelHistoriesUpdated?: TravelHistoryCreateNestedManyWithoutUsersInput;
 
   @ApiProperty({
     required: true,

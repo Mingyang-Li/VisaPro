@@ -11,37 +11,53 @@ import { TravelHistoryService } from "../travelHistory.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  archived: "true",
   createdAt: new Date(),
+  dateDeparted: new Date(),
+  dateEntered: new Date(),
   destinationAirport: "exampleDestinationAirport",
   destinationCity: "exampleDestinationCity",
   destinationCountry: "exampleDestinationCountry",
   id: "exampleId",
+  reasonOfTravel: "exampleReasonOfTravel",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  archived: "true",
   createdAt: new Date(),
+  dateDeparted: new Date(),
+  dateEntered: new Date(),
   destinationAirport: "exampleDestinationAirport",
   destinationCity: "exampleDestinationCity",
   destinationCountry: "exampleDestinationCountry",
   id: "exampleId",
+  reasonOfTravel: "exampleReasonOfTravel",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
+    archived: "true",
     createdAt: new Date(),
+    dateDeparted: new Date(),
+    dateEntered: new Date(),
     destinationAirport: "exampleDestinationAirport",
     destinationCity: "exampleDestinationCity",
     destinationCountry: "exampleDestinationCountry",
     id: "exampleId",
+    reasonOfTravel: "exampleReasonOfTravel",
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
+  archived: "true",
   createdAt: new Date(),
+  dateDeparted: new Date(),
+  dateEntered: new Date(),
   destinationAirport: "exampleDestinationAirport",
   destinationCity: "exampleDestinationCity",
   destinationCountry: "exampleDestinationCountry",
   id: "exampleId",
+  reasonOfTravel: "exampleReasonOfTravel",
   updatedAt: new Date(),
 };
 
@@ -109,6 +125,8 @@ describe("TravelHistory", () => {
       .expect({
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
+        dateDeparted: CREATE_RESULT.dateDeparted.toISOString(),
+        dateEntered: CREATE_RESULT.dateEntered.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       });
   });
@@ -121,6 +139,8 @@ describe("TravelHistory", () => {
         {
           ...FIND_MANY_RESULT[0],
           createdAt: FIND_MANY_RESULT[0].createdAt.toISOString(),
+          dateDeparted: FIND_MANY_RESULT[0].dateDeparted.toISOString(),
+          dateEntered: FIND_MANY_RESULT[0].dateEntered.toISOString(),
           updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
         },
       ]);
@@ -129,9 +149,9 @@ describe("TravelHistory", () => {
   test("GET /travelHistories/:id non existing", async () => {
     await request(app.getHttpServer())
       .get(`${"/travelHistories"}/${nonExistingId}`)
-      .expect(404)
+      .expect(HttpStatus.NOT_FOUND)
       .expect({
-        statusCode: 404,
+        statusCode: HttpStatus.NOT_FOUND,
         message: `No resource was found for {"${"id"}":"${nonExistingId}"}`,
         error: "Not Found",
       });
@@ -144,6 +164,8 @@ describe("TravelHistory", () => {
       .expect({
         ...FIND_ONE_RESULT,
         createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
+        dateDeparted: FIND_ONE_RESULT.dateDeparted.toISOString(),
+        dateEntered: FIND_ONE_RESULT.dateEntered.toISOString(),
         updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
       });
   });

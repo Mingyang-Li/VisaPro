@@ -25,6 +25,18 @@ import { DeleteUserArgs } from "./DeleteUserArgs";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserFindUniqueArgs } from "./UserFindUniqueArgs";
 import { User } from "./User";
+import { ApplicantFindManyArgs } from "../../applicant/base/ApplicantFindManyArgs";
+import { Applicant } from "../../applicant/base/Applicant";
+import { EducationHistoryFindManyArgs } from "../../educationHistory/base/EducationHistoryFindManyArgs";
+import { EducationHistory } from "../../educationHistory/base/EducationHistory";
+import { EmploymentHistoryFindManyArgs } from "../../employmentHistory/base/EmploymentHistoryFindManyArgs";
+import { EmploymentHistory } from "../../employmentHistory/base/EmploymentHistory";
+import { FamilyMemberFindManyArgs } from "../../familyMember/base/FamilyMemberFindManyArgs";
+import { FamilyMember } from "../../familyMember/base/FamilyMember";
+import { PersonalInfoFindManyArgs } from "../../personalInfo/base/PersonalInfoFindManyArgs";
+import { PersonalInfo } from "../../personalInfo/base/PersonalInfo";
+import { TravelHistoryFindManyArgs } from "../../travelHistory/base/TravelHistoryFindManyArgs";
+import { TravelHistory } from "../../travelHistory/base/TravelHistory";
 import { UserService } from "../user.service";
 
 @graphql.Resolver(() => User)
@@ -200,5 +212,544 @@ export class UserResolverBase {
       }
       throw error;
     }
+  }
+
+  @graphql.ResolveField(() => [Applicant])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async applicants(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: ApplicantFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<Applicant[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "Applicant",
+    });
+    const results = await this.service.findApplicants(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [Applicant])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async applicantsArchived(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: ApplicantFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<Applicant[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "Applicant",
+    });
+    const results = await this.service.findApplicantsArchived(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [Applicant])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async applicantsCreated(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: ApplicantFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<Applicant[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "Applicant",
+    });
+    const results = await this.service.findApplicantsCreated(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [Applicant])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async applicantsUpdated(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: ApplicantFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<Applicant[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "Applicant",
+    });
+    const results = await this.service.findApplicantsUpdated(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [EducationHistory])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async educationHistoriesArchived(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: EducationHistoryFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<EducationHistory[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "EducationHistory",
+    });
+    const results = await this.service.findEducationHistoriesArchived(
+      parent.id,
+      args
+    );
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [EducationHistory])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async educationHistoriesCreated(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: EducationHistoryFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<EducationHistory[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "EducationHistory",
+    });
+    const results = await this.service.findEducationHistoriesCreated(
+      parent.id,
+      args
+    );
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [EducationHistory])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async educationHistoriesUpdated(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: EducationHistoryFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<EducationHistory[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "EducationHistory",
+    });
+    const results = await this.service.findEducationHistoriesUpdated(
+      parent.id,
+      args
+    );
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [EmploymentHistory])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async employmentHistoriesArchived(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: EmploymentHistoryFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<EmploymentHistory[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "EmploymentHistory",
+    });
+    const results = await this.service.findEmploymentHistoriesArchived(
+      parent.id,
+      args
+    );
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [EmploymentHistory])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async employmentHistoriesCreated(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: EmploymentHistoryFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<EmploymentHistory[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "EmploymentHistory",
+    });
+    const results = await this.service.findEmploymentHistoriesCreated(
+      parent.id,
+      args
+    );
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [EmploymentHistory])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async employmentHistoriesUpdated(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: EmploymentHistoryFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<EmploymentHistory[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "EmploymentHistory",
+    });
+    const results = await this.service.findEmploymentHistoriesUpdated(
+      parent.id,
+      args
+    );
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [FamilyMember])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async familyMembersArchived(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: FamilyMemberFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<FamilyMember[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "FamilyMember",
+    });
+    const results = await this.service.findFamilyMembersArchived(
+      parent.id,
+      args
+    );
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [FamilyMember])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async familyMembersCreated(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: FamilyMemberFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<FamilyMember[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "FamilyMember",
+    });
+    const results = await this.service.findFamilyMembersCreated(
+      parent.id,
+      args
+    );
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [FamilyMember])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async familyMembersUpdated(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: FamilyMemberFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<FamilyMember[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "FamilyMember",
+    });
+    const results = await this.service.findFamilyMembersUpdated(
+      parent.id,
+      args
+    );
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [PersonalInfo])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async personalInfosArchived(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: PersonalInfoFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<PersonalInfo[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "PersonalInfo",
+    });
+    const results = await this.service.findPersonalInfosArchived(
+      parent.id,
+      args
+    );
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [PersonalInfo])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async personalInfosCreated(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: PersonalInfoFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<PersonalInfo[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "PersonalInfo",
+    });
+    const results = await this.service.findPersonalInfosCreated(
+      parent.id,
+      args
+    );
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [PersonalInfo])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async personalInfosUpdated(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: PersonalInfoFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<PersonalInfo[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "PersonalInfo",
+    });
+    const results = await this.service.findPersonalInfosUpdated(
+      parent.id,
+      args
+    );
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [TravelHistory])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async travelHistoriesArchived(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: TravelHistoryFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<TravelHistory[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "TravelHistory",
+    });
+    const results = await this.service.findTravelHistoriesArchived(
+      parent.id,
+      args
+    );
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [TravelHistory])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async travelHistoriesCreated(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: TravelHistoryFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<TravelHistory[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "TravelHistory",
+    });
+    const results = await this.service.findTravelHistoriesCreated(
+      parent.id,
+      args
+    );
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
+  }
+
+  @graphql.ResolveField(() => [TravelHistory])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async travelHistoriesUpdated(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: TravelHistoryFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<TravelHistory[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "TravelHistory",
+    });
+    const results = await this.service.findTravelHistoriesUpdated(
+      parent.id,
+      args
+    );
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
   }
 }

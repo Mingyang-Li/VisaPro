@@ -11,10 +11,63 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString } from "class-validator";
+import { Applicant } from "../../applicant/base/Applicant";
+import {
+  ValidateNested,
+  IsOptional,
+  IsBoolean,
+  IsString,
+  IsDate,
+} from "class-validator";
 import { Type } from "class-transformer";
+import { User } from "../../user/base/User";
 @ObjectType()
 class FamilyMember {
+  @ApiProperty({
+    required: false,
+    type: () => [Applicant],
+  })
+  @ValidateNested()
+  @Type(() => Applicant)
+  @IsOptional()
+  applicants?: Array<Applicant>;
+
+  @ApiProperty({
+    required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  archived!: boolean | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => User,
+  })
+  @ValidateNested()
+  @Type(() => User)
+  @IsOptional()
+  archivedBy?: User | null;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  countriesOfCitizenship!: string;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  countryOfBirth!: string;
+
   @ApiProperty({
     required: true,
   })
@@ -22,6 +75,34 @@ class FamilyMember {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: () => User,
+  })
+  @ValidateNested()
+  @Type(() => User)
+  @IsOptional()
+  createdBy?: User | null;
+
+  @ApiProperty({
+    required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  dateOfBirth!: Date | null;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  firstName!: string;
 
   @ApiProperty({
     required: true,
@@ -33,10 +114,35 @@ class FamilyMember {
 
   @ApiProperty({
     required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  lastName!: string;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  relationshipToApplicant!: string;
+
+  @ApiProperty({
+    required: true,
   })
   @IsDate()
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: () => User,
+  })
+  @ValidateNested()
+  @Type(() => User)
+  @IsOptional()
+  updatedBy?: User | null;
 }
 export { FamilyMember };

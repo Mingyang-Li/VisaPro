@@ -11,25 +11,53 @@ import { FamilyMemberService } from "../familyMember.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  archived: "true",
+  countriesOfCitizenship: "exampleCountriesOfCitizenship",
+  countryOfBirth: "exampleCountryOfBirth",
   createdAt: new Date(),
+  dateOfBirth: new Date(),
+  firstName: "exampleFirstName",
   id: "exampleId",
+  lastName: "exampleLastName",
+  relationshipToApplicant: "exampleRelationshipToApplicant",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  archived: "true",
+  countriesOfCitizenship: "exampleCountriesOfCitizenship",
+  countryOfBirth: "exampleCountryOfBirth",
   createdAt: new Date(),
+  dateOfBirth: new Date(),
+  firstName: "exampleFirstName",
   id: "exampleId",
+  lastName: "exampleLastName",
+  relationshipToApplicant: "exampleRelationshipToApplicant",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
+    archived: "true",
+    countriesOfCitizenship: "exampleCountriesOfCitizenship",
+    countryOfBirth: "exampleCountryOfBirth",
     createdAt: new Date(),
+    dateOfBirth: new Date(),
+    firstName: "exampleFirstName",
     id: "exampleId",
+    lastName: "exampleLastName",
+    relationshipToApplicant: "exampleRelationshipToApplicant",
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
+  archived: "true",
+  countriesOfCitizenship: "exampleCountriesOfCitizenship",
+  countryOfBirth: "exampleCountryOfBirth",
   createdAt: new Date(),
+  dateOfBirth: new Date(),
+  firstName: "exampleFirstName",
   id: "exampleId",
+  lastName: "exampleLastName",
+  relationshipToApplicant: "exampleRelationshipToApplicant",
   updatedAt: new Date(),
 };
 
@@ -97,6 +125,7 @@ describe("FamilyMember", () => {
       .expect({
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
+        dateOfBirth: CREATE_RESULT.dateOfBirth.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       });
   });
@@ -109,6 +138,7 @@ describe("FamilyMember", () => {
         {
           ...FIND_MANY_RESULT[0],
           createdAt: FIND_MANY_RESULT[0].createdAt.toISOString(),
+          dateOfBirth: FIND_MANY_RESULT[0].dateOfBirth.toISOString(),
           updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
         },
       ]);
@@ -117,9 +147,9 @@ describe("FamilyMember", () => {
   test("GET /familyMembers/:id non existing", async () => {
     await request(app.getHttpServer())
       .get(`${"/familyMembers"}/${nonExistingId}`)
-      .expect(404)
+      .expect(HttpStatus.NOT_FOUND)
       .expect({
-        statusCode: 404,
+        statusCode: HttpStatus.NOT_FOUND,
         message: `No resource was found for {"${"id"}":"${nonExistingId}"}`,
         error: "Not Found",
       });
@@ -132,6 +162,7 @@ describe("FamilyMember", () => {
       .expect({
         ...FIND_ONE_RESULT,
         createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
+        dateOfBirth: FIND_ONE_RESULT.dateOfBirth.toISOString(),
         updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
       });
   });

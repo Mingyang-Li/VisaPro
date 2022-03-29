@@ -11,12 +11,102 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { ApplicantListRelationFilter } from "../../applicant/base/ApplicantListRelationFilter";
+import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { IsOptional } from "class-validator";
+import { EducationHistoryListRelationFilter } from "../../educationHistory/base/EducationHistoryListRelationFilter";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { EmploymentHistoryListRelationFilter } from "../../employmentHistory/base/EmploymentHistoryListRelationFilter";
+import { FamilyMemberListRelationFilter } from "../../familyMember/base/FamilyMemberListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
+import { PersonalInfoListRelationFilter } from "../../personalInfo/base/PersonalInfoListRelationFilter";
+import { TravelHistoryListRelationFilter } from "../../travelHistory/base/TravelHistoryListRelationFilter";
 @InputType()
 class UserWhereInput {
+  @ApiProperty({
+    required: false,
+    type: () => ApplicantListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => ApplicantListRelationFilter)
+  @IsOptional()
+  @Field(() => ApplicantListRelationFilter, {
+    nullable: true,
+  })
+  applicants?: ApplicantListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => ApplicantListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => ApplicantListRelationFilter)
+  @IsOptional()
+  @Field(() => ApplicantListRelationFilter, {
+    nullable: true,
+  })
+  applicantsArchived?: ApplicantListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => ApplicantListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => ApplicantListRelationFilter)
+  @IsOptional()
+  @Field(() => ApplicantListRelationFilter, {
+    nullable: true,
+  })
+  applicantsCreated?: ApplicantListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => ApplicantListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => ApplicantListRelationFilter)
+  @IsOptional()
+  @Field(() => ApplicantListRelationFilter, {
+    nullable: true,
+  })
+  applicantsUpdated?: ApplicantListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => EducationHistoryListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => EducationHistoryListRelationFilter)
+  @IsOptional()
+  @Field(() => EducationHistoryListRelationFilter, {
+    nullable: true,
+  })
+  educationHistoriesArchived?: EducationHistoryListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => EducationHistoryListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => EducationHistoryListRelationFilter)
+  @IsOptional()
+  @Field(() => EducationHistoryListRelationFilter, {
+    nullable: true,
+  })
+  educationHistoriesCreated?: EducationHistoryListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => EducationHistoryListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => EducationHistoryListRelationFilter)
+  @IsOptional()
+  @Field(() => EducationHistoryListRelationFilter, {
+    nullable: true,
+  })
+  educationHistoriesUpdated?: EducationHistoryListRelationFilter;
+
   @ApiProperty({
     required: false,
     type: StringNullableFilter,
@@ -27,6 +117,78 @@ class UserWhereInput {
     nullable: true,
   })
   email?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => EmploymentHistoryListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => EmploymentHistoryListRelationFilter)
+  @IsOptional()
+  @Field(() => EmploymentHistoryListRelationFilter, {
+    nullable: true,
+  })
+  employmentHistoriesArchived?: EmploymentHistoryListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => EmploymentHistoryListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => EmploymentHistoryListRelationFilter)
+  @IsOptional()
+  @Field(() => EmploymentHistoryListRelationFilter, {
+    nullable: true,
+  })
+  employmentHistoriesCreated?: EmploymentHistoryListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => EmploymentHistoryListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => EmploymentHistoryListRelationFilter)
+  @IsOptional()
+  @Field(() => EmploymentHistoryListRelationFilter, {
+    nullable: true,
+  })
+  employmentHistoriesUpdated?: EmploymentHistoryListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => FamilyMemberListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => FamilyMemberListRelationFilter)
+  @IsOptional()
+  @Field(() => FamilyMemberListRelationFilter, {
+    nullable: true,
+  })
+  familyMembersArchived?: FamilyMemberListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => FamilyMemberListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => FamilyMemberListRelationFilter)
+  @IsOptional()
+  @Field(() => FamilyMemberListRelationFilter, {
+    nullable: true,
+  })
+  familyMembersCreated?: FamilyMemberListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => FamilyMemberListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => FamilyMemberListRelationFilter)
+  @IsOptional()
+  @Field(() => FamilyMemberListRelationFilter, {
+    nullable: true,
+  })
+  familyMembersUpdated?: FamilyMemberListRelationFilter;
 
   @ApiProperty({
     required: false,
@@ -60,6 +222,78 @@ class UserWhereInput {
     nullable: true,
   })
   lastName?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => PersonalInfoListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => PersonalInfoListRelationFilter)
+  @IsOptional()
+  @Field(() => PersonalInfoListRelationFilter, {
+    nullable: true,
+  })
+  personalInfosArchived?: PersonalInfoListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => PersonalInfoListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => PersonalInfoListRelationFilter)
+  @IsOptional()
+  @Field(() => PersonalInfoListRelationFilter, {
+    nullable: true,
+  })
+  personalInfosCreated?: PersonalInfoListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => PersonalInfoListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => PersonalInfoListRelationFilter)
+  @IsOptional()
+  @Field(() => PersonalInfoListRelationFilter, {
+    nullable: true,
+  })
+  personalInfosUpdated?: PersonalInfoListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => TravelHistoryListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => TravelHistoryListRelationFilter)
+  @IsOptional()
+  @Field(() => TravelHistoryListRelationFilter, {
+    nullable: true,
+  })
+  travelHistoriesArchived?: TravelHistoryListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => TravelHistoryListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => TravelHistoryListRelationFilter)
+  @IsOptional()
+  @Field(() => TravelHistoryListRelationFilter, {
+    nullable: true,
+  })
+  travelHistoriesCreated?: TravelHistoryListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => TravelHistoryListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => TravelHistoryListRelationFilter)
+  @IsOptional()
+  @Field(() => TravelHistoryListRelationFilter, {
+    nullable: true,
+  })
+  travelHistoriesUpdated?: TravelHistoryListRelationFilter;
 
   @ApiProperty({
     required: false,

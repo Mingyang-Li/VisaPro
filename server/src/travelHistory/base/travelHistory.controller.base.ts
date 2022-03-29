@@ -70,14 +70,70 @@ export class TravelHistoryControllerBase {
       );
     }
     return await this.service.create({
-      data: data,
+      data: {
+        ...data,
+
+        applicant: data.applicant
+          ? {
+              connect: data.applicant,
+            }
+          : undefined,
+
+        archivedBy: data.archivedBy
+          ? {
+              connect: data.archivedBy,
+            }
+          : undefined,
+
+        createdBy: data.createdBy
+          ? {
+              connect: data.createdBy,
+            }
+          : undefined,
+
+        updatedBy: data.updatedBy
+          ? {
+              connect: data.updatedBy,
+            }
+          : undefined,
+      },
       select: {
+        applicant: {
+          select: {
+            id: true,
+          },
+        },
+
+        archived: true,
+
+        archivedBy: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
+
+        createdBy: {
+          select: {
+            id: true,
+          },
+        },
+
+        dateDeparted: true,
+        dateEntered: true,
         destinationAirport: true,
         destinationCity: true,
         destinationCountry: true,
         id: true,
+        reasonOfTravel: true,
         updatedAt: true,
+
+        updatedBy: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
   }
@@ -111,12 +167,42 @@ export class TravelHistoryControllerBase {
     const results = await this.service.findMany({
       ...args,
       select: {
+        applicant: {
+          select: {
+            id: true,
+          },
+        },
+
+        archived: true,
+
+        archivedBy: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
+
+        createdBy: {
+          select: {
+            id: true,
+          },
+        },
+
+        dateDeparted: true,
+        dateEntered: true,
         destinationAirport: true,
         destinationCity: true,
         destinationCountry: true,
         id: true,
+        reasonOfTravel: true,
         updatedAt: true,
+
+        updatedBy: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
     return results.map((result) => permission.filter(result));
@@ -149,12 +235,42 @@ export class TravelHistoryControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        applicant: {
+          select: {
+            id: true,
+          },
+        },
+
+        archived: true,
+
+        archivedBy: {
+          select: {
+            id: true,
+          },
+        },
+
         createdAt: true,
+
+        createdBy: {
+          select: {
+            id: true,
+          },
+        },
+
+        dateDeparted: true,
+        dateEntered: true,
         destinationAirport: true,
         destinationCity: true,
         destinationCountry: true,
         id: true,
+        reasonOfTravel: true,
         updatedAt: true,
+
+        updatedBy: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
     if (result === null) {
@@ -206,14 +322,70 @@ export class TravelHistoryControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          applicant: data.applicant
+            ? {
+                connect: data.applicant,
+              }
+            : undefined,
+
+          archivedBy: data.archivedBy
+            ? {
+                connect: data.archivedBy,
+              }
+            : undefined,
+
+          createdBy: data.createdBy
+            ? {
+                connect: data.createdBy,
+              }
+            : undefined,
+
+          updatedBy: data.updatedBy
+            ? {
+                connect: data.updatedBy,
+              }
+            : undefined,
+        },
         select: {
+          applicant: {
+            select: {
+              id: true,
+            },
+          },
+
+          archived: true,
+
+          archivedBy: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
+
+          createdBy: {
+            select: {
+              id: true,
+            },
+          },
+
+          dateDeparted: true,
+          dateEntered: true,
           destinationAirport: true,
           destinationCity: true,
           destinationCountry: true,
           id: true,
+          reasonOfTravel: true,
           updatedAt: true,
+
+          updatedBy: {
+            select: {
+              id: true,
+            },
+          },
         },
       });
     } catch (error) {
@@ -247,12 +419,42 @@ export class TravelHistoryControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          applicant: {
+            select: {
+              id: true,
+            },
+          },
+
+          archived: true,
+
+          archivedBy: {
+            select: {
+              id: true,
+            },
+          },
+
           createdAt: true,
+
+          createdBy: {
+            select: {
+              id: true,
+            },
+          },
+
+          dateDeparted: true,
+          dateEntered: true,
           destinationAirport: true,
           destinationCity: true,
           destinationCountry: true,
           id: true,
+          reasonOfTravel: true,
           updatedAt: true,
+
+          updatedBy: {
+            select: {
+              id: true,
+            },
+          },
         },
       });
     } catch (error) {

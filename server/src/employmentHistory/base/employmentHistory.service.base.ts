@@ -10,7 +10,7 @@ https://docs.amplication.com/docs/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "nestjs-prisma";
-import { Prisma, EmploymentHistory } from "@prisma/client";
+import { Prisma, EmploymentHistory, Applicant, User } from "@prisma/client";
 
 export class EmploymentHistoryServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -45,5 +45,37 @@ export class EmploymentHistoryServiceBase {
     args: Prisma.SelectSubset<T, Prisma.EmploymentHistoryDeleteArgs>
   ): Promise<EmploymentHistory> {
     return this.prisma.employmentHistory.delete(args);
+  }
+
+  async getApplicant(parentId: string): Promise<Applicant | null> {
+    return this.prisma.employmentHistory
+      .findUnique({
+        where: { id: parentId },
+      })
+      .applicant();
+  }
+
+  async getArchivedBy(parentId: string): Promise<User | null> {
+    return this.prisma.employmentHistory
+      .findUnique({
+        where: { id: parentId },
+      })
+      .archivedBy();
+  }
+
+  async getCreatedBy(parentId: string): Promise<User | null> {
+    return this.prisma.employmentHistory
+      .findUnique({
+        where: { id: parentId },
+      })
+      .createdBy();
+  }
+
+  async getUpdatedBy(parentId: string): Promise<User | null> {
+    return this.prisma.employmentHistory
+      .findUnique({
+        where: { id: parentId },
+      })
+      .updatedBy();
   }
 }

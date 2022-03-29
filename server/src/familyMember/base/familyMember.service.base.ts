@@ -10,7 +10,7 @@ https://docs.amplication.com/docs/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "nestjs-prisma";
-import { Prisma, FamilyMember } from "@prisma/client";
+import { Prisma, FamilyMember, Applicant, User } from "@prisma/client";
 
 export class FamilyMemberServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -45,5 +45,40 @@ export class FamilyMemberServiceBase {
     args: Prisma.SelectSubset<T, Prisma.FamilyMemberDeleteArgs>
   ): Promise<FamilyMember> {
     return this.prisma.familyMember.delete(args);
+  }
+
+  async findApplicants(
+    parentId: string,
+    args: Prisma.ApplicantFindManyArgs
+  ): Promise<Applicant[]> {
+    return this.prisma.familyMember
+      .findUnique({
+        where: { id: parentId },
+      })
+      .applicants(args);
+  }
+
+  async getArchivedBy(parentId: string): Promise<User | null> {
+    return this.prisma.familyMember
+      .findUnique({
+        where: { id: parentId },
+      })
+      .archivedBy();
+  }
+
+  async getCreatedBy(parentId: string): Promise<User | null> {
+    return this.prisma.familyMember
+      .findUnique({
+        where: { id: parentId },
+      })
+      .createdBy();
+  }
+
+  async getUpdatedBy(parentId: string): Promise<User | null> {
+    return this.prisma.familyMember
+      .findUnique({
+        where: { id: parentId },
+      })
+      .updatedBy();
   }
 }

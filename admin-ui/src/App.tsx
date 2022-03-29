@@ -13,10 +13,10 @@ import { EmploymentHistoryList } from "./employmentHistory/EmploymentHistoryList
 import { EmploymentHistoryCreate } from "./employmentHistory/EmploymentHistoryCreate";
 import { EmploymentHistoryEdit } from "./employmentHistory/EmploymentHistoryEdit";
 import { EmploymentHistoryShow } from "./employmentHistory/EmploymentHistoryShow";
-import { EducationHiatoryList } from "./educationHiatory/EducationHiatoryList";
-import { EducationHiatoryCreate } from "./educationHiatory/EducationHiatoryCreate";
-import { EducationHiatoryEdit } from "./educationHiatory/EducationHiatoryEdit";
-import { EducationHiatoryShow } from "./educationHiatory/EducationHiatoryShow";
+import { EducationHistoryList } from "./educationHistory/EducationHistoryList";
+import { EducationHistoryCreate } from "./educationHistory/EducationHistoryCreate";
+import { EducationHistoryEdit } from "./educationHistory/EducationHistoryEdit";
+import { EducationHistoryShow } from "./educationHistory/EducationHistoryShow";
 import { TravelHistoryList } from "./travelHistory/TravelHistoryList";
 import { TravelHistoryCreate } from "./travelHistory/TravelHistoryCreate";
 import { TravelHistoryEdit } from "./travelHistory/TravelHistoryEdit";
@@ -25,6 +25,14 @@ import { FamilyMemberList } from "./familyMember/FamilyMemberList";
 import { FamilyMemberCreate } from "./familyMember/FamilyMemberCreate";
 import { FamilyMemberEdit } from "./familyMember/FamilyMemberEdit";
 import { FamilyMemberShow } from "./familyMember/FamilyMemberShow";
+import { PersonalInfoList } from "./personalInfo/PersonalInfoList";
+import { PersonalInfoCreate } from "./personalInfo/PersonalInfoCreate";
+import { PersonalInfoEdit } from "./personalInfo/PersonalInfoEdit";
+import { PersonalInfoShow } from "./personalInfo/PersonalInfoShow";
+import { ApplicantList } from "./applicant/ApplicantList";
+import { ApplicantCreate } from "./applicant/ApplicantCreate";
+import { ApplicantEdit } from "./applicant/ApplicantEdit";
+import { ApplicantShow } from "./applicant/ApplicantShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -66,11 +74,11 @@ const App = (): React.ReactElement => {
           show={EmploymentHistoryShow}
         />
         <Resource
-          name="EducationHiatory"
-          list={EducationHiatoryList}
-          edit={EducationHiatoryEdit}
-          create={EducationHiatoryCreate}
-          show={EducationHiatoryShow}
+          name="EducationHistory"
+          list={EducationHistoryList}
+          edit={EducationHistoryEdit}
+          create={EducationHistoryCreate}
+          show={EducationHistoryShow}
         />
         <Resource
           name="TravelHistory"
@@ -85,6 +93,20 @@ const App = (): React.ReactElement => {
           edit={FamilyMemberEdit}
           create={FamilyMemberCreate}
           show={FamilyMemberShow}
+        />
+        <Resource
+          name="PersonalInfo"
+          list={PersonalInfoList}
+          edit={PersonalInfoEdit}
+          create={PersonalInfoCreate}
+          show={PersonalInfoShow}
+        />
+        <Resource
+          name="Applicant"
+          list={ApplicantList}
+          edit={ApplicantEdit}
+          create={ApplicantCreate}
+          show={ApplicantShow}
         />
       </Admin>
     </div>
