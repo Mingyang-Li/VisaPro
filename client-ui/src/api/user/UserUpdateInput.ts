@@ -1,0 +1,34 @@
+import { ApplicantUpdateManyWithoutUsersInput } from "./ApplicantUpdateManyWithoutUsersInput";
+import { EducationHistoryUpdateManyWithoutUsersInput } from "./EducationHistoryUpdateManyWithoutUsersInput";
+import { EmploymentHistoryUpdateManyWithoutUsersInput } from "./EmploymentHistoryUpdateManyWithoutUsersInput";
+import { FamilyMemberUpdateManyWithoutUsersInput } from "./FamilyMemberUpdateManyWithoutUsersInput";
+import { PersonalInfoUpdateManyWithoutUsersInput } from "./PersonalInfoUpdateManyWithoutUsersInput";
+import { TravelHistoryUpdateManyWithoutUsersInput } from "./TravelHistoryUpdateManyWithoutUsersInput";
+
+export type UserUpdateInput = {
+  applicants?: ApplicantUpdateManyWithoutUsersInput;
+  applicantsArchived?: ApplicantUpdateManyWithoutUsersInput;
+  applicantsCreated?: ApplicantUpdateManyWithoutUsersInput;
+  applicantsUpdated?: ApplicantUpdateManyWithoutUsersInput;
+  educationHistoriesArchived?: EducationHistoryUpdateManyWithoutUsersInput;
+  educationHistoriesCreated?: EducationHistoryUpdateManyWithoutUsersInput;
+  educationHistoriesUpdated?: EducationHistoryUpdateManyWithoutUsersInput;
+  email?: string | null;
+  employmentHistoriesArchived?: EmploymentHistoryUpdateManyWithoutUsersInput;
+  employmentHistoriesCreated?: EmploymentHistoryUpdateManyWithoutUsersInput;
+  employmentHistoriesUpdated?: EmploymentHistoryUpdateManyWithoutUsersInput;
+  familyMembersArchived?: FamilyMemberUpdateManyWithoutUsersInput;
+  familyMembersCreated?: FamilyMemberUpdateManyWithoutUsersInput;
+  familyMembersUpdated?: FamilyMemberUpdateManyWithoutUsersInput;
+  firstName?: string | null;
+  lastName?: string | null;
+  password?: string;
+  personalInfosArchived?: PersonalInfoUpdateManyWithoutUsersInput;
+  personalInfosCreated?: PersonalInfoUpdateManyWithoutUsersInput;
+  personalInfosUpdated?: PersonalInfoUpdateManyWithoutUsersInput;
+  roles?: Array<string>;
+  travelHistoriesArchived?: TravelHistoryUpdateManyWithoutUsersInput;
+  travelHistoriesCreated?: TravelHistoryUpdateManyWithoutUsersInput;
+  travelHistoriesUpdated?: TravelHistoryUpdateManyWithoutUsersInput;
+  username?: string;
+};

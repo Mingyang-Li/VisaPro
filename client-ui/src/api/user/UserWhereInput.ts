@@ -1,0 +1,35 @@
+import { ApplicantListRelationFilter } from "../applicant/ApplicantListRelationFilter";
+import { EducationHistoryListRelationFilter } from "../educationHistory/EducationHistoryListRelationFilter";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { EmploymentHistoryListRelationFilter } from "../employmentHistory/EmploymentHistoryListRelationFilter";
+import { FamilyMemberListRelationFilter } from "../familyMember/FamilyMemberListRelationFilter";
+import { StringFilter } from "../../util/StringFilter";
+import { PersonalInfoListRelationFilter } from "../personalInfo/PersonalInfoListRelationFilter";
+import { TravelHistoryListRelationFilter } from "../travelHistory/TravelHistoryListRelationFilter";
+
+export type UserWhereInput = {
+  applicants?: ApplicantListRelationFilter;
+  applicantsArchived?: ApplicantListRelationFilter;
+  applicantsCreated?: ApplicantListRelationFilter;
+  applicantsUpdated?: ApplicantListRelationFilter;
+  educationHistoriesArchived?: EducationHistoryListRelationFilter;
+  educationHistoriesCreated?: EducationHistoryListRelationFilter;
+  educationHistoriesUpdated?: EducationHistoryListRelationFilter;
+  email?: StringNullableFilter;
+  employmentHistoriesArchived?: EmploymentHistoryListRelationFilter;
+  employmentHistoriesCreated?: EmploymentHistoryListRelationFilter;
+  employmentHistoriesUpdated?: EmploymentHistoryListRelationFilter;
+  familyMembersArchived?: FamilyMemberListRelationFilter;
+  familyMembersCreated?: FamilyMemberListRelationFilter;
+  familyMembersUpdated?: FamilyMemberListRelationFilter;
+  firstName?: StringNullableFilter;
+  id?: StringFilter;
+  lastName?: StringNullableFilter;
+  personalInfosArchived?: PersonalInfoListRelationFilter;
+  personalInfosCreated?: PersonalInfoListRelationFilter;
+  personalInfosUpdated?: PersonalInfoListRelationFilter;
+  travelHistoriesArchived?: TravelHistoryListRelationFilter;
+  travelHistoriesCreated?: TravelHistoryListRelationFilter;
+  travelHistoriesUpdated?: TravelHistoryListRelationFilter;
+  username?: StringFilter;
+};
