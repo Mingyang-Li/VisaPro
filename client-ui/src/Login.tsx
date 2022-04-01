@@ -26,29 +26,10 @@ const Login = ({ theme }: { theme?: object }) => {
         <div className={`${CLASS_NAME}__wrapper`}>
           <div className={`${CLASS_NAME}__box`}>
             <img
-              src="https://amplication.com/assets/graphql.png"
-              alt="GraphQL API"
-            />
-            <h2>Connect via GraphQL</h2>
-            <div className={`${CLASS_NAME}__box__message`}>
-              Connect to the server using GraphQL API with a complete and
-              understandable description of the data in your API
-            </div>
-            <Button
-              type="button"
-              variant="contained"
-              color="primary"
-              href="/graphql"
-            >
-              Continue
-            </Button>
-          </div>
-          <div className={`${CLASS_NAME}__box`}>
-            <img
               src="https://amplication.com/assets/react-admin.png"
               alt="React-Admin"
             />
-            <h2>Admin UI</h2>
+            <h2>VisaPro</h2>
             <div className={`${CLASS_NAME}__box__message`}>
               Sign in to a React-Admin client with ready-made forms for creating
               and editing all the data models of your application.
@@ -79,34 +60,7 @@ const Login = ({ theme }: { theme?: object }) => {
               </Button>
             </form>
           </div>
-          <div className={`${CLASS_NAME}__box`}>
-            <img
-              src="https://amplication.com/assets/restapi.png"
-              alt="REST API"
-            />
-            <h2>Connect via REST API</h2>
-            <div className={`${CLASS_NAME}__box__message`}>
-              Connect to the server using REST API with a built-in Swagger
-              documentation
-            </div>
-            <Button
-              type="button"
-              variant="contained"
-              color="primary"
-              href="/api"
-            >
-              Continue
-            </Button>
-          </div>
-
           <Notification />
-        </div>
-        <div className={`${CLASS_NAME}__read-more`}>
-          <span>Read </span>
-          <a href="https://docs.amplication.com/docs/api" target="docs">
-            Amplication docs
-          </a>
-          <span> to learn more</span>
         </div>
       </div>
     </ThemeProvider>
