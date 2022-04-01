@@ -75,7 +75,7 @@ class EmploymentHistoryCreateInput {
   })
   @IsString()
   @Field(() => String)
-  cityOfWokrk!: string;
+  cityOfWork!: string;
 
   @ApiProperty({
     required: true,

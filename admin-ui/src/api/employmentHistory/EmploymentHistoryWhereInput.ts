@@ -11,7 +11,7 @@ export type EmploymentHistoryWhereInput = {
   applicant?: ApplicantWhereUniqueInput;
   archived?: BooleanNullableFilter;
   archivedBy?: UserWhereUniqueInput;
-  cityOfWokrk?: StringFilter;
+  cityOfWork?: StringFilter;
   companyName?: StringFilter;
   countryOfWork?: StringFilter;
   createdBy?: UserWhereUniqueInput;

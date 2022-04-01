@@ -45,7 +45,7 @@ model EmploymentHistory {
   archived         Boolean?
   archivedBy       User?      @relation(name: "employmentHistoriesArchived", fields: [archivedById], references: [id])
   archivedById     String?
-  cityOfWokrk      String
+  cityOfWork       String
   companyName      String
   countryOfWork    String
   createdAt        DateTime   @default(now())
@@ -128,7 +128,7 @@ model FamilyMember {
 }
 
 model PersonalInfo {
-  applicant              Applicant?
+  applicant              Applicant
   archived               Boolean?
   archivedBy             User?     @relation(name: "personalInfosArchived", fields: [archivedById], references: [id])
   archivedById           String?

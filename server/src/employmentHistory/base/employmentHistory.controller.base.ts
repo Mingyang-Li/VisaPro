@@ -114,7 +114,7 @@ export class EmploymentHistoryControllerBase {
           },
         },
 
-        cityOfWokrk: true,
+        cityOfWork: true,
         companyName: true,
         countryOfWork: true,
         createdAt: true,
@@ -188,7 +188,7 @@ export class EmploymentHistoryControllerBase {
           },
         },
 
-        cityOfWokrk: true,
+        cityOfWork: true,
         companyName: true,
         countryOfWork: true,
         createdAt: true,
@@ -261,7 +261,7 @@ export class EmploymentHistoryControllerBase {
           },
         },
 
-        cityOfWokrk: true,
+        cityOfWork: true,
         companyName: true,
         countryOfWork: true,
         createdAt: true,
@@ -381,7 +381,7 @@ export class EmploymentHistoryControllerBase {
             },
           },
 
-          cityOfWokrk: true,
+          cityOfWork: true,
           companyName: true,
           countryOfWork: true,
           createdAt: true,
@@ -455,7 +455,7 @@ export class EmploymentHistoryControllerBase {
             },
           },
 
-          cityOfWokrk: true,
+          cityOfWork: true,
           companyName: true,
           countryOfWork: true,
           createdAt: true,

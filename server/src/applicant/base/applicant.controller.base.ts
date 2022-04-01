@@ -716,7 +716,7 @@ export class ApplicantControllerBase {
           },
         },
 
-        cityOfWokrk: true,
+        cityOfWork: true,
         companyName: true,
         countryOfWork: true,
         createdAt: true,

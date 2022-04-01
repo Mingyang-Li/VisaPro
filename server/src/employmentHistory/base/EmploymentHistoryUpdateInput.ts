@@ -78,7 +78,7 @@ class EmploymentHistoryUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  cityOfWokrk?: string;
+  cityOfWork?: string;
 
   @ApiProperty({
     required: false,

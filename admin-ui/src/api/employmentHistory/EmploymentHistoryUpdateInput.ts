@@ -6,7 +6,7 @@ export type EmploymentHistoryUpdateInput = {
   applicant?: ApplicantWhereUniqueInput | null;
   archived?: boolean | null;
   archivedBy?: UserWhereUniqueInput | null;
-  cityOfWokrk?: string;
+  cityOfWork?: string;
   companyName?: string;
   countryOfWork?: string;
   createdBy?: UserWhereUniqueInput | null;

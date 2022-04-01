@@ -1796,7 +1796,7 @@ export class UserControllerBase {
             },
           },
 
-          cityOfWokrk: true,
+          cityOfWork: true,
           companyName: true,
           countryOfWork: true,
           createdAt: true,
@@ -2012,7 +2012,7 @@ export class UserControllerBase {
             },
           },
 
-          cityOfWokrk: true,
+          cityOfWork: true,
           companyName: true,
           countryOfWork: true,
           createdAt: true,
@@ -2228,7 +2228,7 @@ export class UserControllerBase {
             },
           },
 
-          cityOfWokrk: true,
+          cityOfWork: true,
           companyName: true,
           countryOfWork: true,
           createdAt: true,

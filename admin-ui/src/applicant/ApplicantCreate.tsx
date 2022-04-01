@@ -32,7 +32,7 @@ export const ApplicantCreate = (props: CreateProps): React.ReactElement => {
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>
         <ReferenceArrayInput
-          source="educationhistory"
+          source="educationHistories"
           reference="EducationHistory"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -40,7 +40,7 @@ export const ApplicantCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={EducationHistoryTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="employmenthistory"
+          source="employmentHistories"
           reference="EmploymentHistory"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -48,7 +48,7 @@ export const ApplicantCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={EmploymentHistoryTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="familymember"
+          source="familyMembers"
           reference="FamilyMember"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -63,7 +63,7 @@ export const ApplicantCreate = (props: CreateProps): React.ReactElement => {
           <SelectInput optionText={PersonalInfoTitle} />
         </ReferenceInput>
         <ReferenceArrayInput
-          source="travelhistory"
+          source="travelHistories"
           reference="TravelHistory"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -71,7 +71,7 @@ export const ApplicantCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={TravelHistoryTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="user"
+          source="updatedBy"
           reference="User"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}

@@ -61,7 +61,7 @@ class EmploymentHistoryOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  cityOfWokrk?: SortOrder;
+  cityOfWork?: SortOrder;
 
   @ApiProperty({
     required: false,

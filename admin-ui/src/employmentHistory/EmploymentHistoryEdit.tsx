@@ -30,7 +30,7 @@ export const EmploymentHistoryEdit = (props: EditProps): React.ReactElement => {
         <ReferenceInput source="user.id" reference="User" label="Archived By">
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>
-        <TextInput label="City of Work" source="cityOfWokrk" />
+        <TextInput label="City of Work" source="cityOfWork" />
         <TextInput label="Company Name" source="companyName" />
         <TextInput label="Country of Work" source="countryOfWork" />
         <ReferenceInput source="user.id" reference="User" label="Created By">
