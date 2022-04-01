@@ -77,7 +77,7 @@ class EmploymentHistoryWhereInput {
   @Field(() => StringFilter, {
     nullable: true,
   })
-  cityOfWokrk?: StringFilter;
+  cityOfWork?: StringFilter;
 
   @ApiProperty({
     required: false,

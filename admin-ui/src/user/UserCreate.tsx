@@ -23,7 +23,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
     <Create {...props}>
       <SimpleForm>
         <ReferenceArrayInput
-          source="applicant"
+          source="applicants"
           reference="Applicant"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -31,7 +31,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={ApplicantTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="applicant"
+          source="applicantsArchived"
           reference="Applicant"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -39,7 +39,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={ApplicantTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="applicant"
+          source="applicantsCreated"
           reference="Applicant"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -47,7 +47,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={ApplicantTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="applicant"
+          source="applicantsUpdated"
           reference="Applicant"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -55,7 +55,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={ApplicantTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="educationhistory"
+          source="educationHistoriesArchived"
           reference="EducationHistory"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -63,7 +63,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={EducationHistoryTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="educationhistory"
+          source="educationHistoriesCreated"
           reference="EducationHistory"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -71,7 +71,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={EducationHistoryTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="educationhistory"
+          source="educationHistoriesUpdated"
           reference="EducationHistory"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -80,7 +80,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
         </ReferenceArrayInput>
         <TextInput label="Email" source="email" type="email" />
         <ReferenceArrayInput
-          source="employmenthistory"
+          source="employmentHistoriesArchived"
           reference="EmploymentHistory"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -88,7 +88,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={EmploymentHistoryTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="employmenthistory"
+          source="employmentHistoriesCreated"
           reference="EmploymentHistory"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -96,7 +96,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={EmploymentHistoryTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="employmenthistory"
+          source="employmentHistoriesUpdated"
           reference="EmploymentHistory"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -104,7 +104,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={EmploymentHistoryTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="familymember"
+          source="familyMembersArchived"
           reference="FamilyMember"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -112,7 +112,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={FamilyMemberTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="familymember"
+          source="familyMembersCreated"
           reference="FamilyMember"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -120,7 +120,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={FamilyMemberTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="familymember"
+          source="familyMembersUpdated"
           reference="FamilyMember"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -131,7 +131,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
         <TextInput label="Last Name" source="lastName" />
         <PasswordInput label="Password" source="password" />
         <ReferenceArrayInput
-          source="personalinfo"
+          source="personalInfosArchived"
           reference="PersonalInfo"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -139,7 +139,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={PersonalInfoTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="personalinfo"
+          source="personalInfosCreated"
           reference="PersonalInfo"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -147,7 +147,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={PersonalInfoTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="personalinfo"
+          source="personalInfosUpdated"
           reference="PersonalInfo"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -161,7 +161,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           optionValue="value"
         />
         <ReferenceArrayInput
-          source="travelhistory"
+          source="travelHistoriesArchived"
           reference="TravelHistory"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -169,7 +169,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={TravelHistoryTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="travelhistory"
+          source="travelHistoriesCreated"
           reference="TravelHistory"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -177,7 +177,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={TravelHistoryTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="travelhistory"
+          source="travelHistoriesUpdated"
           reference="TravelHistory"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}

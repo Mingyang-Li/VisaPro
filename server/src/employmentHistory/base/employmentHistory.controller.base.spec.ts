@@ -13,7 +13,7 @@ const existingId = "existingId";
 const CREATE_INPUT = {
   additionalInfo: "exampleAdditionalInfo",
   archived: "true",
-  cityOfWokrk: "exampleCityOfWokrk",
+  cityOfWork: "exampleCityOfWork",
   companyName: "exampleCompanyName",
   countryOfWork: "exampleCountryOfWork",
   createdAt: new Date(),
@@ -29,7 +29,7 @@ const CREATE_INPUT = {
 const CREATE_RESULT = {
   additionalInfo: "exampleAdditionalInfo",
   archived: "true",
-  cityOfWokrk: "exampleCityOfWokrk",
+  cityOfWork: "exampleCityOfWork",
   companyName: "exampleCompanyName",
   countryOfWork: "exampleCountryOfWork",
   createdAt: new Date(),
@@ -46,7 +46,7 @@ const FIND_MANY_RESULT = [
   {
     additionalInfo: "exampleAdditionalInfo",
     archived: "true",
-    cityOfWokrk: "exampleCityOfWokrk",
+    cityOfWork: "exampleCityOfWork",
     companyName: "exampleCompanyName",
     countryOfWork: "exampleCountryOfWork",
     createdAt: new Date(),
@@ -63,7 +63,7 @@ const FIND_MANY_RESULT = [
 const FIND_ONE_RESULT = {
   additionalInfo: "exampleAdditionalInfo",
   archived: "true",
-  cityOfWokrk: "exampleCityOfWokrk",
+  cityOfWork: "exampleCityOfWork",
   companyName: "exampleCompanyName",
   countryOfWork: "exampleCountryOfWork",
   createdAt: new Date(),
