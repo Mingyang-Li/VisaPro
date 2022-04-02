@@ -117,7 +117,7 @@ export const ApplicantShow = (props: ShowProps): React.ReactElement => {
             >
               <TextField source={USER_TITLE_FIELD} />
             </ReferenceField>
-            <TextField label="City of Work" source="cityOfWokrk" />
+            <TextField label="City of Work" source="cityOfWork" />
             <TextField label="Company Name" source="companyName" />
             <TextField label="Country of Work" source="countryOfWork" />
             <DateField source="createdAt" label="Created At" />

@@ -34,6 +34,7 @@ import { ApplicantCreate } from "./applicant/ApplicantCreate";
 import { ApplicantEdit } from "./applicant/ApplicantEdit";
 import { ApplicantShow } from "./applicant/ApplicantShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
+import { ApplicantionCreate } from "./application/ApplicationCreate";
 
 const App = (): React.ReactElement => {
   const [dataProvider, setDataProvider] = useState<DataProvider | null>(null);
@@ -60,46 +61,8 @@ const App = (): React.ReactElement => {
         loginPage={Login}
       >
         <Resource
-          name="User"
-          list={UserList}
-          edit={UserEdit}
-          create={UserCreate}
-          show={UserShow}
-        />
-        <Resource
-          name="EmploymentHistory"
-          list={EmploymentHistoryList}
-          edit={EmploymentHistoryEdit}
-          create={EmploymentHistoryCreate}
-          show={EmploymentHistoryShow}
-        />
-        <Resource
-          name="EducationHistory"
-          list={EducationHistoryList}
-          edit={EducationHistoryEdit}
-          create={EducationHistoryCreate}
-          show={EducationHistoryShow}
-        />
-        <Resource
-          name="TravelHistory"
-          list={TravelHistoryList}
-          edit={TravelHistoryEdit}
-          create={TravelHistoryCreate}
-          show={TravelHistoryShow}
-        />
-        <Resource
-          name="FamilyMember"
-          list={FamilyMemberList}
-          edit={FamilyMemberEdit}
-          create={FamilyMemberCreate}
-          show={FamilyMemberShow}
-        />
-        <Resource
-          name="PersonalInfo"
-          list={PersonalInfoList}
-          edit={PersonalInfoEdit}
-          create={PersonalInfoCreate}
-          show={PersonalInfoShow}
+          name={'Applcations'}
+          create={ApplicantionCreate}
         />
         <Resource
           name="Applicant"
@@ -107,6 +70,41 @@ const App = (): React.ReactElement => {
           edit={ApplicantEdit}
           create={ApplicantCreate}
           show={ApplicantShow}
+        />
+        <Resource
+          name="Employment History"
+          list={EmploymentHistoryList}
+          edit={EmploymentHistoryEdit}
+          create={EmploymentHistoryCreate}
+          show={EmploymentHistoryShow}
+        />
+        <Resource
+          name="Education History"
+          list={EducationHistoryList}
+          edit={EducationHistoryEdit}
+          create={EducationHistoryCreate}
+          show={EducationHistoryShow}
+        />
+        <Resource
+          name="Travel History"
+          list={TravelHistoryList}
+          edit={TravelHistoryEdit}
+          create={TravelHistoryCreate}
+          show={TravelHistoryShow}
+        />
+        <Resource
+          name="Family Member"
+          list={FamilyMemberList}
+          edit={FamilyMemberEdit}
+          create={FamilyMemberCreate}
+          show={FamilyMemberShow}
+        />
+        <Resource
+          name="Personal Info"
+          list={PersonalInfoList}
+          edit={PersonalInfoEdit}
+          create={PersonalInfoCreate}
+          show={PersonalInfoShow}
         />
       </Admin>
     </div>

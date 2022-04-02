@@ -5,7 +5,7 @@ export type EmploymentHistoryOrderByInput = {
   applicantId?: SortOrder;
   archived?: SortOrder;
   archivedById?: SortOrder;
-  cityOfWokrk?: SortOrder;
+  cityOfWork?: SortOrder;
   companyName?: SortOrder;
   countryOfWork?: SortOrder;
   createdAt?: SortOrder;

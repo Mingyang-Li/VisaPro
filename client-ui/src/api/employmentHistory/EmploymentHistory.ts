@@ -6,7 +6,7 @@ export type EmploymentHistory = {
   applicant?: Applicant | null;
   archived: boolean | null;
   archivedBy?: User | null;
-  cityOfWokrk: string;
+  cityOfWork: string;
   companyName: string;
   countryOfWork: string;
   createdAt: Date;
