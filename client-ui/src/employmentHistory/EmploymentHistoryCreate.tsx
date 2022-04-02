@@ -1,21 +1,21 @@
-import * as React from "react";
+import * as React from 'react';
 
 import {
+  BooleanInput,
   Create,
-  SimpleForm,
   CreateProps,
-  TextInput,
+  DateTimeInput,
   ReferenceInput,
   SelectInput,
-  BooleanInput,
-  DateTimeInput,
-} from "react-admin";
+  SimpleForm,
+  TextInput,
+} from 'react-admin';
 
-import { ApplicantTitle } from "../applicant/ApplicantTitle";
-import { UserTitle } from "../user/UserTitle";
+import { ApplicantTitle } from '../applicant/ApplicantTitle';
+import { UserTitle } from '../user/UserTitle';
 
 export const EmploymentHistoryCreate = (
-  props: CreateProps
+  props: CreateProps,
 ): React.ReactElement => {
   return (
     <Create {...props}>

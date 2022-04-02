@@ -1,10 +1,10 @@
-import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
-import { EducationHistoryUpdateManyWithoutApplicantsInput } from "./EducationHistoryUpdateManyWithoutApplicantsInput";
-import { EmploymentHistoryUpdateManyWithoutApplicantsInput } from "./EmploymentHistoryUpdateManyWithoutApplicantsInput";
-import { FamilyMemberUpdateManyWithoutApplicantsInput } from "./FamilyMemberUpdateManyWithoutApplicantsInput";
-import { PersonalInfoWhereUniqueInput } from "../personalInfo/PersonalInfoWhereUniqueInput";
-import { TravelHistoryUpdateManyWithoutApplicantsInput } from "./TravelHistoryUpdateManyWithoutApplicantsInput";
-import { UserUpdateManyWithoutApplicantsInput } from "./UserUpdateManyWithoutApplicantsInput";
+import { UserWhereUniqueInput } from '../user/UserWhereUniqueInput';
+import { EducationHistoryUpdateManyWithoutApplicantsInput } from './EducationHistoryUpdateManyWithoutApplicantsInput';
+import { EmploymentHistoryUpdateManyWithoutApplicantsInput } from './EmploymentHistoryUpdateManyWithoutApplicantsInput';
+import { FamilyMemberUpdateManyWithoutApplicantsInput } from './FamilyMemberUpdateManyWithoutApplicantsInput';
+import { PersonalInfoWhereUniqueInput } from '../personalInfo/PersonalInfoWhereUniqueInput';
+import { TravelHistoryUpdateManyWithoutApplicantsInput } from './TravelHistoryUpdateManyWithoutApplicantsInput';
+import { UserUpdateManyWithoutApplicantsInput } from './UserUpdateManyWithoutApplicantsInput';
 
 export type ApplicantUpdateInput = {
   archived?: boolean | null;

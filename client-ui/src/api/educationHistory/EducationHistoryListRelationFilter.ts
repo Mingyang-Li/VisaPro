@@ -1,4 +1,4 @@
-import { EducationHistoryWhereInput } from "./EducationHistoryWhereInput";
+import { EducationHistoryWhereInput } from './EducationHistoryWhereInput';
 
 export type EducationHistoryListRelationFilter = {
   every?: EducationHistoryWhereInput;

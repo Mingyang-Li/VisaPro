@@ -1,4 +1,4 @@
-import { TravelHistoryWhereInput } from "./TravelHistoryWhereInput";
+import { TravelHistoryWhereInput } from './TravelHistoryWhereInput';
 
 export type TravelHistoryListRelationFilter = {
   every?: TravelHistoryWhereInput;

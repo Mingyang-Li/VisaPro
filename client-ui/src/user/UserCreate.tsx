@@ -1,22 +1,22 @@
-import * as React from "react";
+import * as React from 'react';
 
 import {
   Create,
-  SimpleForm,
   CreateProps,
+  PasswordInput,
   ReferenceArrayInput,
   SelectArrayInput,
+  SimpleForm,
   TextInput,
-  PasswordInput,
-} from "react-admin";
+} from 'react-admin';
 
-import { ApplicantTitle } from "../applicant/ApplicantTitle";
-import { EducationHistoryTitle } from "../educationHistory/EducationHistoryTitle";
-import { EmploymentHistoryTitle } from "../employmentHistory/EmploymentHistoryTitle";
-import { FamilyMemberTitle } from "../familyMember/FamilyMemberTitle";
-import { PersonalInfoTitle } from "../personalInfo/PersonalInfoTitle";
-import { TravelHistoryTitle } from "../travelHistory/TravelHistoryTitle";
-import { ROLES_OPTIONS } from "../user/RolesOptions";
+import { ApplicantTitle } from '../applicant/ApplicantTitle';
+import { EducationHistoryTitle } from '../educationHistory/EducationHistoryTitle';
+import { EmploymentHistoryTitle } from '../employmentHistory/EmploymentHistoryTitle';
+import { FamilyMemberTitle } from '../familyMember/FamilyMemberTitle';
+import { PersonalInfoTitle } from '../personalInfo/PersonalInfoTitle';
+import { TravelHistoryTitle } from '../travelHistory/TravelHistoryTitle';
+import { ROLES_OPTIONS } from '../user/RolesOptions';
 
 export const UserCreate = (props: CreateProps): React.ReactElement => {
   return (

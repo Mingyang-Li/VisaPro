@@ -1,4 +1,4 @@
-import { ApplicantWhereUniqueInput } from "./ApplicantWhereUniqueInput";
+import { ApplicantWhereUniqueInput } from './ApplicantWhereUniqueInput';
 
 export type ApplicantFindUniqueArgs = {
   where: ApplicantWhereUniqueInput;

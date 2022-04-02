@@ -1,13 +1,13 @@
-import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
-import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
-import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
-import { EducationHistoryListRelationFilter } from "../educationHistory/EducationHistoryListRelationFilter";
-import { EmploymentHistoryListRelationFilter } from "../employmentHistory/EmploymentHistoryListRelationFilter";
-import { FamilyMemberListRelationFilter } from "../familyMember/FamilyMemberListRelationFilter";
-import { StringFilter } from "../../util/StringFilter";
-import { PersonalInfoWhereUniqueInput } from "../personalInfo/PersonalInfoWhereUniqueInput";
-import { TravelHistoryListRelationFilter } from "../travelHistory/TravelHistoryListRelationFilter";
-import { UserListRelationFilter } from "../user/UserListRelationFilter";
+import { BooleanNullableFilter } from '../../util/BooleanNullableFilter';
+import { DateTimeNullableFilter } from '../../util/DateTimeNullableFilter';
+import { UserWhereUniqueInput } from '../user/UserWhereUniqueInput';
+import { EducationHistoryListRelationFilter } from '../educationHistory/EducationHistoryListRelationFilter';
+import { EmploymentHistoryListRelationFilter } from '../employmentHistory/EmploymentHistoryListRelationFilter';
+import { FamilyMemberListRelationFilter } from '../familyMember/FamilyMemberListRelationFilter';
+import { StringFilter } from '../../util/StringFilter';
+import { PersonalInfoWhereUniqueInput } from '../personalInfo/PersonalInfoWhereUniqueInput';
+import { TravelHistoryListRelationFilter } from '../travelHistory/TravelHistoryListRelationFilter';
+import { UserListRelationFilter } from '../user/UserListRelationFilter';
 
 export type ApplicantWhereInput = {
   archived?: BooleanNullableFilter;

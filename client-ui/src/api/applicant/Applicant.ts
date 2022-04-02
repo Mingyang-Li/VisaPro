@@ -1,9 +1,9 @@
-import { User } from "../user/User";
-import { EducationHistory } from "../educationHistory/EducationHistory";
-import { EmploymentHistory } from "../employmentHistory/EmploymentHistory";
-import { FamilyMember } from "../familyMember/FamilyMember";
-import { PersonalInfo } from "../personalInfo/PersonalInfo";
-import { TravelHistory } from "../travelHistory/TravelHistory";
+import { User } from '../user/User';
+import { EducationHistory } from '../educationHistory/EducationHistory';
+import { EmploymentHistory } from '../employmentHistory/EmploymentHistory';
+import { FamilyMember } from '../familyMember/FamilyMember';
+import { PersonalInfo } from '../personalInfo/PersonalInfo';
+import { TravelHistory } from '../travelHistory/TravelHistory';
 
 export type Applicant = {
   archived: boolean | null;

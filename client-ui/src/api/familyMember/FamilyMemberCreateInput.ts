@@ -1,5 +1,5 @@
-import { ApplicantCreateNestedManyWithoutFamilyMembersInput } from "./ApplicantCreateNestedManyWithoutFamilyMembersInput";
-import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
+import { ApplicantCreateNestedManyWithoutFamilyMembersInput } from './ApplicantCreateNestedManyWithoutFamilyMembersInput';
+import { UserWhereUniqueInput } from '../user/UserWhereUniqueInput';
 
 export type FamilyMemberCreateInput = {
   applicants?: ApplicantCreateNestedManyWithoutFamilyMembersInput;

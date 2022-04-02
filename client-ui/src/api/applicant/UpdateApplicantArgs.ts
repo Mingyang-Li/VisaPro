@@ -1,5 +1,5 @@
-import { ApplicantWhereUniqueInput } from "./ApplicantWhereUniqueInput";
-import { ApplicantUpdateInput } from "./ApplicantUpdateInput";
+import { ApplicantWhereUniqueInput } from './ApplicantWhereUniqueInput';
+import { ApplicantUpdateInput } from './ApplicantUpdateInput';
 
 export type UpdateApplicantArgs = {
   where: ApplicantWhereUniqueInput;

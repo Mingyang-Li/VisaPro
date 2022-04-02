@@ -1,39 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { Admin, DataProvider, Resource } from "react-admin";
-import buildGraphQLProvider from "./data-provider/graphqlDataProvider";
-import { theme } from "./theme/theme";
-import Login from "./Login";
-import "./App.scss";
-import Dashboard from "./pages/Dashboard";
-import { UserList } from "./user/UserList";
-import { UserCreate } from "./user/UserCreate";
-import { UserEdit } from "./user/UserEdit";
-import { UserShow } from "./user/UserShow";
-import { EmploymentHistoryList } from "./employmentHistory/EmploymentHistoryList";
-import { EmploymentHistoryCreate } from "./employmentHistory/EmploymentHistoryCreate";
-import { EmploymentHistoryEdit } from "./employmentHistory/EmploymentHistoryEdit";
-import { EmploymentHistoryShow } from "./employmentHistory/EmploymentHistoryShow";
-import { EducationHistoryList } from "./educationHistory/EducationHistoryList";
-import { EducationHistoryCreate } from "./educationHistory/EducationHistoryCreate";
-import { EducationHistoryEdit } from "./educationHistory/EducationHistoryEdit";
-import { EducationHistoryShow } from "./educationHistory/EducationHistoryShow";
-import { TravelHistoryList } from "./travelHistory/TravelHistoryList";
-import { TravelHistoryCreate } from "./travelHistory/TravelHistoryCreate";
-import { TravelHistoryEdit } from "./travelHistory/TravelHistoryEdit";
-import { TravelHistoryShow } from "./travelHistory/TravelHistoryShow";
-import { FamilyMemberList } from "./familyMember/FamilyMemberList";
-import { FamilyMemberCreate } from "./familyMember/FamilyMemberCreate";
-import { FamilyMemberEdit } from "./familyMember/FamilyMemberEdit";
-import { FamilyMemberShow } from "./familyMember/FamilyMemberShow";
-import { PersonalInfoList } from "./personalInfo/PersonalInfoList";
-import { PersonalInfoCreate } from "./personalInfo/PersonalInfoCreate";
-import { PersonalInfoEdit } from "./personalInfo/PersonalInfoEdit";
-import { PersonalInfoShow } from "./personalInfo/PersonalInfoShow";
-import { ApplicantList } from "./applicant/ApplicantList";
-import { ApplicantCreate } from "./applicant/ApplicantCreate";
-import { ApplicantEdit } from "./applicant/ApplicantEdit";
-import { ApplicantShow } from "./applicant/ApplicantShow";
-import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
+import React, { useEffect, useState } from 'react';
+import { Admin, DataProvider, Resource } from 'react-admin';
+import buildGraphQLProvider from './data-provider/graphqlDataProvider';
+import { theme } from './theme/theme';
+import Login from './Login';
+import './App.scss';
+import Dashboard from './pages/Dashboard';
+import { UserList } from './user/UserList';
+import { UserCreate } from './user/UserCreate';
+import { UserEdit } from './user/UserEdit';
+import { UserShow } from './user/UserShow';
+import { EmploymentHistoryList } from './employmentHistory/EmploymentHistoryList';
+import { EmploymentHistoryCreate } from './employmentHistory/EmploymentHistoryCreate';
+import { EmploymentHistoryEdit } from './employmentHistory/EmploymentHistoryEdit';
+import { EmploymentHistoryShow } from './employmentHistory/EmploymentHistoryShow';
+import { EducationHistoryList } from './educationHistory/EducationHistoryList';
+import { EducationHistoryCreate } from './educationHistory/EducationHistoryCreate';
+import { EducationHistoryEdit } from './educationHistory/EducationHistoryEdit';
+import { EducationHistoryShow } from './educationHistory/EducationHistoryShow';
+import { TravelHistoryList } from './travelHistory/TravelHistoryList';
+import { TravelHistoryCreate } from './travelHistory/TravelHistoryCreate';
+import { TravelHistoryEdit } from './travelHistory/TravelHistoryEdit';
+import { TravelHistoryShow } from './travelHistory/TravelHistoryShow';
+import { FamilyMemberList } from './familyMember/FamilyMemberList';
+import { FamilyMemberCreate } from './familyMember/FamilyMemberCreate';
+import { FamilyMemberEdit } from './familyMember/FamilyMemberEdit';
+import { FamilyMemberShow } from './familyMember/FamilyMemberShow';
+import { PersonalInfoList } from './personalInfo/PersonalInfoList';
+import { PersonalInfoCreate } from './personalInfo/PersonalInfoCreate';
+import { PersonalInfoEdit } from './personalInfo/PersonalInfoEdit';
+import { PersonalInfoShow } from './personalInfo/PersonalInfoShow';
+import { ApplicantList } from './applicant/ApplicantList';
+import { ApplicantCreate } from './applicant/ApplicantCreate';
+import { ApplicantEdit } from './applicant/ApplicantEdit';
+import { ApplicantShow } from './applicant/ApplicantShow';
+import { jwtAuthProvider } from './auth-provider/ra-auth-jwt';
 
 const App = (): React.ReactElement => {
   const [dataProvider, setDataProvider] = useState<DataProvider | null>(null);
@@ -52,7 +52,7 @@ const App = (): React.ReactElement => {
   return (
     <div className="App">
       <Admin
-        title={"VisaPro"}
+        title={'VisaPro'}
         dataProvider={dataProvider}
         authProvider={jwtAuthProvider}
         theme={theme}

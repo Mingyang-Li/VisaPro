@@ -1,5 +1,5 @@
-import { FamilyMemberWhereInput } from "./FamilyMemberWhereInput";
-import { FamilyMemberOrderByInput } from "./FamilyMemberOrderByInput";
+import { FamilyMemberWhereInput } from './FamilyMemberWhereInput';
+import { FamilyMemberOrderByInput } from './FamilyMemberOrderByInput';
 
 export type FamilyMemberFindManyArgs = {
   where?: FamilyMemberWhereInput;

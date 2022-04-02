@@ -1,4 +1,4 @@
-import { FamilyMemberCreateInput } from "./FamilyMemberCreateInput";
+import { FamilyMemberCreateInput } from './FamilyMemberCreateInput';
 
 export type CreateFamilyMemberArgs = {
   data: FamilyMemberCreateInput;

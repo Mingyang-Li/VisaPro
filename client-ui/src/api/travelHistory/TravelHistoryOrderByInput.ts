@@ -1,4 +1,4 @@
-import { SortOrder } from "../../util/SortOrder";
+import { SortOrder } from '../../util/SortOrder';
 
 export type TravelHistoryOrderByInput = {
   applicantId?: SortOrder;

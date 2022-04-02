@@ -1,4 +1,4 @@
-import { TravelHistoryWhereUniqueInput } from "./TravelHistoryWhereUniqueInput";
+import { TravelHistoryWhereUniqueInput } from './TravelHistoryWhereUniqueInput';
 
 export type DeleteTravelHistoryArgs = {
   where: TravelHistoryWhereUniqueInput;

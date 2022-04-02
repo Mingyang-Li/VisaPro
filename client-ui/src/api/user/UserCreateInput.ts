@@ -1,9 +1,9 @@
-import { ApplicantCreateNestedManyWithoutUsersInput } from "./ApplicantCreateNestedManyWithoutUsersInput";
-import { EducationHistoryCreateNestedManyWithoutUsersInput } from "./EducationHistoryCreateNestedManyWithoutUsersInput";
-import { EmploymentHistoryCreateNestedManyWithoutUsersInput } from "./EmploymentHistoryCreateNestedManyWithoutUsersInput";
-import { FamilyMemberCreateNestedManyWithoutUsersInput } from "./FamilyMemberCreateNestedManyWithoutUsersInput";
-import { PersonalInfoCreateNestedManyWithoutUsersInput } from "./PersonalInfoCreateNestedManyWithoutUsersInput";
-import { TravelHistoryCreateNestedManyWithoutUsersInput } from "./TravelHistoryCreateNestedManyWithoutUsersInput";
+import { ApplicantCreateNestedManyWithoutUsersInput } from './ApplicantCreateNestedManyWithoutUsersInput';
+import { EducationHistoryCreateNestedManyWithoutUsersInput } from './EducationHistoryCreateNestedManyWithoutUsersInput';
+import { EmploymentHistoryCreateNestedManyWithoutUsersInput } from './EmploymentHistoryCreateNestedManyWithoutUsersInput';
+import { FamilyMemberCreateNestedManyWithoutUsersInput } from './FamilyMemberCreateNestedManyWithoutUsersInput';
+import { PersonalInfoCreateNestedManyWithoutUsersInput } from './PersonalInfoCreateNestedManyWithoutUsersInput';
+import { TravelHistoryCreateNestedManyWithoutUsersInput } from './TravelHistoryCreateNestedManyWithoutUsersInput';
 
 export type UserCreateInput = {
   applicants?: ApplicantCreateNestedManyWithoutUsersInput;

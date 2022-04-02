@@ -1,4 +1,4 @@
-import { ApplicantCreateInput } from "./ApplicantCreateInput";
+import { ApplicantCreateInput } from './ApplicantCreateInput';
 
 export type CreateApplicantArgs = {
   data: ApplicantCreateInput;

@@ -1,17 +1,17 @@
-import * as React from "react";
+import * as React from 'react';
 
 import {
-  Show,
-  SimpleShowLayout,
-  ShowProps,
-  TextField,
-  ReferenceField,
   BooleanField,
   DateField,
-} from "react-admin";
+  ReferenceField,
+  Show,
+  ShowProps,
+  SimpleShowLayout,
+  TextField,
+} from 'react-admin';
 
-import { APPLICANT_TITLE_FIELD } from "../applicant/ApplicantTitle";
-import { USER_TITLE_FIELD } from "../user/UserTitle";
+import { APPLICANT_TITLE_FIELD } from '../applicant/ApplicantTitle';
+import { USER_TITLE_FIELD } from '../user/UserTitle';
 
 export const EducationHistoryShow = (props: ShowProps): React.ReactElement => {
   return (

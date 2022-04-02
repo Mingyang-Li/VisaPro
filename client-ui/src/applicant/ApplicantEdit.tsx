@@ -1,23 +1,23 @@
-import * as React from "react";
+import * as React from 'react';
 
 import {
-  Edit,
-  SimpleForm,
-  EditProps,
   BooleanInput,
   DateTimeInput,
-  ReferenceInput,
-  SelectInput,
+  Edit,
+  EditProps,
   ReferenceArrayInput,
+  ReferenceInput,
   SelectArrayInput,
-} from "react-admin";
+  SelectInput,
+  SimpleForm,
+} from 'react-admin';
 
-import { UserTitle } from "../user/UserTitle";
-import { EducationHistoryTitle } from "../educationHistory/EducationHistoryTitle";
-import { EmploymentHistoryTitle } from "../employmentHistory/EmploymentHistoryTitle";
-import { FamilyMemberTitle } from "../familyMember/FamilyMemberTitle";
-import { PersonalInfoTitle } from "../personalInfo/PersonalInfoTitle";
-import { TravelHistoryTitle } from "../travelHistory/TravelHistoryTitle";
+import { UserTitle } from '../user/UserTitle';
+import { EducationHistoryTitle } from '../educationHistory/EducationHistoryTitle';
+import { EmploymentHistoryTitle } from '../employmentHistory/EmploymentHistoryTitle';
+import { FamilyMemberTitle } from '../familyMember/FamilyMemberTitle';
+import { PersonalInfoTitle } from '../personalInfo/PersonalInfoTitle';
+import { TravelHistoryTitle } from '../travelHistory/TravelHistoryTitle';
 
 export const ApplicantEdit = (props: EditProps): React.ReactElement => {
   return (

@@ -1,8 +1,8 @@
-import { ApplicantListRelationFilter } from "../applicant/ApplicantListRelationFilter";
-import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
-import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
-import { StringFilter } from "../../util/StringFilter";
-import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
+import { ApplicantListRelationFilter } from '../applicant/ApplicantListRelationFilter';
+import { BooleanNullableFilter } from '../../util/BooleanNullableFilter';
+import { UserWhereUniqueInput } from '../user/UserWhereUniqueInput';
+import { StringFilter } from '../../util/StringFilter';
+import { DateTimeNullableFilter } from '../../util/DateTimeNullableFilter';
 
 export type FamilyMemberWhereInput = {
   applicants?: ApplicantListRelationFilter;

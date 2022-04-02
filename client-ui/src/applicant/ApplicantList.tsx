@@ -1,25 +1,25 @@
-import * as React from "react";
+import * as React from 'react';
 
 import {
-  List,
-  Datagrid,
-  ListProps,
   BooleanField,
-  TextField,
-  ReferenceField,
+  Datagrid,
   DateField,
-} from "react-admin";
+  List,
+  ListProps,
+  ReferenceField,
+  TextField,
+} from 'react-admin';
 
-import Pagination from "../Components/Pagination";
-import { USER_TITLE_FIELD } from "../user/UserTitle";
-import { PERSONALINFO_TITLE_FIELD } from "../personalInfo/PersonalInfoTitle";
+import Pagination from '../Components/Pagination';
+import { USER_TITLE_FIELD } from '../user/UserTitle';
+import { PERSONALINFO_TITLE_FIELD } from '../personalInfo/PersonalInfoTitle';
 
 export const ApplicantList = (props: ListProps): React.ReactElement => {
   return (
     <List
       {...props}
       bulkActionButtons={false}
-      title={"Applicants"}
+      title={'Applicants'}
       perPage={50}
       pagination={<Pagination />}
     >

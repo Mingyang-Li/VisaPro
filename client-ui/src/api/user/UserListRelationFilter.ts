@@ -1,4 +1,4 @@
-import { UserWhereInput } from "./UserWhereInput";
+import { UserWhereInput } from './UserWhereInput';
 
 export type UserListRelationFilter = {
   every?: UserWhereInput;

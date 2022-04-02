@@ -1,4 +1,4 @@
-import { EmploymentHistoryWhereInput } from "./EmploymentHistoryWhereInput";
+import { EmploymentHistoryWhereInput } from './EmploymentHistoryWhereInput';
 
 export type EmploymentHistoryListRelationFilter = {
   every?: EmploymentHistoryWhereInput;

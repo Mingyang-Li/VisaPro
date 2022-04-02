@@ -1,4 +1,4 @@
-import { FamilyMemberWhereInput } from "./FamilyMemberWhereInput";
+import { FamilyMemberWhereInput } from './FamilyMemberWhereInput';
 
 export type FamilyMemberListRelationFilter = {
   every?: FamilyMemberWhereInput;

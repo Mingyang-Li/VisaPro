@@ -1,24 +1,24 @@
-import * as React from "react";
+import * as React from 'react';
 
 import {
-  List,
-  Datagrid,
-  ListProps,
   BooleanField,
+  Datagrid,
+  DateField,
+  List,
+  ListProps,
   ReferenceField,
   TextField,
-  DateField,
-} from "react-admin";
+} from 'react-admin';
 
-import Pagination from "../Components/Pagination";
-import { USER_TITLE_FIELD } from "../user/UserTitle";
+import Pagination from '../Components/Pagination';
+import { USER_TITLE_FIELD } from '../user/UserTitle';
 
 export const FamilyMemberList = (props: ListProps): React.ReactElement => {
   return (
     <List
       {...props}
       bulkActionButtons={false}
-      title={"Family Members"}
+      title={'Family Members'}
       perPage={50}
       pagination={<Pagination />}
     >

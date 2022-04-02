@@ -1,4 +1,4 @@
-import { PersonalInfoWhereUniqueInput } from "../personalInfo/PersonalInfoWhereUniqueInput";
+import { PersonalInfoWhereUniqueInput } from '../personalInfo/PersonalInfoWhereUniqueInput';
 
 export type PersonalInfoUpdateManyWithoutUsersInput = {
   connect?: Array<PersonalInfoWhereUniqueInput>;

@@ -1,5 +1,5 @@
-import { Applicant } from "../applicant/Applicant";
-import { User } from "../user/User";
+import { Applicant } from '../applicant/Applicant';
+import { User } from '../user/User';
 
 export type PersonalInfo = {
   applicant?: Applicant;

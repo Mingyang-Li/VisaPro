@@ -1,5 +1,5 @@
-import { ApplicantUpdateManyWithoutFamilyMembersInput } from "./ApplicantUpdateManyWithoutFamilyMembersInput";
-import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
+import { ApplicantUpdateManyWithoutFamilyMembersInput } from './ApplicantUpdateManyWithoutFamilyMembersInput';
+import { UserWhereUniqueInput } from '../user/UserWhereUniqueInput';
 
 export type FamilyMemberUpdateInput = {
   applicants?: ApplicantUpdateManyWithoutFamilyMembersInput;

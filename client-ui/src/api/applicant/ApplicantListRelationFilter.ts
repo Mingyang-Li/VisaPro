@@ -1,4 +1,4 @@
-import { ApplicantWhereInput } from "./ApplicantWhereInput";
+import { ApplicantWhereInput } from './ApplicantWhereInput';
 
 export type ApplicantListRelationFilter = {
   every?: ApplicantWhereInput;

@@ -1,4 +1,4 @@
-import { EducationHistoryWhereUniqueInput } from "./EducationHistoryWhereUniqueInput";
+import { EducationHistoryWhereUniqueInput } from './EducationHistoryWhereUniqueInput';
 
 export type DeleteEducationHistoryArgs = {
   where: EducationHistoryWhereUniqueInput;

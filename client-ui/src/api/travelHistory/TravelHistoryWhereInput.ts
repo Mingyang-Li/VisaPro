@@ -1,10 +1,10 @@
-import { ApplicantWhereUniqueInput } from "../applicant/ApplicantWhereUniqueInput";
-import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
-import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
-import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
-import { DateTimeFilter } from "../../util/DateTimeFilter";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { StringFilter } from "../../util/StringFilter";
+import { ApplicantWhereUniqueInput } from '../applicant/ApplicantWhereUniqueInput';
+import { BooleanNullableFilter } from '../../util/BooleanNullableFilter';
+import { UserWhereUniqueInput } from '../user/UserWhereUniqueInput';
+import { DateTimeNullableFilter } from '../../util/DateTimeNullableFilter';
+import { DateTimeFilter } from '../../util/DateTimeFilter';
+import { StringNullableFilter } from '../../util/StringNullableFilter';
+import { StringFilter } from '../../util/StringFilter';
 
 export type TravelHistoryWhereInput = {
   applicant?: ApplicantWhereUniqueInput;

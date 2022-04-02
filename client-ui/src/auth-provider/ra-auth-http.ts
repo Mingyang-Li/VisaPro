@@ -1,10 +1,10 @@
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client/core";
-import { AuthProvider } from "react-admin";
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client/core';
+import { AuthProvider } from 'react-admin';
 import {
   CREDENTIALS_LOCAL_STORAGE_ITEM,
   USER_DATA_LOCAL_STORAGE_ITEM,
-} from "../constants";
-import { Credentials, LoginMutateResult } from "../types";
+} from '../constants';
+import { Credentials, LoginMutateResult } from '../types';
 
 const LOGIN = gql`
   mutation login($username: String!, $password: String!) {
@@ -18,7 +18,7 @@ const LOGIN = gql`
 export const httpAuthProvider: AuthProvider = {
   login: async (credentials: Credentials) => {
     const apolloClient = new ApolloClient({
-      uri: "/graphql",
+      uri: '/graphql',
       cache: new InMemoryCache(),
     });
 
@@ -34,12 +34,12 @@ export const httpAuthProvider: AuthProvider = {
         CREDENTIALS_LOCAL_STORAGE_ITEM,
         createBasicAuthorizationHeader(
           credentials.username,
-          credentials.password
-        )
+          credentials.password,
+        ),
       );
       localStorage.setItem(
         USER_DATA_LOCAL_STORAGE_ITEM,
-        JSON.stringify(userData.data)
+        JSON.stringify(userData.data),
       );
       return Promise.resolve();
     }
@@ -61,10 +61,10 @@ export const httpAuthProvider: AuthProvider = {
       ? Promise.resolve()
       : Promise.reject();
   },
-  getPermissions: () => Promise.reject("Unknown method"),
+  getPermissions: () => Promise.reject('Unknown method'),
   getIdentity: () => {
     const str = localStorage.getItem(USER_DATA_LOCAL_STORAGE_ITEM);
-    const userData: LoginMutateResult = JSON.parse(str || "");
+    const userData: LoginMutateResult = JSON.parse(str || '');
 
     return Promise.resolve({
       id: userData.login.username,
@@ -76,7 +76,7 @@ export const httpAuthProvider: AuthProvider = {
 
 function createBasicAuthorizationHeader(
   username: string,
-  password: string
+  password: string,
 ): string {
   return `Basic ${btoa(`${username}:${password}`)}`;
 }

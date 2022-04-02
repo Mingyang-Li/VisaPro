@@ -1,5 +1,5 @@
-import { ApplicantWhereInput } from "./ApplicantWhereInput";
-import { ApplicantOrderByInput } from "./ApplicantOrderByInput";
+import { ApplicantWhereInput } from './ApplicantWhereInput';
+import { ApplicantOrderByInput } from './ApplicantOrderByInput';
 
 export type ApplicantFindManyArgs = {
   where?: ApplicantWhereInput;

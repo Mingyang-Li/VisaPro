@@ -1,4 +1,4 @@
-import { FamilyMemberWhereUniqueInput } from "../familyMember/FamilyMemberWhereUniqueInput";
+import { FamilyMemberWhereUniqueInput } from '../familyMember/FamilyMemberWhereUniqueInput';
 
 export type FamilyMemberUpdateManyWithoutUsersInput = {
   connect?: Array<FamilyMemberWhereUniqueInput>;

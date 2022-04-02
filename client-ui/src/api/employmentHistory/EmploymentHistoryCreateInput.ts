@@ -1,5 +1,5 @@
-import { ApplicantWhereUniqueInput } from "../applicant/ApplicantWhereUniqueInput";
-import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
+import { ApplicantWhereUniqueInput } from '../applicant/ApplicantWhereUniqueInput';
+import { UserWhereUniqueInput } from '../user/UserWhereUniqueInput';
 
 export type EmploymentHistoryCreateInput = {
   additionalInfo?: string | null;

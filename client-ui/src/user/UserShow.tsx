@@ -1,20 +1,20 @@
-import * as React from "react";
+import * as React from 'react';
 
 import {
-  Show,
-  SimpleShowLayout,
-  ShowProps,
-  DateField,
-  TextField,
-  ReferenceManyField,
-  Datagrid,
   BooleanField,
+  Datagrid,
+  DateField,
   ReferenceField,
-} from "react-admin";
+  ReferenceManyField,
+  Show,
+  ShowProps,
+  SimpleShowLayout,
+  TextField,
+} from 'react-admin';
 
-import { USER_TITLE_FIELD } from "./UserTitle";
-import { PERSONALINFO_TITLE_FIELD } from "../personalInfo/PersonalInfoTitle";
-import { APPLICANT_TITLE_FIELD } from "../applicant/ApplicantTitle";
+import { USER_TITLE_FIELD } from './UserTitle';
+import { PERSONALINFO_TITLE_FIELD } from '../personalInfo/PersonalInfoTitle';
+import { APPLICANT_TITLE_FIELD } from '../applicant/ApplicantTitle';
 
 export const UserShow = (props: ShowProps): React.ReactElement => {
   return (

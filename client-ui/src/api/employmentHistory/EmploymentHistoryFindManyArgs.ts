@@ -1,5 +1,5 @@
-import { EmploymentHistoryWhereInput } from "./EmploymentHistoryWhereInput";
-import { EmploymentHistoryOrderByInput } from "./EmploymentHistoryOrderByInput";
+import { EmploymentHistoryWhereInput } from './EmploymentHistoryWhereInput';
+import { EmploymentHistoryOrderByInput } from './EmploymentHistoryOrderByInput';
 
 export type EmploymentHistoryFindManyArgs = {
   where?: EmploymentHistoryWhereInput;

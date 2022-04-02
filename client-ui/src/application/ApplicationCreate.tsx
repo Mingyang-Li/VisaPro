@@ -1,10 +1,10 @@
-import * as React from "react";
+import * as React from 'react';
 
 import {
   Create,
-  SimpleForm,
   CreateProps,
-} from "react-admin";
+  SimpleForm,
+} from 'react-admin';
 
 
 export const ApplicantionCreate = (props: CreateProps): React.ReactElement => {

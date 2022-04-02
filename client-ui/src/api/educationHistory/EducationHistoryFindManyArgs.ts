@@ -1,5 +1,5 @@
-import { EducationHistoryWhereInput } from "./EducationHistoryWhereInput";
-import { EducationHistoryOrderByInput } from "./EducationHistoryOrderByInput";
+import { EducationHistoryWhereInput } from './EducationHistoryWhereInput';
+import { EducationHistoryOrderByInput } from './EducationHistoryOrderByInput';
 
 export type EducationHistoryFindManyArgs = {
   where?: EducationHistoryWhereInput;

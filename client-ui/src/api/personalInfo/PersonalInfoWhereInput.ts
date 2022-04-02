@@ -1,9 +1,9 @@
-import { ApplicantWhereUniqueInput } from "../applicant/ApplicantWhereUniqueInput";
-import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
-import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
-import { StringFilter } from "../../util/StringFilter";
-import { DateTimeFilter } from "../../util/DateTimeFilter";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { ApplicantWhereUniqueInput } from '../applicant/ApplicantWhereUniqueInput';
+import { BooleanNullableFilter } from '../../util/BooleanNullableFilter';
+import { UserWhereUniqueInput } from '../user/UserWhereUniqueInput';
+import { StringFilter } from '../../util/StringFilter';
+import { DateTimeFilter } from '../../util/DateTimeFilter';
+import { StringNullableFilter } from '../../util/StringNullableFilter';
 
 export type PersonalInfoWhereInput = {
   applicant?: ApplicantWhereUniqueInput;

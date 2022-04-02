@@ -1,4 +1,4 @@
-import { ApplicantWhereUniqueInput } from "../applicant/ApplicantWhereUniqueInput";
+import { ApplicantWhereUniqueInput } from '../applicant/ApplicantWhereUniqueInput';
 
 export type ApplicantCreateNestedManyWithoutUsersInput = {
   connect?: Array<ApplicantWhereUniqueInput>;

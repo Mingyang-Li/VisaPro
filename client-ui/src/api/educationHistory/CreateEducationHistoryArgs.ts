@@ -1,4 +1,4 @@
-import { EducationHistoryCreateInput } from "./EducationHistoryCreateInput";
+import { EducationHistoryCreateInput } from './EducationHistoryCreateInput';
 
 export type CreateEducationHistoryArgs = {
   data: EducationHistoryCreateInput;

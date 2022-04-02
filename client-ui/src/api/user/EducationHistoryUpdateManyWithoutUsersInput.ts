@@ -1,4 +1,4 @@
-import { EducationHistoryWhereUniqueInput } from "../educationHistory/EducationHistoryWhereUniqueInput";
+import { EducationHistoryWhereUniqueInput } from '../educationHistory/EducationHistoryWhereUniqueInput';
 
 export type EducationHistoryUpdateManyWithoutUsersInput = {
   connect?: Array<EducationHistoryWhereUniqueInput>;

@@ -1,4 +1,4 @@
-import { TravelHistoryWhereUniqueInput } from "../travelHistory/TravelHistoryWhereUniqueInput";
+import { TravelHistoryWhereUniqueInput } from '../travelHistory/TravelHistoryWhereUniqueInput';
 
 export type TravelHistoryUpdateManyWithoutUsersInput = {
   connect?: Array<TravelHistoryWhereUniqueInput>;

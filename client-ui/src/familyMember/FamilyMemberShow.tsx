@@ -1,16 +1,16 @@
-import * as React from "react";
+import * as React from 'react';
 
 import {
-  Show,
-  SimpleShowLayout,
-  ShowProps,
   BooleanField,
-  ReferenceField,
-  TextField,
   DateField,
-} from "react-admin";
+  ReferenceField,
+  Show,
+  ShowProps,
+  SimpleShowLayout,
+  TextField,
+} from 'react-admin';
 
-import { USER_TITLE_FIELD } from "../user/UserTitle";
+import { USER_TITLE_FIELD } from '../user/UserTitle';
 
 export const FamilyMemberShow = (props: ShowProps): React.ReactElement => {
   return (

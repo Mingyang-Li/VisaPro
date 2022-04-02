@@ -1,6 +1,6 @@
-import { EventEmitter } from "events";
-import { CREDENTIALS_LOCAL_STORAGE_ITEM } from "./constants";
-import { Credentials } from "./types";
+import { EventEmitter } from 'events';
+import { CREDENTIALS_LOCAL_STORAGE_ITEM } from './constants';
+import { Credentials } from './types';
 
 const eventEmitter = new EventEmitter();
 
@@ -9,7 +9,7 @@ export function isAuthenticated(): boolean {
 }
 
 export function listen(listener: (authenticated: boolean) => void): void {
-  eventEmitter.on("change", () => {
+  eventEmitter.on('change', () => {
     listener(isAuthenticated());
   });
 }
@@ -17,7 +17,7 @@ export function listen(listener: (authenticated: boolean) => void): void {
 export function setCredentials(credentials: Credentials) {
   localStorage.setItem(
     CREDENTIALS_LOCAL_STORAGE_ITEM,
-    JSON.stringify(credentials)
+    JSON.stringify(credentials),
   );
 }
 

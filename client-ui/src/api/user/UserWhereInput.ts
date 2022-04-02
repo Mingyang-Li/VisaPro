@@ -1,11 +1,11 @@
-import { ApplicantListRelationFilter } from "../applicant/ApplicantListRelationFilter";
-import { EducationHistoryListRelationFilter } from "../educationHistory/EducationHistoryListRelationFilter";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { EmploymentHistoryListRelationFilter } from "../employmentHistory/EmploymentHistoryListRelationFilter";
-import { FamilyMemberListRelationFilter } from "../familyMember/FamilyMemberListRelationFilter";
-import { StringFilter } from "../../util/StringFilter";
-import { PersonalInfoListRelationFilter } from "../personalInfo/PersonalInfoListRelationFilter";
-import { TravelHistoryListRelationFilter } from "../travelHistory/TravelHistoryListRelationFilter";
+import { ApplicantListRelationFilter } from '../applicant/ApplicantListRelationFilter';
+import { EducationHistoryListRelationFilter } from '../educationHistory/EducationHistoryListRelationFilter';
+import { StringNullableFilter } from '../../util/StringNullableFilter';
+import { EmploymentHistoryListRelationFilter } from '../employmentHistory/EmploymentHistoryListRelationFilter';
+import { FamilyMemberListRelationFilter } from '../familyMember/FamilyMemberListRelationFilter';
+import { StringFilter } from '../../util/StringFilter';
+import { PersonalInfoListRelationFilter } from '../personalInfo/PersonalInfoListRelationFilter';
+import { TravelHistoryListRelationFilter } from '../travelHistory/TravelHistoryListRelationFilter';
 
 export type UserWhereInput = {
   applicants?: ApplicantListRelationFilter;

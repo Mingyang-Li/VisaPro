@@ -1,5 +1,5 @@
-import { PersonalInfoWhereInput } from "./PersonalInfoWhereInput";
-import { PersonalInfoOrderByInput } from "./PersonalInfoOrderByInput";
+import { PersonalInfoWhereInput } from './PersonalInfoWhereInput';
+import { PersonalInfoOrderByInput } from './PersonalInfoOrderByInput';
 
 export type PersonalInfoFindManyArgs = {
   where?: PersonalInfoWhereInput;

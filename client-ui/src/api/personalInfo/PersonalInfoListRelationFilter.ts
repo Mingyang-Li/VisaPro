@@ -1,4 +1,4 @@
-import { PersonalInfoWhereInput } from "./PersonalInfoWhereInput";
+import { PersonalInfoWhereInput } from './PersonalInfoWhereInput';
 
 export type PersonalInfoListRelationFilter = {
   every?: PersonalInfoWhereInput;

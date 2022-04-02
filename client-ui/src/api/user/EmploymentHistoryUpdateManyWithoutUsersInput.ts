@@ -1,4 +1,4 @@
-import { EmploymentHistoryWhereUniqueInput } from "../employmentHistory/EmploymentHistoryWhereUniqueInput";
+import { EmploymentHistoryWhereUniqueInput } from '../employmentHistory/EmploymentHistoryWhereUniqueInput';
 
 export type EmploymentHistoryUpdateManyWithoutUsersInput = {
   connect?: Array<EmploymentHistoryWhereUniqueInput>;

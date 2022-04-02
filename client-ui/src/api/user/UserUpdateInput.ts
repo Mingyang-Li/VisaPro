@@ -1,9 +1,9 @@
-import { ApplicantUpdateManyWithoutUsersInput } from "./ApplicantUpdateManyWithoutUsersInput";
-import { EducationHistoryUpdateManyWithoutUsersInput } from "./EducationHistoryUpdateManyWithoutUsersInput";
-import { EmploymentHistoryUpdateManyWithoutUsersInput } from "./EmploymentHistoryUpdateManyWithoutUsersInput";
-import { FamilyMemberUpdateManyWithoutUsersInput } from "./FamilyMemberUpdateManyWithoutUsersInput";
-import { PersonalInfoUpdateManyWithoutUsersInput } from "./PersonalInfoUpdateManyWithoutUsersInput";
-import { TravelHistoryUpdateManyWithoutUsersInput } from "./TravelHistoryUpdateManyWithoutUsersInput";
+import { ApplicantUpdateManyWithoutUsersInput } from './ApplicantUpdateManyWithoutUsersInput';
+import { EducationHistoryUpdateManyWithoutUsersInput } from './EducationHistoryUpdateManyWithoutUsersInput';
+import { EmploymentHistoryUpdateManyWithoutUsersInput } from './EmploymentHistoryUpdateManyWithoutUsersInput';
+import { FamilyMemberUpdateManyWithoutUsersInput } from './FamilyMemberUpdateManyWithoutUsersInput';
+import { PersonalInfoUpdateManyWithoutUsersInput } from './PersonalInfoUpdateManyWithoutUsersInput';
+import { TravelHistoryUpdateManyWithoutUsersInput } from './TravelHistoryUpdateManyWithoutUsersInput';
 
 export type UserUpdateInput = {
   applicants?: ApplicantUpdateManyWithoutUsersInput;

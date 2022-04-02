@@ -1,4 +1,4 @@
-import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
+import { UserWhereUniqueInput } from './UserWhereUniqueInput';
 
 export type DeleteUserArgs = {
   where: UserWhereUniqueInput;

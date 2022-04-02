@@ -1,9 +1,9 @@
-import { Applicant } from "../applicant/Applicant";
-import { EducationHistory } from "../educationHistory/EducationHistory";
-import { EmploymentHistory } from "../employmentHistory/EmploymentHistory";
-import { FamilyMember } from "../familyMember/FamilyMember";
-import { PersonalInfo } from "../personalInfo/PersonalInfo";
-import { TravelHistory } from "../travelHistory/TravelHistory";
+import { Applicant } from '../applicant/Applicant';
+import { EducationHistory } from '../educationHistory/EducationHistory';
+import { EmploymentHistory } from '../employmentHistory/EmploymentHistory';
+import { FamilyMember } from '../familyMember/FamilyMember';
+import { PersonalInfo } from '../personalInfo/PersonalInfo';
+import { TravelHistory } from '../travelHistory/TravelHistory';
 
 export type User = {
   applicants?: Array<Applicant>;

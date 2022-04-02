@@ -1,5 +1,5 @@
-import { EducationHistoryWhereUniqueInput } from "./EducationHistoryWhereUniqueInput";
-import { EducationHistoryUpdateInput } from "./EducationHistoryUpdateInput";
+import { EducationHistoryWhereUniqueInput } from './EducationHistoryWhereUniqueInput';
+import { EducationHistoryUpdateInput } from './EducationHistoryUpdateInput';
 
 export type UpdateEducationHistoryArgs = {
   where: EducationHistoryWhereUniqueInput;

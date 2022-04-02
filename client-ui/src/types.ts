@@ -1,4 +1,4 @@
-import { JsonValue } from "type-fest";
+import { JsonValue } from 'type-fest';
 
 export type Credentials = {
   username: string;
@@ -10,4 +10,4 @@ export type LoginMutateResult = {
     accessToken: string;
   };
 };
-export type InputJsonValue = Omit<JsonValue, "null">;
+export type InputJsonValue = Omit<JsonValue, 'null'>;

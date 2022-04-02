@@ -1,4 +1,4 @@
-import { EmploymentHistoryWhereUniqueInput } from "./EmploymentHistoryWhereUniqueInput";
+import { EmploymentHistoryWhereUniqueInput } from './EmploymentHistoryWhereUniqueInput';
 
 export type DeleteEmploymentHistoryArgs = {
   where: EmploymentHistoryWhereUniqueInput;

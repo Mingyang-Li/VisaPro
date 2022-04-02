@@ -1,18 +1,18 @@
-import * as React from "react";
+import * as React from 'react';
 
 import {
+  BooleanInput,
+  DateTimeInput,
   Edit,
-  SimpleForm,
   EditProps,
   ReferenceInput,
   SelectInput,
-  BooleanInput,
+  SimpleForm,
   TextInput,
-  DateTimeInput,
-} from "react-admin";
+} from 'react-admin';
 
-import { ApplicantTitle } from "../applicant/ApplicantTitle";
-import { UserTitle } from "../user/UserTitle";
+import { ApplicantTitle } from '../applicant/ApplicantTitle';
+import { UserTitle } from '../user/UserTitle';
 
 export const PersonalInfoEdit = (props: EditProps): React.ReactElement => {
   return (
