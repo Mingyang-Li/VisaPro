@@ -13,8 +13,8 @@ export async function customSeed() {
   await client.user.update({
     where: { username: username },
     data: {
-      username: 'mingyang',
-      password: await hash("mingyang", salt),
+      username: 'admin',
+      password: await hash("admin", salt),
     },
   });
 

@@ -263,7 +263,7 @@ type EmploymentHistory {
   applicant: Applicant
   archived: Boolean
   archivedBy: User
-  cityOfWokrk: String!
+  cityOfWork: String!
   companyName: String!
   countryOfWork: String!
   createdAt: DateTime!
@@ -284,7 +284,7 @@ input EmploymentHistoryCreateInput {
   applicant: ApplicantWhereUniqueInput
   archived: Boolean
   archivedBy: UserWhereUniqueInput
-  cityOfWokrk: String!
+  cityOfWork: String!
   companyName: String!
   countryOfWork: String!
   createdBy: UserWhereUniqueInput
@@ -316,7 +316,7 @@ input EmploymentHistoryOrderByInput {
   applicantId: SortOrder
   archived: SortOrder
   archivedById: SortOrder
-  cityOfWokrk: SortOrder
+  cityOfWork: SortOrder
   companyName: SortOrder
   countryOfWork: SortOrder
   createdAt: SortOrder
@@ -337,7 +337,7 @@ input EmploymentHistoryUpdateInput {
   applicant: ApplicantWhereUniqueInput
   archived: Boolean
   archivedBy: UserWhereUniqueInput
-  cityOfWokrk: String
+  cityOfWork: String
   companyName: String
   countryOfWork: String
   createdBy: UserWhereUniqueInput
@@ -367,7 +367,7 @@ input EmploymentHistoryWhereInput {
   applicant: ApplicantWhereUniqueInput
   archived: BooleanNullableFilter
   archivedBy: UserWhereUniqueInput
-  cityOfWokrk: StringFilter
+  cityOfWork: StringFilter
   companyName: StringFilter
   countryOfWork: StringFilter
   createdBy: UserWhereUniqueInput
