@@ -67,35 +67,35 @@ const App = (): React.ReactElement => {
           show={UserShow}
         />
         <Resource
-          name="EmploymentHistory"
+          name="Employment History"
           list={EmploymentHistoryList}
           edit={EmploymentHistoryEdit}
           create={EmploymentHistoryCreate}
           show={EmploymentHistoryShow}
         />
         <Resource
-          name="EducationHistory"
+          name="Education History"
           list={EducationHistoryList}
           edit={EducationHistoryEdit}
           create={EducationHistoryCreate}
           show={EducationHistoryShow}
         />
         <Resource
-          name="TravelHistory"
+          name="Travel History"
           list={TravelHistoryList}
           edit={TravelHistoryEdit}
           create={TravelHistoryCreate}
           show={TravelHistoryShow}
         />
         <Resource
-          name="FamilyMember"
+          name="Family Member"
           list={FamilyMemberList}
           edit={FamilyMemberEdit}
           create={FamilyMemberCreate}
           show={FamilyMemberShow}
         />
         <Resource
-          name="PersonalInfo"
+          name="Personal Info"
           list={PersonalInfoList}
           edit={PersonalInfoEdit}
           create={PersonalInfoCreate}

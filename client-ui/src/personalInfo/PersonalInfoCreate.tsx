@@ -25,28 +25,25 @@ export const PersonalInfoCreate = (props: CreateProps): React.ReactElement => {
         >
           <SelectInput optionText={ApplicantTitle} />
         </ReferenceInput>
-        <BooleanInput label="Archived" source="archived" />
-        <ReferenceInput source="user.id" reference="User" label="Archived By">
-          <SelectInput optionText={UserTitle} />
-        </ReferenceInput>
+        <TextInput label="First Name" source="firstName" />
+        <TextInput label="Last Name" source="lastName" />
+        <TextInput label="Country of Birth" source="countryOfBirth" />
+        <TextInput label="Email" source="email" type="email" />
+        <DateTimeInput label="Date of Birth" source="dateOfBirth" />
+        <TextInput label="Home Country Address" source="homeCountryAddress" />
+        <TextInput label="INZ Client Number" source="inzClientNumber" />
+        <TextInput label="Modile" source="modile" />
+        <TextInput label="NZ Address" source="nzAddress" />
+        <TextInput label="Passport Number" source="passportNumber" />
         <TextInput
           label="Countries of Citizenship"
           source="countriesOfCitizenship"
         />
-        <TextInput label="Country of Birth" source="countryOfBirth" />
-        <ReferenceInput source="user.id" reference="User" label="Created By">
+        <ReferenceInput source="user.id" reference="User" label="Updated By">
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>
-        <DateTimeInput label="Date of Birth" source="dateOfBirth" />
-        <TextInput label="Email" source="email" type="email" />
-        <TextInput label="First Name" source="firstName" />
-        <TextInput label="Home Country Address" source="homeCountryAddress" />
-        <TextInput label="INZ Client Number" source="inzClientNumber" />
-        <TextInput label="Last Name" source="lastName" />
-        <TextInput label="Modile" source="modile" />
-        <TextInput label="NZ Address" source="nzAddress" />
-        <TextInput label="Passport Number" source="passportNumber" />
-        <ReferenceInput source="user.id" reference="User" label="Updated By">
+        <BooleanInput label="Archived" source="archived" />
+        <ReferenceInput source="user.id" reference="User" label="Archived By">
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>
       </SimpleForm>
