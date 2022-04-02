@@ -60,6 +60,13 @@ const App = (): React.ReactElement => {
         loginPage={Login}
       >
         <Resource
+          name="Applicant"
+          list={ApplicantList}
+          edit={ApplicantEdit}
+          create={ApplicantCreate}
+          show={ApplicantShow}
+        />
+        <Resource
           name="User"
           list={UserList}
           edit={UserEdit}
@@ -100,13 +107,6 @@ const App = (): React.ReactElement => {
           edit={PersonalInfoEdit}
           create={PersonalInfoCreate}
           show={PersonalInfoShow}
-        />
-        <Resource
-          name="Applicant"
-          list={ApplicantList}
-          edit={ApplicantEdit}
-          create={ApplicantCreate}
-          show={ApplicantShow}
         />
       </Admin>
     </div>
