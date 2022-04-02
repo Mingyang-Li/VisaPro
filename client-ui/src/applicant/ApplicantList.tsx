@@ -24,15 +24,6 @@ export const ApplicantList = (props: ListProps): React.ReactElement => {
       pagination={<Pagination />}
     >
       <Datagrid rowClick="show">
-        <BooleanField label="Archived" source="archived" />
-        <TextField label="Archived At" source="archivedAt" />
-        <ReferenceField label="Archived By" source="user.id" reference="User">
-          <TextField source={USER_TITLE_FIELD} />
-        </ReferenceField>
-        <DateField source="createdAt" label="Created At" />
-        <ReferenceField label="Created By" source="user.id" reference="User">
-          <TextField source={USER_TITLE_FIELD} />
-        </ReferenceField>
         <TextField label="ID" source="id" />
         <ReferenceField
           label="Personal Info"
@@ -43,6 +34,15 @@ export const ApplicantList = (props: ListProps): React.ReactElement => {
         </ReferenceField>
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceField label="User" source="user.id" reference="User">
+          <TextField source={USER_TITLE_FIELD} />
+        </ReferenceField>
+        <BooleanField label="Archived" source="archived" />
+        <TextField label="Archived At" source="archivedAt" />
+        <ReferenceField label="Archived By" source="user.id" reference="User">
+          <TextField source={USER_TITLE_FIELD} />
+        </ReferenceField>
+        <DateField source="createdAt" label="Created At" />
+        <ReferenceField label="Created By" source="user.id" reference="User">
           <TextField source={USER_TITLE_FIELD} />
         </ReferenceField>
       </Datagrid>

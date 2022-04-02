@@ -31,13 +31,11 @@ const Login = ({ theme }: { theme?: object }) => {
             />
             <h2>VisaPro</h2>
             <div className={`${CLASS_NAME}__box__message`}>
-              Sign in to a React-Admin client with ready-made forms for creating
-              and editing all the data models of your application.
+              Managing visa applications for immigration consultancies
             </div>
             <form onSubmit={submit}>
               <label>
                 <span>Username</span>
-
                 <input
                   name="username"
                   type="textbox"
@@ -47,7 +45,6 @@ const Login = ({ theme }: { theme?: object }) => {
               </label>
               <label>
                 <span>password</span>
-
                 <input
                   name="password"
                   type="password"
