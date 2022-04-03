@@ -10,12 +10,11 @@ import {
   SimpleForm,
   TextInput,
 } from 'react-admin';
-
 import { ApplicantTitle } from '../applicant/ApplicantTitle';
 import { UserTitle } from '../user/UserTitle';
 
 export const EmploymentHistoryCreate = (
-  props: CreateProps,
+  props: CreateProps
 ): React.ReactElement => {
   return (
     <Create {...props}>
