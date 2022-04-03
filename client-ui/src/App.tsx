@@ -34,6 +34,7 @@ import { ApplicantCreate } from './applicant/ApplicantCreate';
 import { ApplicantEdit } from './applicant/ApplicantEdit';
 import { ApplicantShow } from './applicant/ApplicantShow';
 import { jwtAuthProvider } from './auth-provider/ra-auth-jwt';
+import { IoNewspaperOutline } from 'react-icons/io5';
 
 const App = (): React.ReactElement => {
   const [dataProvider, setDataProvider] = useState<DataProvider | null>(null);
@@ -65,6 +66,7 @@ const App = (): React.ReactElement => {
           edit={ApplicantEdit}
           create={ApplicantCreate}
           show={ApplicantShow}
+          icon={IoNewspaperOutline}
         />
         <Resource
           name="User"

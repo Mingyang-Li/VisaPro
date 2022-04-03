@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import {
   BooleanInput,
   Create,
@@ -10,21 +9,12 @@ import {
   SimpleForm,
   TextInput,
 } from 'react-admin';
-
-import { ApplicantTitle } from '../applicant/ApplicantTitle';
 import { UserTitle } from '../user/UserTitle';
 
 export const PersonalInfoCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
-        <ReferenceInput
-          source="applicant.id"
-          reference="Applicant"
-          label="Applicant"
-        >
-          <SelectInput optionText={ApplicantTitle} />
-        </ReferenceInput>
         <TextInput label="First Name" source="firstName" />
         <TextInput label="Last Name" source="lastName" />
         <TextInput label="Country of Birth" source="countryOfBirth" />
@@ -42,7 +32,7 @@ export const PersonalInfoCreate = (props: CreateProps): React.ReactElement => {
         <ReferenceInput source="user.id" reference="User" label="Updated By">
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>
-        <BooleanInput label="Archived" source="archived" />
+        <BooleanInput label="Archive" source="archived" />
         <ReferenceInput source="user.id" reference="User" label="Archived By">
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>
