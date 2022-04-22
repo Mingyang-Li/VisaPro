@@ -17,6 +17,7 @@ function App() {
     }),
     cache: Store,
   });
+
   const routes: IRoute[] = [
     {
       path: '/login',
@@ -27,6 +28,7 @@ function App() {
       component: <Dashboard />,
     },
   ];
+
   return (
     <ApolloProvider client={client}>
       <Router>

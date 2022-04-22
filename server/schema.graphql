@@ -6,7 +6,7 @@ type Applicant {
   archived: Boolean
   archivedAt: DateTime
   archivedBy: User
-  createdAt: DateTime!
+  createdAt: DateTime
   createdBy: User
   educationHistories(orderBy: [EducationHistoryOrderByInput!], skip: Float, take: Float, where: EducationHistoryWhereInput): [EducationHistory!]!
   employmentHistories(orderBy: [EmploymentHistoryOrderByInput!], skip: Float, take: Float, where: EmploymentHistoryWhereInput): [EmploymentHistory!]!
@@ -14,7 +14,7 @@ type Applicant {
   id: String!
   personalInfo: PersonalInfo
   travelHistories(orderBy: [TravelHistoryOrderByInput!], skip: Float, take: Float, where: TravelHistoryWhereInput): [TravelHistory!]!
-  updatedAt: DateTime!
+  updatedAt: DateTime
   updatedBy(orderBy: [UserOrderByInput!], skip: Float, take: Float, where: UserWhereInput): [User!]!
   user: User
 }
@@ -156,7 +156,7 @@ type EducationHistory {
   isCurrentInstitution: Boolean
   qualificationGained: String
   startDate: DateTime!
-  updatedAt: DateTime!
+  updatedAt: DateTime
   updatedBy: User
 }
 
@@ -263,19 +263,19 @@ type EmploymentHistory {
   applicant: Applicant
   archived: Boolean
   archivedBy: User
-  cityOfWork: String!
-  companyName: String!
-  countryOfWork: String!
-  createdAt: DateTime!
+  cityOfWork: String
+  companyName: String
+  countryOfWork: String
+  createdAt: DateTime
   createdBy: User
   duties: String
   endDate: DateTime
   id: String!
   isCurrentJob: Boolean
-  jobTitle: String!
-  nzBusinessNumber: String!
-  startDate: DateTime!
-  updatedAt: DateTime!
+  jobTitle: String
+  nzBusinessNumber: String
+  startDate: DateTime
+  updatedAt: DateTime
   updatedBy: User
 }
 
@@ -284,16 +284,16 @@ input EmploymentHistoryCreateInput {
   applicant: ApplicantWhereUniqueInput
   archived: Boolean
   archivedBy: UserWhereUniqueInput
-  cityOfWork: String!
-  companyName: String!
-  countryOfWork: String!
+  cityOfWork: String
+  companyName: String
+  countryOfWork: String
   createdBy: UserWhereUniqueInput
   duties: String
   endDate: DateTime
   isCurrentJob: Boolean
-  jobTitle: String!
-  nzBusinessNumber: String!
-  startDate: DateTime!
+  jobTitle: String
+  nzBusinessNumber: String
+  startDate: DateTime
   updatedBy: UserWhereUniqueInput
 }
 
@@ -367,17 +367,17 @@ input EmploymentHistoryWhereInput {
   applicant: ApplicantWhereUniqueInput
   archived: BooleanNullableFilter
   archivedBy: UserWhereUniqueInput
-  cityOfWork: StringFilter
-  companyName: StringFilter
-  countryOfWork: StringFilter
+  cityOfWork: StringNullableFilter
+  companyName: StringNullableFilter
+  countryOfWork: StringNullableFilter
   createdBy: UserWhereUniqueInput
   duties: StringNullableFilter
   endDate: DateTimeNullableFilter
   id: StringFilter
   isCurrentJob: BooleanNullableFilter
-  jobTitle: StringFilter
-  nzBusinessNumber: StringFilter
-  startDate: DateTimeFilter
+  jobTitle: StringNullableFilter
+  nzBusinessNumber: StringNullableFilter
+  startDate: DateTimeNullableFilter
   updatedBy: UserWhereUniqueInput
 }
 
@@ -389,16 +389,16 @@ type FamilyMember {
   applicants(orderBy: [ApplicantOrderByInput!], skip: Float, take: Float, where: ApplicantWhereInput): [Applicant!]!
   archived: Boolean
   archivedBy: User
-  countriesOfCitizenship: String!
-  countryOfBirth: String!
-  createdAt: DateTime!
+  countriesOfCitizenship: String
+  countryOfBirth: String
+  createdAt: DateTime
   createdBy: User
   dateOfBirth: DateTime
-  firstName: String!
+  firstName: String
   id: String!
-  lastName: String!
-  relationshipToApplicant: String!
-  updatedAt: DateTime!
+  lastName: String
+  relationshipToApplicant: String
+  updatedAt: DateTime
   updatedBy: User
 }
 
@@ -406,13 +406,13 @@ input FamilyMemberCreateInput {
   applicants: ApplicantCreateNestedManyWithoutFamilyMembersInput
   archived: Boolean
   archivedBy: UserWhereUniqueInput
-  countriesOfCitizenship: String!
-  countryOfBirth: String!
+  countriesOfCitizenship: String
+  countryOfBirth: String
   createdBy: UserWhereUniqueInput
   dateOfBirth: DateTime
-  firstName: String!
-  lastName: String!
-  relationshipToApplicant: String!
+  firstName: String
+  lastName: String
+  relationshipToApplicant: String
   updatedBy: UserWhereUniqueInput
 }
 
@@ -476,14 +476,14 @@ input FamilyMemberWhereInput {
   applicants: ApplicantListRelationFilter
   archived: BooleanNullableFilter
   archivedBy: UserWhereUniqueInput
-  countriesOfCitizenship: StringFilter
-  countryOfBirth: StringFilter
+  countriesOfCitizenship: StringNullableFilter
+  countryOfBirth: StringNullableFilter
   createdBy: UserWhereUniqueInput
   dateOfBirth: DateTimeNullableFilter
-  firstName: StringFilter
+  firstName: StringNullableFilter
   id: StringFilter
-  lastName: StringFilter
-  relationshipToApplicant: StringFilter
+  lastName: StringNullableFilter
+  relationshipToApplicant: StringNullableFilter
   updatedBy: UserWhereUniqueInput
 }
 
@@ -524,21 +524,21 @@ type PersonalInfo {
   applicant: Applicant
   archived: Boolean
   archivedBy: User
-  countriesOfCitizenship: String!
-  countryOfBirth: String!
-  createdAt: DateTime!
+  countriesOfCitizenship: String
+  countryOfBirth: String
+  createdAt: DateTime
   createdBy: User
-  dateOfBirth: DateTime!
+  dateOfBirth: DateTime
   email: String
-  firstName: String!
+  firstName: String
   homeCountryAddress: String
   id: String!
   inzClientNumber: String
-  lastName: String!
+  lastName: String
   modile: String
   nzAddress: String
   passportNumber: String
-  updatedAt: DateTime!
+  updatedAt: DateTime
   updatedBy: User
 }
 
@@ -546,15 +546,15 @@ input PersonalInfoCreateInput {
   applicant: ApplicantWhereUniqueInput
   archived: Boolean
   archivedBy: UserWhereUniqueInput
-  countriesOfCitizenship: String!
-  countryOfBirth: String!
+  countriesOfCitizenship: String
+  countryOfBirth: String
   createdBy: UserWhereUniqueInput
-  dateOfBirth: DateTime!
+  dateOfBirth: DateTime
   email: String
-  firstName: String!
+  firstName: String
   homeCountryAddress: String
   inzClientNumber: String
-  lastName: String!
+  lastName: String
   modile: String
   nzAddress: String
   passportNumber: String
@@ -622,16 +622,16 @@ input PersonalInfoWhereInput {
   applicant: ApplicantWhereUniqueInput
   archived: BooleanNullableFilter
   archivedBy: UserWhereUniqueInput
-  countriesOfCitizenship: StringFilter
-  countryOfBirth: StringFilter
+  countriesOfCitizenship: StringNullableFilter
+  countryOfBirth: StringNullableFilter
   createdBy: UserWhereUniqueInput
-  dateOfBirth: DateTimeFilter
+  dateOfBirth: DateTimeNullableFilter
   email: StringNullableFilter
-  firstName: StringFilter
+  firstName: StringNullableFilter
   homeCountryAddress: StringNullableFilter
   id: StringFilter
   inzClientNumber: StringNullableFilter
-  lastName: StringFilter
+  lastName: StringNullableFilter
   modile: StringNullableFilter
   nzAddress: StringNullableFilter
   passportNumber: StringNullableFilter
@@ -711,16 +711,16 @@ type TravelHistory {
   applicant: Applicant
   archived: Boolean
   archivedBy: User
-  createdAt: DateTime!
+  createdAt: DateTime
   createdBy: User
   dateDeparted: DateTime
-  dateEntered: DateTime!
+  dateEntered: DateTime
   destinationAirport: String
   destinationCity: String
   destinationCountry: String
   id: String!
   reasonOfTravel: String!
-  updatedAt: DateTime!
+  updatedAt: DateTime
   updatedBy: User
 }
 
@@ -730,7 +730,7 @@ input TravelHistoryCreateInput {
   archivedBy: UserWhereUniqueInput
   createdBy: UserWhereUniqueInput
   dateDeparted: DateTime
-  dateEntered: DateTime!
+  dateEntered: DateTime
   destinationAirport: String
   destinationCity: String
   destinationCountry: String
@@ -801,7 +801,7 @@ input TravelHistoryWhereInput {
   archivedBy: UserWhereUniqueInput
   createdBy: UserWhereUniqueInput
   dateDeparted: DateTimeNullableFilter
-  dateEntered: DateTimeFilter
+  dateEntered: DateTimeNullableFilter
   destinationAirport: StringNullableFilter
   destinationCity: StringNullableFilter
   destinationCountry: StringNullableFilter
@@ -819,7 +819,7 @@ type User {
   applicantsArchived(orderBy: [ApplicantOrderByInput!], skip: Float, take: Float, where: ApplicantWhereInput): [Applicant!]!
   applicantsCreated(orderBy: [ApplicantOrderByInput!], skip: Float, take: Float, where: ApplicantWhereInput): [Applicant!]!
   applicantsUpdated(orderBy: [ApplicantOrderByInput!], skip: Float, take: Float, where: ApplicantWhereInput): [Applicant!]!
-  createdAt: DateTime!
+  createdAt: DateTime
   educationHistoriesArchived(orderBy: [EducationHistoryOrderByInput!], skip: Float, take: Float, where: EducationHistoryWhereInput): [EducationHistory!]!
   educationHistoriesCreated(orderBy: [EducationHistoryOrderByInput!], skip: Float, take: Float, where: EducationHistoryWhereInput): [EducationHistory!]!
   educationHistoriesUpdated(orderBy: [EducationHistoryOrderByInput!], skip: Float, take: Float, where: EducationHistoryWhereInput): [EducationHistory!]!
@@ -840,7 +840,7 @@ type User {
   travelHistoriesArchived(orderBy: [TravelHistoryOrderByInput!], skip: Float, take: Float, where: TravelHistoryWhereInput): [TravelHistory!]!
   travelHistoriesCreated(orderBy: [TravelHistoryOrderByInput!], skip: Float, take: Float, where: TravelHistoryWhereInput): [TravelHistory!]!
   travelHistoriesUpdated(orderBy: [TravelHistoryOrderByInput!], skip: Float, take: Float, where: TravelHistoryWhereInput): [TravelHistory!]!
-  updatedAt: DateTime!
+  updatedAt: DateTime
   username: String!
 }
 
