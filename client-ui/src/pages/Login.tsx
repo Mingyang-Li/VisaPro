@@ -20,7 +20,6 @@ import { useMutation } from '@apollo/client';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { LOGIN } from '../graphql/Mutations';
-import { Credentials } from '../generated/graphql';
 
 const theme = createTheme();
 
@@ -28,6 +27,8 @@ interface ILogin {
   email: string;
   password: string;
   showPassword: boolean;
+  isInvalidEmail: boolean;
+  isInvalidPassword: false;
 }
 
 export default function Login() {
@@ -35,16 +36,15 @@ export default function Login() {
     email: '',
     password: '',
     showPassword: false,
+    isInvalidEmail: false,
+    isInvalidPassword: false,
   });
-  // const [initiateLogin] = useMutation(
-  //   LOGIN,
-  //   {
-  //     variables: {
-  //       username: values.email,
-  //       password: values.password,
-  //     },
-  //   },
-  // );
+  const [initiateLogin, { data, loading, error }] = useMutation(LOGIN, {
+    variables: {
+      username: values.email,
+      password: values.password,
+    },
+  });
   const updateEmail = (e: any) => {
     setValues({ ...values, email: e.currentTarget.value });
   };
@@ -57,7 +57,7 @@ export default function Login() {
     setValues({ ...values, showPassword: !values.showPassword });
   };
   const handleSubmit = () => {
-    // initiateLogin();
+    initiateLogin();
   };
 
   return (
@@ -95,7 +95,7 @@ export default function Login() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in to VisaPro NZ
+              VisaPro NZ
             </Typography>
             <Box
               component="form"
@@ -112,16 +112,15 @@ export default function Login() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                error={values.isInvalidEmail}
                 onChange={(e) => updateEmail(e)}
               />
               <OutlinedInput
                 required
                 fullWidth
-                name="password"
-                label="Password"
+                id="outlined-adornment-password"
                 type={values.showPassword ? 'text' : 'password'}
-                id="password"
-                autoComplete="current-password"
+                value={values.password}
                 onChange={(e) => updatePassword(e)}
                 endAdornment={(
                   <InputAdornment position="end">
@@ -134,6 +133,7 @@ export default function Login() {
                     </IconButton>
                   </InputAdornment>
                 )}
+                label="Password"
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -145,20 +145,18 @@ export default function Login() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                {loading ? 'Logging you in' : 'Sign In'}
               </Button>
-              {/* <Grid container>
-                <Grid item xs>
-                  <Link href="https://google.com" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="https://google.com" variant="body2">
-                    Sign Up
-                  </Link>
-                </Grid>
-              </Grid> */}
+              <p>
+                data:
+                {' '}
+                {JSON.stringify(data)}
+              </p>
+              <p>
+                error:
+                {' '}
+                {JSON.stringify(error)}
+              </p>
             </Box>
           </Box>
         </Grid>
