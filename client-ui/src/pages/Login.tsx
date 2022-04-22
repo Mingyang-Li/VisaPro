@@ -1,9 +1,8 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -11,35 +10,54 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {
   createTheme,
   FormControlLabel,
+  IconButton,
+  InputAdornment,
   TextField,
   ThemeProvider,
   Typography,
 } from '@mui/material';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>
-      {' '}
-      {new Date().getFullYear()}
-      .
-    </Typography>
-  );
-}
+import { useMutation } from '@apollo/client';
+import { VisibilityOff, Visibility } from '@mui/icons-material';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import { LOGIN } from '../graphql/Mutations';
+import { Credentials } from '../generated/graphql';
 
 const theme = createTheme();
 
-export default function SignInSide() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+interface ILogin {
+  email: string;
+  password: string;
+  showPassword: boolean;
+}
+
+export default function Login() {
+  const [values, setValues] = useState<ILogin>({
+    email: '',
+    password: '',
+    showPassword: false,
+  });
+  // const [initiateLogin] = useMutation(
+  //   LOGIN,
+  //   {
+  //     variables: {
+  //       username: values.email,
+  //       password: values.password,
+  //     },
+  //   },
+  // );
+  const updateEmail = (e: any) => {
+    setValues({ ...values, email: e.currentTarget.value });
+  };
+
+  const updatePassword = (e: any) => {
+    setValues({ ...values, password: e.currentTarget.value });
+  };
+
+  const toggleShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+  const handleSubmit = () => {
+    // initiateLogin();
   };
 
   return (
@@ -77,7 +95,7 @@ export default function SignInSide() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Sign in to VisaPro NZ
             </Typography>
             <Box
               component="form"
@@ -94,16 +112,28 @@ export default function SignInSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange={(e) => updateEmail(e)}
               />
-              <TextField
-                margin="normal"
+              <OutlinedInput
                 required
                 fullWidth
                 name="password"
                 label="Password"
-                type="password"
+                type={values.showPassword ? 'text' : 'password'}
                 id="password"
                 autoComplete="current-password"
+                onChange={(e) => updatePassword(e)}
+                endAdornment={(
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={toggleShowPassword}
+                      edge="end"
+                    >
+                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                )}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -117,7 +147,7 @@ export default function SignInSide() {
               >
                 Sign In
               </Button>
-              <Grid container>
+              {/* <Grid container>
                 <Grid item xs>
                   <Link href="https://google.com" variant="body2">
                     Forgot password?
@@ -128,8 +158,7 @@ export default function SignInSide() {
                     Sign Up
                   </Link>
                 </Grid>
-              </Grid>
-              <Copyright />
+              </Grid> */}
             </Box>
           </Box>
         </Grid>
