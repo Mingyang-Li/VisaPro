@@ -5,12 +5,12 @@ export type FamilyMemberCreateInput = {
   applicants?: ApplicantCreateNestedManyWithoutFamilyMembersInput;
   archived?: boolean | null;
   archivedBy?: UserWhereUniqueInput | null;
-  countriesOfCitizenship: string;
-  countryOfBirth: string;
+  countriesOfCitizenship?: string | null;
+  countryOfBirth?: string | null;
   createdBy?: UserWhereUniqueInput | null;
   dateOfBirth?: Date | null;
-  firstName: string;
-  lastName: string;
-  relationshipToApplicant: string;
+  firstName?: string | null;
+  lastName?: string | null;
+  relationshipToApplicant?: string | null;
   updatedBy?: UserWhereUniqueInput | null;
 };

@@ -59,20 +59,26 @@ class PersonalInfoCreateInput {
   archivedBy?: UserWhereUniqueInput | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  countriesOfCitizenship!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  countriesOfCitizenship?: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  countryOfBirth!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  countryOfBirth?: string | null;
 
   @ApiProperty({
     required: false,
@@ -87,12 +93,15 @@ class PersonalInfoCreateInput {
   createdBy?: UserWhereUniqueInput | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
-  @Field(() => Date)
-  dateOfBirth!: Date;
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  dateOfBirth?: Date | null;
 
   @ApiProperty({
     required: false,
@@ -106,12 +115,15 @@ class PersonalInfoCreateInput {
   email?: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  firstName!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  firstName?: string | null;
 
   @ApiProperty({
     required: false,
@@ -136,12 +148,15 @@ class PersonalInfoCreateInput {
   inzClientNumber?: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  lastName!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  lastName?: string | null;
 
   @ApiProperty({
     required: false,

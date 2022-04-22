@@ -78,7 +78,7 @@ class EmploymentHistoryUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  cityOfWork?: string;
+  cityOfWork?: string | null;
 
   @ApiProperty({
     required: false,
@@ -89,7 +89,7 @@ class EmploymentHistoryUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  companyName?: string;
+  companyName?: string | null;
 
   @ApiProperty({
     required: false,
@@ -100,7 +100,7 @@ class EmploymentHistoryUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  countryOfWork?: string;
+  countryOfWork?: string | null;
 
   @ApiProperty({
     required: false,
@@ -156,7 +156,7 @@ class EmploymentHistoryUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  jobTitle?: string;
+  jobTitle?: string | null;
 
   @ApiProperty({
     required: false,
@@ -167,7 +167,7 @@ class EmploymentHistoryUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  nzBusinessNumber?: string;
+  nzBusinessNumber?: string | null;
 
   @ApiProperty({
     required: false,
@@ -178,7 +178,7 @@ class EmploymentHistoryUpdateInput {
   @Field(() => Date, {
     nullable: true,
   })
-  startDate?: Date;
+  startDate?: Date | null;
 
   @ApiProperty({
     required: false,

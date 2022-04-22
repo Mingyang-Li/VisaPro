@@ -1,20 +1,21 @@
 import { ApplicantListRelationFilter } from "../applicant/ApplicantListRelationFilter";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
-import { StringFilter } from "../../util/StringFilter";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
+import { StringFilter } from "../../util/StringFilter";
 
 export type FamilyMemberWhereInput = {
   applicants?: ApplicantListRelationFilter;
   archived?: BooleanNullableFilter;
   archivedBy?: UserWhereUniqueInput;
-  countriesOfCitizenship?: StringFilter;
-  countryOfBirth?: StringFilter;
+  countriesOfCitizenship?: StringNullableFilter;
+  countryOfBirth?: StringNullableFilter;
   createdBy?: UserWhereUniqueInput;
   dateOfBirth?: DateTimeNullableFilter;
-  firstName?: StringFilter;
+  firstName?: StringNullableFilter;
   id?: StringFilter;
-  lastName?: StringFilter;
-  relationshipToApplicant?: StringFilter;
+  lastName?: StringNullableFilter;
+  relationshipToApplicant?: StringNullableFilter;
   updatedBy?: UserWhereUniqueInput;
 };

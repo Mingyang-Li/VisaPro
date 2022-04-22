@@ -53,28 +53,37 @@ class FamilyMember {
   archivedBy?: User | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  countriesOfCitizenship!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  countriesOfCitizenship!: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  countryOfBirth!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  countryOfBirth!: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
-  @Field(() => Date)
-  createdAt!: Date;
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  createdAt!: Date | null;
 
   @ApiProperty({
     required: false,
@@ -97,12 +106,15 @@ class FamilyMember {
   dateOfBirth!: Date | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  firstName!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  firstName!: string | null;
 
   @ApiProperty({
     required: true,
@@ -113,28 +125,37 @@ class FamilyMember {
   id!: string;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  lastName!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  lastName!: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  relationshipToApplicant!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  relationshipToApplicant!: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
-  @Field(() => Date)
-  updatedAt!: Date;
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  updatedAt!: Date | null;
 
   @ApiProperty({
     required: false,

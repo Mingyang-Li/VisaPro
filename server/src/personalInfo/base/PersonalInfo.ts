@@ -53,28 +53,37 @@ class PersonalInfo {
   archivedBy?: User | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  countriesOfCitizenship!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  countriesOfCitizenship!: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  countryOfBirth!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  countryOfBirth!: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
-  @Field(() => Date)
-  createdAt!: Date;
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  createdAt!: Date | null;
 
   @ApiProperty({
     required: false,
@@ -86,12 +95,15 @@ class PersonalInfo {
   createdBy?: User | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
-  @Field(() => Date)
-  dateOfBirth!: Date;
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  dateOfBirth!: Date | null;
 
   @ApiProperty({
     required: false,
@@ -105,12 +117,15 @@ class PersonalInfo {
   email!: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  firstName!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  firstName!: string | null;
 
   @ApiProperty({
     required: false,
@@ -143,12 +158,15 @@ class PersonalInfo {
   inzClientNumber!: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  lastName!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  lastName!: string | null;
 
   @ApiProperty({
     required: false,
@@ -184,12 +202,15 @@ class PersonalInfo {
   passportNumber!: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
-  @Field(() => Date)
-  updatedAt!: Date;
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  updatedAt!: Date | null;
 
   @ApiProperty({
     required: false,

@@ -82,12 +82,15 @@ class TravelHistoryCreateInput {
   dateDeparted?: Date | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
-  @Field(() => Date)
-  dateEntered!: Date;
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  dateEntered?: Date | null;
 
   @ApiProperty({
     required: false,

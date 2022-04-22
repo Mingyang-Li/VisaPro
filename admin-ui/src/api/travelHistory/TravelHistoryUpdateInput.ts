@@ -7,7 +7,7 @@ export type TravelHistoryUpdateInput = {
   archivedBy?: UserWhereUniqueInput | null;
   createdBy?: UserWhereUniqueInput | null;
   dateDeparted?: Date | null;
-  dateEntered?: Date;
+  dateEntered?: Date | null;
   destinationAirport?: string | null;
   destinationCity?: string | null;
   destinationCountry?: string | null;

@@ -1,24 +1,24 @@
 import { ApplicantWhereUniqueInput } from "../applicant/ApplicantWhereUniqueInput";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
-import { StringFilter } from "../../util/StringFilter";
-import { DateTimeFilter } from "../../util/DateTimeFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
+import { StringFilter } from "../../util/StringFilter";
 
 export type PersonalInfoWhereInput = {
   applicant?: ApplicantWhereUniqueInput;
   archived?: BooleanNullableFilter;
   archivedBy?: UserWhereUniqueInput;
-  countriesOfCitizenship?: StringFilter;
-  countryOfBirth?: StringFilter;
+  countriesOfCitizenship?: StringNullableFilter;
+  countryOfBirth?: StringNullableFilter;
   createdBy?: UserWhereUniqueInput;
-  dateOfBirth?: DateTimeFilter;
+  dateOfBirth?: DateTimeNullableFilter;
   email?: StringNullableFilter;
-  firstName?: StringFilter;
+  firstName?: StringNullableFilter;
   homeCountryAddress?: StringNullableFilter;
   id?: StringFilter;
   inzClientNumber?: StringNullableFilter;
-  lastName?: StringFilter;
+  lastName?: StringNullableFilter;
   modile?: StringNullableFilter;
   nzAddress?: StringNullableFilter;
   passportNumber?: StringNullableFilter;
