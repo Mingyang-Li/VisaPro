@@ -4,16 +4,16 @@
 
 In the project directory you can run:
 
-### `npm start`
+### `yarn start`
 
 Runs the app in the development mode.
 By default, it is accessible at http://localhost:3000
 
-### `npm test`
+### `yarn test`
 
 Launches the test runner.
 
-### `npm run build`
+### `yarn run build`
 
 Builds the app for production to the `dist` folder.
 
@@ -27,31 +27,31 @@ Make sure you have Node.js 14, npm, and Docker installed.
 - Install dependencies
 
 ```
-npm install
+yarn
 ```
 
 - Generate Prisma client
 
 ```
-npm run prisma:generate
+yarn run prisma:generate
 ```
 
 - Start database in Docker
 
 ```
-npm run docker:db
+yarn run docker:db
 ```
 
 - Initiate the database
 
 ```
-npm run db:init
+yarn run db:init
 ```
 
 - Start the server
 
 ```
-npm start
+yarn start
 ```
 
 ## Learn more

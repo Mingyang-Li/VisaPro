@@ -1,0 +1,5 @@
+mutation LOGIN {
+  login(credentials: { username: "mingyang", password: "mingyang" }) {
+    accessToken
+  }
+}
