@@ -33,7 +33,7 @@ export type Applicant = {
   archived?: Maybe<Scalars['Boolean']>;
   archivedAt?: Maybe<Scalars['DateTime']>;
   archivedBy?: Maybe<User>;
-  createdAt: Scalars['DateTime'];
+  createdAt?: Maybe<Scalars['DateTime']>;
   createdBy?: Maybe<User>;
   educationHistories: Array<EducationHistory>;
   employmentHistories: Array<EmploymentHistory>;
@@ -41,7 +41,7 @@ export type Applicant = {
   id: Scalars['String'];
   personalInfo?: Maybe<PersonalInfo>;
   travelHistories: Array<TravelHistory>;
-  updatedAt: Scalars['DateTime'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
   updatedBy: Array<User>;
   user?: Maybe<User>;
 };
@@ -214,7 +214,7 @@ export type EducationHistory = {
   isCurrentInstitution?: Maybe<Scalars['Boolean']>;
   qualificationGained?: Maybe<Scalars['String']>;
   startDate: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
   updatedBy?: Maybe<User>;
 };
 
@@ -322,19 +322,19 @@ export type EmploymentHistory = {
   applicant?: Maybe<Applicant>;
   archived?: Maybe<Scalars['Boolean']>;
   archivedBy?: Maybe<User>;
-  cityOfWork: Scalars['String'];
-  companyName: Scalars['String'];
-  countryOfWork: Scalars['String'];
-  createdAt: Scalars['DateTime'];
+  cityOfWork?: Maybe<Scalars['String']>;
+  companyName?: Maybe<Scalars['String']>;
+  countryOfWork?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   createdBy?: Maybe<User>;
   duties?: Maybe<Scalars['String']>;
   endDate?: Maybe<Scalars['DateTime']>;
   id: Scalars['String'];
   isCurrentJob?: Maybe<Scalars['Boolean']>;
-  jobTitle: Scalars['String'];
-  nzBusinessNumber: Scalars['String'];
-  startDate: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
+  jobTitle?: Maybe<Scalars['String']>;
+  nzBusinessNumber?: Maybe<Scalars['String']>;
+  startDate?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   updatedBy?: Maybe<User>;
 };
 
@@ -343,16 +343,16 @@ export type EmploymentHistoryCreateInput = {
   applicant?: InputMaybe<ApplicantWhereUniqueInput>;
   archived?: InputMaybe<Scalars['Boolean']>;
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
-  cityOfWork: Scalars['String'];
-  companyName: Scalars['String'];
-  countryOfWork: Scalars['String'];
+  cityOfWork?: InputMaybe<Scalars['String']>;
+  companyName?: InputMaybe<Scalars['String']>;
+  countryOfWork?: InputMaybe<Scalars['String']>;
   createdBy?: InputMaybe<UserWhereUniqueInput>;
   duties?: InputMaybe<Scalars['String']>;
   endDate?: InputMaybe<Scalars['DateTime']>;
   isCurrentJob?: InputMaybe<Scalars['Boolean']>;
-  jobTitle: Scalars['String'];
-  nzBusinessNumber: Scalars['String'];
-  startDate: Scalars['DateTime'];
+  jobTitle?: InputMaybe<Scalars['String']>;
+  nzBusinessNumber?: InputMaybe<Scalars['String']>;
+  startDate?: InputMaybe<Scalars['DateTime']>;
   updatedBy?: InputMaybe<UserWhereUniqueInput>;
 };
 
@@ -426,17 +426,17 @@ export type EmploymentHistoryWhereInput = {
   applicant?: InputMaybe<ApplicantWhereUniqueInput>;
   archived?: InputMaybe<BooleanNullableFilter>;
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
-  cityOfWork?: InputMaybe<StringFilter>;
-  companyName?: InputMaybe<StringFilter>;
-  countryOfWork?: InputMaybe<StringFilter>;
+  cityOfWork?: InputMaybe<StringNullableFilter>;
+  companyName?: InputMaybe<StringNullableFilter>;
+  countryOfWork?: InputMaybe<StringNullableFilter>;
   createdBy?: InputMaybe<UserWhereUniqueInput>;
   duties?: InputMaybe<StringNullableFilter>;
   endDate?: InputMaybe<DateTimeNullableFilter>;
   id?: InputMaybe<StringFilter>;
   isCurrentJob?: InputMaybe<BooleanNullableFilter>;
-  jobTitle?: InputMaybe<StringFilter>;
-  nzBusinessNumber?: InputMaybe<StringFilter>;
-  startDate?: InputMaybe<DateTimeFilter>;
+  jobTitle?: InputMaybe<StringNullableFilter>;
+  nzBusinessNumber?: InputMaybe<StringNullableFilter>;
+  startDate?: InputMaybe<DateTimeNullableFilter>;
   updatedBy?: InputMaybe<UserWhereUniqueInput>;
 };
 
@@ -449,16 +449,16 @@ export type FamilyMember = {
   applicants: Array<Applicant>;
   archived?: Maybe<Scalars['Boolean']>;
   archivedBy?: Maybe<User>;
-  countriesOfCitizenship: Scalars['String'];
-  countryOfBirth: Scalars['String'];
-  createdAt: Scalars['DateTime'];
+  countriesOfCitizenship?: Maybe<Scalars['String']>;
+  countryOfBirth?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   createdBy?: Maybe<User>;
   dateOfBirth?: Maybe<Scalars['DateTime']>;
-  firstName: Scalars['String'];
+  firstName?: Maybe<Scalars['String']>;
   id: Scalars['String'];
-  lastName: Scalars['String'];
-  relationshipToApplicant: Scalars['String'];
-  updatedAt: Scalars['DateTime'];
+  lastName?: Maybe<Scalars['String']>;
+  relationshipToApplicant?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   updatedBy?: Maybe<User>;
 };
 
@@ -473,13 +473,13 @@ export type FamilyMemberCreateInput = {
   applicants?: InputMaybe<ApplicantCreateNestedManyWithoutFamilyMembersInput>;
   archived?: InputMaybe<Scalars['Boolean']>;
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
-  countriesOfCitizenship: Scalars['String'];
-  countryOfBirth: Scalars['String'];
+  countriesOfCitizenship?: InputMaybe<Scalars['String']>;
+  countryOfBirth?: InputMaybe<Scalars['String']>;
   createdBy?: InputMaybe<UserWhereUniqueInput>;
   dateOfBirth?: InputMaybe<Scalars['DateTime']>;
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  relationshipToApplicant: Scalars['String'];
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
+  relationshipToApplicant?: InputMaybe<Scalars['String']>;
   updatedBy?: InputMaybe<UserWhereUniqueInput>;
 };
 
@@ -543,14 +543,14 @@ export type FamilyMemberWhereInput = {
   applicants?: InputMaybe<ApplicantListRelationFilter>;
   archived?: InputMaybe<BooleanNullableFilter>;
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
-  countriesOfCitizenship?: InputMaybe<StringFilter>;
-  countryOfBirth?: InputMaybe<StringFilter>;
+  countriesOfCitizenship?: InputMaybe<StringNullableFilter>;
+  countryOfBirth?: InputMaybe<StringNullableFilter>;
   createdBy?: InputMaybe<UserWhereUniqueInput>;
   dateOfBirth?: InputMaybe<DateTimeNullableFilter>;
-  firstName?: InputMaybe<StringFilter>;
+  firstName?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
-  lastName?: InputMaybe<StringFilter>;
-  relationshipToApplicant?: InputMaybe<StringFilter>;
+  lastName?: InputMaybe<StringNullableFilter>;
+  relationshipToApplicant?: InputMaybe<StringNullableFilter>;
   updatedBy?: InputMaybe<UserWhereUniqueInput>;
 };
 
@@ -689,21 +689,21 @@ export type PersonalInfo = {
   applicant?: Maybe<Applicant>;
   archived?: Maybe<Scalars['Boolean']>;
   archivedBy?: Maybe<User>;
-  countriesOfCitizenship: Scalars['String'];
-  countryOfBirth: Scalars['String'];
-  createdAt: Scalars['DateTime'];
+  countriesOfCitizenship?: Maybe<Scalars['String']>;
+  countryOfBirth?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   createdBy?: Maybe<User>;
-  dateOfBirth: Scalars['DateTime'];
+  dateOfBirth?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
-  firstName: Scalars['String'];
+  firstName?: Maybe<Scalars['String']>;
   homeCountryAddress?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   inzClientNumber?: Maybe<Scalars['String']>;
-  lastName: Scalars['String'];
+  lastName?: Maybe<Scalars['String']>;
   modile?: Maybe<Scalars['String']>;
   nzAddress?: Maybe<Scalars['String']>;
   passportNumber?: Maybe<Scalars['String']>;
-  updatedAt: Scalars['DateTime'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
   updatedBy?: Maybe<User>;
 };
 
@@ -711,15 +711,15 @@ export type PersonalInfoCreateInput = {
   applicant?: InputMaybe<ApplicantWhereUniqueInput>;
   archived?: InputMaybe<Scalars['Boolean']>;
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
-  countriesOfCitizenship: Scalars['String'];
-  countryOfBirth: Scalars['String'];
+  countriesOfCitizenship?: InputMaybe<Scalars['String']>;
+  countryOfBirth?: InputMaybe<Scalars['String']>;
   createdBy?: InputMaybe<UserWhereUniqueInput>;
-  dateOfBirth: Scalars['DateTime'];
+  dateOfBirth?: InputMaybe<Scalars['DateTime']>;
   email?: InputMaybe<Scalars['String']>;
-  firstName: Scalars['String'];
+  firstName?: InputMaybe<Scalars['String']>;
   homeCountryAddress?: InputMaybe<Scalars['String']>;
   inzClientNumber?: InputMaybe<Scalars['String']>;
-  lastName: Scalars['String'];
+  lastName?: InputMaybe<Scalars['String']>;
   modile?: InputMaybe<Scalars['String']>;
   nzAddress?: InputMaybe<Scalars['String']>;
   passportNumber?: InputMaybe<Scalars['String']>;
@@ -787,16 +787,16 @@ export type PersonalInfoWhereInput = {
   applicant?: InputMaybe<ApplicantWhereUniqueInput>;
   archived?: InputMaybe<BooleanNullableFilter>;
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
-  countriesOfCitizenship?: InputMaybe<StringFilter>;
-  countryOfBirth?: InputMaybe<StringFilter>;
+  countriesOfCitizenship?: InputMaybe<StringNullableFilter>;
+  countryOfBirth?: InputMaybe<StringNullableFilter>;
   createdBy?: InputMaybe<UserWhereUniqueInput>;
-  dateOfBirth?: InputMaybe<DateTimeFilter>;
+  dateOfBirth?: InputMaybe<DateTimeNullableFilter>;
   email?: InputMaybe<StringNullableFilter>;
-  firstName?: InputMaybe<StringFilter>;
+  firstName?: InputMaybe<StringNullableFilter>;
   homeCountryAddress?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
   inzClientNumber?: InputMaybe<StringNullableFilter>;
-  lastName?: InputMaybe<StringFilter>;
+  lastName?: InputMaybe<StringNullableFilter>;
   modile?: InputMaybe<StringNullableFilter>;
   nzAddress?: InputMaybe<StringNullableFilter>;
   passportNumber?: InputMaybe<StringNullableFilter>;
@@ -1004,16 +1004,16 @@ export type TravelHistory = {
   applicant?: Maybe<Applicant>;
   archived?: Maybe<Scalars['Boolean']>;
   archivedBy?: Maybe<User>;
-  createdAt: Scalars['DateTime'];
+  createdAt?: Maybe<Scalars['DateTime']>;
   createdBy?: Maybe<User>;
   dateDeparted?: Maybe<Scalars['DateTime']>;
-  dateEntered: Scalars['DateTime'];
+  dateEntered?: Maybe<Scalars['DateTime']>;
   destinationAirport?: Maybe<Scalars['String']>;
   destinationCity?: Maybe<Scalars['String']>;
   destinationCountry?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   reasonOfTravel: Scalars['String'];
-  updatedAt: Scalars['DateTime'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
   updatedBy?: Maybe<User>;
 };
 
@@ -1023,7 +1023,7 @@ export type TravelHistoryCreateInput = {
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
   createdBy?: InputMaybe<UserWhereUniqueInput>;
   dateDeparted?: InputMaybe<Scalars['DateTime']>;
-  dateEntered: Scalars['DateTime'];
+  dateEntered?: InputMaybe<Scalars['DateTime']>;
   destinationAirport?: InputMaybe<Scalars['String']>;
   destinationCity?: InputMaybe<Scalars['String']>;
   destinationCountry?: InputMaybe<Scalars['String']>;
@@ -1094,7 +1094,7 @@ export type TravelHistoryWhereInput = {
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
   createdBy?: InputMaybe<UserWhereUniqueInput>;
   dateDeparted?: InputMaybe<DateTimeNullableFilter>;
-  dateEntered?: InputMaybe<DateTimeFilter>;
+  dateEntered?: InputMaybe<DateTimeNullableFilter>;
   destinationAirport?: InputMaybe<StringNullableFilter>;
   destinationCity?: InputMaybe<StringNullableFilter>;
   destinationCountry?: InputMaybe<StringNullableFilter>;
@@ -1113,7 +1113,7 @@ export type User = {
   applicantsArchived: Array<Applicant>;
   applicantsCreated: Array<Applicant>;
   applicantsUpdated: Array<Applicant>;
-  createdAt: Scalars['DateTime'];
+  createdAt?: Maybe<Scalars['DateTime']>;
   educationHistoriesArchived: Array<EducationHistory>;
   educationHistoriesCreated: Array<EducationHistory>;
   educationHistoriesUpdated: Array<EducationHistory>;
@@ -1134,7 +1134,7 @@ export type User = {
   travelHistoriesArchived: Array<TravelHistory>;
   travelHistoriesCreated: Array<TravelHistory>;
   travelHistoriesUpdated: Array<TravelHistory>;
-  updatedAt: Scalars['DateTime'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
   username: Scalars['String'];
 };
 
@@ -1400,20 +1400,6 @@ export type LoginMutation = {
   login: { __typename?: 'UserInfo'; accessToken?: string | null };
 };
 
-export type Create_UserMutationVariables = Exact<{ [key: string]: never }>;
-
-export type Create_UserMutation = {
-  __typename?: 'Mutation';
-  createUser: {
-    __typename?: 'User';
-    firstName?: string | null;
-    lastName?: string | null;
-    roles: Array<string>;
-    email?: string | null;
-    username: string;
-  };
-};
-
 export const LoginDocument = gql`
   mutation LOGIN {
     login(credentials: { username: "mingyang", password: "mingyang" }) {
@@ -1459,66 +1445,4 @@ export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<
   LoginMutation,
   LoginMutationVariables
->;
-export const Create_UserDocument = gql`
-  mutation CREATE_USER {
-    createUser(
-      data: {
-        firstName: "test"
-        lastName: "test"
-        roles: ["user"]
-        email: "test@gmail.com"
-        username: "test@gmail.com"
-        password: "test@gmail.com"
-      }
-    ) {
-      firstName
-      lastName
-      roles
-      email
-      username
-    }
-  }
-`;
-export type Create_UserMutationFn = Apollo.MutationFunction<
-  Create_UserMutation,
-  Create_UserMutationVariables
->;
-
-/**
- * __useCreate_UserMutation__
- *
- * To run a mutation, you first call `useCreate_UserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreate_UserMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createUserMutation, { data, loading, error }] = useCreate_UserMutation({
- *   variables: {
- *   },
- * });
- */
-export function useCreate_UserMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    Create_UserMutation,
-    Create_UserMutationVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<Create_UserMutation, Create_UserMutationVariables>(
-    Create_UserDocument,
-    options,
-  );
-}
-export type Create_UserMutationHookResult = ReturnType<
-  typeof useCreate_UserMutation
->;
-export type Create_UserMutationResult =
-  Apollo.MutationResult<Create_UserMutation>;
-export type Create_UserMutationOptions = Apollo.BaseMutationOptions<
-  Create_UserMutation,
-  Create_UserMutationVariables
 >;
