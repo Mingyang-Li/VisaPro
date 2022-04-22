@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { IRoute } from './dto/IRoute';
+import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
     },
     {
       path: '/dashboard',
-      component: <h1>dashboard</h1>,
+      component: <Dashboard />,
     },
   ];
   return (

@@ -1,25 +1,5 @@
 mutation LOGIN {
-  login(credentials: {
-    username: "mingyang"
-    password: "mingyang"
-  }) {
+  login(credentials: { username: "mingyang", password: "mingyang" }) {
     accessToken
-  }
-}
-
-mutation CREATE_USER {
-  createUser(data: {
-    firstName: "test"
-    lastName: "test"
-    roles: ["user"]
-    email: "test@gmail.com"
-    username: "test@gmail.com"
-    password: "test@gmail.com"
-  }) {
-    firstName
-    lastName
-    roles
-    email
-    username
   }
 }
