@@ -12,7 +12,7 @@ model User {
   applicantsArchived          Applicant[]         @relation(name: "applicantsArchived")
   applicantsCreated           Applicant[]         @relation(name: "applicantsCreated")
   applicantsUpdated           Applicant[]         @relation(name: "applicantsUpdated")
-  createdAt                   DateTime            @default(now())
+  createdAt                   DateTime?           @default(now())
   educationHistoriesArchived  EducationHistory[]  @relation(name: "educationHistoriesArchived")
   educationHistoriesCreated   EducationHistory[]  @relation(name: "educationHistoriesCreated")
   educationHistoriesUpdated   EducationHistory[]  @relation(name: "educationHistoriesUpdated")
@@ -34,7 +34,7 @@ model User {
   travelHistoriesArchived     TravelHistory[]     @relation(name: "travelHistoriesArchived")
   travelHistoriesCreated      TravelHistory[]     @relation(name: "travelHistoriesCreated")
   travelHistoriesUpdated      TravelHistory[]     @relation(name: "travelHistoriesUpdated")
-  updatedAt                   DateTime            @updatedAt
+  updatedAt                   DateTime?           @updatedAt
   username                    String              @unique
 }
 
@@ -45,20 +45,20 @@ model EmploymentHistory {
   archived         Boolean?
   archivedBy       User?      @relation(name: "employmentHistoriesArchived", fields: [archivedById], references: [id])
   archivedById     String?
-  cityOfWork       String
-  companyName      String
-  countryOfWork    String
-  createdAt        DateTime   @default(now())
+  cityOfWork       String?
+  companyName      String?
+  countryOfWork    String?
+  createdAt        DateTime?  @default(now())
   createdBy        User?      @relation(name: "employmentHistoriesCreated", fields: [createdById], references: [id])
   createdById      String?
   duties           String?
   endDate          DateTime?
   id               String     @id @default(cuid())
   isCurrentJob     Boolean?
-  jobTitle         String
-  nzBusinessNumber String
-  startDate        DateTime
-  updatedAt        DateTime   @updatedAt
+  jobTitle         String?
+  nzBusinessNumber String?
+  startDate        DateTime?
+  updatedAt        DateTime?  @updatedAt
   updatedBy        User?      @relation(name: "employmentHistoriesUpdated", fields: [updatedById], references: [id])
   updatedById      String?
 }
@@ -81,7 +81,7 @@ model EducationHistory {
   isCurrentInstitution Boolean?
   qualificationGained  String?
   startDate            DateTime
-  updatedAt            DateTime   @updatedAt
+  updatedAt            DateTime?  @updatedAt
   updatedBy            User?      @relation(name: "educationHistoriesUpdated", fields: [updatedById], references: [id])
   updatedById          String?
 }
@@ -92,17 +92,17 @@ model TravelHistory {
   archived           Boolean?
   archivedBy         User?      @relation(name: "travelHistoriesArchived", fields: [archivedById], references: [id])
   archivedById       String?
-  createdAt          DateTime   @default(now())
+  createdAt          DateTime?  @default(now())
   createdBy          User?      @relation(name: "travelHistoriesCreated", fields: [createdById], references: [id])
   createdById        String?
   dateDeparted       DateTime?
-  dateEntered        DateTime
+  dateEntered        DateTime?
   destinationAirport String?
   destinationCity    String?
   destinationCountry String?
   id                 String     @id @default(cuid())
   reasonOfTravel     String
-  updatedAt          DateTime   @updatedAt
+  updatedAt          DateTime?  @updatedAt
   updatedBy          User?      @relation(name: "travelHistoriesUpdated", fields: [updatedById], references: [id])
   updatedById        String?
 }
@@ -112,17 +112,17 @@ model FamilyMember {
   archived                Boolean?
   archivedBy              User?       @relation(name: "familyMembersArchived", fields: [archivedById], references: [id])
   archivedById            String?
-  countriesOfCitizenship  String
-  countryOfBirth          String
-  createdAt               DateTime    @default(now())
+  countriesOfCitizenship  String?
+  countryOfBirth          String?
+  createdAt               DateTime?   @default(now())
   createdBy               User?       @relation(name: "familyMembersCreated", fields: [createdById], references: [id])
   createdById             String?
   dateOfBirth             DateTime?
-  firstName               String
+  firstName               String?
   id                      String      @id @default(cuid())
-  lastName                String
-  relationshipToApplicant String
-  updatedAt               DateTime    @updatedAt
+  lastName                String?
+  relationshipToApplicant String?
+  updatedAt               DateTime?   @updatedAt
   updatedBy               User?       @relation(name: "familyMembersUpdated", fields: [updatedById], references: [id])
   updatedById             String?
 }
@@ -132,22 +132,22 @@ model PersonalInfo {
   archived               Boolean?
   archivedBy             User?     @relation(name: "personalInfosArchived", fields: [archivedById], references: [id])
   archivedById           String?
-  countriesOfCitizenship String
-  countryOfBirth         String
-  createdAt              DateTime  @default(now())
+  countriesOfCitizenship String?
+  countryOfBirth         String?
+  createdAt              DateTime? @default(now())
   createdBy              User?     @relation(name: "personalInfosCreated", fields: [createdById], references: [id])
   createdById            String?
-  dateOfBirth            DateTime
+  dateOfBirth            DateTime?
   email                  String?
-  firstName              String
+  firstName              String?
   homeCountryAddress     String?
   id                     String    @id @default(cuid())
   inzClientNumber        String?
-  lastName               String
+  lastName               String?
   modile                 String?
   nzAddress              String?
   passportNumber         String?
-  updatedAt              DateTime  @updatedAt
+  updatedAt              DateTime? @updatedAt
   updatedBy              User?     @relation(name: "personalInfosUpdated", fields: [updatedById], references: [id])
   updatedById            String?
 }
@@ -157,7 +157,7 @@ model Applicant {
   archivedAt          DateTime?
   archivedBy          User?               @relation(name: "applicantsArchived", fields: [archivedById], references: [id])
   archivedById        String?
-  createdAt           DateTime            @default(now())
+  createdAt           DateTime?           @default(now())
   createdBy           User?               @relation(name: "applicantsCreated", fields: [createdById], references: [id])
   createdById         String?
   educationHistories  EducationHistory[]
@@ -167,7 +167,7 @@ model Applicant {
   personalInfo        PersonalInfo?       @relation(fields: [personalInfoId], references: [id])
   personalInfoId      String?
   travelHistories     TravelHistory[]
-  updatedAt           DateTime            @updatedAt
+  updatedAt           DateTime?           @updatedAt
   updatedBy           User[]              @relation(name: "applicantsUpdated")
   user                User?               @relation(name: "ApplicantsOnUser", fields: [userId], references: [id])
   userId              String?

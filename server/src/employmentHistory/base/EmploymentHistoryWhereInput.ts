@@ -17,9 +17,8 @@ import { IsOptional, ValidateNested } from "class-validator";
 import { ApplicantWhereUniqueInput } from "../../applicant/base/ApplicantWhereUniqueInput";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
-import { StringFilter } from "../../util/StringFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
-import { DateTimeFilter } from "../../util/DateTimeFilter";
+import { StringFilter } from "../../util/StringFilter";
 @InputType()
 class EmploymentHistoryWhereInput {
   @ApiProperty({
@@ -70,36 +69,36 @@ class EmploymentHistoryWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringFilter,
+    type: StringNullableFilter,
   })
-  @Type(() => StringFilter)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => StringFilter, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  cityOfWork?: StringFilter;
+  cityOfWork?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
-    type: StringFilter,
+    type: StringNullableFilter,
   })
-  @Type(() => StringFilter)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => StringFilter, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  companyName?: StringFilter;
+  companyName?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
-    type: StringFilter,
+    type: StringNullableFilter,
   })
-  @Type(() => StringFilter)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => StringFilter, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  countryOfWork?: StringFilter;
+  countryOfWork?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -159,36 +158,36 @@ class EmploymentHistoryWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringFilter,
+    type: StringNullableFilter,
   })
-  @Type(() => StringFilter)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => StringFilter, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  jobTitle?: StringFilter;
+  jobTitle?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
-    type: StringFilter,
+    type: StringNullableFilter,
   })
-  @Type(() => StringFilter)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => StringFilter, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  nzBusinessNumber?: StringFilter;
+  nzBusinessNumber?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
-    type: DateTimeFilter,
+    type: DateTimeNullableFilter,
   })
-  @Type(() => DateTimeFilter)
+  @Type(() => DateTimeNullableFilter)
   @IsOptional()
-  @Field(() => DateTimeFilter, {
+  @Field(() => DateTimeNullableFilter, {
     nullable: true,
   })
-  startDate?: DateTimeFilter;
+  startDate?: DateTimeNullableFilter;
 
   @ApiProperty({
     required: false,

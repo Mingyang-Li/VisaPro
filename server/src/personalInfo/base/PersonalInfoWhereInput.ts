@@ -16,9 +16,9 @@ import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
-import { StringFilter } from "../../util/StringFilter";
-import { DateTimeFilter } from "../../util/DateTimeFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
+import { StringFilter } from "../../util/StringFilter";
 @InputType()
 class PersonalInfoWhereInput {
   @ApiProperty({
@@ -58,25 +58,25 @@ class PersonalInfoWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringFilter,
+    type: StringNullableFilter,
   })
-  @Type(() => StringFilter)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => StringFilter, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  countriesOfCitizenship?: StringFilter;
+  countriesOfCitizenship?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
-    type: StringFilter,
+    type: StringNullableFilter,
   })
-  @Type(() => StringFilter)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => StringFilter, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  countryOfBirth?: StringFilter;
+  countryOfBirth?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -92,14 +92,14 @@ class PersonalInfoWhereInput {
 
   @ApiProperty({
     required: false,
-    type: DateTimeFilter,
+    type: DateTimeNullableFilter,
   })
-  @Type(() => DateTimeFilter)
+  @Type(() => DateTimeNullableFilter)
   @IsOptional()
-  @Field(() => DateTimeFilter, {
+  @Field(() => DateTimeNullableFilter, {
     nullable: true,
   })
-  dateOfBirth?: DateTimeFilter;
+  dateOfBirth?: DateTimeNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -114,14 +114,14 @@ class PersonalInfoWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringFilter,
+    type: StringNullableFilter,
   })
-  @Type(() => StringFilter)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => StringFilter, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  firstName?: StringFilter;
+  firstName?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -158,14 +158,14 @@ class PersonalInfoWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringFilter,
+    type: StringNullableFilter,
   })
-  @Type(() => StringFilter)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => StringFilter, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  lastName?: StringFilter;
+  lastName?: StringNullableFilter;
 
   @ApiProperty({
     required: false,

@@ -17,7 +17,6 @@ import { Type } from "class-transformer";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
-import { DateTimeFilter } from "../../util/DateTimeFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 @InputType()
@@ -82,14 +81,14 @@ class TravelHistoryWhereInput {
 
   @ApiProperty({
     required: false,
-    type: DateTimeFilter,
+    type: DateTimeNullableFilter,
   })
-  @Type(() => DateTimeFilter)
+  @Type(() => DateTimeNullableFilter)
   @IsOptional()
-  @Field(() => DateTimeFilter, {
+  @Field(() => DateTimeNullableFilter, {
     nullable: true,
   })
-  dateEntered?: DateTimeFilter;
+  dateEntered?: DateTimeNullableFilter;
 
   @ApiProperty({
     required: false,

@@ -10,7 +10,7 @@ export type User = {
   applicantsArchived?: Array<Applicant>;
   applicantsCreated?: Array<Applicant>;
   applicantsUpdated?: Array<Applicant>;
-  createdAt: Date;
+  createdAt: Date | null;
   educationHistoriesArchived?: Array<EducationHistory>;
   educationHistoriesCreated?: Array<EducationHistory>;
   educationHistoriesUpdated?: Array<EducationHistory>;
@@ -31,6 +31,6 @@ export type User = {
   travelHistoriesArchived?: Array<TravelHistory>;
   travelHistoriesCreated?: Array<TravelHistory>;
   travelHistoriesUpdated?: Array<TravelHistory>;
-  updatedAt: Date;
+  updatedAt: Date | null;
   username: string;
 };

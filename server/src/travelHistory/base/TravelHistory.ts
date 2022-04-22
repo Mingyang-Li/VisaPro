@@ -53,12 +53,15 @@ class TravelHistory {
   archivedBy?: User | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
-  @Field(() => Date)
-  createdAt!: Date;
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  createdAt!: Date | null;
 
   @ApiProperty({
     required: false,
@@ -81,12 +84,15 @@ class TravelHistory {
   dateDeparted!: Date | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
-  @Field(() => Date)
-  dateEntered!: Date;
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  dateEntered!: Date | null;
 
   @ApiProperty({
     required: false,
@@ -138,12 +144,15 @@ class TravelHistory {
   reasonOfTravel!: string;
 
   @ApiProperty({
-    required: true,
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
-  @Field(() => Date)
-  updatedAt!: Date;
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  updatedAt!: Date | null;
 
   @ApiProperty({
     required: false,

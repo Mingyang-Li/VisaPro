@@ -9,7 +9,7 @@ export type Applicant = {
   archived: boolean | null;
   archivedAt: Date | null;
   archivedBy?: User | null;
-  createdAt: Date;
+  createdAt: Date | null;
   createdBy?: User | null;
   educationHistories?: Array<EducationHistory>;
   employmentHistories?: Array<EmploymentHistory>;
@@ -17,7 +17,7 @@ export type Applicant = {
   id: string;
   personalInfo?: PersonalInfo | null;
   travelHistories?: Array<TravelHistory>;
-  updatedAt: Date;
+  updatedAt: Date | null;
   updatedBy?: Array<User>;
   user?: User | null;
 };

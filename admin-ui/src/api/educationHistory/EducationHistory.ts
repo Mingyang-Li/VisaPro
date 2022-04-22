@@ -16,6 +16,6 @@ export type EducationHistory = {
   isCurrentInstitution: boolean | null;
   qualificationGained: string | null;
   startDate: Date;
-  updatedAt: Date;
+  updatedAt: Date | null;
   updatedBy?: User | null;
 };

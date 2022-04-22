@@ -90,7 +90,7 @@ class TravelHistoryUpdateInput {
   @Field(() => Date, {
     nullable: true,
   })
-  dateEntered?: Date;
+  dateEntered?: Date | null;
 
   @ApiProperty({
     required: false,

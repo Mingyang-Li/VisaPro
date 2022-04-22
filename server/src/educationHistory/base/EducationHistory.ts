@@ -154,12 +154,15 @@ class EducationHistory {
   startDate!: Date;
 
   @ApiProperty({
-    required: true,
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
-  @Field(() => Date)
-  updatedAt!: Date;
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  updatedAt!: Date | null;
 
   @ApiProperty({
     required: false,

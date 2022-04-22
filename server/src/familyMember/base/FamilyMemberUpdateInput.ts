@@ -67,7 +67,7 @@ class FamilyMemberUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  countriesOfCitizenship?: string;
+  countriesOfCitizenship?: string | null;
 
   @ApiProperty({
     required: false,
@@ -78,7 +78,7 @@ class FamilyMemberUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  countryOfBirth?: string;
+  countryOfBirth?: string | null;
 
   @ApiProperty({
     required: false,
@@ -112,7 +112,7 @@ class FamilyMemberUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  firstName?: string;
+  firstName?: string | null;
 
   @ApiProperty({
     required: false,
@@ -123,7 +123,7 @@ class FamilyMemberUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  lastName?: string;
+  lastName?: string | null;
 
   @ApiProperty({
     required: false,
@@ -134,7 +134,7 @@ class FamilyMemberUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  relationshipToApplicant?: string;
+  relationshipToApplicant?: string | null;
 
   @ApiProperty({
     required: false,
