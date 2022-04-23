@@ -12,7 +12,7 @@ export const Store = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        jwtToken: {
+        userInfo: {
           read() {
             return userInfo();
           },

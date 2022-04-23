@@ -9,9 +9,11 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {
   createTheme,
+  FormControl,
   FormControlLabel,
   IconButton,
   InputAdornment,
+  InputLabel,
   TextField,
   ThemeProvider,
   Typography,
@@ -41,12 +43,22 @@ const Login: React.FC = () => {
     isInvalidEmail: false,
     isInvalidPassword: false,
   });
-  const [initiateLogin, { data, loading, error }] = useMutation<Mutation>(LOGIN, {
-    variables: {
-      username: values.email,
-      password: values.password,
+  const [initiateLogin, { data, loading, error }] = useMutation<Mutation>(
+    LOGIN,
+    {
+      variables: {
+        username: values.email,
+        password: values.password,
+      },
+      onCompleted: () => {
+        localStorage.setItem(
+          'auth-token',
+          data?.login.accessToken || 'undefined',
+        );
+        userInfo(data?.login);
+      },
     },
-  });
+  );
   const updateEmail = (e: any) => {
     setValues({ ...values, email: e.currentTarget.value });
   };
@@ -60,7 +72,6 @@ const Login: React.FC = () => {
   };
   const handleSubmit = () => {
     initiateLogin();
-    userInfo(data?.login);
   };
 
   return (
@@ -77,9 +88,10 @@ const Login: React.FC = () => {
               // eslint-disable-next-line max-len
               'url(https://onechelofanadventure.com/wp-content/uploads/2017/05/New-Zealand-South-Island-Things-to-Do.png)',
             backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) => (t.palette.mode === 'light'
-              ? t.palette.grey[50]
-              : t.palette.grey[900]),
+            backgroundColor: (t) =>
+              t.palette.mode === 'light'
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -100,12 +112,7 @@ const Login: React.FC = () => {
             <Typography component="h1" variant="h5">
               VisaPro NZ
             </Typography>
-            <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
-            >
+            <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -118,31 +125,41 @@ const Login: React.FC = () => {
                 error={values.isInvalidEmail}
                 onChange={(e) => updateEmail(e)}
               />
-              <OutlinedInput
-                required
-                fullWidth
-                id="outlined-adornment-password"
-                type={values.showPassword ? 'text' : 'password'}
-                value={values.password}
-                onChange={(e) => updatePassword(e)}
-                endAdornment={(
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={toggleShowPassword}
-                      edge="end"
-                    >
-                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                )}
-                label="Password"
-              />
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Password
+                </InputLabel>
+                <OutlinedInput
+                  required
+                  fullWidth
+                  id="outlined-adornment-passwor  d"
+                  type={values.showPassword ? 'text' : 'password'}
+                  value={values.password}
+                  onChange={(e) => updatePassword(e)}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={toggleShowPassword}
+                        edge="end"
+                      >
+                        {values.showPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
+                />
+              </FormControl>
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
               <Button
+                onClick={handleSubmit}
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -150,22 +167,14 @@ const Login: React.FC = () => {
               >
                 {loading ? 'Logging you in' : 'Sign In'}
               </Button>
-              <p>
-                data:
-                {' '}
-                {JSON.stringify(useReactiveVar(userInfo))}
-              </p>
-              <p>
-                error:
-                {' '}
-                {JSON.stringify(error)}
-              </p>
+              <p>data: {JSON.stringify(useReactiveVar(userInfo))}</p>
+              <p>error: {JSON.stringify(error)}</p>
             </Box>
           </Box>
         </Grid>
       </Grid>
     </ThemeProvider>
   );
-}
+};
 
 export default Login;
