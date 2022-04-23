@@ -1,6 +1,12 @@
 import { makeVar, InMemoryCache, ReactiveVar } from '@apollo/client';
+import { UserInfo } from '../generated/graphql';
 
-export const jwtTokenVar: ReactiveVar<string> = makeVar('');
+export const userInfo: ReactiveVar<UserInfo> = makeVar<UserInfo>({
+  __typename: 'UserInfo',
+  username: '',
+  accessToken: '',
+  roles: ['user'],
+});
 
 export const Store = new InMemoryCache({
   typePolicies: {
@@ -8,7 +14,7 @@ export const Store = new InMemoryCache({
       fields: {
         jwtToken: {
           read() {
-            return jwtTokenVar();
+            return userInfo();
           },
         },
       },

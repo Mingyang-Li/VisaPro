@@ -16,10 +16,12 @@ import {
   ThemeProvider,
   Typography,
 } from '@mui/material';
-import { useMutation } from '@apollo/client';
+import { useMutation, useReactiveVar } from '@apollo/client';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { LOGIN } from '../graphql/Mutations';
+import { userInfo } from '../graphql/Store';
+import { Mutation } from '../generated/graphql';
 
 const theme = createTheme();
 
@@ -31,7 +33,7 @@ interface ILogin {
   isInvalidPassword: false;
 }
 
-export default function Login() {
+const Login: React.FC = () => {
   const [values, setValues] = useState<ILogin>({
     email: '',
     password: '',
@@ -39,7 +41,7 @@ export default function Login() {
     isInvalidEmail: false,
     isInvalidPassword: false,
   });
-  const [initiateLogin, { data, loading, error }] = useMutation(LOGIN, {
+  const [initiateLogin, { data, loading, error }] = useMutation<Mutation>(LOGIN, {
     variables: {
       username: values.email,
       password: values.password,
@@ -58,6 +60,7 @@ export default function Login() {
   };
   const handleSubmit = () => {
     initiateLogin();
+    userInfo(data?.login);
   };
 
   return (
@@ -150,7 +153,7 @@ export default function Login() {
               <p>
                 data:
                 {' '}
-                {JSON.stringify(data)}
+                {JSON.stringify(useReactiveVar(userInfo))}
               </p>
               <p>
                 error:
@@ -164,3 +167,5 @@ export default function Login() {
     </ThemeProvider>
   );
 }
+
+export default Login;
