@@ -24,6 +24,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import { LOGIN } from '../graphql/Mutations';
 import { userInfo } from '../graphql/Store';
 import { Mutation } from '../generated/graphql';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
@@ -41,6 +42,7 @@ interface ILogin {
 }
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
   const [values, setValues] = useState<ILogin>({
     email: '',
     password: '',
@@ -51,20 +53,12 @@ const Login: React.FC = () => {
     LOGIN,
     {
       update(proxy, result) {
-        console.log(result);
-        alert(JSON.stringify(result));
+        userInfo(result?.data?.login);
+        navigate('/dashboard');
       },
       variables: {
         username: values.email,
         password: values.password,
-      },
-      onCompleted: () => {
-        // console.log(data?.login.accessToken);
-        // localStorage.setItem(
-        //   'auth-token',
-        //   data?.login.accessToken || 'undefined',
-        // );
-        userInfo(data?.login);
       },
     },
   );
@@ -170,15 +164,13 @@ const Login: React.FC = () => {
               />
               <Button
                 onClick={handleSubmit}
-                type="submit"
+                // type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
                 {loading ? 'Logging you in' : 'Sign In'}
               </Button>
-              <p>data: {JSON.stringify(useReactiveVar(userInfo))}</p>
-              <p>error: {JSON.stringify(error)}</p>
             </Box>
           </Box>
         </Grid>
