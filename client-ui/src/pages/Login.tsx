@@ -31,8 +31,13 @@ interface ILogin {
   email: string;
   password: string;
   showPassword: boolean;
-  isInvalidEmail: boolean;
-  isInvalidPassword: false;
+  loginError: {
+    loginFailed?: boolean;
+    errorCode?: string;
+    errorMessage?: string;
+    isInvalidEmail?: boolean;
+    isInvalidPassword?: false;
+  };
 }
 
 const Login: React.FC = () => {
@@ -40,21 +45,25 @@ const Login: React.FC = () => {
     email: '',
     password: '',
     showPassword: false,
-    isInvalidEmail: false,
-    isInvalidPassword: false,
+    loginError: {},
   });
   const [initiateLogin, { data, loading, error }] = useMutation<Mutation>(
     LOGIN,
     {
+      update(proxy, result) {
+        console.log(result);
+        alert(JSON.stringify(result));
+      },
       variables: {
         username: values.email,
         password: values.password,
       },
       onCompleted: () => {
-        localStorage.setItem(
-          'auth-token',
-          data?.login.accessToken || 'undefined',
-        );
+        // console.log(data?.login.accessToken);
+        // localStorage.setItem(
+        //   'auth-token',
+        //   data?.login.accessToken || 'undefined',
+        // );
         userInfo(data?.login);
       },
     },
@@ -122,7 +131,7 @@ const Login: React.FC = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                error={values.isInvalidEmail}
+                error={values.loginError.loginFailed}
                 onChange={(e) => updateEmail(e)}
               />
               <FormControl variant="outlined" fullWidth>
@@ -134,6 +143,7 @@ const Login: React.FC = () => {
                   fullWidth
                   id="outlined-adornment-passwor  d"
                   type={values.showPassword ? 'text' : 'password'}
+                  error={values.loginError.loginFailed}
                   value={values.password}
                   onChange={(e) => updatePassword(e)}
                   endAdornment={
