@@ -8,6 +8,12 @@ export const userInfo: ReactiveVar<UserInfo> = makeVar<UserInfo>({
   roles: ['user'],
 });
 
+// export const user: ReactiveVar<User> = makeVar<User>({
+//   __typename: 'User',
+//   applicants: [{}],
+//   applicantsArchived: [],
+// });
+
 export const Store = new InMemoryCache({
   typePolicies: {
     Query: {
