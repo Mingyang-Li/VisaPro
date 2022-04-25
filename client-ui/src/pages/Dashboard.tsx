@@ -37,8 +37,9 @@ const Contents: React.FC = () => {
 };
 
 const Dashboard: React.FC = () => {
-  const user = useReactiveVar(userInfo);
-  console.log(user);
+  // const userInfoDetails = useReactiveVar(userInfo);
+  // const userDetails = useReactiveVar(user);
+  // console.log(user);
   return (
     <>
       {/* <h2>{JSON.stringify(user)}</h2> */}

@@ -4,6 +4,7 @@ import {
   EducationHistory,
   EmploymentHistory,
   FamilyMember,
+  PersonalInfo,
   TravelHistory,
   User,
   UserInfo,
@@ -26,6 +27,10 @@ const familyMember: FamilyMember = {
   applicants: [],
 };
 
+const personalInfo: PersonalInfo = {
+  id: '',
+};
+
 const applicant: Applicant = {
   id: '',
   educationHistories: [educationHistory],
@@ -42,9 +47,28 @@ export const userInfo: ReactiveVar<UserInfo> = makeVar<UserInfo>({
 });
 
 export const user: ReactiveVar<User> = makeVar<User>({
-  __typename: 'User',
-  applicants: [{}],
-  applicantsArchived: [],
+  id: '',
+  applicants: [applicant],
+  applicantsCreated: [applicant],
+  applicantsArchived: [applicant],
+  applicantsUpdated: [applicant],
+  educationHistoriesArchived: [educationHistory],
+  educationHistoriesCreated: [educationHistory],
+  educationHistoriesUpdated: [educationHistory],
+  employmentHistoriesArchived: [employmentHistory],
+  employmentHistoriesCreated: [employmentHistory],
+  employmentHistoriesUpdated: [employmentHistory],
+  familyMembersArchived: [familyMember],
+  familyMembersCreated: [familyMember],
+  familyMembersUpdated: [familyMember],
+  personalInfosArchived: [personalInfo],
+  personalInfosCreated: [personalInfo],
+  personalInfosUpdated: [personalInfo],
+  travelHistoriesArchived: [travelHistory],
+  travelHistoriesCreated: [travelHistory],
+  travelHistoriesUpdated: [travelHistory],
+  roles: ['User'],
+  username: '',
 });
 
 export const Store = new InMemoryCache({
@@ -54,6 +78,11 @@ export const Store = new InMemoryCache({
         userInfo: {
           read() {
             return userInfo();
+          },
+        },
+        user: {
+          read() {
+            return user();
           },
         },
       },
