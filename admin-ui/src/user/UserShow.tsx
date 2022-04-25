@@ -60,6 +60,13 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
               <TextField source={PERSONALINFO_TITLE_FIELD} />
             </ReferenceField>
             <DateField source="updatedAt" label="Updated At" />
+            <ReferenceField
+              label="Updated By"
+              source="user.id"
+              reference="User"
+            >
+              <TextField source={USER_TITLE_FIELD} />
+            </ReferenceField>
             <ReferenceField label="User" source="user.id" reference="User">
               <TextField source={USER_TITLE_FIELD} />
             </ReferenceField>
@@ -97,6 +104,13 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
               <TextField source={PERSONALINFO_TITLE_FIELD} />
             </ReferenceField>
             <DateField source="updatedAt" label="Updated At" />
+            <ReferenceField
+              label="Updated By"
+              source="user.id"
+              reference="User"
+            >
+              <TextField source={USER_TITLE_FIELD} />
+            </ReferenceField>
             <ReferenceField label="User" source="user.id" reference="User">
               <TextField source={USER_TITLE_FIELD} />
             </ReferenceField>
@@ -134,6 +148,57 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
               <TextField source={PERSONALINFO_TITLE_FIELD} />
             </ReferenceField>
             <DateField source="updatedAt" label="Updated At" />
+            <ReferenceField
+              label="Updated By"
+              source="user.id"
+              reference="User"
+            >
+              <TextField source={USER_TITLE_FIELD} />
+            </ReferenceField>
+            <ReferenceField label="User" source="user.id" reference="User">
+              <TextField source={USER_TITLE_FIELD} />
+            </ReferenceField>
+          </Datagrid>
+        </ReferenceManyField>
+        <ReferenceManyField
+          reference="Applicant"
+          target="UserId"
+          label="Applicants"
+        >
+          <Datagrid rowClick="show">
+            <BooleanField label="Archived" source="archived" />
+            <TextField label="Archived At" source="archivedAt" />
+            <ReferenceField
+              label="Archived By"
+              source="user.id"
+              reference="User"
+            >
+              <TextField source={USER_TITLE_FIELD} />
+            </ReferenceField>
+            <DateField source="createdAt" label="Created At" />
+            <ReferenceField
+              label="Created By"
+              source="user.id"
+              reference="User"
+            >
+              <TextField source={USER_TITLE_FIELD} />
+            </ReferenceField>
+            <TextField label="ID" source="id" />
+            <ReferenceField
+              label="Personal Info"
+              source="personalinfo.id"
+              reference="PersonalInfo"
+            >
+              <TextField source={PERSONALINFO_TITLE_FIELD} />
+            </ReferenceField>
+            <DateField source="updatedAt" label="Updated At" />
+            <ReferenceField
+              label="Updated By"
+              source="user.id"
+              reference="User"
+            >
+              <TextField source={USER_TITLE_FIELD} />
+            </ReferenceField>
             <ReferenceField label="User" source="user.id" reference="User">
               <TextField source={USER_TITLE_FIELD} />
             </ReferenceField>

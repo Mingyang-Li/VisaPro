@@ -33,7 +33,6 @@ import { FamilyMemberFindManyArgs } from "../../familyMember/base/FamilyMemberFi
 import { FamilyMember } from "../../familyMember/base/FamilyMember";
 import { TravelHistoryFindManyArgs } from "../../travelHistory/base/TravelHistoryFindManyArgs";
 import { TravelHistory } from "../../travelHistory/base/TravelHistory";
-import { UserFindManyArgs } from "../../user/base/UserFindManyArgs";
 import { User } from "../../user/base/User";
 import { PersonalInfo } from "../../personalInfo/base/PersonalInfo";
 import { ApplicantService } from "../applicant.service";
@@ -163,6 +162,12 @@ export class ApplicantResolverBase {
             }
           : undefined,
 
+        updatedBy: args.data.updatedBy
+          ? {
+              connect: args.data.updatedBy,
+            }
+          : undefined,
+
         user: args.data.user
           ? {
               connect: args.data.user,
@@ -225,6 +230,12 @@ export class ApplicantResolverBase {
           personalInfo: args.data.personalInfo
             ? {
                 connect: args.data.personalInfo,
+              }
+            : undefined,
+
+          updatedBy: args.data.updatedBy
+            ? {
+                connect: args.data.updatedBy,
               }
             : undefined,
 
@@ -371,32 +382,6 @@ export class ApplicantResolverBase {
     return results.map((result) => permission.filter(result));
   }
 
-  @graphql.ResolveField(() => [User])
-  @nestAccessControl.UseRoles({
-    resource: "Applicant",
-    action: "read",
-    possession: "any",
-  })
-  async updatedBy(
-    @graphql.Parent() parent: Applicant,
-    @graphql.Args() args: UserFindManyArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<User[]> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "User",
-    });
-    const results = await this.service.findUpdatedBy(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results.map((result) => permission.filter(result));
-  }
-
   @graphql.ResolveField(() => User, { nullable: true })
   @nestAccessControl.UseRoles({
     resource: "Applicant",
@@ -462,6 +447,30 @@ export class ApplicantResolverBase {
       resource: "PersonalInfo",
     });
     const result = await this.service.getPersonalInfo(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return permission.filter(result);
+  }
+
+  @graphql.ResolveField(() => User, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "Applicant",
+    action: "read",
+    possession: "any",
+  })
+  async updatedBy(
+    @graphql.Parent() parent: Applicant,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<User | null> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "User",
+    });
+    const result = await this.service.getUpdatedBy(parent.id);
 
     if (!result) {
       return null;

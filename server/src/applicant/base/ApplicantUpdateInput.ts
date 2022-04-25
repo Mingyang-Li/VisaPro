@@ -19,7 +19,6 @@ import { EmploymentHistoryUpdateManyWithoutApplicantsInput } from "./EmploymentH
 import { FamilyMemberUpdateManyWithoutApplicantsInput } from "./FamilyMemberUpdateManyWithoutApplicantsInput";
 import { PersonalInfoWhereUniqueInput } from "../../personalInfo/base/PersonalInfoWhereUniqueInput";
 import { TravelHistoryUpdateManyWithoutApplicantsInput } from "./TravelHistoryUpdateManyWithoutApplicantsInput";
-import { UserUpdateManyWithoutApplicantsInput } from "./UserUpdateManyWithoutApplicantsInput";
 @InputType()
 class ApplicantUpdateInput {
   @ApiProperty({
@@ -130,15 +129,15 @@ class ApplicantUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: () => UserUpdateManyWithoutApplicantsInput,
+    type: () => UserWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => UserUpdateManyWithoutApplicantsInput)
+  @Type(() => UserWhereUniqueInput)
   @IsOptional()
-  @Field(() => UserUpdateManyWithoutApplicantsInput, {
+  @Field(() => UserWhereUniqueInput, {
     nullable: true,
   })
-  updatedBy?: UserUpdateManyWithoutApplicantsInput;
+  updatedBy?: UserWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,

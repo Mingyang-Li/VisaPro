@@ -9,5 +9,6 @@ export type ApplicantOrderByInput = {
   id?: SortOrder;
   personalInfoId?: SortOrder;
   updatedAt?: SortOrder;
+  updatedById?: SortOrder;
   userId?: SortOrder;
 };

@@ -38,6 +38,9 @@ export const ApplicantShow = (props: ShowProps): React.ReactElement => {
           <TextField source={PERSONALINFO_TITLE_FIELD} />
         </ReferenceField>
         <DateField source="updatedAt" label="Updated At" />
+        <ReferenceField label="Updated By" source="user.id" reference="User">
+          <TextField source={USER_TITLE_FIELD} />
+        </ReferenceField>
         <ReferenceField label="User" source="user.id" reference="User">
           <TextField source={USER_TITLE_FIELD} />
         </ReferenceField>
