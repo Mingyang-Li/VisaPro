@@ -64,28 +64,37 @@ class EducationHistory {
   archivedBy?: User | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  city!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  city!: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  country!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  country!: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
-  @Field(() => Date)
-  createdAt!: Date;
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  createdAt!: Date | null;
 
   @ApiProperty({
     required: false,
@@ -116,12 +125,15 @@ class EducationHistory {
   id!: string;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  institutionName!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  institutionName!: string | null;
 
   @ApiProperty({
     required: false,
@@ -146,12 +158,15 @@ class EducationHistory {
   qualificationGained!: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
-  @Field(() => Date)
-  startDate!: Date;
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  startDate!: Date | null;
 
   @ApiProperty({
     required: false,

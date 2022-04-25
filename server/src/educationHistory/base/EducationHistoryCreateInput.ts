@@ -70,20 +70,26 @@ class EducationHistoryCreateInput {
   archivedBy?: UserWhereUniqueInput | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  city!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  city?: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  country!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  country?: string | null;
 
   @ApiProperty({
     required: false,
@@ -109,12 +115,15 @@ class EducationHistoryCreateInput {
   endDate?: Date | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  institutionName!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  institutionName?: string | null;
 
   @ApiProperty({
     required: false,
@@ -139,12 +148,15 @@ class EducationHistoryCreateInput {
   qualificationGained?: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
-  @Field(() => Date)
-  startDate!: Date;
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  startDate?: Date | null;
 
   @ApiProperty({
     required: false,

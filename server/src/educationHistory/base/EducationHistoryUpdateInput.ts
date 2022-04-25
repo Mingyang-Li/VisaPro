@@ -78,7 +78,7 @@ class EducationHistoryUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  city?: string;
+  city?: string | null;
 
   @ApiProperty({
     required: false,
@@ -89,7 +89,7 @@ class EducationHistoryUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  country?: string;
+  country?: string | null;
 
   @ApiProperty({
     required: false,
@@ -123,7 +123,7 @@ class EducationHistoryUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  institutionName?: string;
+  institutionName?: string | null;
 
   @ApiProperty({
     required: false,
@@ -156,7 +156,7 @@ class EducationHistoryUpdateInput {
   @Field(() => Date, {
     nullable: true,
   })
-  startDate?: Date;
+  startDate?: Date | null;
 
   @ApiProperty({
     required: false,

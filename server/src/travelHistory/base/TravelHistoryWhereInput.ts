@@ -136,14 +136,14 @@ class TravelHistoryWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringFilter,
+    type: StringNullableFilter,
   })
-  @Type(() => StringFilter)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => StringFilter, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  reasonOfTravel?: StringFilter;
+  reasonOfTravel?: StringNullableFilter;
 
   @ApiProperty({
     required: false,

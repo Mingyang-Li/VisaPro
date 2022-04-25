@@ -13,7 +13,7 @@ export type TravelHistory = {
   destinationCity: string | null;
   destinationCountry: string | null;
   id: string;
-  reasonOfTravel: string;
+  reasonOfTravel: string | null;
   updatedAt: Date | null;
   updatedBy?: User | null;
 };
