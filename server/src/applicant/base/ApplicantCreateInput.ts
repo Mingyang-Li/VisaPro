@@ -19,7 +19,6 @@ import { EmploymentHistoryCreateNestedManyWithoutApplicantsInput } from "./Emplo
 import { FamilyMemberCreateNestedManyWithoutApplicantsInput } from "./FamilyMemberCreateNestedManyWithoutApplicantsInput";
 import { PersonalInfoWhereUniqueInput } from "../../personalInfo/base/PersonalInfoWhereUniqueInput";
 import { TravelHistoryCreateNestedManyWithoutApplicantsInput } from "./TravelHistoryCreateNestedManyWithoutApplicantsInput";
-import { UserCreateNestedManyWithoutApplicantsInput } from "./UserCreateNestedManyWithoutApplicantsInput";
 @InputType()
 class ApplicantCreateInput {
   @ApiProperty({
@@ -130,15 +129,15 @@ class ApplicantCreateInput {
 
   @ApiProperty({
     required: false,
-    type: () => UserCreateNestedManyWithoutApplicantsInput,
+    type: () => UserWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => UserCreateNestedManyWithoutApplicantsInput)
+  @Type(() => UserWhereUniqueInput)
   @IsOptional()
-  @Field(() => UserCreateNestedManyWithoutApplicantsInput, {
+  @Field(() => UserWhereUniqueInput, {
     nullable: true,
   })
-  updatedBy?: UserCreateNestedManyWithoutApplicantsInput;
+  updatedBy?: UserWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,

@@ -144,12 +144,12 @@ class Applicant {
 
   @ApiProperty({
     required: false,
-    type: () => [User],
+    type: () => User,
   })
   @ValidateNested()
   @Type(() => User)
   @IsOptional()
-  updatedBy?: Array<User>;
+  updatedBy?: User | null;
 
   @ApiProperty({
     required: false,

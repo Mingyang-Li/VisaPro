@@ -97,6 +97,15 @@ class ApplicantOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  updatedById?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   userId?: SortOrder;
 }
 

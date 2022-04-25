@@ -168,7 +168,8 @@ model Applicant {
   personalInfoId      String?
   travelHistories     TravelHistory[]
   updatedAt           DateTime?           @updatedAt
-  updatedBy           User[]              @relation(name: "applicantsUpdated")
+  updatedBy           User?               @relation(name: "applicantsUpdated", fields: [updatedById], references: [id])
+  updatedById         String?
   user                User?               @relation(name: "ApplicantsOnUser", fields: [userId], references: [id])
   userId              String?
 }

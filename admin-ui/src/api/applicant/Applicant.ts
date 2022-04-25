@@ -18,6 +18,6 @@ export type Applicant = {
   personalInfo?: PersonalInfo | null;
   travelHistories?: Array<TravelHistory>;
   updatedAt: Date | null;
-  updatedBy?: Array<User>;
+  updatedBy?: User | null;
   user?: User | null;
 };
