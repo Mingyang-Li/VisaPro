@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import { ApolloProvider, ApolloClient, HttpLink } from '@apollo/client';
 import { IRoute } from './dto/IRoute';
 import Dashboard from './pages/Dashboard';
@@ -17,7 +22,12 @@ function App() {
     }),
     cache: Store,
   });
+
   const routes: IRoute[] = [
+    {
+      path: '*',
+      component: <Navigate to="/login" replace />,
+    },
     {
       path: '/login',
       component: <Login />,
@@ -27,6 +37,7 @@ function App() {
       component: <Dashboard />,
     },
   ];
+
   return (
     <ApolloProvider client={client}>
       <Router>

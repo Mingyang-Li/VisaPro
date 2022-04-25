@@ -9,18 +9,22 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {
   createTheme,
+  FormControl,
   FormControlLabel,
   IconButton,
   InputAdornment,
+  InputLabel,
   TextField,
   ThemeProvider,
   Typography,
 } from '@mui/material';
-import { useMutation } from '@apollo/client';
+import { useMutation, useReactiveVar } from '@apollo/client';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { LOGIN } from '../graphql/Mutations';
-import { Credentials } from '../generated/graphql';
+import { userInfo } from '../graphql/Store';
+import { Mutation } from '../generated/graphql';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
@@ -28,23 +32,36 @@ interface ILogin {
   email: string;
   password: string;
   showPassword: boolean;
+  loginError: {
+    loginFailed?: boolean;
+    errorCode?: string;
+    errorMessage?: string;
+    isInvalidEmail?: boolean;
+    isInvalidPassword?: false;
+  };
 }
 
-export default function Login() {
+const Login: React.FC = () => {
+  const navigate = useNavigate();
   const [values, setValues] = useState<ILogin>({
     email: '',
     password: '',
     showPassword: false,
+    loginError: {},
   });
-  // const [initiateLogin] = useMutation(
-  //   LOGIN,
-  //   {
-  //     variables: {
-  //       username: values.email,
-  //       password: values.password,
-  //     },
-  //   },
-  // );
+  const [initiateLogin, { data, loading, error }] = useMutation<Mutation>(
+    LOGIN,
+    {
+      update(proxy, result) {
+        userInfo(result?.data?.login);
+        navigate('/dashboard');
+      },
+      variables: {
+        username: values.email,
+        password: values.password,
+      },
+    },
+  );
   const updateEmail = (e: any) => {
     setValues({ ...values, email: e.currentTarget.value });
   };
@@ -57,7 +74,7 @@ export default function Login() {
     setValues({ ...values, showPassword: !values.showPassword });
   };
   const handleSubmit = () => {
-    // initiateLogin();
+    initiateLogin();
   };
 
   return (
@@ -74,9 +91,10 @@ export default function Login() {
               // eslint-disable-next-line max-len
               'url(https://onechelofanadventure.com/wp-content/uploads/2017/05/New-Zealand-South-Island-Things-to-Do.png)',
             backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) => (t.palette.mode === 'light'
-              ? t.palette.grey[50]
-              : t.palette.grey[900]),
+            backgroundColor: (t) =>
+              t.palette.mode === 'light'
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -95,14 +113,9 @@ export default function Login() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in to VisaPro NZ
+              VisaPro NZ
             </Typography>
-            <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
-            >
+            <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -112,57 +125,58 @@ export default function Login() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                error={values.loginError.loginFailed}
                 onChange={(e) => updateEmail(e)}
               />
-              <OutlinedInput
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type={values.showPassword ? 'text' : 'password'}
-                id="password"
-                autoComplete="current-password"
-                onChange={(e) => updatePassword(e)}
-                endAdornment={(
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={toggleShowPassword}
-                      edge="end"
-                    >
-                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                )}
-              />
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Password
+                </InputLabel>
+                <OutlinedInput
+                  required
+                  fullWidth
+                  id="outlined-adornment-passwor  d"
+                  type={values.showPassword ? 'text' : 'password'}
+                  error={values.loginError.loginFailed}
+                  value={values.password}
+                  onChange={(e) => updatePassword(e)}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={toggleShowPassword}
+                        edge="end"
+                      >
+                        {values.showPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
+                />
+              </FormControl>
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
               <Button
-                type="submit"
+                onClick={handleSubmit}
+                // type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                {loading ? 'Logging you in' : 'Sign In'}
               </Button>
-              {/* <Grid container>
-                <Grid item xs>
-                  <Link href="https://google.com" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="https://google.com" variant="body2">
-                    Sign Up
-                  </Link>
-                </Grid>
-              </Grid> */}
             </Box>
           </Box>
         </Grid>
       </Grid>
     </ThemeProvider>
   );
-}
+};
+
+export default Login;
