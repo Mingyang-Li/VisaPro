@@ -15,7 +15,7 @@ type Applicant {
   personalInfo: PersonalInfo
   travelHistories(orderBy: [TravelHistoryOrderByInput!], skip: Float, take: Float, where: TravelHistoryWhereInput): [TravelHistory!]!
   updatedAt: DateTime
-  updatedBy(orderBy: [UserOrderByInput!], skip: Float, take: Float, where: UserWhereInput): [User!]!
+  updatedBy: User
   user: User
 }
 
@@ -29,7 +29,7 @@ input ApplicantCreateInput {
   familyMembers: FamilyMemberCreateNestedManyWithoutApplicantsInput
   personalInfo: PersonalInfoWhereUniqueInput
   travelHistories: TravelHistoryCreateNestedManyWithoutApplicantsInput
-  updatedBy: UserCreateNestedManyWithoutApplicantsInput
+  updatedBy: UserWhereUniqueInput
   user: UserWhereUniqueInput
 }
 
@@ -56,6 +56,7 @@ input ApplicantOrderByInput {
   id: SortOrder
   personalInfoId: SortOrder
   updatedAt: SortOrder
+  updatedById: SortOrder
   userId: SortOrder
 }
 
@@ -69,7 +70,7 @@ input ApplicantUpdateInput {
   familyMembers: FamilyMemberUpdateManyWithoutApplicantsInput
   personalInfo: PersonalInfoWhereUniqueInput
   travelHistories: TravelHistoryUpdateManyWithoutApplicantsInput
-  updatedBy: UserUpdateManyWithoutApplicantsInput
+  updatedBy: UserWhereUniqueInput
   user: UserWhereUniqueInput
 }
 
@@ -96,7 +97,7 @@ input ApplicantWhereInput {
   id: StringFilter
   personalInfo: PersonalInfoWhereUniqueInput
   travelHistories: TravelHistoryListRelationFilter
-  updatedBy: UserListRelationFilter
+  updatedBy: UserWhereUniqueInput
   user: UserWhereUniqueInput
 }
 
@@ -861,20 +862,10 @@ input UserCreateInput {
   username: String!
 }
 
-input UserCreateNestedManyWithoutApplicantsInput {
-  connect: [UserWhereUniqueInput!]
-}
-
 type UserInfo {
   accessToken: String
   roles: [String!]!
   username: String!
-}
-
-input UserListRelationFilter {
-  every: UserWhereInput
-  none: UserWhereInput
-  some: UserWhereInput
 }
 
 input UserOrderByInput {
@@ -915,12 +906,6 @@ input UserUpdateInput {
   travelHistoriesCreated: TravelHistoryUpdateManyWithoutUsersInput
   travelHistoriesUpdated: TravelHistoryUpdateManyWithoutUsersInput
   username: String
-}
-
-input UserUpdateManyWithoutApplicantsInput {
-  connect: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  set: [UserWhereUniqueInput!]
 }
 
 input UserWhereInput {

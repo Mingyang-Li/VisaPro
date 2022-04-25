@@ -31,7 +31,7 @@ export type Applicant = {
   personalInfo?: Maybe<PersonalInfo>;
   travelHistories: Array<TravelHistory>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  updatedBy: Array<User>;
+  updatedBy?: Maybe<User>;
   user?: Maybe<User>;
 };
 
@@ -67,14 +67,6 @@ export type ApplicantTravelHistoriesArgs = {
   where?: InputMaybe<TravelHistoryWhereInput>;
 };
 
-
-export type ApplicantUpdatedByArgs = {
-  orderBy?: InputMaybe<Array<UserOrderByInput>>;
-  skip?: InputMaybe<Scalars['Float']>;
-  take?: InputMaybe<Scalars['Float']>;
-  where?: InputMaybe<UserWhereInput>;
-};
-
 export type ApplicantCreateInput = {
   archived?: InputMaybe<Scalars['Boolean']>;
   archivedAt?: InputMaybe<Scalars['DateTime']>;
@@ -85,7 +77,7 @@ export type ApplicantCreateInput = {
   familyMembers?: InputMaybe<FamilyMemberCreateNestedManyWithoutApplicantsInput>;
   personalInfo?: InputMaybe<PersonalInfoWhereUniqueInput>;
   travelHistories?: InputMaybe<TravelHistoryCreateNestedManyWithoutApplicantsInput>;
-  updatedBy?: InputMaybe<UserCreateNestedManyWithoutApplicantsInput>;
+  updatedBy?: InputMaybe<UserWhereUniqueInput>;
   user?: InputMaybe<UserWhereUniqueInput>;
 };
 
@@ -112,6 +104,7 @@ export type ApplicantOrderByInput = {
   id?: InputMaybe<SortOrder>;
   personalInfoId?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
+  updatedById?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
@@ -125,7 +118,7 @@ export type ApplicantUpdateInput = {
   familyMembers?: InputMaybe<FamilyMemberUpdateManyWithoutApplicantsInput>;
   personalInfo?: InputMaybe<PersonalInfoWhereUniqueInput>;
   travelHistories?: InputMaybe<TravelHistoryUpdateManyWithoutApplicantsInput>;
-  updatedBy?: InputMaybe<UserUpdateManyWithoutApplicantsInput>;
+  updatedBy?: InputMaybe<UserWhereUniqueInput>;
   user?: InputMaybe<UserWhereUniqueInput>;
 };
 
@@ -152,7 +145,7 @@ export type ApplicantWhereInput = {
   id?: InputMaybe<StringFilter>;
   personalInfo?: InputMaybe<PersonalInfoWhereUniqueInput>;
   travelHistories?: InputMaybe<TravelHistoryListRelationFilter>;
-  updatedBy?: InputMaybe<UserListRelationFilter>;
+  updatedBy?: InputMaybe<UserWhereUniqueInput>;
   user?: InputMaybe<UserWhereUniqueInput>;
 };
 
@@ -1345,21 +1338,11 @@ export type UserCreateInput = {
   username: Scalars['String'];
 };
 
-export type UserCreateNestedManyWithoutApplicantsInput = {
-  connect?: InputMaybe<Array<UserWhereUniqueInput>>;
-};
-
 export type UserInfo = {
   __typename?: 'UserInfo';
   accessToken?: Maybe<Scalars['String']>;
   roles: Array<Scalars['String']>;
   username: Scalars['String'];
-};
-
-export type UserListRelationFilter = {
-  every?: InputMaybe<UserWhereInput>;
-  none?: InputMaybe<UserWhereInput>;
-  some?: InputMaybe<UserWhereInput>;
 };
 
 export type UserOrderByInput = {
@@ -1400,12 +1383,6 @@ export type UserUpdateInput = {
   travelHistoriesCreated?: InputMaybe<TravelHistoryUpdateManyWithoutUsersInput>;
   travelHistoriesUpdated?: InputMaybe<TravelHistoryUpdateManyWithoutUsersInput>;
   username?: InputMaybe<Scalars['String']>;
-};
-
-export type UserUpdateManyWithoutApplicantsInput = {
-  connect?: InputMaybe<Array<UserWhereUniqueInput>>;
-  disconnect?: InputMaybe<Array<UserWhereUniqueInput>>;
-  set?: InputMaybe<Array<UserWhereUniqueInput>>;
 };
 
 export type UserWhereInput = {
