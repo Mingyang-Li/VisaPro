@@ -347,6 +347,12 @@ export class UserControllerBase {
 
         updatedAt: true,
 
+        updatedBy: {
+          select: {
+            id: true,
+          },
+        },
+
         user: {
           select: {
             id: true,
@@ -550,6 +556,12 @@ export class UserControllerBase {
         },
 
         updatedAt: true,
+
+        updatedBy: {
+          select: {
+            id: true,
+          },
+        },
 
         user: {
           select: {
@@ -755,6 +767,12 @@ export class UserControllerBase {
 
         updatedAt: true,
 
+        updatedBy: {
+          select: {
+            id: true,
+          },
+        },
+
         user: {
           select: {
             id: true,
@@ -958,6 +976,12 @@ export class UserControllerBase {
         },
 
         updatedAt: true,
+
+        updatedBy: {
+          select: {
+            id: true,
+          },
+        },
 
         user: {
           select: {

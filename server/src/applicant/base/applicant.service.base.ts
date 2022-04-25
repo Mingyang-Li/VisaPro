@@ -101,17 +101,6 @@ export class ApplicantServiceBase {
       .travelHistories(args);
   }
 
-  async findUpdatedBy(
-    parentId: string,
-    args: Prisma.UserFindManyArgs
-  ): Promise<User[]> {
-    return this.prisma.applicant
-      .findUnique({
-        where: { id: parentId },
-      })
-      .updatedBy(args);
-  }
-
   async getArchivedBy(parentId: string): Promise<User | null> {
     return this.prisma.applicant
       .findUnique({
@@ -134,6 +123,14 @@ export class ApplicantServiceBase {
         where: { id: parentId },
       })
       .personalInfo();
+  }
+
+  async getUpdatedBy(parentId: string): Promise<User | null> {
+    return this.prisma.applicant
+      .findUnique({
+        where: { id: parentId },
+      })
+      .updatedBy();
   }
 
   async getUser(parentId: string): Promise<User | null> {

@@ -4,7 +4,6 @@ import { EmploymentHistoryUpdateManyWithoutApplicantsInput } from "./EmploymentH
 import { FamilyMemberUpdateManyWithoutApplicantsInput } from "./FamilyMemberUpdateManyWithoutApplicantsInput";
 import { PersonalInfoWhereUniqueInput } from "../personalInfo/PersonalInfoWhereUniqueInput";
 import { TravelHistoryUpdateManyWithoutApplicantsInput } from "./TravelHistoryUpdateManyWithoutApplicantsInput";
-import { UserUpdateManyWithoutApplicantsInput } from "./UserUpdateManyWithoutApplicantsInput";
 
 export type ApplicantUpdateInput = {
   archived?: boolean | null;
@@ -16,6 +15,6 @@ export type ApplicantUpdateInput = {
   familyMembers?: FamilyMemberUpdateManyWithoutApplicantsInput;
   personalInfo?: PersonalInfoWhereUniqueInput | null;
   travelHistories?: TravelHistoryUpdateManyWithoutApplicantsInput;
-  updatedBy?: UserUpdateManyWithoutApplicantsInput;
+  updatedBy?: UserWhereUniqueInput | null;
   user?: UserWhereUniqueInput | null;
 };

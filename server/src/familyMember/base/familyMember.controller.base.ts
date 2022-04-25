@@ -482,6 +482,12 @@ export class FamilyMemberControllerBase {
 
         updatedAt: true,
 
+        updatedBy: {
+          select: {
+            id: true,
+          },
+        },
+
         user: {
           select: {
             id: true,

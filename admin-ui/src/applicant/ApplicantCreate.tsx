@@ -70,14 +70,9 @@ export const ApplicantCreate = (props: CreateProps): React.ReactElement => {
         >
           <SelectArrayInput optionText={TravelHistoryTitle} />
         </ReferenceArrayInput>
-        <ReferenceArrayInput
-          source="updatedBy"
-          reference="User"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
-        >
-          <SelectArrayInput optionText={UserTitle} />
-        </ReferenceArrayInput>
+        <ReferenceInput source="user.id" reference="User" label="Updated By">
+          <SelectInput optionText={UserTitle} />
+        </ReferenceInput>
         <ReferenceInput source="user.id" reference="User" label="User">
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>

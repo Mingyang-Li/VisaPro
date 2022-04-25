@@ -7,7 +7,6 @@ import { FamilyMemberListRelationFilter } from "../familyMember/FamilyMemberList
 import { StringFilter } from "../../util/StringFilter";
 import { PersonalInfoWhereUniqueInput } from "../personalInfo/PersonalInfoWhereUniqueInput";
 import { TravelHistoryListRelationFilter } from "../travelHistory/TravelHistoryListRelationFilter";
-import { UserListRelationFilter } from "../user/UserListRelationFilter";
 
 export type ApplicantWhereInput = {
   archived?: BooleanNullableFilter;
@@ -20,6 +19,6 @@ export type ApplicantWhereInput = {
   id?: StringFilter;
   personalInfo?: PersonalInfoWhereUniqueInput;
   travelHistories?: TravelHistoryListRelationFilter;
-  updatedBy?: UserListRelationFilter;
+  updatedBy?: UserWhereUniqueInput;
   user?: UserWhereUniqueInput;
 };

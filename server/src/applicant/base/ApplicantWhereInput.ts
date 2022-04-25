@@ -22,7 +22,6 @@ import { FamilyMemberListRelationFilter } from "../../familyMember/base/FamilyMe
 import { StringFilter } from "../../util/StringFilter";
 import { PersonalInfoWhereUniqueInput } from "../../personalInfo/base/PersonalInfoWhereUniqueInput";
 import { TravelHistoryListRelationFilter } from "../../travelHistory/base/TravelHistoryListRelationFilter";
-import { UserListRelationFilter } from "../../user/base/UserListRelationFilter";
 @InputType()
 class ApplicantWhereInput {
   @ApiProperty({
@@ -144,15 +143,15 @@ class ApplicantWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => UserListRelationFilter,
+    type: () => UserWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => UserListRelationFilter)
+  @Type(() => UserWhereUniqueInput)
   @IsOptional()
-  @Field(() => UserListRelationFilter, {
+  @Field(() => UserWhereUniqueInput, {
     nullable: true,
   })
-  updatedBy?: UserListRelationFilter;
+  updatedBy?: UserWhereUniqueInput;
 
   @ApiProperty({
     required: false,

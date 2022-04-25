@@ -4,7 +4,6 @@ import { EmploymentHistoryCreateNestedManyWithoutApplicantsInput } from "./Emplo
 import { FamilyMemberCreateNestedManyWithoutApplicantsInput } from "./FamilyMemberCreateNestedManyWithoutApplicantsInput";
 import { PersonalInfoWhereUniqueInput } from "../personalInfo/PersonalInfoWhereUniqueInput";
 import { TravelHistoryCreateNestedManyWithoutApplicantsInput } from "./TravelHistoryCreateNestedManyWithoutApplicantsInput";
-import { UserCreateNestedManyWithoutApplicantsInput } from "./UserCreateNestedManyWithoutApplicantsInput";
 
 export type ApplicantCreateInput = {
   archived?: boolean | null;
@@ -16,6 +15,6 @@ export type ApplicantCreateInput = {
   familyMembers?: FamilyMemberCreateNestedManyWithoutApplicantsInput;
   personalInfo?: PersonalInfoWhereUniqueInput | null;
   travelHistories?: TravelHistoryCreateNestedManyWithoutApplicantsInput;
-  updatedBy?: UserCreateNestedManyWithoutApplicantsInput;
+  updatedBy?: UserWhereUniqueInput | null;
   user?: UserWhereUniqueInput | null;
 };
