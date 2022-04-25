@@ -6,13 +6,13 @@ export type EducationHistoryUpdateInput = {
   applicant?: ApplicantWhereUniqueInput | null;
   archived?: boolean | null;
   archivedBy?: UserWhereUniqueInput | null;
-  city?: string;
-  country?: string;
+  city?: string | null;
+  country?: string | null;
   createdBy?: UserWhereUniqueInput | null;
   endDate?: Date | null;
-  institutionName?: string;
+  institutionName?: string | null;
   isCurrentInstitution?: boolean | null;
   qualificationGained?: string | null;
-  startDate?: Date;
+  startDate?: Date | null;
   updatedBy?: UserWhereUniqueInput | null;
 };

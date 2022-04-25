@@ -17,9 +17,8 @@ import { IsOptional, ValidateNested } from "class-validator";
 import { ApplicantWhereUniqueInput } from "../../applicant/base/ApplicantWhereUniqueInput";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
-import { StringFilter } from "../../util/StringFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
-import { DateTimeFilter } from "../../util/DateTimeFilter";
+import { StringFilter } from "../../util/StringFilter";
 @InputType()
 class EducationHistoryWhereInput {
   @ApiProperty({
@@ -70,25 +69,25 @@ class EducationHistoryWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringFilter,
+    type: StringNullableFilter,
   })
-  @Type(() => StringFilter)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => StringFilter, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  city?: StringFilter;
+  city?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
-    type: StringFilter,
+    type: StringNullableFilter,
   })
-  @Type(() => StringFilter)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => StringFilter, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  country?: StringFilter;
+  country?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -126,14 +125,14 @@ class EducationHistoryWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringFilter,
+    type: StringNullableFilter,
   })
-  @Type(() => StringFilter)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => StringFilter, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  institutionName?: StringFilter;
+  institutionName?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -159,14 +158,14 @@ class EducationHistoryWhereInput {
 
   @ApiProperty({
     required: false,
-    type: DateTimeFilter,
+    type: DateTimeNullableFilter,
   })
-  @Type(() => DateTimeFilter)
+  @Type(() => DateTimeNullableFilter)
   @IsOptional()
-  @Field(() => DateTimeFilter, {
+  @Field(() => DateTimeNullableFilter, {
     nullable: true,
   })
-  startDate?: DateTimeFilter;
+  startDate?: DateTimeNullableFilter;
 
   @ApiProperty({
     required: false,

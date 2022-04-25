@@ -16,6 +16,6 @@ export type TravelHistoryWhereInput = {
   destinationCity?: StringNullableFilter;
   destinationCountry?: StringNullableFilter;
   id?: StringFilter;
-  reasonOfTravel?: StringFilter;
+  reasonOfTravel?: StringNullableFilter;
   updatedBy?: UserWhereUniqueInput;
 };

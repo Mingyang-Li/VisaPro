@@ -11,6 +11,6 @@ export type TravelHistoryUpdateInput = {
   destinationAirport?: string | null;
   destinationCity?: string | null;
   destinationCountry?: string | null;
-  reasonOfTravel?: string;
+  reasonOfTravel?: string | null;
   updatedBy?: UserWhereUniqueInput | null;
 };

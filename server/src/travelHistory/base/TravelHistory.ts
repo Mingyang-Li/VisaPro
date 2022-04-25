@@ -136,12 +136,15 @@ class TravelHistory {
   id!: string;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  reasonOfTravel!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  reasonOfTravel!: string | null;
 
   @ApiProperty({
     required: false,

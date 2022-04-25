@@ -70,17 +70,17 @@ model EducationHistory {
   archived             Boolean?
   archivedBy           User?      @relation(name: "educationHistoriesArchived", fields: [archivedById], references: [id])
   archivedById         String?
-  city                 String
-  country              String
-  createdAt            DateTime   @default(now())
+  city                 String?
+  country              String?
+  createdAt            DateTime?  @default(now())
   createdBy            User?      @relation(name: "educationHistoriesCreated", fields: [createdById], references: [id])
   createdById          String?
   endDate              DateTime?
   id                   String     @id @default(cuid())
-  institutionName      String
+  institutionName      String?
   isCurrentInstitution Boolean?
   qualificationGained  String?
-  startDate            DateTime
+  startDate            DateTime?
   updatedAt            DateTime?  @updatedAt
   updatedBy            User?      @relation(name: "educationHistoriesUpdated", fields: [updatedById], references: [id])
   updatedById          String?
@@ -101,7 +101,7 @@ model TravelHistory {
   destinationCity    String?
   destinationCountry String?
   id                 String     @id @default(cuid())
-  reasonOfTravel     String
+  reasonOfTravel     String?
   updatedAt          DateTime?  @updatedAt
   updatedBy          User?      @relation(name: "travelHistoriesUpdated", fields: [updatedById], references: [id])
   updatedById        String?
@@ -128,7 +128,7 @@ model FamilyMember {
 }
 
 model PersonalInfo {
-  applicant              Applicant?
+  applicant              Applicant
   archived               Boolean?
   archivedBy             User?     @relation(name: "personalInfosArchived", fields: [archivedById], references: [id])
   archivedById           String?

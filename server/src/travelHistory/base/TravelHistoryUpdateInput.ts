@@ -134,7 +134,7 @@ class TravelHistoryUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  reasonOfTravel?: string;
+  reasonOfTravel?: string | null;
 
   @ApiProperty({
     required: false,
