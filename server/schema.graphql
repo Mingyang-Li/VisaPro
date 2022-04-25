@@ -119,17 +119,6 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-input DateTimeFilter {
-  equals: DateTime
-  gt: DateTime
-  gte: DateTime
-  in: [DateTime!]
-  lt: DateTime
-  lte: DateTime
-  not: DateTime
-  notIn: [DateTime!]
-}
-
 input DateTimeNullableFilter {
   equals: DateTime
   gt: DateTime
@@ -146,16 +135,16 @@ type EducationHistory {
   applicant: Applicant
   archived: Boolean
   archivedBy: User
-  city: String!
-  country: String!
-  createdAt: DateTime!
+  city: String
+  country: String
+  createdAt: DateTime
   createdBy: User
   endDate: DateTime
   id: String!
-  institutionName: String!
+  institutionName: String
   isCurrentInstitution: Boolean
   qualificationGained: String
-  startDate: DateTime!
+  startDate: DateTime
   updatedAt: DateTime
   updatedBy: User
 }
@@ -165,14 +154,14 @@ input EducationHistoryCreateInput {
   applicant: ApplicantWhereUniqueInput
   archived: Boolean
   archivedBy: UserWhereUniqueInput
-  city: String!
-  country: String!
+  city: String
+  country: String
   createdBy: UserWhereUniqueInput
   endDate: DateTime
-  institutionName: String!
+  institutionName: String
   isCurrentInstitution: Boolean
   qualificationGained: String
-  startDate: DateTime!
+  startDate: DateTime
   updatedBy: UserWhereUniqueInput
 }
 
@@ -242,15 +231,15 @@ input EducationHistoryWhereInput {
   applicant: ApplicantWhereUniqueInput
   archived: BooleanNullableFilter
   archivedBy: UserWhereUniqueInput
-  city: StringFilter
-  country: StringFilter
+  city: StringNullableFilter
+  country: StringNullableFilter
   createdBy: UserWhereUniqueInput
   endDate: DateTimeNullableFilter
   id: StringFilter
-  institutionName: StringFilter
+  institutionName: StringNullableFilter
   isCurrentInstitution: BooleanNullableFilter
   qualificationGained: StringNullableFilter
-  startDate: DateTimeFilter
+  startDate: DateTimeNullableFilter
   updatedBy: UserWhereUniqueInput
 }
 
@@ -719,7 +708,7 @@ type TravelHistory {
   destinationCity: String
   destinationCountry: String
   id: String!
-  reasonOfTravel: String!
+  reasonOfTravel: String
   updatedAt: DateTime
   updatedBy: User
 }
@@ -734,7 +723,7 @@ input TravelHistoryCreateInput {
   destinationAirport: String
   destinationCity: String
   destinationCountry: String
-  reasonOfTravel: String!
+  reasonOfTravel: String
   updatedBy: UserWhereUniqueInput
 }
 
@@ -806,7 +795,7 @@ input TravelHistoryWhereInput {
   destinationCity: StringNullableFilter
   destinationCountry: StringNullableFilter
   id: StringFilter
-  reasonOfTravel: StringFilter
+  reasonOfTravel: StringNullableFilter
   updatedBy: UserWhereUniqueInput
 }
 
