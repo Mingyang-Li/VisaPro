@@ -1,15 +1,27 @@
 import React from 'react';
 import { userInfo } from '../graphql/Store';
-import { useReactiveVar } from '@apollo/client';
+import { useQuery, useReactiveVar } from '@apollo/client';
 import AppContainer from '../templates/appContainer/AppContainer';
 import BasicCard from '../templates/card/Card';
 import { Grid } from '@mui/material';
-import ApplicantForm from '../templates/applicantForm/ApplicantForm';
+import ApplicantFormCreate from '../templates/applicantFormCreate/ApplicantFormCreate';
+import { User } from '../generated/graphql';
+import { GET_CURR_USER } from '../graphql/Queries';
 
 const Contents: React.FC = () => {
+  const info = useReactiveVar(userInfo);
+  const username = info.username;
+  console.log(username);
+  const { data, loading, error } = useQuery(GET_CURR_USER, {
+    variables: {
+      username: username,
+    },
+  });
+
+  console.table(data);
   return (
     <>
-      <ApplicantForm open={false} title={'Create new'} mode={'create'} />
+      <ApplicantFormCreate open={false} title={'New applicant'} />
       <Grid container spacing={2}>
         <Grid item md={3}>
           <BasicCard />
@@ -46,7 +58,6 @@ const Dashboard: React.FC = () => {
   // console.log(user);
   return (
     <>
-      {/* <h2>{JSON.stringify(user)}</h2> */}
       <AppContainer title="Dashboard" contents={<Contents />} />
     </>
   );

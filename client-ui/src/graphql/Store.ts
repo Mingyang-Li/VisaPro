@@ -48,6 +48,10 @@ export const userInfo: ReactiveVar<UserInfo> = makeVar<UserInfo>({
 
 export const user: ReactiveVar<User> = makeVar<User>({
   id: '',
+  roles: ['User'],
+  username: '',
+  firstName: '',
+  lastName: '',
   applicants: [applicant],
   applicantsCreated: [applicant],
   applicantsArchived: [applicant],
@@ -67,8 +71,6 @@ export const user: ReactiveVar<User> = makeVar<User>({
   travelHistoriesArchived: [travelHistory],
   travelHistoriesCreated: [travelHistory],
   travelHistoriesUpdated: [travelHistory],
-  roles: ['User'],
-  username: '',
 });
 
 export const Store = new InMemoryCache({
