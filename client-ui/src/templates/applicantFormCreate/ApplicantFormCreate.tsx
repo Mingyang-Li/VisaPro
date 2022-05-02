@@ -122,7 +122,7 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
           <Grid container spacing={2}>
             <Grid item md={6} sm={12} xs={12}>
               <TextField
-                id="outlined-basic"
+                id="firstName"
                 label="First name"
                 variant="outlined"
                 value={values.firstName}
@@ -136,7 +136,7 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
             </Grid>
             <Grid item md={6} sm={12} xs={12}>
               <TextField
-                id="outlined-basic"
+                id="lastName"
                 label="Last name"
                 variant="outlined"
                 value={values.lastName}
@@ -150,7 +150,7 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
             </Grid>
             <Grid item md={12} sm={12} xs={12}>
               <TextField
-                id="outlined-basic"
+                id="email"
                 label="Email"
                 variant="outlined"
                 value={values.email}
