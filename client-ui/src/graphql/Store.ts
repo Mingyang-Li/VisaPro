@@ -73,6 +73,8 @@ export const user: ReactiveVar<User> = makeVar<User>({
   travelHistoriesUpdated: [travelHistory],
 });
 
+export const entityCreated: ReactiveVar<string> = makeVar('');
+
 export const Store = new InMemoryCache({
   typePolicies: {
     Query: {
@@ -85,6 +87,11 @@ export const Store = new InMemoryCache({
         user: {
           read() {
             return user();
+          },
+        },
+        entityCreated: {
+          read() {
+            return entityCreated();
           },
         },
       },

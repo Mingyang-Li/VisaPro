@@ -5,6 +5,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Maybe } from '../../generated/graphql';
 
 const bull = (
   <Box
@@ -16,7 +17,7 @@ const bull = (
 );
 
 interface IBasicCard {
-  fullName?: string;
+  fullName?: Maybe<string>;
   email?: string;
   educationHistoriesCt?: number;
   employmentHistoriesCt?: number;
