@@ -4,35 +4,39 @@ import { useReactiveVar } from '@apollo/client';
 import AppContainer from '../templates/appContainer/AppContainer';
 import BasicCard from '../templates/card/Card';
 import { Grid } from '@mui/material';
+import ApplicantForm from '../templates/applicantForm/ApplicantForm';
 
 const Contents: React.FC = () => {
   return (
-    <Grid container spacing={2}>
-      <Grid item md={3}>
-        <BasicCard />
+    <>
+      <ApplicantForm open={false} title={'Create new'} mode={'create'} />
+      <Grid container spacing={2}>
+        <Grid item md={3}>
+          <BasicCard />
+        </Grid>
+        <Grid item md={3}>
+          <BasicCard />
+        </Grid>
+        <Grid item md={3}>
+          <BasicCard />
+        </Grid>
+        <Grid item md={3}>
+          <BasicCard />
+        </Grid>
+        <Grid item md={3}>
+          <BasicCard />
+        </Grid>
+        <Grid item md={3}>
+          <BasicCard />
+        </Grid>
+        <Grid item md={3}>
+          <BasicCard />
+        </Grid>
+        <Grid item md={3}>
+          <BasicCard />
+        </Grid>
       </Grid>
-      <Grid item md={3}>
-        <BasicCard />
-      </Grid>
-      <Grid item md={3}>
-        <BasicCard />
-      </Grid>
-      <Grid item md={3}>
-        <BasicCard />
-      </Grid>
-      <Grid item md={3}>
-        <BasicCard />
-      </Grid>
-      <Grid item md={3}>
-        <BasicCard />
-      </Grid>
-      <Grid item md={3}>
-        <BasicCard />
-      </Grid>
-      <Grid item md={3}>
-        <BasicCard />
-      </Grid>
-    </Grid>
+    </>
   );
 };
 

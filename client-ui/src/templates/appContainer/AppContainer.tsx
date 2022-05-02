@@ -17,6 +17,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const drawerWidth = 240;
 
@@ -156,7 +159,7 @@ const AppContainer: React.FC<IAppContainer> = ({ title, contents }) => {
                   justifyContent: 'center',
                 }}
               >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <PeopleAltIcon />
               </ListItemIcon>
               <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -164,7 +167,7 @@ const AppContainer: React.FC<IAppContainer> = ({ title, contents }) => {
         </List>
         <Divider />
         <List>
-          {['My Account', 'Settings', 'Logout'].map((text, index) => (
+          {['My Account', 'Logout'].map((text, index) => (
             <ListItemButton
               key={text}
               sx={{
@@ -180,7 +183,7 @@ const AppContainer: React.FC<IAppContainer> = ({ title, contents }) => {
                   justifyContent: 'center',
                 }}
               >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {index % 2 === 0 ? <AccountCircleIcon /> : <LogoutIcon />}
               </ListItemIcon>
               <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
