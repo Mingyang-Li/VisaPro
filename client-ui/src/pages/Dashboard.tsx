@@ -24,6 +24,7 @@ export const UpdatingCurrUser: React.FC = () => {
     currUser.firstName = data?.users[0].firstName;
     currUser.lastName = data?.users[0].lastName;
     user(currUser);
+    window.localStorage.setItem('userId', currUser.id);
   }
   return <></>;
 };
@@ -45,8 +46,11 @@ const Contents: React.FC = () => {
         {data?.applicants.map((a) => (
           <Grid item lg={3} md={4} xs={12}>
             <BasicCard
-              fullName={a.personalInfo?.firstName}
-              email={'sdf'}
+              key={a.id}
+              fullName={
+                a.personalInfo?.firstName + ' ' + a.personalInfo?.lastName
+              }
+              email={a.personalInfo?.email}
               educationHistoriesCt={a.educationHistories.length}
               employmentHistoriesCt={a.employmentHistories.length}
               travelHistoriesCt={a.travelHistories.length}
@@ -54,9 +58,6 @@ const Contents: React.FC = () => {
             />
           </Grid>
         ))}
-        <Grid item lg={3} md={4} xs={12}>
-          <BasicCard />
-        </Grid>
       </Grid>
     </>
   );

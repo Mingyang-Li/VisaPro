@@ -14,7 +14,10 @@ export const GET_CURR_USER = gql`
 
 export const GET_APPLICANTS_BY_USER = gql`
   query ($id: String!) {
-    applicants(where: { createdBy: { id: $id }, archived: { equals: false } }) {
+    applicants(
+      where: { createdBy: { id: $id }, archived: { equals: null } }
+      orderBy: { updatedAt: Desc }
+    ) {
       id
       personalInfo {
         id

@@ -8,6 +8,7 @@ import {
   CREATE_PERSONAL_INFO,
   CREATE_APPLICANT,
 } from '../../graphql/Mutations';
+import { GET_APPLICANTS_BY_USER } from '../../graphql/Queries';
 import { Mutation } from '../../generated/graphql';
 import { entityCreated, user } from '../../graphql/Store';
 
@@ -57,7 +58,12 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
 
   const handleSubmit = () => {
     setValues({ ...values, disableInput: true });
-    createPersonalInfo().then(createApplicant);
+    // createPersonalInfo().then(createApplicant);
+    createApplicant().then(() => {
+      setTimeout(() => {
+        handleClose();
+      }, 700);
+    });
   };
 
   const [createPersonalInfo, { loading }] = useMutation<Mutation>(
@@ -82,13 +88,21 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
     CREATE_APPLICANT,
     {
       variables: {
-        personalInfo: {
-          id: personalInfoId,
-        },
+        // personalInfo: {
+        //   id: personalInfoId,
+        // },
         createdBy: {
           id: u.id,
         },
       },
+      refetchQueries: [
+        {
+          query: GET_APPLICANTS_BY_USER,
+          variables: {
+            id: window.localStorage.getItem('userId'),
+          },
+        },
+      ],
     },
   );
   return (
@@ -148,12 +162,7 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
               />
             </Grid>
             <Grid item md={6}>
-              <Button
-                onClick={handleClose}
-                variant="outlined"
-                disabled={enableCreation}
-                fullWidth
-              >
+              <Button onClick={handleClose} variant="outlined" fullWidth>
                 discard
               </Button>
             </Grid>

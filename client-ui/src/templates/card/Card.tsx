@@ -17,8 +17,9 @@ const bull = (
 );
 
 interface IBasicCard {
+  id?: string;
   fullName?: Maybe<string>;
-  email?: string;
+  email?: Maybe<string>;
   educationHistoriesCt?: number;
   employmentHistoriesCt?: number;
   travelHistoriesCt?: number;
@@ -29,6 +30,7 @@ export default function BasicCard(props: IBasicCard) {
   return (
     <Card>
       <CardContent>
+        <p>ID: {props.id}</p>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {props.email ? props.email : 'Email:'}
         </Typography>

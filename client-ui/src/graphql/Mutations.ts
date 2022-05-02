@@ -32,12 +32,10 @@ export const CREATE_PERSONAL_INFO = gql`
 
 export const CREATE_APPLICANT = gql`
   mutation (
-    $personalInfo: PersonalInfoWhereUniqueInput
+    # $personalInfo: PersonalInfoWhereUniqueInput
     $createdBy: UserWhereUniqueInput
   ) {
-    createApplicant(
-      data: { personalInfo: $personalInfo, createdBy: $createdBy }
-    ) {
+    createApplicant(data: { createdBy: $createdBy }) {
       id
     }
   }
