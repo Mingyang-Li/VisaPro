@@ -7,6 +7,7 @@ import { Grid } from '@mui/material';
 import ApplicantFormCreate from '../templates/applicantFormCreate/ApplicantFormCreate';
 import { Query } from '../generated/graphql';
 import { GET_APPLICANTS_BY_USER, GET_CURR_USER } from '../graphql/Queries';
+import ApplicantFormEdit from '../templates/applicantFormEdit/ApplicantFormEdit';
 
 export const UpdatingCurrUser: React.FC = () => {
   const info = useReactiveVar(userInfo);
@@ -30,13 +31,11 @@ export const UpdatingCurrUser: React.FC = () => {
 };
 
 const Contents: React.FC = () => {
-  const u = useReactiveVar(user);
   const { data } = useQuery<Query>(GET_APPLICANTS_BY_USER, {
     variables: {
-      id: u.id,
+      id: window.localStorage.getItem('userId'),
     },
   });
-  console.log(data?.applicants);
 
   return (
     <>
@@ -47,6 +46,7 @@ const Contents: React.FC = () => {
           <Grid item lg={3} md={4} xs={12}>
             <BasicCard
               key={a.id}
+              updatedAt={a.updatedAt}
               fullName={
                 a.personalInfo?.firstName + ' ' + a.personalInfo?.lastName
               }

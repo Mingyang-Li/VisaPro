@@ -16,6 +16,7 @@ export const CREATE_PERSONAL_INFO = gql`
     $lastName: String
     $email: String
     $createdBy: UserWhereUniqueInput
+    $applicant: ApplicantWhereUniqueInput
   ) {
     createPersonalInfo(
       data: {
@@ -23,6 +24,7 @@ export const CREATE_PERSONAL_INFO = gql`
         lastName: $lastName
         email: $email
         createdBy: $createdBy
+        applicant: $applicant
       }
     ) {
       id
@@ -31,11 +33,8 @@ export const CREATE_PERSONAL_INFO = gql`
 `;
 
 export const CREATE_APPLICANT = gql`
-  mutation (
-    # $personalInfo: PersonalInfoWhereUniqueInput
-    $createdBy: UserWhereUniqueInput
-  ) {
-    createApplicant(data: { createdBy: $createdBy }) {
+  mutation ($createdBy: UserWhereUniqueInput) {
+    createApplicant(data: { createdBy: $createdBy, archived: false }) {
       id
     }
   }

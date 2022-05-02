@@ -56,15 +56,7 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
     values.email === '' ||
     values.disableInput;
 
-  const handleSubmit = () => {
-    setValues({ ...values, disableInput: true });
-    // createPersonalInfo().then(createApplicant);
-    createApplicant().then(() => {
-      setTimeout(() => {
-        handleClose();
-      }, 700);
-    });
-  };
+  const applicantId = useReactiveVar(entityCreated);
 
   const [createPersonalInfo, { loading }] = useMutation<Mutation>(
     CREATE_PERSONAL_INFO,
@@ -76,23 +68,8 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
         createdBy: {
           id: u.id,
         },
-      },
-      update(proxy, result) {
-        entityCreated(result?.data?.createPersonalInfo.id);
-      },
-    },
-  );
-
-  const personalInfoId = useReactiveVar(entityCreated);
-  const [createApplicant, { data, error }] = useMutation<Mutation>(
-    CREATE_APPLICANT,
-    {
-      variables: {
-        // personalInfo: {
-        //   id: personalInfoId,
-        // },
-        createdBy: {
-          id: u.id,
+        applicant: {
+          id: applicantId,
         },
       },
       refetchQueries: [
@@ -105,6 +82,30 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
       ],
     },
   );
+
+  const [createApplicant] = useMutation<Mutation>(CREATE_APPLICANT, {
+    variables: {
+      createdBy: {
+        id: u.id,
+      },
+    },
+    update(proxy, result) {
+      entityCreated(result?.data?.createApplicant.id);
+    },
+  });
+
+  const handleSubmit = () => {
+    setValues({ ...values, disableInput: true });
+    createApplicant().then(() => {
+      console.log(`newapplicant_id: ${applicantId}`);
+      createPersonalInfo().then(() => {
+        setTimeout(() => {
+          handleClose();
+        }, 700);
+      });
+    });
+  };
+
   return (
     <>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -119,7 +120,7 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
         <br></br>
         <DialogContent>
           <Grid container spacing={2}>
-            <Grid item md={6}>
+            <Grid item md={6} sm={12} xs={12}>
               <TextField
                 id="outlined-basic"
                 label="First name"
@@ -133,7 +134,7 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
                 disabled={values.disableInput}
               />
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={6} sm={12} xs={12}>
               <TextField
                 id="outlined-basic"
                 label="Last name"
@@ -147,7 +148,7 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
                 disabled={values.disableInput}
               />
             </Grid>
-            <Grid item md={12}>
+            <Grid item md={12} sm={12} xs={12}>
               <TextField
                 id="outlined-basic"
                 label="Email"
@@ -161,12 +162,12 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
                 disabled={values.disableInput}
               />
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={6} sm={12} xs={12}>
               <Button onClick={handleClose} variant="outlined" fullWidth>
                 discard
               </Button>
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={6} sm={12} xs={12}>
               <Button
                 onClick={handleSubmit}
                 disabled={enableCreation}
