@@ -3,8 +3,11 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Maybe } from '../../generated/graphql';
+import ApplicantFormEdit from '../applicantFormEdit/ApplicantFormEdit';
+import Grid from '@mui/material/Grid';
+import Divider from '@mui/material/Divider';
 
 const bull = (
   <Box
@@ -16,8 +19,10 @@ const bull = (
 );
 
 interface IBasicCard {
-  fullName?: string;
-  email?: string;
+  id?: string;
+  updatedAt?: string;
+  fullName?: Maybe<string>;
+  email?: Maybe<string>;
   educationHistoriesCt?: number;
   employmentHistoriesCt?: number;
   travelHistoriesCt?: number;
@@ -26,10 +31,11 @@ interface IBasicCard {
 
 export default function BasicCard(props: IBasicCard) {
   return (
-    <Card>
+    <Card variant="outlined">
       <CardContent>
+        <p>Updated at: {props.updatedAt}</p>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {props.email ? props.email : 'Email:'}
+          {props.email ? `Email: ${props.email}` : 'Email:'}
         </Typography>
         <Typography variant="h5" component="div">
           {props.fullName ? props.fullName : 'Name'}
@@ -50,8 +56,13 @@ export default function BasicCard(props: IBasicCard) {
           Family Members: {props.familyMembersCt ? props.familyMembersCt : '0'}
         </Typography>
       </CardContent>
+      <Divider />
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Grid container spacing={2}>
+          <Grid item md={6}>
+            <ApplicantFormEdit />
+          </Grid>
+        </Grid>
       </CardActions>
     </Card>
   );

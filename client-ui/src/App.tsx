@@ -5,19 +5,26 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-import { ApolloProvider, ApolloClient, HttpLink } from '@apollo/client';
+import {
+  ApolloProvider,
+  ApolloClient,
+  HttpLink,
+  useReactiveVar,
+} from '@apollo/client';
 import { IRoute } from './dto/IRoute';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
-import { Store } from './graphql/Store';
+import { Store, userInfo } from './graphql/Store';
 import { ConfigService } from './services/config.service';
 
 function App() {
+  const info = useReactiveVar(userInfo);
+  const token = info.accessToken;
   const client = new ApolloClient({
     link: new HttpLink({
       uri: ConfigService.REACT_APP_GRAPHQL_API,
       headers: {
-        Authorization: 'Bearer asjhyxg',
+        Authorization: `Bearer ${token}`,
       },
     }),
     cache: Store,

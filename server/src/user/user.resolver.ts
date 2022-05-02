@@ -6,6 +6,7 @@ import * as gqlACGuard from "../auth/gqlAC.guard";
 import { UserResolverBase } from "./base/user.resolver.base";
 import { User } from "./base/User";
 import { UserService } from "./user.service";
+import { UserFindManyArgs } from "./base/UserFindManyArgs";
 
 @graphql.Resolver(() => User)
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -16,5 +17,11 @@ export class UserResolver extends UserResolverBase {
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {
     super(service, rolesBuilder);
+  }
+
+  @graphql.Query(() => [User])
+  async users(@graphql.Args() args: UserFindManyArgs): Promise<User[]> {
+    const results = await this.service.findMany(args);
+    return results;
   }
 }

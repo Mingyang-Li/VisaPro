@@ -18,7 +18,7 @@ import {
   ThemeProvider,
   Typography,
 } from '@mui/material';
-import { useMutation, useReactiveVar } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { LOGIN } from '../graphql/Mutations';
@@ -49,19 +49,20 @@ const Login: React.FC = () => {
     showPassword: false,
     loginError: {},
   });
-  const [initiateLogin, { data, loading, error }] = useMutation<Mutation>(
-    LOGIN,
-    {
-      update(proxy, result) {
-        userInfo(result?.data?.login);
-        navigate('/dashboard');
-      },
-      variables: {
-        username: values.email,
-        password: values.password,
-      },
+  const [initiateLogin, { loading }] = useMutation<Mutation>(LOGIN, {
+    update(proxy, result) {
+      userInfo(result?.data?.login);
+      window.localStorage.setItem(
+        'accessToken',
+        result?.data?.login?.accessToken as string,
+      );
+      navigate('/dashboard');
     },
-  );
+    variables: {
+      username: values.email,
+      password: values.password,
+    },
+  });
   const updateEmail = (e: any) => {
     setValues({ ...values, email: e.currentTarget.value });
   };
