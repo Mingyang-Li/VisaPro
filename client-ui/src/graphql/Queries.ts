@@ -13,10 +13,8 @@ export const GET_CURR_USER = gql`
 `;
 
 export const GET_APPLICANTS_BY_USER = gql`
-  query ($userId: String) {
-    applicants(
-      where: { createdBy: { id: "asjh" }, archived: { equals: false } }
-    ) {
+  query ($id: String!) {
+    applicants(where: { createdBy: { id: $id }, archived: { equals: false } }) {
       id
       personalInfo {
         id
