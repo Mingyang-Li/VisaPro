@@ -8,6 +8,10 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { PersonalInfoForm } from '../personalInfoForm/PersonalInfoForm';
+import { EducationHistoryForm } from '../educationHistoryForm/EducationHistoryForm';
+import { EmploymentHistoryForm } from '../employmentHistoryForm/EmploymentHistoryForm';
+import { TravelHistoryForm } from '../travelHistoryForm/TravelHistoryForm';
+import { FamilyMemberForm } from '../familyMemberForm/FamilyMemberForm';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -68,16 +72,16 @@ export function BasicTabs() {
         <PersonalInfoForm />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <EducationHistoryForm />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <EmploymentHistoryForm />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Item Three
+        <TravelHistoryForm />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        Item Three
+        <FamilyMemberForm />
       </TabPanel>
     </Box>
   );
