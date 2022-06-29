@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -25,6 +25,10 @@ import { LOGIN } from '../graphql/Mutations';
 import { userInfo } from '../graphql/Store';
 import { Mutation } from '../generated/graphql';
 import { useNavigate } from 'react-router-dom';
+import { TypeOf } from 'zod';
+import { loginSchema } from '../utils/zod.schemas';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const theme = createTheme();
 
@@ -41,7 +45,25 @@ interface ILogin {
   };
 }
 
+type LoginInput = TypeOf<typeof loginSchema>;
+
 const Login: React.FC = () => {
+  const {
+    register,
+    formState: { errors, isSubmitSuccessful },
+    reset,
+    handleSubmit,
+  } = useForm<LoginInput>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSubmitSuccessful]);
+
   const navigate = useNavigate();
   const [values, setValues] = useState<ILogin>({
     email: '',
@@ -73,8 +95,12 @@ const Login: React.FC = () => {
   const toggleShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
-  const handleSubmit = async () => {
-    await initiateLogin().then(() => navigate('/dashboard'));
+  // const handleSubmit = async () => {
+  //   await initiateLogin().then(() => navigate('/dashboard'));
+  // };
+
+  const onSubmitHandler: SubmitHandler<LoginInput> = (values) => {
+    console.log(values);
   };
 
   return (
@@ -163,7 +189,8 @@ const Login: React.FC = () => {
                 label="Remember me"
               />
               <Button
-                onClick={handleSubmit}
+                onClick={() => console.log('clicked')}
+                // onClick={handleSubmit}
                 // type="submit"
                 fullWidth
                 variant="contained"
