@@ -56,7 +56,6 @@ const Login: React.FC = () => {
         'accessToken',
         result?.data?.login?.accessToken as string,
       );
-      navigate('/dashboard');
     },
     variables: {
       username: values.email,
@@ -74,8 +73,8 @@ const Login: React.FC = () => {
   const toggleShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
-  const handleSubmit = () => {
-    initiateLogin();
+  const handleSubmit = async () => {
+    await initiateLogin().then(() => navigate('/dashboard'));
   };
 
   return (
