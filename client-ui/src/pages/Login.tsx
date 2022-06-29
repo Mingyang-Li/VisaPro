@@ -49,7 +49,7 @@ type LoginInput = TypeOf<typeof loginSchema>;
 
 const Login: React.FC = () => {
   const {
-    register,
+    register: login,
     formState: { errors, isSubmitSuccessful },
     reset,
     handleSubmit,
@@ -99,7 +99,8 @@ const Login: React.FC = () => {
   //   await initiateLogin().then(() => navigate('/dashboard'));
   // };
 
-  const onSubmitHandler: SubmitHandler<LoginInput> = (values) => {
+  const onSubmitHandler: SubmitHandler<LoginInput> = async (values) => {
+    await initiateLogin().then(() => navigate('/dashboard'));
     console.log(values);
   };
 
@@ -141,18 +142,26 @@ const Login: React.FC = () => {
             <Typography component="h1" variant="h5">
               VisaPro NZ
             </Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }}>
+            <Box
+              component="form"
+              noValidate
+              sx={{ mt: 1 }}
+              onSubmit={handleSubmit(onSubmitHandler)}
+            >
               <TextField
                 margin="normal"
                 required
                 fullWidth
                 id="email"
                 label="Email Address"
-                name="email"
+                // name="email"
                 autoComplete="email"
                 autoFocus
-                error={values.loginError.loginFailed}
-                onChange={(e) => updateEmail(e)}
+                // error={values.loginError.loginFailed}
+                onKeyDown={(e: any) => updateEmail(e)}
+                error={!!errors['email']}
+                helperText={errors['email'] ? errors['email'].message : ''}
+                {...login('email')}
               />
               <FormControl variant="outlined" fullWidth>
                 <InputLabel htmlFor="outlined-adornment-password">
@@ -189,9 +198,9 @@ const Login: React.FC = () => {
                 label="Remember me"
               />
               <Button
-                onClick={() => console.log('clicked')}
+                // onClick={() => console.log('clicked')}
                 // onClick={handleSubmit}
-                // type="submit"
+                type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
