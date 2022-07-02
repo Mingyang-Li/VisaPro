@@ -6,6 +6,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import FormHelperText from '@mui/material/FormHelperText';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {
   createTheme,
@@ -85,6 +86,7 @@ const Login: React.FC = () => {
     },
   });
   const updateEmail = (e: any) => {
+    console.log(`email: ${values.email}`);
     setValues({ ...values, email: e.currentTarget.value });
   };
 
@@ -95,13 +97,9 @@ const Login: React.FC = () => {
   const toggleShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
-  // const handleSubmit = async () => {
-  //   await initiateLogin().then(() => navigate('/dashboard'));
-  // };
 
-  const onSubmitHandler: SubmitHandler<LoginInput> = async (values) => {
+  const onSubmitHandler: SubmitHandler<LoginInput> = async () => {
     await initiateLogin().then(() => navigate('/dashboard'));
-    console.log(values);
   };
 
   return (
@@ -154,14 +152,11 @@ const Login: React.FC = () => {
                 fullWidth
                 id="email"
                 label="Email Address"
-                // name="email"
-                autoComplete="email"
                 autoFocus
-                // error={values.loginError.loginFailed}
-                onKeyDown={(e: any) => updateEmail(e)}
                 error={!!errors['email']}
                 helperText={errors['email'] ? errors['email'].message : ''}
                 {...login('email')}
+                onChange={(e: any) => updateEmail(e)}
               />
               <FormControl variant="outlined" fullWidth>
                 <InputLabel htmlFor="outlined-adornment-password">
@@ -172,9 +167,7 @@ const Login: React.FC = () => {
                   fullWidth
                   id="outlined-adornment-passwor  d"
                   type={values.showPassword ? 'text' : 'password'}
-                  error={values.loginError.loginFailed}
                   value={values.password}
-                  onChange={(e) => updatePassword(e)}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -191,15 +184,19 @@ const Login: React.FC = () => {
                     </InputAdornment>
                   }
                   label="Password"
+                  error={!!errors['password']}
+                  {...login('password')}
+                  onChange={(e) => updatePassword(e)}
                 />
+                <FormHelperText error id="password-error">
+                  {errors['password'] ? errors['password'].message : ''}
+                </FormHelperText>
               </FormControl>
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
               <Button
-                // onClick={() => console.log('clicked')}
-                // onClick={handleSubmit}
                 type="submit"
                 fullWidth
                 variant="contained"
