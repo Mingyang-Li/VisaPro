@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Navigate,
@@ -16,10 +16,17 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import { Store, userInfo } from './graphql/Store';
 import { ConfigService } from './services/config.service';
+import Protected from './components/auth/Protected';
 
-function App() {
+const App: React.FC = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
   const info = useReactiveVar(userInfo);
   const token = info.accessToken;
+
+  useEffect(() => {
+    setLoggedIn(!loggedIn);
+  }, [token]);
+
   const client = new ApolloClient({
     link: new HttpLink({
       uri: ConfigService.REACT_APP_GRAPHQL_API,
@@ -41,7 +48,13 @@ function App() {
     },
     {
       path: '/dashboard',
-      component: <Dashboard />,
+      component: (
+        <Protected
+          isLoggedIn={window.localStorage.getItem('accessToken') !== null}
+        >
+          <Dashboard />
+        </Protected>
+      ),
     },
   ];
 
@@ -56,6 +69,6 @@ function App() {
       </Router>
     </ApolloProvider>
   );
-}
+};
 
 export default App;
