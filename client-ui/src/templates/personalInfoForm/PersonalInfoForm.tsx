@@ -1,21 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { CardActions, Grid, TextField } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Autocomplete from '@mui/material/Autocomplete';
 import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
-import { useReactiveVar } from '@apollo/client';
-import { applicantIdCurrEditing, user } from '../../graphql/Store';
-import { PersonalInfo } from '../../generated/graphql';
+import { useQuery, useReactiveVar } from '@apollo/client';
+import { applicantIdCurrEditing } from '../../graphql/Store';
+import { Query } from '../../generated/graphql';
+import { PERSONAL_INFO_BY_APPLICANT_ID } from '../../graphql/Queries';
 
-interface IPersonalInfoForm {
-  data?: PersonalInfo;
-}
-
-export const PersonalInfoForm: React.FC = (props: IPersonalInfoForm) => {
+export const PersonalInfoForm: React.FC = () => {
+  const [edit, setEdit] = useState(false);
   const applicantId = useReactiveVar(applicantIdCurrEditing);
-  const userVar = useReactiveVar(user);
-  console.log(applicantId);
+  const { data, loading, error } = useQuery<Query>(
+    PERSONAL_INFO_BY_APPLICANT_ID,
+    {
+      variables: {
+        applicantId,
+      },
+    },
+  );
+  const personalInfo = data?.personalInfos[0];
+  console.log(personalInfo);
   // const applicant = userVar.applicants.filter((a) => a.id !== applicantId);
 
   // useEffect(() => {
@@ -29,17 +35,19 @@ export const PersonalInfoForm: React.FC = (props: IPersonalInfoForm) => {
           <Grid item md={6} sm={12} xs={12}>
             <TextField
               id={'firstName'}
-              variant="outlined"
               label={'First name'}
+              value={personalInfo!.firstName}
               fullWidth
+              disabled={!edit}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
               id={'lastName'}
-              variant="outlined"
               label={'Last name'}
+              value={personalInfo!.lastName}
               fullWidth
+              disabled={!edit}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
@@ -47,7 +55,9 @@ export const PersonalInfoForm: React.FC = (props: IPersonalInfoForm) => {
               id={'email'}
               variant="outlined"
               label={'Email'}
+              value={personalInfo!.email}
               fullWidth
+              disabled={!edit}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
@@ -55,7 +65,9 @@ export const PersonalInfoForm: React.FC = (props: IPersonalInfoForm) => {
               id={'mobile'}
               variant="outlined"
               label={'Mobile'}
+              value={personalInfo!.modile}
               fullWidth
+              disabled={!edit}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
@@ -63,7 +75,9 @@ export const PersonalInfoForm: React.FC = (props: IPersonalInfoForm) => {
               id={'nzAddress'}
               variant="outlined"
               label={'NZ address'}
+              value={personalInfo!.nzAddress}
               fullWidth
+              disabled={!edit}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
@@ -71,7 +85,9 @@ export const PersonalInfoForm: React.FC = (props: IPersonalInfoForm) => {
               id={'inzClientNumber'}
               variant="outlined"
               label={'Immigration NZ Client number'}
+              value={personalInfo!.inzClientNumber}
               fullWidth
+              disabled={!edit}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
@@ -79,7 +95,9 @@ export const PersonalInfoForm: React.FC = (props: IPersonalInfoForm) => {
               id={'passportNumber'}
               variant="outlined"
               label={'Passport number'}
+              value={personalInfo!.passportNumber}
               fullWidth
+              disabled={!edit}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
@@ -87,7 +105,9 @@ export const PersonalInfoForm: React.FC = (props: IPersonalInfoForm) => {
               id={'countriesOfCitizenship'}
               variant="outlined"
               label={'Countries of citizenship'}
+              value={personalInfo!.countriesOfCitizenship}
               fullWidth
+              disabled={!edit}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>

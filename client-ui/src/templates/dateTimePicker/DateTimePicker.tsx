@@ -6,6 +6,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 interface IDatePicker {
   label?: string;
+  value?: Date;
+  disabled?: boolean;
 }
 
 export const BasicDatePicker: React.FC<IDatePicker> = (props: IDatePicker) => {
@@ -15,11 +17,12 @@ export const BasicDatePicker: React.FC<IDatePicker> = (props: IDatePicker) => {
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
         label={props.label}
-        value={value}
+        value={props.value ?? null}
         onChange={(newValue) => {
           setValue(newValue);
         }}
         renderInput={(params) => <TextField {...params} />}
+        disabled={props.disabled ?? false}
       />
     </LocalizationProvider>
   );
