@@ -1,5 +1,5 @@
-import React from 'react';
-import { user, userInfo } from '../graphql/Store';
+import React, { useCallback } from 'react';
+import { user, applicantIdCurrEditing, userInfo } from '../graphql/Store';
 import { useQuery, useReactiveVar } from '@apollo/client';
 import AppContainer from '../templates/appContainer/AppContainer';
 import BasicCard from '../templates/card/Card';
@@ -55,6 +55,7 @@ const Contents: React.FC = () => {
               employmentHistoriesCt={a.employmentHistories.length}
               travelHistoriesCt={a.travelHistories.length}
               familyMembersCt={a.familyMembers.length}
+              onEditRequest={() => applicantIdCurrEditing(a.id)}
             />
           </Grid>
         ))}

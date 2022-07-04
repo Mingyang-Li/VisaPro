@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CardActions, Grid, TextField } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Autocomplete from '@mui/material/Autocomplete';
 import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
+import { useReactiveVar } from '@apollo/client';
+import { applicantIdCurrEditing, user } from '../../graphql/Store';
 
 export const PersonalInfoForm: React.FC = () => {
+  const applicantId = useReactiveVar(applicantIdCurrEditing);
+  const userVar = useReactiveVar(user);
+  const applicant = userVar.applicants.filter((a) => a.id !== applicantId);
+  useEffect(() => {
+    console.table(applicant);
+  }, [applicantId]);
   return (
     <Card variant="outlined">
       <CardContent>

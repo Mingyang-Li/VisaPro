@@ -103,7 +103,7 @@ const ApplicantFormEdit: React.FC = (props: IApplicantFormEdit) => {
   };
 
   const handleSubmit = () => {
-    console.log('!');
+    console.log('handleSubmit clicked');
   };
 
   return (

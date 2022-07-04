@@ -27,6 +27,7 @@ interface IBasicCard {
   employmentHistoriesCt?: number;
   travelHistoriesCt?: number;
   familyMembersCt?: number;
+  onEditRequest?: () => void;
 }
 
 export default function BasicCard(props: IBasicCard) {
@@ -59,7 +60,7 @@ export default function BasicCard(props: IBasicCard) {
       <Divider />
       <CardActions>
         <Grid container spacing={2}>
-          <Grid item md={6}>
+          <Grid item md={6} onClick={props.onEditRequest}>
             <ApplicantFormEdit />
           </Grid>
         </Grid>
