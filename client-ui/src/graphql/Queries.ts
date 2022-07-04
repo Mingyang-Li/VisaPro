@@ -86,70 +86,21 @@ export const GET_APPLICANTS_BY_USER = gql`
   }
 `;
 
-export const GET_APPLICANT_BY_ID = gql`
+export const PERSONAL_INFO_BY_APPLICANT_ID = gql`
   query ($applicantId: String!) {
-    applicant(where: { id: $applicantId }) {
-      personalInfo {
-        id
-        firstName
-        lastName
-        email
-        modile
-        countryOfBirth
-        countriesOfCitizenship
-        inzClientNumber
-        nzAddress
-        passportNumber
-        createdAt
-        updatedAt
-      }
-      educationHistories {
-        id
-        startDate
-        endDate
-        isCurrentInstitution
-        city
-        country
-        institutionName
-        qualificationGained
-        createdAt
-        updatedAt
-      }
-      employmentHistories {
-        id
-        jobTitle
-        companyName
-        startDate
-        endDate
-        isCurrentJob
-        duties
-        nzBusinessNumber
-        additionalInfo
-        createdAt
-        updatedAt
-      }
-      familyMembers {
-        id
-        firstName
-        lastName
-        dateOfBirth
-        countryOfBirth
-        countriesOfCitizenship
-        relationshipToApplicant
-        createdAt
-        updatedAt
-      }
-      travelHistories {
-        id
-        dateDeparted
-        dateEntered
-        destinationAirport
-        destinationCity
-        destinationCountry
-        reasonOfTravel
-        createdAt
-        updatedAt
-      }
+    personalInfos(where: { applicant: { id: $applicantId } }) {
+      id
+      firstName
+      lastName
+      email
+      modile
+      countryOfBirth
+      countriesOfCitizenship
+      inzClientNumber
+      nzAddress
+      passportNumber
+      createdAt
+      updatedAt
     }
   }
 `;

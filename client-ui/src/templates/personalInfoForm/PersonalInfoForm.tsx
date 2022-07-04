@@ -6,14 +6,22 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
 import { useReactiveVar } from '@apollo/client';
 import { applicantIdCurrEditing, user } from '../../graphql/Store';
+import { PersonalInfo } from '../../generated/graphql';
 
-export const PersonalInfoForm: React.FC = () => {
+interface IPersonalInfoForm {
+  data?: PersonalInfo;
+}
+
+export const PersonalInfoForm: React.FC = (props: IPersonalInfoForm) => {
   const applicantId = useReactiveVar(applicantIdCurrEditing);
   const userVar = useReactiveVar(user);
-  const applicant = userVar.applicants.filter((a) => a.id !== applicantId);
-  useEffect(() => {
-    console.table(applicant);
-  }, [applicantId]);
+  console.log(applicantId);
+  // const applicant = userVar.applicants.filter((a) => a.id !== applicantId);
+
+  // useEffect(() => {
+  //   console.table(applicant);
+  // }, [applicantId]);
+
   return (
     <Card variant="outlined">
       <CardContent>
