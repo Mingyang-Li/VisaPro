@@ -165,7 +165,7 @@ model Applicant {
   familyMembers       FamilyMember[]
   id                  String              @id @default(cuid())
   personalInfo        PersonalInfo?       @relation(fields: [personalInfoId], references: [id])
-  personalInfoId      String?
+  personalInfoId      String?             @unique
   travelHistories     TravelHistory[]
   updatedAt           DateTime?           @updatedAt
   updatedBy           User?               @relation(name: "applicantsUpdated", fields: [updatedById], references: [id])

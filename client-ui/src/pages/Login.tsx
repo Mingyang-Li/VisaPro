@@ -90,7 +90,6 @@ const Login: React.FC = () => {
   });
 
   const updateEmail = (e: any) => {
-    console.log(`email: ${values.email}`);
     setValues({ ...values, email: e.currentTarget.value });
   };
 
