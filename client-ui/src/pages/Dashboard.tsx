@@ -43,7 +43,7 @@ const Contents: React.FC = () => {
       <ApplicantFormCreate open={false} title={'New applicant'} />
       <Grid container spacing={2}>
         {data?.applicants.map((a) => (
-          <Grid item lg={3} md={4} xs={12}>
+          <Grid item lg={3} md={4} xs={12} key={a.id}>
             <BasicCard
               key={a.id}
               updatedAt={a.updatedAt}
