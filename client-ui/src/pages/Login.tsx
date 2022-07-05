@@ -8,17 +8,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import FormHelperText from '@mui/material/FormHelperText';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import {
-  createTheme,
-  FormControl,
-  FormControlLabel,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  TextField,
-  ThemeProvider,
-  Typography,
-} from '@mui/material';
 import { useMutation } from '@apollo/client';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -30,6 +19,16 @@ import { TypeOf } from 'zod';
 import { loginSchema } from '../utils/zod.schemas';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { ThemeProvider } from '@emotion/react';
+import createTheme from '@mui/material/styles/createTheme';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import Alert from '@mui/material/Alert';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 const theme = createTheme();
 
@@ -49,6 +48,7 @@ interface ILogin {
 type LoginInput = TypeOf<typeof loginSchema>;
 
 const Login: React.FC = () => {
+  const [loginError, setLoginError] = useState(false);
   const {
     register: login,
     formState: { errors, isSubmitSuccessful },
@@ -62,8 +62,11 @@ const Login: React.FC = () => {
     if (isSubmitSuccessful) {
       reset();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSubmitSuccessful]);
+
+  useEffect(() => {
+    updateLoginButtonText();
+  }, [loginError]);
 
   const navigate = useNavigate();
   const [values, setValues] = useState<ILogin>({
@@ -85,6 +88,7 @@ const Login: React.FC = () => {
       password: values.password,
     },
   });
+
   const updateEmail = (e: any) => {
     console.log(`email: ${values.email}`);
     setValues({ ...values, email: e.currentTarget.value });
@@ -99,7 +103,19 @@ const Login: React.FC = () => {
   };
 
   const onSubmitHandler: SubmitHandler<LoginInput> = async () => {
-    await initiateLogin().then(() => navigate('/dashboard'));
+    try {
+      await initiateLogin().then(() => navigate('/dashboard'));
+    } catch (e) {
+      setLoginError(!loginError);
+    }
+  };
+
+  const updateLoginButtonText = () => {
+    if (loading) {
+      return 'Logging you in';
+    } else {
+      return 'Login';
+    }
   };
 
   return (
@@ -165,7 +181,7 @@ const Login: React.FC = () => {
                 <OutlinedInput
                   required
                   fullWidth
-                  id="outlined-adornment-passwor  d"
+                  id="outlined-adornment-password"
                   type={values.showPassword ? 'text' : 'password'}
                   value={values.password}
                   endAdornment={
@@ -192,6 +208,13 @@ const Login: React.FC = () => {
                   {errors['password'] ? errors['password'].message : ''}
                 </FormHelperText>
               </FormControl>
+              {loginError ? (
+                <Alert severity="error">
+                  The email or password you entered is incorrect, try again
+                </Alert>
+              ) : (
+                <></>
+              )}
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
@@ -202,7 +225,7 @@ const Login: React.FC = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                {loading ? 'Logging you in' : 'Sign In'}
+                {updateLoginButtonText()}
               </Button>
             </Box>
           </Box>
