@@ -7,7 +7,6 @@ import { Grid } from '@mui/material';
 import ApplicantFormCreate from '../templates/applicantFormCreate/ApplicantFormCreate';
 import { Query } from '../generated/graphql';
 import { GET_APPLICANTS_BY_USER, GET_CURR_USER } from '../graphql/Queries';
-import ApplicantFormEdit from '../templates/applicantFormEdit/ApplicantFormEdit';
 
 export const UpdatingCurrUser: React.FC = () => {
   const info = useReactiveVar(userInfo);
