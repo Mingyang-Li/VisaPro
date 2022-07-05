@@ -8,6 +8,7 @@ import { useQuery, useReactiveVar } from '@apollo/client';
 import { applicantIdCurrEditing } from '../../graphql/Store';
 import { Query } from '../../generated/graphql';
 import { PERSONAL_INFO_BY_APPLICANT_ID } from '../../graphql/Queries';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 export const PersonalInfoForm: React.FC = () => {
   const [edit, setEdit] = useState(false);
@@ -31,6 +32,7 @@ export const PersonalInfoForm: React.FC = () => {
   return (
     <Card variant="outlined">
       <CardContent>
+        <LoadingSpinner show={loading} />
         <Grid container spacing={2}>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
