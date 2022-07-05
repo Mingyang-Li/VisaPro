@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CardActions, Grid, TextField } from '@mui/material';
+import { Button, CardActions, Grid, TextField } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -38,7 +38,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'firstName'}
               label={'First name'}
-              value={personalInfo!.firstName}
+              // value={personalInfo!.firstName}
               fullWidth
               disabled={!edit}
             />
@@ -47,7 +47,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'lastName'}
               label={'Last name'}
-              value={personalInfo!.lastName}
+              // value={personalInfo!.lastName}
               fullWidth
               disabled={!edit}
             />
@@ -57,7 +57,7 @@ export const PersonalInfoForm: React.FC = () => {
               id={'email'}
               variant="outlined"
               label={'Email'}
-              value={personalInfo!.email}
+              // value={personalInfo!.email}
               fullWidth
               disabled={!edit}
             />
@@ -67,7 +67,7 @@ export const PersonalInfoForm: React.FC = () => {
               id={'mobile'}
               variant="outlined"
               label={'Mobile'}
-              value={personalInfo!.modile}
+              // value={personalInfo!.modile}
               fullWidth
               disabled={!edit}
             />
@@ -77,7 +77,7 @@ export const PersonalInfoForm: React.FC = () => {
               id={'nzAddress'}
               variant="outlined"
               label={'NZ address'}
-              value={personalInfo!.nzAddress}
+              // value={personalInfo!.nzAddress}
               fullWidth
               disabled={!edit}
             />
@@ -87,7 +87,7 @@ export const PersonalInfoForm: React.FC = () => {
               id={'inzClientNumber'}
               variant="outlined"
               label={'Immigration NZ Client number'}
-              value={personalInfo!.inzClientNumber}
+              // value={personalInfo!.inzClientNumber}
               fullWidth
               disabled={!edit}
             />
@@ -97,7 +97,7 @@ export const PersonalInfoForm: React.FC = () => {
               id={'passportNumber'}
               variant="outlined"
               label={'Passport number'}
-              value={personalInfo!.passportNumber}
+              // value={personalInfo!.passportNumber}
               fullWidth
               disabled={!edit}
             />
@@ -107,7 +107,7 @@ export const PersonalInfoForm: React.FC = () => {
               id={'countriesOfCitizenship'}
               variant="outlined"
               label={'Countries of citizenship'}
-              value={personalInfo!.countriesOfCitizenship}
+              // value={personalInfo!.countriesOfCitizenship}
               fullWidth
               disabled={!edit}
             />
@@ -128,7 +128,25 @@ export const PersonalInfoForm: React.FC = () => {
           </Grid>
         </Grid>
       </CardContent>
-      <CardActions></CardActions>
+      <CardActions>
+        <Grid container spacing={2}>
+          <Grid item md={6} sm={12} xs={12}>
+            <Button variant="outlined" fullWidth>
+              Edit
+            </Button>
+          </Grid>
+          <Grid item md={6} sm={12} xs={12}>
+            <Button
+              // onClick={handleSubmit}
+              // disabled={enableCreation}
+              variant="contained"
+              fullWidth
+            >
+              Save
+            </Button>
+          </Grid>
+        </Grid>
+      </CardActions>
     </Card>
   );
 };

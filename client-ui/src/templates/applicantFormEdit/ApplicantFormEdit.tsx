@@ -2,7 +2,7 @@ import React from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Button } from '@mui/material';
+import { Button, DialogActions } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
@@ -114,7 +114,6 @@ const ApplicantFormEdit: React.FC = (props: IApplicantFormEdit) => {
       <Dialog
         maxWidth={'lg'}
         open={open}
-        onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         fullWidth
@@ -123,6 +122,11 @@ const ApplicantFormEdit: React.FC = (props: IApplicantFormEdit) => {
         <DialogContent>
           <BasicTabs />
         </DialogContent>
+        <DialogActions>
+          <Button variant="contained" color="error" onClick={handleClose}>
+            Close
+          </Button>
+        </DialogActions>
       </Dialog>
     </>
   );
