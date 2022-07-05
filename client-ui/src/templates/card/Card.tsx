@@ -9,15 +9,6 @@ import ApplicantFormEdit from '../applicantFormEdit/ApplicantFormEdit';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
-
 interface IBasicCard {
   id?: string;
   updatedAt?: string;
