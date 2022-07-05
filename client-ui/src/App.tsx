@@ -19,13 +19,8 @@ import { ConfigService } from './services/config.service';
 import Protected from './components/auth/Protected';
 
 const App: React.FC = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
   const info = useReactiveVar(userInfo);
   const token = info.accessToken;
-
-  useEffect(() => {
-    setLoggedIn(!loggedIn);
-  }, [token]);
 
   const client = new ApolloClient({
     link: new HttpLink({
