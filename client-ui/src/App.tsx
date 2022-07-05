@@ -17,6 +17,7 @@ import Login from './pages/Login';
 import { Store, userInfo } from './graphql/Store';
 import { ConfigService } from './services/config.service';
 import Protected from './components/auth/Protected';
+import Applicant from './pages/Applicant';
 
 const App: React.FC = () => {
   const info = useReactiveVar(userInfo);
@@ -47,7 +48,8 @@ const App: React.FC = () => {
         <Protected
           isLoggedIn={window.localStorage.getItem('accessToken') !== null}
         >
-          <Dashboard />
+          <Applicant />
+          {/* <Dashboard /> */}
         </Protected>
       ),
     },
