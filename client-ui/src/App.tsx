@@ -48,8 +48,17 @@ const App: React.FC = () => {
         <Protected
           isLoggedIn={window.localStorage.getItem('accessToken') !== null}
         >
+          <Dashboard />
+        </Protected>
+      ),
+    },
+    {
+      path: '/applicants/:id',
+      component: (
+        <Protected
+          isLoggedIn={window.localStorage.getItem('accessToken') !== null}
+        >
           <Applicant />
-          {/* <Dashboard /> */}
         </Protected>
       ),
     },
