@@ -29,6 +29,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Alert from '@mui/material/Alert';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const theme = createTheme();
 
@@ -64,10 +65,6 @@ const Login: React.FC = () => {
     }
   }, [isSubmitSuccessful]);
 
-  useEffect(() => {
-    updateLoginButtonText();
-  }, [loginError]);
-
   const navigate = useNavigate();
   const [values, setValues] = useState<ILogin>({
     email: '',
@@ -75,7 +72,7 @@ const Login: React.FC = () => {
     showPassword: false,
     loginError: {},
   });
-  const [initiateLogin, { loading }] = useMutation<Mutation>(LOGIN, {
+  const [initiateLogin, { data, loading }] = useMutation<Mutation>(LOGIN, {
     update(proxy, result) {
       userInfo(result?.data?.login);
       window.localStorage.setItem(
@@ -88,6 +85,10 @@ const Login: React.FC = () => {
       password: values.password,
     },
   });
+
+  // useEffect(() => {
+  //   setLoginError(!loginError);
+  // }, [error]);
 
   const updateEmail = (e: any) => {
     setValues({ ...values, email: e.currentTarget.value });
@@ -106,14 +107,9 @@ const Login: React.FC = () => {
       await initiateLogin().then(() => navigate('/dashboard'));
     } catch (e) {
       setLoginError(!loginError);
-    }
-  };
-
-  const updateLoginButtonText = () => {
-    if (loading) {
-      return 'Logging you in';
-    } else {
-      return 'Login';
+      setValues({ ...values, email: '', password: '' });
+    } finally {
+      console.log({ loading, data });
     }
   };
 
@@ -223,8 +219,13 @@ const Login: React.FC = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                disabled={loading}
               >
-                {updateLoginButtonText()}
+                {loading ? (
+                  <CircularProgress color="warning" size={30} />
+                ) : (
+                  'Login'
+                )}
               </Button>
             </Box>
           </Box>

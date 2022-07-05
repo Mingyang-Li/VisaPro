@@ -62,8 +62,8 @@ const App: React.FC = () => {
     <ApolloProvider client={client}>
       <Router>
         <Routes>
-          {routes.map((r) => (
-            <Route path={r.path} element={r.component} />
+          {routes.map((r, index) => (
+            <Route key={index} path={r.path} element={r.component} />
           ))}
         </Routes>
       </Router>
