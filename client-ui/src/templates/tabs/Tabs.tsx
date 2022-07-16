@@ -1,10 +1,5 @@
 import { Box, Typography, Tabs, Tab } from '@mui/material';
 import React from 'react';
-import { EducationHistoryForm } from '../educationHistoryForm/EducationHistoryForm';
-import { EmploymentHistoryForm } from '../employmentHistoryForm/EmploymentHistoryForm';
-import { FamilyMemberForm } from '../familyMemberForm/FamilyMemberForm';
-import { PersonalInfoForm } from '../personalInfoForm/PersonalInfoForm';
-import { TravelHistoryForm } from '../travelHistoryForm/TravelHistoryForm';
 
 interface TabPanelProps {
   children?: React.ReactNode;
