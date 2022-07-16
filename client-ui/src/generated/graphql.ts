@@ -13,7 +13,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
   DateTime: any;
 };
 
@@ -304,6 +303,7 @@ export type EmploymentHistory = {
   createdAt?: Maybe<Scalars['DateTime']>;
   createdBy?: Maybe<User>;
   duties?: Maybe<Scalars['String']>;
+  employmentType?: Maybe<Scalars['String']>;
   endDate?: Maybe<Scalars['DateTime']>;
   id: Scalars['String'];
   isCurrentJob?: Maybe<Scalars['Boolean']>;
@@ -324,6 +324,7 @@ export type EmploymentHistoryCreateInput = {
   countryOfWork?: InputMaybe<Scalars['String']>;
   createdBy?: InputMaybe<UserWhereUniqueInput>;
   duties?: InputMaybe<Scalars['String']>;
+  employmentType?: InputMaybe<Scalars['String']>;
   endDate?: InputMaybe<Scalars['DateTime']>;
   isCurrentJob?: InputMaybe<Scalars['Boolean']>;
   jobTitle?: InputMaybe<Scalars['String']>;
@@ -357,6 +358,7 @@ export type EmploymentHistoryOrderByInput = {
   createdAt?: InputMaybe<SortOrder>;
   createdById?: InputMaybe<SortOrder>;
   duties?: InputMaybe<SortOrder>;
+  employmentType?: InputMaybe<SortOrder>;
   endDate?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   isCurrentJob?: InputMaybe<SortOrder>;
@@ -377,6 +379,7 @@ export type EmploymentHistoryUpdateInput = {
   countryOfWork?: InputMaybe<Scalars['String']>;
   createdBy?: InputMaybe<UserWhereUniqueInput>;
   duties?: InputMaybe<Scalars['String']>;
+  employmentType?: InputMaybe<Scalars['String']>;
   endDate?: InputMaybe<Scalars['DateTime']>;
   isCurrentJob?: InputMaybe<Scalars['Boolean']>;
   jobTitle?: InputMaybe<Scalars['String']>;
@@ -407,6 +410,7 @@ export type EmploymentHistoryWhereInput = {
   countryOfWork?: InputMaybe<StringNullableFilter>;
   createdBy?: InputMaybe<UserWhereUniqueInput>;
   duties?: InputMaybe<StringNullableFilter>;
+  employmentType?: InputMaybe<StringNullableFilter>;
   endDate?: InputMaybe<DateTimeNullableFilter>;
   id?: InputMaybe<StringFilter>;
   isCurrentJob?: InputMaybe<BooleanNullableFilter>;
@@ -537,7 +541,7 @@ export type FamilyMemberWhereUniqueInput = {
 
 export type MetaQueryPayload = {
   __typename?: 'MetaQueryPayload';
-  count: Scalars['String'];
+  count: Scalars['Float'];
 };
 
 export type Mutation = {
@@ -699,7 +703,7 @@ export type PersonalInfo = {
   id: Scalars['String'];
   inzClientNumber?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
-  modile?: Maybe<Scalars['String']>;
+  mobile?: Maybe<Scalars['String']>;
   nzAddress?: Maybe<Scalars['String']>;
   passportNumber?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -719,7 +723,7 @@ export type PersonalInfoCreateInput = {
   homeCountryAddress?: InputMaybe<Scalars['String']>;
   inzClientNumber?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
-  modile?: InputMaybe<Scalars['String']>;
+  mobile?: InputMaybe<Scalars['String']>;
   nzAddress?: InputMaybe<Scalars['String']>;
   passportNumber?: InputMaybe<Scalars['String']>;
   updatedBy?: InputMaybe<UserWhereUniqueInput>;
@@ -750,7 +754,7 @@ export type PersonalInfoOrderByInput = {
   id?: InputMaybe<SortOrder>;
   inzClientNumber?: InputMaybe<SortOrder>;
   lastName?: InputMaybe<SortOrder>;
-  modile?: InputMaybe<SortOrder>;
+  mobile?: InputMaybe<SortOrder>;
   nzAddress?: InputMaybe<SortOrder>;
   passportNumber?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
@@ -770,7 +774,7 @@ export type PersonalInfoUpdateInput = {
   homeCountryAddress?: InputMaybe<Scalars['String']>;
   inzClientNumber?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
-  modile?: InputMaybe<Scalars['String']>;
+  mobile?: InputMaybe<Scalars['String']>;
   nzAddress?: InputMaybe<Scalars['String']>;
   passportNumber?: InputMaybe<Scalars['String']>;
   updatedBy?: InputMaybe<UserWhereUniqueInput>;
@@ -796,7 +800,7 @@ export type PersonalInfoWhereInput = {
   id?: InputMaybe<StringFilter>;
   inzClientNumber?: InputMaybe<StringNullableFilter>;
   lastName?: InputMaybe<StringNullableFilter>;
-  modile?: InputMaybe<StringNullableFilter>;
+  mobile?: InputMaybe<StringNullableFilter>;
   nzAddress?: InputMaybe<StringNullableFilter>;
   passportNumber?: InputMaybe<StringNullableFilter>;
   updatedBy?: InputMaybe<UserWhereUniqueInput>;
@@ -1028,9 +1032,9 @@ export type TravelHistory = {
   createdBy?: Maybe<User>;
   dateDeparted?: Maybe<Scalars['DateTime']>;
   dateEntered?: Maybe<Scalars['DateTime']>;
-  destinationAirport?: Maybe<Scalars['String']>;
   destinationCity?: Maybe<Scalars['String']>;
   destinationCountry?: Maybe<Scalars['String']>;
+  destinationHub?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   reasonOfTravel?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -1044,9 +1048,9 @@ export type TravelHistoryCreateInput = {
   createdBy?: InputMaybe<UserWhereUniqueInput>;
   dateDeparted?: InputMaybe<Scalars['DateTime']>;
   dateEntered?: InputMaybe<Scalars['DateTime']>;
-  destinationAirport?: InputMaybe<Scalars['String']>;
   destinationCity?: InputMaybe<Scalars['String']>;
   destinationCountry?: InputMaybe<Scalars['String']>;
+  destinationHub?: InputMaybe<Scalars['String']>;
   reasonOfTravel?: InputMaybe<Scalars['String']>;
   updatedBy?: InputMaybe<UserWhereUniqueInput>;
 };
@@ -1073,9 +1077,9 @@ export type TravelHistoryOrderByInput = {
   createdById?: InputMaybe<SortOrder>;
   dateDeparted?: InputMaybe<SortOrder>;
   dateEntered?: InputMaybe<SortOrder>;
-  destinationAirport?: InputMaybe<SortOrder>;
   destinationCity?: InputMaybe<SortOrder>;
   destinationCountry?: InputMaybe<SortOrder>;
+  destinationHub?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   reasonOfTravel?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
@@ -1089,9 +1093,9 @@ export type TravelHistoryUpdateInput = {
   createdBy?: InputMaybe<UserWhereUniqueInput>;
   dateDeparted?: InputMaybe<Scalars['DateTime']>;
   dateEntered?: InputMaybe<Scalars['DateTime']>;
-  destinationAirport?: InputMaybe<Scalars['String']>;
   destinationCity?: InputMaybe<Scalars['String']>;
   destinationCountry?: InputMaybe<Scalars['String']>;
+  destinationHub?: InputMaybe<Scalars['String']>;
   reasonOfTravel?: InputMaybe<Scalars['String']>;
   updatedBy?: InputMaybe<UserWhereUniqueInput>;
 };
@@ -1115,9 +1119,9 @@ export type TravelHistoryWhereInput = {
   createdBy?: InputMaybe<UserWhereUniqueInput>;
   dateDeparted?: InputMaybe<DateTimeNullableFilter>;
   dateEntered?: InputMaybe<DateTimeNullableFilter>;
-  destinationAirport?: InputMaybe<StringNullableFilter>;
   destinationCity?: InputMaybe<StringNullableFilter>;
   destinationCountry?: InputMaybe<StringNullableFilter>;
+  destinationHub?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
   reasonOfTravel?: InputMaybe<StringNullableFilter>;
   updatedBy?: InputMaybe<UserWhereUniqueInput>;
