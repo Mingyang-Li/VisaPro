@@ -6,11 +6,15 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
 import { useQuery, useReactiveVar } from '@apollo/client';
 import { applicantIdCurrEditing } from '../../graphql/Store';
-import { Query } from '../../generated/graphql';
+import { PersonalInfo, Query } from '../../generated/graphql';
 import { PERSONAL_INFO_BY_APPLICANT_ID } from '../../graphql/Queries';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
+import { countryList } from '../../utils/countries';
+import { useParams } from 'react-router-dom';
 
 export const PersonalInfoForm: React.FC = () => {
+  const { id } = useParams();
+  const [formInfo, setFormInfo] = useState<PersonalInfo>({ id: id || '' });
   const [edit, setEdit] = useState(false);
   const applicantId = useReactiveVar(applicantIdCurrEditing);
   const { data, loading, error } = useQuery<Query>(
@@ -22,7 +26,6 @@ export const PersonalInfoForm: React.FC = () => {
     },
   );
   const personalInfo = data?.personalInfos[0];
-  console.log(personalInfo);
   // const applicant = userVar.applicants.filter((a) => a.id !== applicantId);
 
   // useEffect(() => {
@@ -38,91 +41,118 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'firstName'}
               label={'First name'}
-              // value={personalInfo!.firstName}
+              defaultValue={personalInfo!.firstName}
+              onChange={(e: any) =>
+                setFormInfo({ ...formInfo, firstName: e.currentTarget.value })
+              }
               fullWidth
               disabled={!edit}
+              variant={!edit ? 'filled' : 'outlined'}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
               id={'lastName'}
               label={'Last name'}
-              // value={personalInfo!.lastName}
+              defaultValue={personalInfo!.lastName}
+              onChange={(e: any) =>
+                setFormInfo({ ...formInfo, lastName: e.currentTarget.value })
+              }
               fullWidth
               disabled={!edit}
+              variant={!edit ? 'filled' : 'outlined'}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
               id={'email'}
-              variant="outlined"
               label={'Email'}
-              // value={personalInfo!.email}
+              defaultValue={personalInfo!.email}
+              onChange={(e: any) =>
+                setFormInfo({ ...formInfo, email: e.currentTarget.value })
+              }
               fullWidth
               disabled={!edit}
+              variant={!edit ? 'filled' : 'outlined'}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
               id={'mobile'}
-              variant="outlined"
               label={'Mobile'}
-              // value={personalInfo!.modile}
+              defaultValue={personalInfo!.modile}
+              onChange={(e: any) =>
+                setFormInfo({ ...formInfo, firstName: e.currentTarget.value })
+              }
               fullWidth
               disabled={!edit}
+              variant={!edit ? 'filled' : 'outlined'}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
               id={'nzAddress'}
-              variant="outlined"
               label={'NZ address'}
               // value={personalInfo!.nzAddress}
               fullWidth
               disabled={!edit}
+              variant={!edit ? 'filled' : 'outlined'}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
               id={'inzClientNumber'}
-              variant="outlined"
               label={'Immigration NZ Client number'}
               // value={personalInfo!.inzClientNumber}
               fullWidth
               disabled={!edit}
+              variant={!edit ? 'filled' : 'outlined'}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
               id={'passportNumber'}
-              variant="outlined"
               label={'Passport number'}
               // value={personalInfo!.passportNumber}
               fullWidth
               disabled={!edit}
+              variant={!edit ? 'filled' : 'outlined'}
             />
-          </Grid>
-          <Grid item md={6} sm={12} xs={12}>
-            <TextField
-              id={'countriesOfCitizenship'}
-              variant="outlined"
-              label={'Countries of citizenship'}
-              // value={personalInfo!.countriesOfCitizenship}
-              fullWidth
-              disabled={!edit}
-            />
-          </Grid>
-          <Grid item md={6} sm={12} xs={12}>
-            <BasicDatePicker label="Date of birth" />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <Autocomplete
               disablePortal
               id="combo-box-demo"
-              options={[{ label: 'New Zealand' }]}
+              options={countryList.map((c) => c)}
+              sx={{ width: 300 }}
+              disabled={!edit}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Countries of citizenship"
+                  fullWidth
+                  variant={!edit ? 'filled' : 'outlined'}
+                />
+              )}
+            />
+          </Grid>
+          <Grid item md={6} sm={12} xs={12}>
+            <BasicDatePicker label="Date of birth" disabled={!edit} />
+          </Grid>
+          <Grid item md={6} sm={12} xs={12}>
+            <Autocomplete
+              disablePortal
+              disabled={!edit}
+              id="combo-box-demo"
+              options={countryList.map((c) => c)}
               sx={{ width: 300 }}
               renderInput={(params) => (
-                <TextField {...params} label="Country of birth" fullWidth />
+                <TextField
+                  {...params}
+                  label="Country of birth"
+                  fullWidth
+                  variant={!edit ? 'filled' : 'outlined'}
+                />
               )}
             />
           </Grid>
@@ -131,14 +161,19 @@ export const PersonalInfoForm: React.FC = () => {
       <CardActions>
         <Grid container spacing={2}>
           <Grid item md={6} sm={12} xs={12}>
-            <Button variant="outlined" fullWidth>
-              Edit
+            <Button
+              variant={edit ? 'contained' : 'outlined'}
+              fullWidth
+              onClick={() => setEdit(!edit)}
+              color={edit ? 'error' : 'primary'}
+            >
+              {edit ? 'Discard' : 'Edit'}
             </Button>
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <Button
               // onClick={handleSubmit}
-              // disabled={enableCreation}
+              disabled={!edit}
               variant="contained"
               fullWidth
             >

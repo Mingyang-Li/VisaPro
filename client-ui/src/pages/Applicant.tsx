@@ -1,5 +1,6 @@
 import { Grid } from '@mui/material';
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import AppContainer from '../templates/appContainer/AppContainer';
 import { EducationHistoryForm } from '../templates/educationHistoryForm/EducationHistoryForm';
 import { EmploymentHistoryForm } from '../templates/employmentHistoryForm/EmploymentHistoryForm';
@@ -9,6 +10,7 @@ import { BasicTabs, Tab } from '../templates/tabs/Tabs';
 import { TravelHistoryForm } from '../templates/travelHistoryForm/TravelHistoryForm';
 
 const Contents: React.FC = () => {
+  const { id } = useParams();
   const contents: Tab[] = [
     {
       label: 'Personal Info',
@@ -34,6 +36,7 @@ const Contents: React.FC = () => {
 
   return (
     <Grid container spacing={2}>
+      <h1>Applicant ID: {id}</h1>
       <BasicTabs tabs={contents} />
     </Grid>
   );

@@ -55,7 +55,6 @@ export const BasicTabs: React.FC<IBasicTabs> = (props: IBasicTabs) => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <h1>Applicant ID: </h1>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="tabs">
           {props.tabs.map((t, i) => (
