@@ -8,6 +8,7 @@ import { Maybe } from '../../generated/graphql';
 import ApplicantFormEdit from '../applicantFormEdit/ApplicantFormEdit';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
 
 interface IBasicCard {
   id?: string;
@@ -51,8 +52,9 @@ export default function BasicCard(props: IBasicCard) {
       <Divider />
       <CardActions>
         <Grid container spacing={2}>
-          <Grid item md={6} onClick={props.onEditRequest}>
-            <ApplicantFormEdit />
+          <Grid item md={6}>
+            <Button onClick={props.onEditRequest}>Edit</Button>
+            {/* <ApplicantFormEdit /> */}
           </Grid>
         </Grid>
       </CardActions>

@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { user, applicantIdCurrEditing, userInfo } from '../graphql/Store';
 import { useQuery, useReactiveVar } from '@apollo/client';
 import AppContainer from '../templates/appContainer/AppContainer';
@@ -36,6 +37,13 @@ const Contents: React.FC = () => {
     },
   });
 
+  const navigate = useNavigate();
+
+  const onEditRequest = (id: string) => {
+    applicantIdCurrEditing(id);
+    navigate(`/applicants/${id}`);
+  };
+
   return (
     <>
       <UpdatingCurrUser />
@@ -54,7 +62,7 @@ const Contents: React.FC = () => {
               employmentHistoriesCt={a.employmentHistories.length}
               travelHistoriesCt={a.travelHistories.length}
               familyMembersCt={a.familyMembers.length}
-              onEditRequest={() => applicantIdCurrEditing(a.id)}
+              onEditRequest={() => onEditRequest(a.id)}
             />
           </Grid>
         ))}

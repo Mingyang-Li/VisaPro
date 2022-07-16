@@ -48,7 +48,7 @@ export interface IBasicTabs {
   tabs: Tab[];
 }
 
-export const BasicTabs: React.FC<Tab[]> = (tabs: Tab[]) => {
+export const BasicTabs: React.FC<IBasicTabs> = (props: IBasicTabs) => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -60,12 +60,12 @@ export const BasicTabs: React.FC<Tab[]> = (tabs: Tab[]) => {
       <h1>Applicant ID: </h1>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="tabs">
-          {tabs.map((t, i) => (
+          {props.tabs.map((t, i) => (
             <Tab label={t.label} {...a11yProps(i)} />
           ))}
         </Tabs>
       </Box>
-      {tabs.map((t, i) => (
+      {props.tabs.map((t, i) => (
         <TabPanel value={value} index={1}>
           {t.component}
         </TabPanel>
