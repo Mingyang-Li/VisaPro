@@ -14,7 +14,7 @@ export const TravelHistoryForm = () => {
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
-              id={'destinationAirport'}
+              id={'destinationHub'}
               variant="outlined"
               label={'Destination airport'}
               fullWidth

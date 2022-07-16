@@ -80,7 +80,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'mobile'}
               label={'Mobile'}
-              defaultValue={personalInfo!.modile}
+              defaultValue={personalInfo!.mobile}
               onChange={(e: any) =>
                 setFormInfo({ ...formInfo, firstName: e.currentTarget.value })
               }

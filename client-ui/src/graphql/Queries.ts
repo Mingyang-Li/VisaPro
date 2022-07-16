@@ -24,7 +24,7 @@ export const GET_APPLICANTS_BY_USER = gql`
         firstName
         lastName
         email
-        modile
+        mobile
         countryOfBirth
         countriesOfCitizenship
         inzClientNumber
@@ -73,7 +73,7 @@ export const GET_APPLICANTS_BY_USER = gql`
         id
         dateDeparted
         dateEntered
-        destinationAirport
+        destinationHub
         destinationCity
         destinationCountry
         reasonOfTravel
@@ -93,7 +93,7 @@ export const PERSONAL_INFO_BY_APPLICANT_ID = gql`
       firstName
       lastName
       email
-      modile
+      mobile
       countryOfBirth
       countriesOfCitizenship
       inzClientNumber
