@@ -1,4 +1,7 @@
-import { Box, Typography, Tabs, Tab } from '@mui/material';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import Typography from '@mui/material/Typography/';
 import React from 'react';
 
 interface TabPanelProps {
@@ -61,7 +64,7 @@ export const BasicTabs: React.FC<IBasicTabs> = (props: IBasicTabs) => {
         </Tabs>
       </Box>
       {props.tabs.map((t, i) => (
-        <TabPanel value={value} index={1}>
+        <TabPanel value={value} index={i}>
           {t.component}
         </TabPanel>
       ))}
