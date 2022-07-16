@@ -19,7 +19,7 @@ export type PersonalInfoWhereInput = {
   id?: StringFilter;
   inzClientNumber?: StringNullableFilter;
   lastName?: StringNullableFilter;
-  modile?: StringNullableFilter;
+  mobile?: StringNullableFilter;
   nzAddress?: StringNullableFilter;
   passportNumber?: StringNullableFilter;
   updatedBy?: UserWhereUniqueInput;

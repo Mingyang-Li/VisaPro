@@ -15,10 +15,10 @@ import * as apollo from "apollo-server-express";
 import * as nestAccessControl from "nest-access-control";
 import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
 import * as gqlACGuard from "../../auth/gqlAC.guard";
-import * as gqlUserRoles from "../../auth/gqlUserRoles.decorator";
-import * as abacUtil from "../../auth/abac.util";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { CreateEmploymentHistoryArgs } from "./CreateEmploymentHistoryArgs";
 import { UpdateEmploymentHistoryArgs } from "./UpdateEmploymentHistoryArgs";
 import { DeleteEmploymentHistoryArgs } from "./DeleteEmploymentHistoryArgs";
@@ -56,6 +56,7 @@ export class EmploymentHistoryResolverBase {
     };
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [EmploymentHistory])
   @nestAccessControl.UseRoles({
     resource: "EmploymentHistory",
@@ -63,19 +64,12 @@ export class EmploymentHistoryResolverBase {
     possession: "any",
   })
   async employmentHistories(
-    @graphql.Args() args: EmploymentHistoryFindManyArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: EmploymentHistoryFindManyArgs
   ): Promise<EmploymentHistory[]> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "EmploymentHistory",
-    });
-    const results = await this.service.findMany(args);
-    return results.map((result) => permission.filter(result));
+    return this.service.findMany(args);
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => EmploymentHistory, { nullable: true })
   @nestAccessControl.UseRoles({
     resource: "EmploymentHistory",
@@ -83,22 +77,16 @@ export class EmploymentHistoryResolverBase {
     possession: "own",
   })
   async employmentHistory(
-    @graphql.Args() args: EmploymentHistoryFindUniqueArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: EmploymentHistoryFindUniqueArgs
   ): Promise<EmploymentHistory | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "own",
-      resource: "EmploymentHistory",
-    });
     const result = await this.service.findOne(args);
     if (result === null) {
       return null;
     }
-    return permission.filter(result);
+    return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => EmploymentHistory)
   @nestAccessControl.UseRoles({
     resource: "EmploymentHistory",
@@ -106,31 +94,8 @@ export class EmploymentHistoryResolverBase {
     possession: "any",
   })
   async createEmploymentHistory(
-    @graphql.Args() args: CreateEmploymentHistoryArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: CreateEmploymentHistoryArgs
   ): Promise<EmploymentHistory> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "create",
-      possession: "any",
-      resource: "EmploymentHistory",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(
-      permission,
-      args.data
-    );
-    if (invalidAttributes.length) {
-      const properties = invalidAttributes
-        .map((attribute: string) => JSON.stringify(attribute))
-        .join(", ");
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new apollo.ApolloError(
-        `providing the properties: ${properties} on ${"EmploymentHistory"} creation is forbidden for roles: ${roles}`
-      );
-    }
-    // @ts-ignore
     return await this.service.create({
       ...args,
       data: {
@@ -163,6 +128,7 @@ export class EmploymentHistoryResolverBase {
     });
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => EmploymentHistory)
   @nestAccessControl.UseRoles({
     resource: "EmploymentHistory",
@@ -170,32 +136,9 @@ export class EmploymentHistoryResolverBase {
     possession: "any",
   })
   async updateEmploymentHistory(
-    @graphql.Args() args: UpdateEmploymentHistoryArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: UpdateEmploymentHistoryArgs
   ): Promise<EmploymentHistory | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "EmploymentHistory",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(
-      permission,
-      args.data
-    );
-    if (invalidAttributes.length) {
-      const properties = invalidAttributes
-        .map((attribute: string) => JSON.stringify(attribute))
-        .join(", ");
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new apollo.ApolloError(
-        `providing the properties: ${properties} on ${"EmploymentHistory"} update is forbidden for roles: ${roles}`
-      );
-    }
     try {
-      // @ts-ignore
       return await this.service.update({
         ...args,
         data: {
@@ -246,7 +189,6 @@ export class EmploymentHistoryResolverBase {
     @graphql.Args() args: DeleteEmploymentHistoryArgs
   ): Promise<EmploymentHistory | null> {
     try {
-      // @ts-ignore
       return await this.service.delete(args);
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -258,99 +200,75 @@ export class EmploymentHistoryResolverBase {
     }
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Applicant, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "EmploymentHistory",
+    resource: "Applicant",
     action: "read",
     possession: "any",
   })
   async applicant(
-    @graphql.Parent() parent: EmploymentHistory,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Parent() parent: EmploymentHistory
   ): Promise<Applicant | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "Applicant",
-    });
     const result = await this.service.getApplicant(parent.id);
 
     if (!result) {
       return null;
     }
-    return permission.filter(result);
+    return result;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => User, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "EmploymentHistory",
+    resource: "User",
     action: "read",
     possession: "any",
   })
   async archivedBy(
-    @graphql.Parent() parent: EmploymentHistory,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Parent() parent: EmploymentHistory
   ): Promise<User | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "User",
-    });
     const result = await this.service.getArchivedBy(parent.id);
 
     if (!result) {
       return null;
     }
-    return permission.filter(result);
+    return result;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => User, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "EmploymentHistory",
+    resource: "User",
     action: "read",
     possession: "any",
   })
   async createdBy(
-    @graphql.Parent() parent: EmploymentHistory,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Parent() parent: EmploymentHistory
   ): Promise<User | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "User",
-    });
     const result = await this.service.getCreatedBy(parent.id);
 
     if (!result) {
       return null;
     }
-    return permission.filter(result);
+    return result;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => User, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "EmploymentHistory",
+    resource: "User",
     action: "read",
     possession: "any",
   })
   async updatedBy(
-    @graphql.Parent() parent: EmploymentHistory,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Parent() parent: EmploymentHistory
   ): Promise<User | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "User",
-    });
     const result = await this.service.getUpdatedBy(parent.id);
 
     if (!result) {
       return null;
     }
-    return permission.filter(result);
+    return result;
   }
 }

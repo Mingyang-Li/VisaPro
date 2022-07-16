@@ -125,6 +125,17 @@ class EmploymentHistoryWhereInput {
 
   @ApiProperty({
     required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  employmentType?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
     type: DateTimeNullableFilter,
   })
   @Type(() => DateTimeNullableFilter)

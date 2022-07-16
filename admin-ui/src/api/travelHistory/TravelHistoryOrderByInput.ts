@@ -8,9 +8,9 @@ export type TravelHistoryOrderByInput = {
   createdById?: SortOrder;
   dateDeparted?: SortOrder;
   dateEntered?: SortOrder;
-  destinationAirport?: SortOrder;
   destinationCity?: SortOrder;
   destinationCountry?: SortOrder;
+  destinationHub?: SortOrder;
   id?: SortOrder;
   reasonOfTravel?: SortOrder;
   updatedAt?: SortOrder;

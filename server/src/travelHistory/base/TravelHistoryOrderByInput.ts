@@ -88,15 +88,6 @@ class TravelHistoryOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  destinationAirport?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
   destinationCity?: SortOrder;
 
   @ApiProperty({
@@ -107,6 +98,15 @@ class TravelHistoryOrderByInput {
     nullable: true,
   })
   destinationCountry?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  destinationHub?: SortOrder;
 
   @ApiProperty({
     required: false,

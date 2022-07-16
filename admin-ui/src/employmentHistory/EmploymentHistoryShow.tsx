@@ -37,6 +37,7 @@ export const EmploymentHistoryShow = (props: ShowProps): React.ReactElement => {
           <TextField source={USER_TITLE_FIELD} />
         </ReferenceField>
         <TextField label="Duties" source="duties" />
+        <TextField label="Employment Type" source="employmentType" />
         <TextField label="End Date" source="endDate" />
         <TextField label="ID" source="id" />
         <BooleanField label="Is Current Job" source="isCurrentJob" />

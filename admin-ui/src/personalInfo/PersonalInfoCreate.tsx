@@ -43,7 +43,7 @@ export const PersonalInfoCreate = (props: CreateProps): React.ReactElement => {
         <TextInput label="Home Country Address" source="homeCountryAddress" />
         <TextInput label="INZ Client Number" source="inzClientNumber" />
         <TextInput label="Last Name" source="lastName" />
-        <TextInput label="Modile" source="modile" />
+        <TextInput label="Mobile" source="mobile" />
         <TextInput label="NZ Address" source="nzAddress" />
         <TextInput label="Passport Number" source="passportNumber" />
         <ReferenceInput source="user.id" reference="User" label="Updated By">

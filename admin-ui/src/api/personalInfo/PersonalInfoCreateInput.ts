@@ -14,7 +14,7 @@ export type PersonalInfoCreateInput = {
   homeCountryAddress?: string | null;
   inzClientNumber?: string | null;
   lastName?: string | null;
-  modile?: string | null;
+  mobile?: string | null;
   nzAddress?: string | null;
   passportNumber?: string | null;
   updatedBy?: UserWhereUniqueInput | null;

@@ -16,7 +16,7 @@ export type PersonalInfo = {
   id: string;
   inzClientNumber: string | null;
   lastName: string | null;
-  modile: string | null;
+  mobile: string | null;
   nzAddress: string | null;
   passportNumber: string | null;
   updatedAt: Date | null;

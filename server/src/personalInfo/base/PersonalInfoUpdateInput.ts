@@ -167,7 +167,7 @@ class PersonalInfoUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  modile?: string | null;
+  mobile?: string | null;
 
   @ApiProperty({
     required: false,

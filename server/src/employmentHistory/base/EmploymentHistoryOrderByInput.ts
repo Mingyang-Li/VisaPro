@@ -115,6 +115,15 @@ class EmploymentHistoryOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  employmentType?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   endDate?: SortOrder;
 
   @ApiProperty({

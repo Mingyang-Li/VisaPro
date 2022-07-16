@@ -37,6 +37,7 @@ export const EmploymentHistoryEdit = (props: EditProps): React.ReactElement => {
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>
         <TextInput label="Duties" multiline source="duties" />
+        <TextInput label="Employment Type" source="employmentType" />
         <DateTimeInput label="End Date" source="endDate" />
         <BooleanInput label="Is Current Job" source="isCurrentJob" />
         <TextInput label="Job Title" source="jobTitle" />

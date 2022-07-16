@@ -15,10 +15,10 @@ import * as apollo from "apollo-server-express";
 import * as nestAccessControl from "nest-access-control";
 import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
 import * as gqlACGuard from "../../auth/gqlAC.guard";
-import * as gqlUserRoles from "../../auth/gqlUserRoles.decorator";
-import * as abacUtil from "../../auth/abac.util";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { CreateTravelHistoryArgs } from "./CreateTravelHistoryArgs";
 import { UpdateTravelHistoryArgs } from "./UpdateTravelHistoryArgs";
 import { DeleteTravelHistoryArgs } from "./DeleteTravelHistoryArgs";
@@ -56,6 +56,7 @@ export class TravelHistoryResolverBase {
     };
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [TravelHistory])
   @nestAccessControl.UseRoles({
     resource: "TravelHistory",
@@ -63,19 +64,12 @@ export class TravelHistoryResolverBase {
     possession: "any",
   })
   async travelHistories(
-    @graphql.Args() args: TravelHistoryFindManyArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: TravelHistoryFindManyArgs
   ): Promise<TravelHistory[]> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "TravelHistory",
-    });
-    const results = await this.service.findMany(args);
-    return results.map((result) => permission.filter(result));
+    return this.service.findMany(args);
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => TravelHistory, { nullable: true })
   @nestAccessControl.UseRoles({
     resource: "TravelHistory",
@@ -83,22 +77,16 @@ export class TravelHistoryResolverBase {
     possession: "own",
   })
   async travelHistory(
-    @graphql.Args() args: TravelHistoryFindUniqueArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: TravelHistoryFindUniqueArgs
   ): Promise<TravelHistory | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "own",
-      resource: "TravelHistory",
-    });
     const result = await this.service.findOne(args);
     if (result === null) {
       return null;
     }
-    return permission.filter(result);
+    return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => TravelHistory)
   @nestAccessControl.UseRoles({
     resource: "TravelHistory",
@@ -106,31 +94,8 @@ export class TravelHistoryResolverBase {
     possession: "any",
   })
   async createTravelHistory(
-    @graphql.Args() args: CreateTravelHistoryArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: CreateTravelHistoryArgs
   ): Promise<TravelHistory> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "create",
-      possession: "any",
-      resource: "TravelHistory",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(
-      permission,
-      args.data
-    );
-    if (invalidAttributes.length) {
-      const properties = invalidAttributes
-        .map((attribute: string) => JSON.stringify(attribute))
-        .join(", ");
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new apollo.ApolloError(
-        `providing the properties: ${properties} on ${"TravelHistory"} creation is forbidden for roles: ${roles}`
-      );
-    }
-    // @ts-ignore
     return await this.service.create({
       ...args,
       data: {
@@ -163,6 +128,7 @@ export class TravelHistoryResolverBase {
     });
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => TravelHistory)
   @nestAccessControl.UseRoles({
     resource: "TravelHistory",
@@ -170,32 +136,9 @@ export class TravelHistoryResolverBase {
     possession: "any",
   })
   async updateTravelHistory(
-    @graphql.Args() args: UpdateTravelHistoryArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: UpdateTravelHistoryArgs
   ): Promise<TravelHistory | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "TravelHistory",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(
-      permission,
-      args.data
-    );
-    if (invalidAttributes.length) {
-      const properties = invalidAttributes
-        .map((attribute: string) => JSON.stringify(attribute))
-        .join(", ");
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new apollo.ApolloError(
-        `providing the properties: ${properties} on ${"TravelHistory"} update is forbidden for roles: ${roles}`
-      );
-    }
     try {
-      // @ts-ignore
       return await this.service.update({
         ...args,
         data: {
@@ -246,7 +189,6 @@ export class TravelHistoryResolverBase {
     @graphql.Args() args: DeleteTravelHistoryArgs
   ): Promise<TravelHistory | null> {
     try {
-      // @ts-ignore
       return await this.service.delete(args);
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -258,99 +200,75 @@ export class TravelHistoryResolverBase {
     }
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Applicant, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "TravelHistory",
+    resource: "Applicant",
     action: "read",
     possession: "any",
   })
   async applicant(
-    @graphql.Parent() parent: TravelHistory,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Parent() parent: TravelHistory
   ): Promise<Applicant | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "Applicant",
-    });
     const result = await this.service.getApplicant(parent.id);
 
     if (!result) {
       return null;
     }
-    return permission.filter(result);
+    return result;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => User, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "TravelHistory",
+    resource: "User",
     action: "read",
     possession: "any",
   })
   async archivedBy(
-    @graphql.Parent() parent: TravelHistory,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Parent() parent: TravelHistory
   ): Promise<User | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "User",
-    });
     const result = await this.service.getArchivedBy(parent.id);
 
     if (!result) {
       return null;
     }
-    return permission.filter(result);
+    return result;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => User, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "TravelHistory",
+    resource: "User",
     action: "read",
     possession: "any",
   })
   async createdBy(
-    @graphql.Parent() parent: TravelHistory,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Parent() parent: TravelHistory
   ): Promise<User | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "User",
-    });
     const result = await this.service.getCreatedBy(parent.id);
 
     if (!result) {
       return null;
     }
-    return permission.filter(result);
+    return result;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => User, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "TravelHistory",
+    resource: "User",
     action: "read",
     possession: "any",
   })
   async updatedBy(
-    @graphql.Parent() parent: TravelHistory,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Parent() parent: TravelHistory
   ): Promise<User | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "User",
-    });
     const result = await this.service.getUpdatedBy(parent.id);
 
     if (!result) {
       return null;
     }
-    return permission.filter(result);
+    return result;
   }
 }

@@ -11,6 +11,7 @@ export type EmploymentHistoryCreateInput = {
   countryOfWork?: string | null;
   createdBy?: UserWhereUniqueInput | null;
   duties?: string | null;
+  employmentType?: string | null;
   endDate?: Date | null;
   isCurrentJob?: boolean | null;
   jobTitle?: string | null;

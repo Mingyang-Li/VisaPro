@@ -52,6 +52,7 @@ model EmploymentHistory {
   createdBy        User?      @relation(name: "employmentHistoriesCreated", fields: [createdById], references: [id])
   createdById      String?
   duties           String?
+  employmentType   String?
   endDate          DateTime?
   id               String     @id @default(cuid())
   isCurrentJob     Boolean?
@@ -97,9 +98,9 @@ model TravelHistory {
   createdById        String?
   dateDeparted       DateTime?
   dateEntered        DateTime?
-  destinationAirport String?
   destinationCity    String?
   destinationCountry String?
+  destinationHub     String?
   id                 String     @id @default(cuid())
   reasonOfTravel     String?
   updatedAt          DateTime?  @updatedAt
@@ -128,7 +129,7 @@ model FamilyMember {
 }
 
 model PersonalInfo {
-  applicant              Applicant?
+  applicant              Applicant
   archived               Boolean?
   archivedBy             User?     @relation(name: "personalInfosArchived", fields: [archivedById], references: [id])
   archivedById           String?
@@ -144,7 +145,7 @@ model PersonalInfo {
   id                     String    @id @default(cuid())
   inzClientNumber        String?
   lastName               String?
-  modile                 String?
+  mobile                 String?
   nzAddress              String?
   passportNumber         String?
   updatedAt              DateTime? @updatedAt
@@ -165,7 +166,7 @@ model Applicant {
   familyMembers       FamilyMember[]
   id                  String              @id @default(cuid())
   personalInfo        PersonalInfo?       @relation(fields: [personalInfoId], references: [id])
-  personalInfoId      String?             @unique
+  personalInfoId      String?
   travelHistories     TravelHistory[]
   updatedAt           DateTime?           @updatedAt
   updatedBy           User?               @relation(name: "applicantsUpdated", fields: [updatedById], references: [id])

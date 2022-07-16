@@ -12,9 +12,9 @@ export type TravelHistoryWhereInput = {
   createdBy?: UserWhereUniqueInput;
   dateDeparted?: DateTimeNullableFilter;
   dateEntered?: DateTimeNullableFilter;
-  destinationAirport?: StringNullableFilter;
   destinationCity?: StringNullableFilter;
   destinationCountry?: StringNullableFilter;
+  destinationHub?: StringNullableFilter;
   id?: StringFilter;
   reasonOfTravel?: StringNullableFilter;
   updatedBy?: UserWhereUniqueInput;

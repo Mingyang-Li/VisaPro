@@ -12,6 +12,7 @@ export type EmploymentHistory = {
   createdAt: Date | null;
   createdBy?: User | null;
   duties: string | null;
+  employmentType: string | null;
   endDate: Date | null;
   id: string;
   isCurrentJob: boolean | null;

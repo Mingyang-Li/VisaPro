@@ -101,17 +101,6 @@ class TravelHistoryCreateInput {
   @Field(() => String, {
     nullable: true,
   })
-  destinationAirport?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
   destinationCity?: string | null;
 
   @ApiProperty({
@@ -124,6 +113,17 @@ class TravelHistoryCreateInput {
     nullable: true,
   })
   destinationCountry?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  destinationHub?: string | null;
 
   @ApiProperty({
     required: false,

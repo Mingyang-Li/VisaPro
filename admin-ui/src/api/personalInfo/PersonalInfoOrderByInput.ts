@@ -15,7 +15,7 @@ export type PersonalInfoOrderByInput = {
   id?: SortOrder;
   inzClientNumber?: SortOrder;
   lastName?: SortOrder;
-  modile?: SortOrder;
+  mobile?: SortOrder;
   nzAddress?: SortOrder;
   passportNumber?: SortOrder;
   updatedAt?: SortOrder;
