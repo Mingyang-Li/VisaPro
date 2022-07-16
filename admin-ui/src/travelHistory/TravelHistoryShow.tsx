@@ -34,9 +34,9 @@ export const TravelHistoryShow = (props: ShowProps): React.ReactElement => {
         </ReferenceField>
         <TextField label="Date Departed" source="dateDeparted" />
         <TextField label="Date Entered" source="dateEntered" />
-        <TextField label="Destination Airport" source="destinationAirport" />
         <TextField label="Destination City" source="destinationCity" />
         <TextField label="Destination Country" source="destinationCountry" />
+        <TextField label="Destination Hub" source="destinationHub" />
         <TextField label="ID" source="id" />
         <TextField label="Reason of Travel" source="reasonOfTravel" />
         <DateField source="updatedAt" label="Updated At" />

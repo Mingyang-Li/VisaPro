@@ -8,9 +8,9 @@ export type TravelHistoryUpdateInput = {
   createdBy?: UserWhereUniqueInput | null;
   dateDeparted?: Date | null;
   dateEntered?: Date | null;
-  destinationAirport?: string | null;
   destinationCity?: string | null;
   destinationCountry?: string | null;
+  destinationHub?: string | null;
   reasonOfTravel?: string | null;
   updatedBy?: UserWhereUniqueInput | null;
 };

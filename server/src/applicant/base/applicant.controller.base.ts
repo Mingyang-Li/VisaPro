@@ -11,16 +11,16 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import * as common from "@nestjs/common";
 import * as swagger from "@nestjs/swagger";
-import * as nestMorgan from "nest-morgan";
 import * as nestAccessControl from "nest-access-control";
 import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
-import * as abacUtil from "../../auth/abac.util";
 import { isRecordNotFoundError } from "../../prisma.util";
 import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
 import { ApplicantService } from "../applicant.service";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { ApplicantCreateInput } from "./ApplicantCreateInput";
 import { ApplicantWhereInput } from "./ApplicantWhereInput";
 import { ApplicantWhereUniqueInput } from "./ApplicantWhereUniqueInput";
@@ -40,47 +40,23 @@ import { TravelHistoryFindManyArgs } from "../../travelHistory/base/TravelHistor
 import { TravelHistory } from "../../travelHistory/base/TravelHistory";
 import { TravelHistoryWhereUniqueInput } from "../../travelHistory/base/TravelHistoryWhereUniqueInput";
 @swagger.ApiBearerAuth()
+@common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class ApplicantControllerBase {
   constructor(
     protected readonly service: ApplicantService,
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {}
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Post()
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "create",
     possession: "any",
   })
+  @common.Post()
   @swagger.ApiCreatedResponse({ type: Applicant })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
-  async create(
-    @common.Body() data: ApplicantCreateInput,
-    @nestAccessControl.UserRoles() userRoles: string[]
-  ): Promise<Applicant> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "create",
-      possession: "any",
-      resource: "Applicant",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const properties = invalidAttributes
-        .map((attribute: string) => JSON.stringify(attribute))
-        .join(", ");
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new errors.ForbiddenException(
-        `providing the properties: ${properties} on ${"Applicant"} creation is forbidden for roles: ${roles}`
-      );
-    }
+  async create(@common.Body() data: ApplicantCreateInput): Promise<Applicant> {
     return await this.service.create({
       data: {
         ...data,
@@ -158,33 +134,19 @@ export class ApplicantControllerBase {
     });
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Get()
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "read",
     possession: "any",
   })
+  @common.Get()
   @swagger.ApiOkResponse({ type: [Applicant] })
   @swagger.ApiForbiddenResponse()
   @ApiNestedQuery(ApplicantFindManyArgs)
-  async findMany(
-    @common.Req() request: Request,
-    @nestAccessControl.UserRoles() userRoles: string[]
-  ): Promise<Applicant[]> {
+  async findMany(@common.Req() request: Request): Promise<Applicant[]> {
     const args = plainToClass(ApplicantFindManyArgs, request.query);
-
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "Applicant",
-    });
-    const results = await this.service.findMany({
+    return this.service.findMany({
       ...args,
       select: {
         archived: true,
@@ -227,33 +189,21 @@ export class ApplicantControllerBase {
         },
       },
     });
-    return results.map((result) => permission.filter(result));
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Get("/:id")
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "read",
     possession: "own",
   })
+  @common.Get("/:id")
   @swagger.ApiOkResponse({ type: Applicant })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async findOne(
-    @common.Param() params: ApplicantWhereUniqueInput,
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Param() params: ApplicantWhereUniqueInput
   ): Promise<Applicant | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "own",
-      resource: "Applicant",
-    });
     const result = await this.service.findOne({
       where: params,
       select: {
@@ -302,47 +252,23 @@ export class ApplicantControllerBase {
         `No resource was found for ${JSON.stringify(params)}`
       );
     }
-    return permission.filter(result);
+    return result;
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Patch("/:id")
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "update",
     possession: "any",
   })
+  @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Applicant })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async update(
     @common.Param() params: ApplicantWhereUniqueInput,
-    @common.Body()
-    data: ApplicantUpdateInput,
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Body() data: ApplicantUpdateInput
   ): Promise<Applicant | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "Applicant",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const properties = invalidAttributes
-        .map((attribute: string) => JSON.stringify(attribute))
-        .join(", ");
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new errors.ForbiddenException(
-        `providing the properties: ${properties} on ${"Applicant"} update is forbidden for roles: ${roles}`
-      );
-    }
     try {
       return await this.service.update({
         where: params,
@@ -430,17 +356,12 @@ export class ApplicantControllerBase {
     }
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Delete("/:id")
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "delete",
     possession: "any",
   })
+  @common.Delete("/:id")
   @swagger.ApiOkResponse({ type: Applicant })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
@@ -501,30 +422,19 @@ export class ApplicantControllerBase {
     }
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Get("/:id/educationHistories")
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Applicant",
+    resource: "EducationHistory",
     action: "read",
     possession: "any",
   })
+  @common.Get("/:id/educationHistories")
   @ApiNestedQuery(EducationHistoryFindManyArgs)
   async findManyEducationHistories(
     @common.Req() request: Request,
-    @common.Param() params: ApplicantWhereUniqueInput,
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Param() params: ApplicantWhereUniqueInput
   ): Promise<EducationHistory[]> {
     const query = plainToClass(EducationHistoryFindManyArgs, request.query);
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "EducationHistory",
-    });
     const results = await this.service.findEducationHistories(params.id, {
       ...query,
       select: {
@@ -574,47 +484,24 @@ export class ApplicantControllerBase {
         `No resource was found for ${JSON.stringify(params)}`
       );
     }
-    return results.map((result) => permission.filter(result));
+    return results;
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Post("/:id/educationHistories")
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "update",
     possession: "any",
   })
-  async createEducationHistories(
+  @common.Post("/:id/educationHistories")
+  async connectEducationHistories(
     @common.Param() params: ApplicantWhereUniqueInput,
-    @common.Body() body: ApplicantWhereUniqueInput[],
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Body() body: EducationHistoryWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       educationHistories: {
         connect: body,
       },
     };
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "Applicant",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new common.ForbiddenException(
-        `Updating the relationship: ${
-          invalidAttributes[0]
-        } of ${"Applicant"} is forbidden for roles: ${roles}`
-      );
-    }
     await this.service.update({
       where: params,
       data,
@@ -622,44 +509,21 @@ export class ApplicantControllerBase {
     });
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Patch("/:id/educationHistories")
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "update",
     possession: "any",
   })
+  @common.Patch("/:id/educationHistories")
   async updateEducationHistories(
     @common.Param() params: ApplicantWhereUniqueInput,
-    @common.Body() body: EducationHistoryWhereUniqueInput[],
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Body() body: EducationHistoryWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       educationHistories: {
         set: body,
       },
     };
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "Applicant",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new common.ForbiddenException(
-        `Updating the relationship: ${
-          invalidAttributes[0]
-        } of ${"Applicant"} is forbidden for roles: ${roles}`
-      );
-    }
     await this.service.update({
       where: params,
       data,
@@ -667,44 +531,21 @@ export class ApplicantControllerBase {
     });
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Delete("/:id/educationHistories")
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "update",
     possession: "any",
   })
-  async deleteEducationHistories(
+  @common.Delete("/:id/educationHistories")
+  async disconnectEducationHistories(
     @common.Param() params: ApplicantWhereUniqueInput,
-    @common.Body() body: ApplicantWhereUniqueInput[],
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Body() body: EducationHistoryWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       educationHistories: {
         disconnect: body,
       },
     };
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "Applicant",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new common.ForbiddenException(
-        `Updating the relationship: ${
-          invalidAttributes[0]
-        } of ${"Applicant"} is forbidden for roles: ${roles}`
-      );
-    }
     await this.service.update({
       where: params,
       data,
@@ -712,30 +553,19 @@ export class ApplicantControllerBase {
     });
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Get("/:id/employmentHistories")
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Applicant",
+    resource: "EmploymentHistory",
     action: "read",
     possession: "any",
   })
+  @common.Get("/:id/employmentHistories")
   @ApiNestedQuery(EmploymentHistoryFindManyArgs)
   async findManyEmploymentHistories(
     @common.Req() request: Request,
-    @common.Param() params: ApplicantWhereUniqueInput,
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Param() params: ApplicantWhereUniqueInput
   ): Promise<EmploymentHistory[]> {
     const query = plainToClass(EmploymentHistoryFindManyArgs, request.query);
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "EmploymentHistory",
-    });
     const results = await this.service.findEmploymentHistories(params.id, {
       ...query,
       select: {
@@ -767,6 +597,7 @@ export class ApplicantControllerBase {
         },
 
         duties: true,
+        employmentType: true,
         endDate: true,
         id: true,
         isCurrentJob: true,
@@ -787,47 +618,24 @@ export class ApplicantControllerBase {
         `No resource was found for ${JSON.stringify(params)}`
       );
     }
-    return results.map((result) => permission.filter(result));
+    return results;
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Post("/:id/employmentHistories")
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "update",
     possession: "any",
   })
-  async createEmploymentHistories(
+  @common.Post("/:id/employmentHistories")
+  async connectEmploymentHistories(
     @common.Param() params: ApplicantWhereUniqueInput,
-    @common.Body() body: ApplicantWhereUniqueInput[],
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Body() body: EmploymentHistoryWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       employmentHistories: {
         connect: body,
       },
     };
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "Applicant",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new common.ForbiddenException(
-        `Updating the relationship: ${
-          invalidAttributes[0]
-        } of ${"Applicant"} is forbidden for roles: ${roles}`
-      );
-    }
     await this.service.update({
       where: params,
       data,
@@ -835,44 +643,21 @@ export class ApplicantControllerBase {
     });
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Patch("/:id/employmentHistories")
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "update",
     possession: "any",
   })
+  @common.Patch("/:id/employmentHistories")
   async updateEmploymentHistories(
     @common.Param() params: ApplicantWhereUniqueInput,
-    @common.Body() body: EmploymentHistoryWhereUniqueInput[],
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Body() body: EmploymentHistoryWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       employmentHistories: {
         set: body,
       },
     };
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "Applicant",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new common.ForbiddenException(
-        `Updating the relationship: ${
-          invalidAttributes[0]
-        } of ${"Applicant"} is forbidden for roles: ${roles}`
-      );
-    }
     await this.service.update({
       where: params,
       data,
@@ -880,44 +665,21 @@ export class ApplicantControllerBase {
     });
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Delete("/:id/employmentHistories")
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "update",
     possession: "any",
   })
-  async deleteEmploymentHistories(
+  @common.Delete("/:id/employmentHistories")
+  async disconnectEmploymentHistories(
     @common.Param() params: ApplicantWhereUniqueInput,
-    @common.Body() body: ApplicantWhereUniqueInput[],
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Body() body: EmploymentHistoryWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       employmentHistories: {
         disconnect: body,
       },
     };
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "Applicant",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new common.ForbiddenException(
-        `Updating the relationship: ${
-          invalidAttributes[0]
-        } of ${"Applicant"} is forbidden for roles: ${roles}`
-      );
-    }
     await this.service.update({
       where: params,
       data,
@@ -925,30 +687,19 @@ export class ApplicantControllerBase {
     });
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Get("/:id/familyMembers")
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Applicant",
+    resource: "FamilyMember",
     action: "read",
     possession: "any",
   })
+  @common.Get("/:id/familyMembers")
   @ApiNestedQuery(FamilyMemberFindManyArgs)
   async findManyFamilyMembers(
     @common.Req() request: Request,
-    @common.Param() params: ApplicantWhereUniqueInput,
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Param() params: ApplicantWhereUniqueInput
   ): Promise<FamilyMember[]> {
     const query = plainToClass(FamilyMemberFindManyArgs, request.query);
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "FamilyMember",
-    });
     const results = await this.service.findFamilyMembers(params.id, {
       ...query,
       select: {
@@ -989,47 +740,24 @@ export class ApplicantControllerBase {
         `No resource was found for ${JSON.stringify(params)}`
       );
     }
-    return results.map((result) => permission.filter(result));
+    return results;
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Post("/:id/familyMembers")
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "update",
     possession: "any",
   })
-  async createFamilyMembers(
+  @common.Post("/:id/familyMembers")
+  async connectFamilyMembers(
     @common.Param() params: ApplicantWhereUniqueInput,
-    @common.Body() body: ApplicantWhereUniqueInput[],
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Body() body: FamilyMemberWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       familyMembers: {
         connect: body,
       },
     };
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "Applicant",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new common.ForbiddenException(
-        `Updating the relationship: ${
-          invalidAttributes[0]
-        } of ${"Applicant"} is forbidden for roles: ${roles}`
-      );
-    }
     await this.service.update({
       where: params,
       data,
@@ -1037,44 +765,21 @@ export class ApplicantControllerBase {
     });
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Patch("/:id/familyMembers")
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "update",
     possession: "any",
   })
+  @common.Patch("/:id/familyMembers")
   async updateFamilyMembers(
     @common.Param() params: ApplicantWhereUniqueInput,
-    @common.Body() body: FamilyMemberWhereUniqueInput[],
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Body() body: FamilyMemberWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       familyMembers: {
         set: body,
       },
     };
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "Applicant",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new common.ForbiddenException(
-        `Updating the relationship: ${
-          invalidAttributes[0]
-        } of ${"Applicant"} is forbidden for roles: ${roles}`
-      );
-    }
     await this.service.update({
       where: params,
       data,
@@ -1082,44 +787,21 @@ export class ApplicantControllerBase {
     });
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Delete("/:id/familyMembers")
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "update",
     possession: "any",
   })
-  async deleteFamilyMembers(
+  @common.Delete("/:id/familyMembers")
+  async disconnectFamilyMembers(
     @common.Param() params: ApplicantWhereUniqueInput,
-    @common.Body() body: ApplicantWhereUniqueInput[],
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Body() body: FamilyMemberWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       familyMembers: {
         disconnect: body,
       },
     };
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "Applicant",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new common.ForbiddenException(
-        `Updating the relationship: ${
-          invalidAttributes[0]
-        } of ${"Applicant"} is forbidden for roles: ${roles}`
-      );
-    }
     await this.service.update({
       where: params,
       data,
@@ -1127,30 +809,19 @@ export class ApplicantControllerBase {
     });
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Get("/:id/travelHistories")
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Applicant",
+    resource: "TravelHistory",
     action: "read",
     possession: "any",
   })
+  @common.Get("/:id/travelHistories")
   @ApiNestedQuery(TravelHistoryFindManyArgs)
   async findManyTravelHistories(
     @common.Req() request: Request,
-    @common.Param() params: ApplicantWhereUniqueInput,
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Param() params: ApplicantWhereUniqueInput
   ): Promise<TravelHistory[]> {
     const query = plainToClass(TravelHistoryFindManyArgs, request.query);
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "TravelHistory",
-    });
     const results = await this.service.findTravelHistories(params.id, {
       ...query,
       select: {
@@ -1178,9 +849,9 @@ export class ApplicantControllerBase {
 
         dateDeparted: true,
         dateEntered: true,
-        destinationAirport: true,
         destinationCity: true,
         destinationCountry: true,
+        destinationHub: true,
         id: true,
         reasonOfTravel: true,
         updatedAt: true,
@@ -1197,47 +868,24 @@ export class ApplicantControllerBase {
         `No resource was found for ${JSON.stringify(params)}`
       );
     }
-    return results.map((result) => permission.filter(result));
+    return results;
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Post("/:id/travelHistories")
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "update",
     possession: "any",
   })
-  async createTravelHistories(
+  @common.Post("/:id/travelHistories")
+  async connectTravelHistories(
     @common.Param() params: ApplicantWhereUniqueInput,
-    @common.Body() body: ApplicantWhereUniqueInput[],
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Body() body: TravelHistoryWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       travelHistories: {
         connect: body,
       },
     };
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "Applicant",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new common.ForbiddenException(
-        `Updating the relationship: ${
-          invalidAttributes[0]
-        } of ${"Applicant"} is forbidden for roles: ${roles}`
-      );
-    }
     await this.service.update({
       where: params,
       data,
@@ -1245,44 +893,21 @@ export class ApplicantControllerBase {
     });
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Patch("/:id/travelHistories")
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "update",
     possession: "any",
   })
+  @common.Patch("/:id/travelHistories")
   async updateTravelHistories(
     @common.Param() params: ApplicantWhereUniqueInput,
-    @common.Body() body: TravelHistoryWhereUniqueInput[],
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Body() body: TravelHistoryWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       travelHistories: {
         set: body,
       },
     };
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "Applicant",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new common.ForbiddenException(
-        `Updating the relationship: ${
-          invalidAttributes[0]
-        } of ${"Applicant"} is forbidden for roles: ${roles}`
-      );
-    }
     await this.service.update({
       where: params,
       data,
@@ -1290,44 +915,21 @@ export class ApplicantControllerBase {
     });
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Delete("/:id/travelHistories")
   @nestAccessControl.UseRoles({
     resource: "Applicant",
     action: "update",
     possession: "any",
   })
-  async deleteTravelHistories(
+  @common.Delete("/:id/travelHistories")
+  async disconnectTravelHistories(
     @common.Param() params: ApplicantWhereUniqueInput,
-    @common.Body() body: ApplicantWhereUniqueInput[],
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Body() body: TravelHistoryWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       travelHistories: {
         disconnect: body,
       },
     };
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "Applicant",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new common.ForbiddenException(
-        `Updating the relationship: ${
-          invalidAttributes[0]
-        } of ${"Applicant"} is forbidden for roles: ${roles}`
-      );
-    }
     await this.service.update({
       where: params,
       data,

@@ -51,7 +51,7 @@ export const PersonalInfoList = (props: ListProps): React.ReactElement => {
         <TextField label="ID" source="id" />
         <TextField label="INZ Client Number" source="inzClientNumber" />
         <TextField label="Last Name" source="lastName" />
-        <TextField label="Modile" source="modile" />
+        <TextField label="Mobile" source="mobile" />
         <TextField label="NZ Address" source="nzAddress" />
         <TextField label="Passport Number" source="passportNumber" />
         <DateField source="updatedAt" label="Updated At" />

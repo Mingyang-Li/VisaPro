@@ -259,6 +259,7 @@ type EmploymentHistory {
   createdAt: DateTime
   createdBy: User
   duties: String
+  employmentType: String
   endDate: DateTime
   id: String!
   isCurrentJob: Boolean
@@ -279,6 +280,7 @@ input EmploymentHistoryCreateInput {
   countryOfWork: String
   createdBy: UserWhereUniqueInput
   duties: String
+  employmentType: String
   endDate: DateTime
   isCurrentJob: Boolean
   jobTitle: String
@@ -312,6 +314,7 @@ input EmploymentHistoryOrderByInput {
   createdAt: SortOrder
   createdById: SortOrder
   duties: SortOrder
+  employmentType: SortOrder
   endDate: SortOrder
   id: SortOrder
   isCurrentJob: SortOrder
@@ -332,6 +335,7 @@ input EmploymentHistoryUpdateInput {
   countryOfWork: String
   createdBy: UserWhereUniqueInput
   duties: String
+  employmentType: String
   endDate: DateTime
   isCurrentJob: Boolean
   jobTitle: String
@@ -362,6 +366,7 @@ input EmploymentHistoryWhereInput {
   countryOfWork: StringNullableFilter
   createdBy: UserWhereUniqueInput
   duties: StringNullableFilter
+  employmentType: StringNullableFilter
   endDate: DateTimeNullableFilter
   id: StringFilter
   isCurrentJob: BooleanNullableFilter
@@ -482,7 +487,7 @@ input FamilyMemberWhereUniqueInput {
 }
 
 type MetaQueryPayload {
-  count: String!
+  count: Float!
 }
 
 type Mutation {
@@ -525,7 +530,7 @@ type PersonalInfo {
   id: String!
   inzClientNumber: String
   lastName: String
-  modile: String
+  mobile: String
   nzAddress: String
   passportNumber: String
   updatedAt: DateTime
@@ -545,7 +550,7 @@ input PersonalInfoCreateInput {
   homeCountryAddress: String
   inzClientNumber: String
   lastName: String
-  modile: String
+  mobile: String
   nzAddress: String
   passportNumber: String
   updatedBy: UserWhereUniqueInput
@@ -576,7 +581,7 @@ input PersonalInfoOrderByInput {
   id: SortOrder
   inzClientNumber: SortOrder
   lastName: SortOrder
-  modile: SortOrder
+  mobile: SortOrder
   nzAddress: SortOrder
   passportNumber: SortOrder
   updatedAt: SortOrder
@@ -596,7 +601,7 @@ input PersonalInfoUpdateInput {
   homeCountryAddress: String
   inzClientNumber: String
   lastName: String
-  modile: String
+  mobile: String
   nzAddress: String
   passportNumber: String
   updatedBy: UserWhereUniqueInput
@@ -622,7 +627,7 @@ input PersonalInfoWhereInput {
   id: StringFilter
   inzClientNumber: StringNullableFilter
   lastName: StringNullableFilter
-  modile: StringNullableFilter
+  mobile: StringNullableFilter
   nzAddress: StringNullableFilter
   passportNumber: StringNullableFilter
   updatedBy: UserWhereUniqueInput
@@ -705,9 +710,9 @@ type TravelHistory {
   createdBy: User
   dateDeparted: DateTime
   dateEntered: DateTime
-  destinationAirport: String
   destinationCity: String
   destinationCountry: String
+  destinationHub: String
   id: String!
   reasonOfTravel: String
   updatedAt: DateTime
@@ -721,9 +726,9 @@ input TravelHistoryCreateInput {
   createdBy: UserWhereUniqueInput
   dateDeparted: DateTime
   dateEntered: DateTime
-  destinationAirport: String
   destinationCity: String
   destinationCountry: String
+  destinationHub: String
   reasonOfTravel: String
   updatedBy: UserWhereUniqueInput
 }
@@ -750,9 +755,9 @@ input TravelHistoryOrderByInput {
   createdById: SortOrder
   dateDeparted: SortOrder
   dateEntered: SortOrder
-  destinationAirport: SortOrder
   destinationCity: SortOrder
   destinationCountry: SortOrder
+  destinationHub: SortOrder
   id: SortOrder
   reasonOfTravel: SortOrder
   updatedAt: SortOrder
@@ -766,9 +771,9 @@ input TravelHistoryUpdateInput {
   createdBy: UserWhereUniqueInput
   dateDeparted: DateTime
   dateEntered: DateTime
-  destinationAirport: String
   destinationCity: String
   destinationCountry: String
+  destinationHub: String
   reasonOfTravel: String
   updatedBy: UserWhereUniqueInput
 }
@@ -792,9 +797,9 @@ input TravelHistoryWhereInput {
   createdBy: UserWhereUniqueInput
   dateDeparted: DateTimeNullableFilter
   dateEntered: DateTimeNullableFilter
-  destinationAirport: StringNullableFilter
   destinationCity: StringNullableFilter
   destinationCountry: StringNullableFilter
+  destinationHub: StringNullableFilter
   id: StringFilter
   reasonOfTravel: StringNullableFilter
   updatedBy: UserWhereUniqueInput

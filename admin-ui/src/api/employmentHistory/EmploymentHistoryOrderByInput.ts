@@ -11,6 +11,7 @@ export type EmploymentHistoryOrderByInput = {
   createdAt?: SortOrder;
   createdById?: SortOrder;
   duties?: SortOrder;
+  employmentType?: SortOrder;
   endDate?: SortOrder;
   id?: SortOrder;
   isCurrentJob?: SortOrder;

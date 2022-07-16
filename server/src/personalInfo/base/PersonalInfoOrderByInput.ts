@@ -151,7 +151,7 @@ class PersonalInfoOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  modile?: SortOrder;
+  mobile?: SortOrder;
 
   @ApiProperty({
     required: false,

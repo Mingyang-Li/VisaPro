@@ -11,16 +11,16 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import * as common from "@nestjs/common";
 import * as swagger from "@nestjs/swagger";
-import * as nestMorgan from "nest-morgan";
 import * as nestAccessControl from "nest-access-control";
 import * as defaultAuthGuard from "../../auth/defaultAuth.guard";
-import * as abacUtil from "../../auth/abac.util";
 import { isRecordNotFoundError } from "../../prisma.util";
 import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
 import { EducationHistoryService } from "../educationHistory.service";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { EducationHistoryCreateInput } from "./EducationHistoryCreateInput";
 import { EducationHistoryWhereInput } from "./EducationHistoryWhereInput";
 import { EducationHistoryWhereUniqueInput } from "./EducationHistoryWhereUniqueInput";
@@ -28,47 +28,25 @@ import { EducationHistoryFindManyArgs } from "./EducationHistoryFindManyArgs";
 import { EducationHistoryUpdateInput } from "./EducationHistoryUpdateInput";
 import { EducationHistory } from "./EducationHistory";
 @swagger.ApiBearerAuth()
+@common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class EducationHistoryControllerBase {
   constructor(
     protected readonly service: EducationHistoryService,
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {}
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Post()
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @nestAccessControl.UseRoles({
     resource: "EducationHistory",
     action: "create",
     possession: "any",
   })
+  @common.Post()
   @swagger.ApiCreatedResponse({ type: EducationHistory })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async create(
-    @common.Body() data: EducationHistoryCreateInput,
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Body() data: EducationHistoryCreateInput
   ): Promise<EducationHistory> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "create",
-      possession: "any",
-      resource: "EducationHistory",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const properties = invalidAttributes
-        .map((attribute: string) => JSON.stringify(attribute))
-        .join(", ");
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new errors.ForbiddenException(
-        `providing the properties: ${properties} on ${"EducationHistory"} creation is forbidden for roles: ${roles}`
-      );
-    }
     return await this.service.create({
       data: {
         ...data,
@@ -141,33 +119,19 @@ export class EducationHistoryControllerBase {
     });
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Get()
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
     resource: "EducationHistory",
     action: "read",
     possession: "any",
   })
+  @common.Get()
   @swagger.ApiOkResponse({ type: [EducationHistory] })
   @swagger.ApiForbiddenResponse()
   @ApiNestedQuery(EducationHistoryFindManyArgs)
-  async findMany(
-    @common.Req() request: Request,
-    @nestAccessControl.UserRoles() userRoles: string[]
-  ): Promise<EducationHistory[]> {
+  async findMany(@common.Req() request: Request): Promise<EducationHistory[]> {
     const args = plainToClass(EducationHistoryFindManyArgs, request.query);
-
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "EducationHistory",
-    });
-    const results = await this.service.findMany({
+    return this.service.findMany({
       ...args,
       select: {
         additionalInfo: true,
@@ -211,33 +175,21 @@ export class EducationHistoryControllerBase {
         },
       },
     });
-    return results.map((result) => permission.filter(result));
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Get("/:id")
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
     resource: "EducationHistory",
     action: "read",
     possession: "own",
   })
+  @common.Get("/:id")
   @swagger.ApiOkResponse({ type: EducationHistory })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async findOne(
-    @common.Param() params: EducationHistoryWhereUniqueInput,
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Param() params: EducationHistoryWhereUniqueInput
   ): Promise<EducationHistory | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "own",
-      resource: "EducationHistory",
-    });
     const result = await this.service.findOne({
       where: params,
       select: {
@@ -287,47 +239,23 @@ export class EducationHistoryControllerBase {
         `No resource was found for ${JSON.stringify(params)}`
       );
     }
-    return permission.filter(result);
+    return result;
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Patch("/:id")
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @nestAccessControl.UseRoles({
     resource: "EducationHistory",
     action: "update",
     possession: "any",
   })
+  @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: EducationHistory })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async update(
     @common.Param() params: EducationHistoryWhereUniqueInput,
-    @common.Body()
-    data: EducationHistoryUpdateInput,
-    @nestAccessControl.UserRoles() userRoles: string[]
+    @common.Body() data: EducationHistoryUpdateInput
   ): Promise<EducationHistory | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "EducationHistory",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
-    if (invalidAttributes.length) {
-      const properties = invalidAttributes
-        .map((attribute: string) => JSON.stringify(attribute))
-        .join(", ");
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new errors.ForbiddenException(
-        `providing the properties: ${properties} on ${"EducationHistory"} update is forbidden for roles: ${roles}`
-      );
-    }
     try {
       return await this.service.update({
         where: params,
@@ -410,17 +338,12 @@ export class EducationHistoryControllerBase {
     }
   }
 
-  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
-  @common.UseGuards(
-    defaultAuthGuard.DefaultAuthGuard,
-    nestAccessControl.ACGuard
-  )
-  @common.Delete("/:id")
   @nestAccessControl.UseRoles({
     resource: "EducationHistory",
     action: "delete",
     possession: "any",
   })
+  @common.Delete("/:id")
   @swagger.ApiOkResponse({ type: EducationHistory })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })

@@ -176,7 +176,7 @@ class PersonalInfoWhereInput {
   @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  modile?: StringNullableFilter;
+  mobile?: StringNullableFilter;
 
   @ApiProperty({
     required: false,

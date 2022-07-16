@@ -15,6 +15,7 @@ export type EmploymentHistoryWhereInput = {
   countryOfWork?: StringNullableFilter;
   createdBy?: UserWhereUniqueInput;
   duties?: StringNullableFilter;
+  employmentType?: StringNullableFilter;
   endDate?: DateTimeNullableFilter;
   id?: StringFilter;
   isCurrentJob?: BooleanNullableFilter;

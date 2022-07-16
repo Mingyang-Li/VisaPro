@@ -9,9 +9,9 @@ export type TravelHistory = {
   createdBy?: User | null;
   dateDeparted: Date | null;
   dateEntered: Date | null;
-  destinationAirport: string | null;
   destinationCity: string | null;
   destinationCountry: string | null;
+  destinationHub: string | null;
   id: string;
   reasonOfTravel: string | null;
   updatedAt: Date | null;

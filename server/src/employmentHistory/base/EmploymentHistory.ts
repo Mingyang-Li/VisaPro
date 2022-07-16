@@ -129,6 +129,17 @@ class EmploymentHistory {
 
   @ApiProperty({
     required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  employmentType!: string | null;
+
+  @ApiProperty({
+    required: false,
   })
   @IsDate()
   @Type(() => Date)

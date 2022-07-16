@@ -99,17 +99,6 @@ class TravelHistoryWhereInput {
   @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  destinationAirport?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: StringNullableFilter,
-  })
-  @Type(() => StringNullableFilter)
-  @IsOptional()
-  @Field(() => StringNullableFilter, {
-    nullable: true,
-  })
   destinationCity?: StringNullableFilter;
 
   @ApiProperty({
@@ -122,6 +111,17 @@ class TravelHistoryWhereInput {
     nullable: true,
   })
   destinationCountry?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  destinationHub?: StringNullableFilter;
 
   @ApiProperty({
     required: false,

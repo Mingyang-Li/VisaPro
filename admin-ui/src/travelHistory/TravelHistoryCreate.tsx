@@ -34,9 +34,9 @@ export const TravelHistoryCreate = (props: CreateProps): React.ReactElement => {
         </ReferenceInput>
         <DateTimeInput label="Date Departed" source="dateDeparted" />
         <DateTimeInput label="Date Entered" source="dateEntered" />
-        <TextInput label="Destination Airport" source="destinationAirport" />
         <TextInput label="Destination City" source="destinationCity" />
         <TextInput label="Destination Country" source="destinationCountry" />
+        <TextInput label="Destination Hub" source="destinationHub" />
         <TextInput label="Reason of Travel" source="reasonOfTravel" />
         <ReferenceInput source="user.id" reference="User" label="Updated By">
           <SelectInput optionText={UserTitle} />
