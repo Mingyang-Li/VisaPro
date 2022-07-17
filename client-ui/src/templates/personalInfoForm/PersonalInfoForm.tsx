@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, CardActions, Grid, TextField } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -10,11 +10,8 @@ import { PersonalInfo, Query } from '../../generated/graphql';
 import { PERSONAL_INFO_BY_APPLICANT_ID } from '../../graphql/Queries';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import { countryList } from '../../utils/countries';
-import { useParams } from 'react-router-dom';
 
 export const PersonalInfoForm: React.FC = () => {
-  const { id } = useParams();
-  const [formInfo, setFormInfo] = useState<PersonalInfo>({ id: id || '' });
   const [edit, setEdit] = useState(false);
   const applicantId = useReactiveVar(applicantIdCurrEditing);
   const { data, loading, error } = useQuery<Query>(
@@ -25,7 +22,12 @@ export const PersonalInfoForm: React.FC = () => {
       },
     },
   );
-  const personalInfo = data?.personalInfos[0];
+  const [formInfo, setFormInfo] = useState<PersonalInfo>(
+    data?.personalInfos[0] as PersonalInfo,
+  );
+  useEffect(() => {
+    console.log(formInfo);
+  }, [formInfo]);
 
   return (
     <Card variant="outlined">
@@ -36,7 +38,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'firstName'}
               label={'First name'}
-              defaultValue={personalInfo?.firstName}
+              defaultValue={formInfo?.firstName}
               onChange={(e: any) =>
                 setFormInfo({ ...formInfo, firstName: e.currentTarget.value })
               }
@@ -49,7 +51,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'lastName'}
               label={'Last name'}
-              defaultValue={personalInfo?.lastName}
+              defaultValue={formInfo?.lastName}
               onChange={(e: any) =>
                 setFormInfo({ ...formInfo, lastName: e.currentTarget.value })
               }
@@ -62,7 +64,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'email'}
               label={'Email'}
-              defaultValue={personalInfo?.email}
+              defaultValue={formInfo?.email}
               onChange={(e: any) =>
                 setFormInfo({ ...formInfo, email: e.currentTarget.value })
               }
@@ -75,7 +77,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'mobile'}
               label={'Mobile'}
-              defaultValue={personalInfo?.mobile}
+              defaultValue={formInfo?.mobile}
               onChange={(e: any) =>
                 setFormInfo({ ...formInfo, mobile: e.currentTarget.value })
               }
@@ -88,7 +90,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'nzAddress'}
               label={'NZ address'}
-              defaultValue={personalInfo?.nzAddress}
+              defaultValue={formInfo?.nzAddress}
               onChange={(e: any) =>
                 setFormInfo({ ...formInfo, nzAddress: e.currentTarget.value })
               }
@@ -101,7 +103,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'homeCountryAddress'}
               label={'Home Country Address'}
-              defaultValue={personalInfo?.homeCountryAddress}
+              defaultValue={formInfo?.homeCountryAddress}
               onChange={(e: any) =>
                 setFormInfo({
                   ...formInfo,
@@ -117,7 +119,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'inzClientNumber'}
               label={'Immigration NZ Client number'}
-              defaultValue={personalInfo?.inzClientNumber}
+              defaultValue={formInfo?.inzClientNumber}
               onChange={(e: any) =>
                 setFormInfo({
                   ...formInfo,
@@ -133,7 +135,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'passportNumber'}
               label={'Passport number'}
-              defaultValue={personalInfo?.passportNumber}
+              defaultValue={formInfo?.passportNumber}
               onChange={(e: any) =>
                 setFormInfo({
                   ...formInfo,
@@ -145,33 +147,56 @@ export const PersonalInfoForm: React.FC = () => {
               variant={!edit ? 'filled' : 'outlined'}
             />
           </Grid>
-          <Grid item md={6} sm={12} xs={12}>
+          <Grid item md={4} sm={12} xs={12}>
             <Autocomplete
+              id="countriesOfCitizenship"
+              freeSolo
               disablePortal
-              id="combo-box-demo"
               options={countryList.map((c) => c)}
-              sx={{ width: 300 }}
               disabled={!edit}
+              onChange={(event: any, newValue: string | null) => {
+                setFormInfo({
+                  ...formInfo,
+                  countriesOfCitizenship: newValue,
+                });
+              }}
+              inputValue={formInfo.countriesOfCitizenship ?? ''}
+              onInputChange={(event, newInputValue) => {
+                setFormInfo({
+                  ...formInfo,
+                  countriesOfCitizenship: newInputValue,
+                });
+              }}
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label="Countries of citizenship"
+                  label="Country of citizenship"
                   fullWidth
                   variant={!edit ? 'filled' : 'outlined'}
                 />
               )}
             />
           </Grid>
-          <Grid item md={3} sm={12} xs={12}>
-            <BasicDatePicker label="Date of birth" disabled={!edit} />
-          </Grid>
-          <Grid item md={3} sm={12} xs={12}>
+
+          <Grid item md={4} sm={12} xs={12}>
             <Autocomplete
+              id="countryOfBirth"
               disablePortal
               disabled={!edit}
-              id="combo-box-demo"
               options={countryList.map((c) => c)}
-              sx={{ width: 300 }}
+              onChange={(event: any, newValue: string | null) => {
+                setFormInfo({
+                  ...formInfo,
+                  countryOfBirth: newValue,
+                });
+              }}
+              inputValue={formInfo.countriesOfCitizenship ?? ''}
+              onInputChange={(event, newInputValue) => {
+                setFormInfo({
+                  ...formInfo,
+                  countryOfBirth: newInputValue,
+                });
+              }}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -181,6 +206,9 @@ export const PersonalInfoForm: React.FC = () => {
                 />
               )}
             />
+          </Grid>
+          <Grid item md={4} sm={12} xs={12}>
+            <BasicDatePicker label="Date of birth" disabled={!edit} />
           </Grid>
         </Grid>
       </CardContent>

@@ -16,12 +16,13 @@ export const BasicDatePicker: React.FC<IDatePicker> = (props: IDatePicker) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
-        label={props.label}
-        value={props.value ?? null}
+        inputFormat="yyyy/MM/dd"
+        label={props.label ?? 'Date'}
+        value={value}
         onChange={(newValue) => {
           setValue(newValue);
         }}
-        renderInput={(params) => <TextField {...params} />}
+        renderInput={(params) => <TextField {...params} fullWidth />}
         disabled={props.disabled ?? false}
       />
     </LocalizationProvider>
