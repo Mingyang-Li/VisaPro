@@ -9,7 +9,7 @@ import ApplicantFormCreate from '../templates/applicantFormCreate/ApplicantFormC
 import { Query } from '../generated/graphql';
 import { GET_APPLICANTS_BY_USER, GET_CURR_USER } from '../graphql/Queries';
 
-export const UpdatingCurrUser: React.FC = () => {
+const UpdatingCurrUser: React.FC = () => {
   const info = useReactiveVar(userInfo);
   const username = info.username;
   const { data } = useQuery<Query>(GET_CURR_USER, {
@@ -25,7 +25,7 @@ export const UpdatingCurrUser: React.FC = () => {
     currUser.firstName = data?.users[0].firstName;
     currUser.lastName = data?.users[0].lastName;
     user(currUser);
-    window.localStorage.setItem('userId', currUser.id);
+    sessionStorage.setItem('userId', currUser.id);
   }
   return <></>;
 };
@@ -33,7 +33,7 @@ export const UpdatingCurrUser: React.FC = () => {
 const Contents: React.FC = () => {
   const { data } = useQuery<Query>(GET_APPLICANTS_BY_USER, {
     variables: {
-      id: window.localStorage.getItem('userId'),
+      id: sessionStorage.getItem('userId'),
     },
   });
 

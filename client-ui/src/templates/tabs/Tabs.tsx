@@ -42,7 +42,7 @@ export interface Tab {
   component: React.ReactElement;
 }
 
-export interface IBasicTabs {
+interface IBasicTabs {
   tabs: Tab[];
 }
 

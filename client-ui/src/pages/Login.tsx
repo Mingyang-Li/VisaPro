@@ -75,7 +75,7 @@ const Login: React.FC = () => {
   const [initiateLogin, { data, loading }] = useMutation<Mutation>(LOGIN, {
     update(proxy, result) {
       userInfo(result?.data?.login);
-      window.localStorage.setItem(
+      sessionStorage.setItem(
         'accessToken',
         result?.data?.login?.accessToken as string,
       );
@@ -85,10 +85,6 @@ const Login: React.FC = () => {
       password: values.password,
     },
   });
-
-  // useEffect(() => {
-  //   setLoginError(!loginError);
-  // }, [error]);
 
   const updateEmail = (e: any) => {
     setValues({ ...values, email: e.currentTarget.value });

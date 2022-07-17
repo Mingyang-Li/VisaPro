@@ -110,7 +110,7 @@ const AppContainer: React.FC<IAppContainer> = ({ title, contents }) => {
   };
 
   const handleLogout = () => {
-    window.localStorage.removeItem('accessToken');
+    sessionStorage.removeItem('accessToken');
     navigate('/login');
   };
 

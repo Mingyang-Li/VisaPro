@@ -45,9 +45,7 @@ const App: React.FC = () => {
     {
       path: '/dashboard',
       component: (
-        <Protected
-          isLoggedIn={window.localStorage.getItem('accessToken') !== null}
-        >
+        <Protected isLoggedIn={sessionStorage.getItem('accessToken') !== null}>
           <Dashboard />
         </Protected>
       ),
@@ -55,9 +53,7 @@ const App: React.FC = () => {
     {
       path: '/applicants/:id',
       component: (
-        <Protected
-          isLoggedIn={window.localStorage.getItem('accessToken') !== null}
-        >
+        <Protected isLoggedIn={sessionStorage.getItem('accessToken') !== null}>
           <Applicant />
         </Protected>
       ),
