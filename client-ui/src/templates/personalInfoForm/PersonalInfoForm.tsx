@@ -77,7 +77,7 @@ export const PersonalInfoForm: React.FC = () => {
               label={'Mobile'}
               defaultValue={personalInfo?.mobile}
               onChange={(e: any) =>
-                setFormInfo({ ...formInfo, firstName: e.currentTarget.value })
+                setFormInfo({ ...formInfo, mobile: e.currentTarget.value })
               }
               fullWidth
               disabled={!edit}
@@ -88,7 +88,10 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'nzAddress'}
               label={'NZ address'}
-              value={personalInfo?.nzAddress}
+              defaultValue={personalInfo?.nzAddress}
+              onChange={(e: any) =>
+                setFormInfo({ ...formInfo, nzAddress: e.currentTarget.value })
+              }
               fullWidth
               disabled={!edit}
               variant={!edit ? 'filled' : 'outlined'}
@@ -98,7 +101,13 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'homeCountryAddress'}
               label={'Home Country Address'}
-              value={personalInfo?.homeCountryAddress}
+              defaultValue={personalInfo?.homeCountryAddress}
+              onChange={(e: any) =>
+                setFormInfo({
+                  ...formInfo,
+                  homeCountryAddress: e.currentTarget.value,
+                })
+              }
               fullWidth
               disabled={!edit}
               variant={!edit ? 'filled' : 'outlined'}
@@ -108,7 +117,13 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'inzClientNumber'}
               label={'Immigration NZ Client number'}
-              value={personalInfo?.inzClientNumber}
+              defaultValue={personalInfo?.inzClientNumber}
+              onChange={(e: any) =>
+                setFormInfo({
+                  ...formInfo,
+                  inzClientNumber: e.currentTarget.value,
+                })
+              }
               fullWidth
               disabled={!edit}
               variant={!edit ? 'filled' : 'outlined'}
@@ -118,7 +133,13 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'passportNumber'}
               label={'Passport number'}
-              value={personalInfo?.passportNumber}
+              defaultValue={personalInfo?.passportNumber}
+              onChange={(e: any) =>
+                setFormInfo({
+                  ...formInfo,
+                  passportNumber: e.currentTarget.value,
+                })
+              }
               fullWidth
               disabled={!edit}
               variant={!edit ? 'filled' : 'outlined'}

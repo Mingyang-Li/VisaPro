@@ -25,7 +25,7 @@ const LoadingSpinner: React.FC<ILoadingSpinner> = (props: ILoadingSpinner) => (
       alt="Loading..."
       style={{ top: '30%', left: '45%' }}
     />
-    <h3>{props.text ?? 'Loading...'}</h3>
+    <p>{props.text ?? 'Loading...'}</p>
   </div>
 );
 
