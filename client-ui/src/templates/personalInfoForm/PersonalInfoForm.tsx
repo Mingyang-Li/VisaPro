@@ -26,11 +26,6 @@ export const PersonalInfoForm: React.FC = () => {
     },
   );
   const personalInfo = data?.personalInfos[0];
-  // const applicant = userVar.applicants.filter((a) => a.id !== applicantId);
-
-  // useEffect(() => {
-  //   console.table(applicant);
-  // }, [applicantId]);
 
   return (
     <Card variant="outlined">
@@ -41,7 +36,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'firstName'}
               label={'First name'}
-              defaultValue={personalInfo!.firstName}
+              defaultValue={personalInfo?.firstName}
               onChange={(e: any) =>
                 setFormInfo({ ...formInfo, firstName: e.currentTarget.value })
               }
@@ -54,7 +49,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'lastName'}
               label={'Last name'}
-              defaultValue={personalInfo!.lastName}
+              defaultValue={personalInfo?.lastName}
               onChange={(e: any) =>
                 setFormInfo({ ...formInfo, lastName: e.currentTarget.value })
               }
@@ -67,7 +62,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'email'}
               label={'Email'}
-              defaultValue={personalInfo!.email}
+              defaultValue={personalInfo?.email}
               onChange={(e: any) =>
                 setFormInfo({ ...formInfo, email: e.currentTarget.value })
               }
@@ -80,7 +75,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'mobile'}
               label={'Mobile'}
-              defaultValue={personalInfo!.mobile}
+              defaultValue={personalInfo?.mobile}
               onChange={(e: any) =>
                 setFormInfo({ ...formInfo, firstName: e.currentTarget.value })
               }
@@ -93,7 +88,17 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'nzAddress'}
               label={'NZ address'}
-              // value={personalInfo!.nzAddress}
+              value={personalInfo?.nzAddress}
+              fullWidth
+              disabled={!edit}
+              variant={!edit ? 'filled' : 'outlined'}
+            />
+          </Grid>
+          <Grid item md={6} sm={12} xs={12}>
+            <TextField
+              id={'homeCountryAddress'}
+              label={'Home Country Address'}
+              value={personalInfo?.homeCountryAddress}
               fullWidth
               disabled={!edit}
               variant={!edit ? 'filled' : 'outlined'}
@@ -103,7 +108,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'inzClientNumber'}
               label={'Immigration NZ Client number'}
-              // value={personalInfo!.inzClientNumber}
+              value={personalInfo?.inzClientNumber}
               fullWidth
               disabled={!edit}
               variant={!edit ? 'filled' : 'outlined'}
@@ -113,7 +118,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'passportNumber'}
               label={'Passport number'}
-              // value={personalInfo!.passportNumber}
+              value={personalInfo?.passportNumber}
               fullWidth
               disabled={!edit}
               variant={!edit ? 'filled' : 'outlined'}
@@ -136,10 +141,10 @@ export const PersonalInfoForm: React.FC = () => {
               )}
             />
           </Grid>
-          <Grid item md={6} sm={12} xs={12}>
+          <Grid item md={3} sm={12} xs={12}>
             <BasicDatePicker label="Date of birth" disabled={!edit} />
           </Grid>
-          <Grid item md={6} sm={12} xs={12}>
+          <Grid item md={3} sm={12} xs={12}>
             <Autocomplete
               disablePortal
               disabled={!edit}
