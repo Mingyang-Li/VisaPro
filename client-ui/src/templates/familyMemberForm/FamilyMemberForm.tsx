@@ -49,7 +49,7 @@ export const FamilyMemberForm = () => {
             />
           </Grid>
           <Grid item md={6} sm={6} xs={12}>
-            <BasicDatePicker label="Date of birth" />
+            {/* <BasicDatePicker label="Date of birth" /> */}
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField

@@ -29,6 +29,10 @@ export const PersonalInfoForm: React.FC = () => {
     console.log(formInfo);
   }, [formInfo]);
 
+  const updateDateValue = (d: Date) => {
+    setFormInfo({ ...formInfo, dateOfBirth: d });
+  };
+
   return (
     <Card variant="outlined">
       <CardContent>
@@ -160,7 +164,6 @@ export const PersonalInfoForm: React.FC = () => {
                   countriesOfCitizenship: newValue,
                 });
               }}
-              inputValue={formInfo.countriesOfCitizenship ?? ''}
               onInputChange={(event, newInputValue) => {
                 setFormInfo({
                   ...formInfo,
@@ -190,7 +193,6 @@ export const PersonalInfoForm: React.FC = () => {
                   countryOfBirth: newValue,
                 });
               }}
-              inputValue={formInfo.countriesOfCitizenship ?? ''}
               onInputChange={(event, newInputValue) => {
                 setFormInfo({
                   ...formInfo,
@@ -208,7 +210,11 @@ export const PersonalInfoForm: React.FC = () => {
             />
           </Grid>
           <Grid item md={4} sm={12} xs={12}>
-            <BasicDatePicker label="Date of birth" disabled={!edit} />
+            <BasicDatePicker
+              label="Date of birth"
+              disabled={!edit}
+              updateParentDateValue={updateDateValue}
+            />
           </Grid>
         </Grid>
       </CardContent>

@@ -7,10 +7,10 @@ export const TravelHistoryForm = () => {
       <CardContent>
         <Grid container spacing={2}>
           <Grid item md={6} sm={6} xs={12}>
-            <BasicDatePicker label="Date entered a destination" />
+            {/* <BasicDatePicker label="Date entered a destination" /> */}
           </Grid>
           <Grid item md={6} sm={6} xs={12}>
-            <BasicDatePicker label="Date departed" />
+            {/* <BasicDatePicker label="Date departed" /> */}
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField

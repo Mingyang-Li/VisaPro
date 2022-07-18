@@ -67,10 +67,10 @@ export const EmploymentHistoryForm: React.FC = () => {
             />
           </Grid>
           <Grid item md={6} sm={6} xs={12}>
-            <BasicDatePicker label="Start date" />
+            {/* <BasicDatePicker label="Start date" /> */}
           </Grid>
           <Grid item md={6} sm={6} xs={12}>
-            <BasicDatePicker label="End date" />
+            {/* <BasicDatePicker label="End date" /> */}
           </Grid>
           <Grid item md={6} sm={6} xs={12}>
             <FormControlLabel

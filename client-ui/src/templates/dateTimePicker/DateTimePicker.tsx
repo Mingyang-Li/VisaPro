@@ -8,6 +8,7 @@ interface IDatePicker {
   label?: string;
   value?: Date;
   disabled?: boolean;
+  updateParentDateValue: (d: Date) => void;
 }
 
 export const BasicDatePicker: React.FC<IDatePicker> = (props: IDatePicker) => {
@@ -21,6 +22,7 @@ export const BasicDatePicker: React.FC<IDatePicker> = (props: IDatePicker) => {
         value={value}
         onChange={(newValue) => {
           setValue(newValue);
+          props.updateParentDateValue(newValue as Date);
         }}
         renderInput={(params) => <TextField {...params} fullWidth />}
         disabled={props.disabled ?? false}
