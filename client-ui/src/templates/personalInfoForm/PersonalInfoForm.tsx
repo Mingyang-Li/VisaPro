@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, CardActions, Grid, TextField } from '@mui/material';
+import { Alert, Button, CardActions, Grid, TextField } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -28,9 +28,8 @@ export const PersonalInfoForm: React.FC = () => {
     data?.personalInfos[0] as PersonalInfo,
   );
 
-  const [initiateMutation, { loading: updating }] = useMutation<Mutation>(
-    UPDATE_PERSONAL_INFO_BY_ID,
-    {
+  const [initiateMutation, { loading: updating, error: updateError }] =
+    useMutation<Mutation>(UPDATE_PERSONAL_INFO_BY_ID, {
       variables: {
         id: formInfo.id,
         firstName: formInfo.firstName,
@@ -52,8 +51,7 @@ export const PersonalInfoForm: React.FC = () => {
           variables: { applicantId },
         },
       ],
-    },
-  );
+    });
 
   useEffect(() => {
     console.log(formInfo);
@@ -244,6 +242,29 @@ export const PersonalInfoForm: React.FC = () => {
               label="Date of birth"
               disabled={!edit}
               updateParentDateValue={updateDateValue}
+            />
+          </Grid>
+          {/* <Grid item md={12} sm={12} xs={12}>
+            <Alert severity="success">testjsdgfjs</Alert>
+          </Grid> */}
+          <Grid item md={6} sm={12} xs={12}>
+            <TextField
+              id="createdAt"
+              label="Created at"
+              variant="filled"
+              disabled
+              fullWidth
+              value={new Date(formInfo.createdAt).toUTCString()}
+            />
+          </Grid>
+          <Grid item md={6} sm={12} xs={12}>
+            <TextField
+              id="updatedAt"
+              label="Updated at"
+              variant="filled"
+              disabled
+              fullWidth
+              value={new Date(formInfo.updatedAt).toUTCString()}
             />
           </Grid>
         </Grid>
