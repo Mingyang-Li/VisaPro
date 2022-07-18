@@ -39,3 +39,42 @@ export const CREATE_APPLICANT = gql`
     }
   }
 `;
+
+export const UPDATE_PERSONAL_INFO_BY_ID = gql`
+  mutation {
+    updatePersonalInfo(
+      where: { id: "cl2ohcya75800a0u2edb47zqr" }
+      data: {
+        firstName: "Test"
+        lastName: "1"
+        email: "test1@gmail.com"
+        mobile: "123456789"
+        nzAddress: "234 cow rd, sheepland"
+        homeCountryAddress: "1 polar bear road, Quebec, Canada"
+        inzClientNumber: "FDGHV4545"
+        passportNumber: "V5BV4B45"
+        countriesOfCitizenship: "North Korea"
+        countryOfBirth: "India"
+        dateOfBirth: "Fri Jul 01 2022 00:00:00 GMT+1200 (New Zealand Standard Time)"
+        updatedBy: { id: "cl1zup0hr25785su22imjp419" }
+      }
+    ) {
+      firstName
+      lastName
+      email
+      mobile
+      nzAddress
+      homeCountryAddress
+      inzClientNumber
+      passportNumber
+      countriesOfCitizenship
+      countryOfBirth
+      dateOfBirth
+      updatedAt
+      updatedBy {
+        id
+        email
+      }
+    }
+  }
+`;
