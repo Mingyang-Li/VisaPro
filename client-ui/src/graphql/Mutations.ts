@@ -41,22 +41,38 @@ export const CREATE_APPLICANT = gql`
 `;
 
 export const UPDATE_PERSONAL_INFO_BY_ID = gql`
-  mutation {
+  mutation (
+    # pk
+    $id: String!
+    # data
+    $firstName: String
+    $lastName: String
+    $email: String
+    $mobile: String
+    $nzAddress: String
+    $homeCountryAddress: String
+    $inzClientNumber: String
+    $passportNumber: String
+    $countriesOfCitizenship: String
+    $countryOfBirth: String
+    $dateOfBirth: DateTime
+    $updatedById: String
+  ) {
     updatePersonalInfo(
-      where: { id: "cl2ohcya75800a0u2edb47zqr" }
+      where: { id: $id }
       data: {
-        firstName: "Test"
-        lastName: "1"
-        email: "test1@gmail.com"
-        mobile: "123456789"
-        nzAddress: "234 cow rd, sheepland"
-        homeCountryAddress: "1 polar bear road, Quebec, Canada"
-        inzClientNumber: "FDGHV4545"
-        passportNumber: "V5BV4B45"
-        countriesOfCitizenship: "North Korea"
-        countryOfBirth: "India"
-        dateOfBirth: "Fri Jul 01 2022 00:00:00 GMT+1200 (New Zealand Standard Time)"
-        updatedBy: { id: "cl1zup0hr25785su22imjp419" }
+        firstName: $firstName
+        lastName: $lastName
+        email: $email
+        mobile: $mobile
+        nzAddress: $nzAddress
+        homeCountryAddress: $homeCountryAddress
+        inzClientNumber: $inzClientNumber
+        passportNumber: $passportNumber
+        countriesOfCitizenship: $countriesOfCitizenship
+        countryOfBirth: $countryOfBirth
+        dateOfBirth: $dateOfBirth
+        updatedBy: { id: $$updatedById }
       }
     ) {
       firstName
