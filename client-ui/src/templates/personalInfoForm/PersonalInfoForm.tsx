@@ -4,12 +4,13 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Autocomplete from '@mui/material/Autocomplete';
 import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
-import { useQuery, useReactiveVar } from '@apollo/client';
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { applicantIdCurrEditing } from '../../graphql/Store';
-import { PersonalInfo, Query } from '../../generated/graphql';
+import { Mutation, PersonalInfo, Query } from '../../generated/graphql';
 import { PERSONAL_INFO_BY_APPLICANT_ID } from '../../graphql/Queries';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import { countryList } from '../../utils/countries';
+import { UPDATE_PERSONAL_INFO_BY_ID } from '../../graphql/Mutations';
 
 export const PersonalInfoForm: React.FC = () => {
   const [edit, setEdit] = useState(false);
@@ -22,9 +23,38 @@ export const PersonalInfoForm: React.FC = () => {
       },
     },
   );
+
   const [formInfo, setFormInfo] = useState<PersonalInfo>(
     data?.personalInfos[0] as PersonalInfo,
   );
+
+  const [initiateMutation, { loading: updating }] = useMutation<Mutation>(
+    UPDATE_PERSONAL_INFO_BY_ID,
+    {
+      variables: {
+        id: formInfo.id,
+        firstName: formInfo.firstName,
+        lastName: formInfo.lastName,
+        email: formInfo.email,
+        mobile: formInfo.mobile,
+        nzAddress: formInfo.nzAddress,
+        homeCountryAddress: formInfo.homeCountryAddress,
+        inzClientNumber: formInfo.inzClientNumber,
+        passportNumber: formInfo.passportNumber,
+        countriesOfCitizenship: formInfo.countriesOfCitizenship,
+        countryOfBirth: formInfo.countryOfBirth,
+        dateOfBirth: formInfo.dateOfBirth,
+        updatedById: window.sessionStorage.getItem('userId'),
+      },
+      refetchQueries: [
+        {
+          query: PERSONAL_INFO_BY_APPLICANT_ID,
+          variables: { applicantId },
+        },
+      ],
+    },
+  );
+
   useEffect(() => {
     console.log(formInfo);
   }, [formInfo]);
@@ -36,7 +66,7 @@ export const PersonalInfoForm: React.FC = () => {
   return (
     <Card variant="outlined">
       <CardContent>
-        <LoadingSpinner show={loading} />
+        <LoadingSpinner show={loading || updating} />
         <Grid container spacing={2}>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
@@ -232,7 +262,7 @@ export const PersonalInfoForm: React.FC = () => {
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <Button
-              // onClick={handleSubmit}
+              onClick={() => initiateMutation().then(() => setEdit(!edit))}
               disabled={!edit}
               variant="contained"
               fullWidth

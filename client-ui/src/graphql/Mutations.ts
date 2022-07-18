@@ -56,7 +56,7 @@ export const UPDATE_PERSONAL_INFO_BY_ID = gql`
     $countriesOfCitizenship: String
     $countryOfBirth: String
     $dateOfBirth: DateTime
-    $updatedById: String
+    $updatedById: String!
   ) {
     updatePersonalInfo(
       where: { id: $id }
@@ -72,25 +72,10 @@ export const UPDATE_PERSONAL_INFO_BY_ID = gql`
         countriesOfCitizenship: $countriesOfCitizenship
         countryOfBirth: $countryOfBirth
         dateOfBirth: $dateOfBirth
-        updatedBy: { id: $$updatedById }
+        updatedBy: { id: $updatedById }
       }
     ) {
-      firstName
-      lastName
-      email
-      mobile
-      nzAddress
-      homeCountryAddress
-      inzClientNumber
-      passportNumber
-      countriesOfCitizenship
-      countryOfBirth
-      dateOfBirth
       updatedAt
-      updatedBy {
-        id
-        email
-      }
     }
   }
 `;
