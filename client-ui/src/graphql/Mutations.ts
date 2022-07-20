@@ -172,19 +172,22 @@ export const UPDATE_EDUCATION_HISTORY_BY_ID = gql`
 
 export const CREATE_EMPLOYMENT_HISOTRY = gql`
   mutation (
-  # data
-  $jobTitle: String
-  $companyName: String
-  $duties: String
-  $cityOfWork: String
-  $countryOfWork: String
-  $employmentType: String
-  $additionalInfo: String
+    # data
+    $jobTitle: String
+    $companyName: String
+    $duties: String
+    $cityOfWork: String
+    $countryOfWork: String
+    $employmentType: String
+    $startDate: DateTime
+    $endDate: DateTime
+    $nzBusinessNumber: String
+    $additionalInfo: String
 
-  # relations
-  $applicantID: String!
-  $createdByID: String!
-) {
+    # relations
+    $applicantID: String!
+    $createdByID: String!
+  ) {
     createEmploymentHistory (
       data: {
         jobTitle: $jobTitle
@@ -193,6 +196,9 @@ export const CREATE_EMPLOYMENT_HISOTRY = gql`
         cityOfWork: $cityOfWork
         countryOfWork: $countryOfWork
         employmentType: $employmentType
+        startDate: $startDate
+        endDate: $endDate
+        nzBusinessNumber: $nzBusinessNumber 
         additionalInfo: $additionalInfo
         archived: false
         applicant: {
