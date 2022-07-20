@@ -89,7 +89,6 @@ export const CREATE_EDUCATION_HISTORY = gql`
     $qualificationGained: String
     $startDate: DateTime
     $endDate: DateTime
-    $archived: Boolean
     $additionalInfo: String
     
     # relations
@@ -105,7 +104,7 @@ export const CREATE_EDUCATION_HISTORY = gql`
         qualificationGained: $qualificationGained
         startDate: $startDate
         endDate: $endDate
-        archived: $archived
+        archived: false
         additionalInfo: $additionalInfo
         applicant: {
           id: $applicantID
