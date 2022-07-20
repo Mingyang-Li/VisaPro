@@ -123,4 +123,50 @@ export const CREATE_EDUCATION_HISTORY = gql`
       }
     }
   }
-`
+`;
+
+export const UPDATE_EDUCATION_HISTORY_BY_ID = gql`
+  mutation (
+  # pk
+  $id: String!
+  
+  # args
+  $institutionName: String
+  $city: String
+  $country: String
+  $isCurrentInstitution: Boolean
+  $qualificationGained: String
+  $startDate: DateTime
+  $endDate: DateTime
+  $archived: Boolean
+  $additionalInfo: String
+  $updatedByID: String!
+) {
+    updateEducationHistory (
+      where: {
+        id: $id
+      }
+      data: {
+        institutionName: $institutionName
+        city: $city
+        country: $country
+        isCurrentInstitution: $isCurrentInstitution
+        qualificationGained: $qualificationGained
+        startDate: $startDate
+        endDate: $endDate
+        archived: $archived
+        additionalInfo: $additionalInfo
+        updatedBy: {
+          id: $updatedByID
+        }
+      }
+    ) {
+      id
+      updatedAt
+      updatedBy {
+        id
+        username
+      }
+    }
+  }
+`;
