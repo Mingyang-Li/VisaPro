@@ -122,20 +122,21 @@ export const CREATE_EDUCATION_HISTORY = gql`
 
 export const UPDATE_EDUCATION_HISTORY_BY_ID = gql`
   mutation (
-  # pk
-  $id: String!
-  
-  # args
-  $institutionName: String
-  $city: String
-  $country: String
-  $isCurrentInstitution: Boolean
-  $qualificationGained: String
-  $startDate: DateTime
-  $endDate: DateTime
-  $archived: Boolean
-  $additionalInfo: String
-  $updatedByID: String!
+    # pk
+    $id: String!
+
+    # args
+    $institutionName: String
+    $city: String
+    $country: String
+    $isCurrentInstitution: Boolean
+    $qualificationGained: String
+    $startDate: DateTime
+    $endDate: DateTime
+    $archived: Boolean
+    $archivedBy: UserWhereUniqueInput
+    $additionalInfo: String
+    $updatedBy: UserWhereUniqueInput!
 ) {
     updateEducationHistory (
       where: {
@@ -150,10 +151,9 @@ export const UPDATE_EDUCATION_HISTORY_BY_ID = gql`
         startDate: $startDate
         endDate: $endDate
         archived: $archived
+        archivedBy: $archivedBy
         additionalInfo: $additionalInfo
-        updatedBy: {
-          id: $updatedByID
-        }
+        updatedBy: $updatedBy
       }
     ) {
       id
