@@ -181,8 +181,8 @@ export const CREATE_EMPLOYMENT_HISOTRY = gql`
     $additionalInfo: String
 
     # relations
-    $applicantID: String!
-    $createdByID: String!
+    $applicant: ApplicantWhereUniqueInput!
+    $createdBy: UserWhereUniqueInput!
   ) {
     createEmploymentHistory (
       data: {
@@ -197,12 +197,8 @@ export const CREATE_EMPLOYMENT_HISOTRY = gql`
         nzBusinessNumber: $nzBusinessNumber 
         additionalInfo: $additionalInfo
         archived: false
-        applicant: {
-          id: $applicantID
-        }
-        createdBy: {
-          id: $createdByID
-        }
+        applicant: $applicant
+        createdBy: $createdBy
       }
     ) {
       id
