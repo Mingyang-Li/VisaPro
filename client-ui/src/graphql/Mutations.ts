@@ -92,8 +92,8 @@ export const CREATE_EDUCATION_HISTORY = gql`
     $additionalInfo: String
     
     # relations
-    $applicantID: String!
-    $createdByID: String!
+    $applicant: ApplicantWhereUniqueInput!
+    $createdBy: UserWhereUniqueInput!
   ) {
     createEducationHistory (
       data: {
@@ -106,12 +106,8 @@ export const CREATE_EDUCATION_HISTORY = gql`
         endDate: $endDate
         archived: false
         additionalInfo: $additionalInfo
-        applicant: {
-          id: $applicantID
-        }
-        createdBy: {
-          id: $createdByID
-        }
+        applicant: $applicant
+        createdBy: $createdBy
       }
     ) {
       id
