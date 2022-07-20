@@ -170,3 +170,46 @@ export const UPDATE_EDUCATION_HISTORY_BY_ID = gql`
     }
   }
 `;
+
+export const CREATE_EMPLOYMENT_HISOTRY = gql`
+  mutation (
+  # data
+  $jobTitle: String
+  $companyName: String
+  $duties: String
+  $cityOfWork: String
+  $countryOfWork: String
+  $employmentType: String
+  $additionalInfo: String
+
+  # relations
+  $applicantID: String!
+  $createdByID: String!
+) {
+    createEmploymentHistory (
+      data: {
+        jobTitle: $jobTitle
+        companyName: $companyName
+        duties: $duties
+        cityOfWork: $cityOfWork
+        countryOfWork: $countryOfWork
+        employmentType: $employmentType
+        additionalInfo: $additionalInfo
+        archived: false
+        applicant: {
+          id: $applicantID
+        }
+        createdBy: {
+          id: $createdByID
+        }
+      }
+    ) {
+      id
+      createdAt
+      createdBy {
+        id
+        username
+      }
+    }
+  }
+`;
