@@ -79,3 +79,47 @@ export const UPDATE_PERSONAL_INFO_BY_ID = gql`
     }
   }
 `;
+
+export const CREATE_EDUCATION_HISTORY = gql`
+  mutation (
+    $institutionName: String
+    $city: String
+    $country: String
+    $isCurrentInstitution: Boolean
+    $qualificationGained: String
+    $startDate: DateTime
+    $endDate: DateTime
+    $archived: Boolean
+    $additionalInfo: String
+    
+    # relations
+    $applicantID: String!
+  ) {
+    createEducationHistory (
+      data: {
+        institutionName: $institutionName
+        city: $city
+        country: $country
+        isCurrentInstitution: $isCurrentInstitution
+        qualificationGained: $qualificationGained
+        startDate: $startDate
+        endDate: $endDate
+        archived: $archived
+        additionalInfo: $additionalInfo
+        applicant: {
+          id: $applicantID
+        }
+        createdBy: {
+          id: $createdByID
+        }
+      }
+    ) {
+      id
+      createdAt
+      createdBy {
+        id
+        username
+      }
+    }
+  }
+`
