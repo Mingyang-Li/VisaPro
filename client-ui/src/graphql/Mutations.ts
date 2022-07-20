@@ -94,6 +94,7 @@ export const CREATE_EDUCATION_HISTORY = gql`
     
     # relations
     $applicantID: String!
+    $createdByID: String!
   ) {
     createEducationHistory (
       data: {
