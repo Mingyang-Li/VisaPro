@@ -244,9 +244,15 @@ export const PersonalInfoForm: React.FC = () => {
               updateParentDateValue={updateDateValue}
             />
           </Grid>
-          {/* <Grid item md={12} sm={12} xs={12}>
-            <Alert severity="success">testjsdgfjs</Alert>
-          </Grid> */}
+          {updateError ? (
+            <Grid item md={12} sm={12} xs={12}>
+            <Alert severity="error">An error occured, please try again later</Alert>
+          </Grid>
+          ) : (
+            <Grid item md={12} sm={12} xs={12}>
+              <Alert severity="success">Personal Information updated</Alert>
+            </Grid>
+          )}
           <Grid item md={6} sm={12} xs={12}>
             <TextField
               id="createdAt"
