@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const LOGIN = gql`
-  mutation ($username: String!, $password: String!) {
+  mutation LOGIN($username: String!, $password: String!) {
     login(credentials: { username: $username, password: $password }) {
       roles
       username
@@ -11,7 +11,7 @@ export const LOGIN = gql`
 `;
 
 export const CREATE_PERSONAL_INFO = gql`
-  mutation (
+  mutation CREATE_PERSONAL_INFO(
     $firstName: String
     $lastName: String
     $email: String
@@ -33,7 +33,7 @@ export const CREATE_PERSONAL_INFO = gql`
 `;
 
 export const CREATE_APPLICANT = gql`
-  mutation ($createdBy: UserWhereUniqueInput) {
+  mutation CREATE_PERSONAL_INFO($createdBy: UserWhereUniqueInput) {
     createApplicant(data: { createdBy: $createdBy, archived: false }) {
       id
     }
@@ -41,7 +41,7 @@ export const CREATE_APPLICANT = gql`
 `;
 
 export const UPDATE_PERSONAL_INFO_BY_ID = gql`
-  mutation (
+  mutation UPDATE_PERSONAL_INFO_BY_ID(
     # pk
     $id: String!
     # data
@@ -81,7 +81,7 @@ export const UPDATE_PERSONAL_INFO_BY_ID = gql`
 `;
 
 export const CREATE_EDUCATION_HISTORY = gql`
-  mutation (
+  mutation CREATE_EDUCATION_HISTORY(
     $institutionName: String
     $city: String
     $country: String
@@ -90,12 +90,11 @@ export const CREATE_EDUCATION_HISTORY = gql`
     $startDate: DateTime
     $endDate: DateTime
     $additionalInfo: String
-    
     # relations
     $applicant: ApplicantWhereUniqueInput!
     $createdBy: UserWhereUniqueInput!
   ) {
-    createEducationHistory (
+    createEducationHistory(
       data: {
         institutionName: $institutionName
         city: $city
@@ -121,10 +120,9 @@ export const CREATE_EDUCATION_HISTORY = gql`
 `;
 
 export const UPDATE_EDUCATION_HISTORY_BY_ID = gql`
-  mutation (
+  mutation UPDATE_EDUCATION_HISTORY_BY_ID(
     # pk
     $id: String!
-
     # args
     $institutionName: String
     $city: String
@@ -137,11 +135,9 @@ export const UPDATE_EDUCATION_HISTORY_BY_ID = gql`
     $archivedBy: UserWhereUniqueInput
     $additionalInfo: String
     $updatedBy: UserWhereUniqueInput!
-) {
-    updateEducationHistory (
-      where: {
-        id: $id
-      }
+  ) {
+    updateEducationHistory(
+      where: { id: $id }
       data: {
         institutionName: $institutionName
         city: $city
@@ -167,7 +163,7 @@ export const UPDATE_EDUCATION_HISTORY_BY_ID = gql`
 `;
 
 export const CREATE_EMPLOYMENT_HISOTRY = gql`
-  mutation (
+  mutation CREATE_EMPLOYMENT_HISOTRY(
     # data
     $jobTitle: String
     $companyName: String
@@ -179,12 +175,11 @@ export const CREATE_EMPLOYMENT_HISOTRY = gql`
     $endDate: DateTime
     $nzBusinessNumber: String
     $additionalInfo: String
-
     # relations
     $applicant: ApplicantWhereUniqueInput!
     $createdBy: UserWhereUniqueInput!
   ) {
-    createEmploymentHistory (
+    createEmploymentHistory(
       data: {
         jobTitle: $jobTitle
         companyName: $companyName
@@ -194,7 +189,7 @@ export const CREATE_EMPLOYMENT_HISOTRY = gql`
         employmentType: $employmentType
         startDate: $startDate
         endDate: $endDate
-        nzBusinessNumber: $nzBusinessNumber 
+        nzBusinessNumber: $nzBusinessNumber
         additionalInfo: $additionalInfo
         archived: false
         applicant: $applicant

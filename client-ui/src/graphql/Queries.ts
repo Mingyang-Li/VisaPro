@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_CURR_USER = gql`
-  query ($username: String) {
+  query GET_CURR_USER($username: String) {
     users(where: { username: { equals: $username } }) {
       id
       username
@@ -13,7 +13,7 @@ export const GET_CURR_USER = gql`
 `;
 
 export const GET_APPLICANTS_BY_USER = gql`
-  query ($id: String!) {
+  query GET_APPLICANTS_BY_USER($id: String!) {
     applicants(
       where: { createdBy: { id: $id }, archived: { equals: null } }
       orderBy: { updatedAt: Desc }
@@ -53,7 +53,7 @@ export const GET_APPLICANTS_BY_USER = gql`
 `;
 
 export const PERSONAL_INFO_BY_APPLICANT_ID = gql`
-  query ($applicantId: String!) {
+  query PERSONAL_INFO_BY_APPLICANT_ID($applicantId: String!) {
     personalInfos(where: { applicant: { id: $applicantId } }) {
       id
       firstName
