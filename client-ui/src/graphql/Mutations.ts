@@ -11,30 +11,16 @@ export const LOGIN = gql`
 `;
 
 export const CREATE_PERSONAL_INFO = gql`
-  mutation CREATE_PERSONAL_INFO(
-    $firstName: String
-    $lastName: String
-    $email: String
-    $createdBy: UserWhereUniqueInput
-    $applicant: ApplicantWhereUniqueInput
-  ) {
-    createPersonalInfo(
-      data: {
-        firstName: $firstName
-        lastName: $lastName
-        email: $email
-        createdBy: $createdBy
-        applicant: $applicant
-      }
-    ) {
+  mutation CREATE_PERSONAL_INFO($data: PersonalInfoCreateInput!) {
+    createPersonalInfo(data: $data) {
       id
     }
   }
 `;
 
 export const CREATE_APPLICANT = gql`
-  mutation CREATE_PERSONAL_INFO($createdBy: UserWhereUniqueInput) {
-    createApplicant(data: { createdBy: $createdBy, archived: false }) {
+  mutation CREATE_APPLICANT($data: ApplicantCreateInput!) {
+    createApplicant(data: $data) {
       id
     }
   }

@@ -58,18 +58,34 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
 
   const applicantId = useReactiveVar(entityCreated);
 
+  const [createApplicant] = useMutation<Mutation>(CREATE_APPLICANT, {
+    variables: {
+      data: {
+        createdBy: {
+          id: u.id,
+        },
+        archived: false,
+      },
+    },
+    update(proxy, result) {
+      entityCreated(result?.data?.createApplicant.id);
+    },
+  });
+
   const [createPersonalInfo, { loading }] = useMutation<Mutation>(
     CREATE_PERSONAL_INFO,
     {
       variables: {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
-        createdBy: {
-          id: u.id,
-        },
-        applicant: {
-          id: applicantId,
+        data: {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          createdBy: {
+            id: u.id,
+          },
+          applicant: {
+            id: applicantId,
+          },
         },
       },
       refetchQueries: [
@@ -85,17 +101,6 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
       ],
     },
   );
-
-  const [createApplicant] = useMutation<Mutation>(CREATE_APPLICANT, {
-    variables: {
-      createdBy: {
-        id: u.id,
-      },
-    },
-    update(proxy, result) {
-      entityCreated(result?.data?.createApplicant.id);
-    },
-  });
 
   const handleSubmit = () => {
     setValues({ ...values, disableInput: true });
