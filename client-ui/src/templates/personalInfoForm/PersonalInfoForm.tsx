@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, Button, CardActions, Grid, TextField } from '@mui/material';
+import { Button, CardActions, Grid, TextField } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -244,15 +244,6 @@ export const PersonalInfoForm: React.FC = () => {
               updateParentDateValue={updateDateValue}
             />
           </Grid>
-          {updateError ? (
-            <Grid item md={12} sm={12} xs={12}>
-            <Alert severity="error">An error occured, please try again later</Alert>
-          </Grid>
-          ) : (
-            <Grid item md={12} sm={12} xs={12}>
-              <Alert severity="success">Personal Information updated</Alert>
-            </Grid>
-          )}
           <Grid item md={6} sm={12} xs={12}>
             <TextField
               id="createdAt"

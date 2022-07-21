@@ -53,8 +53,8 @@ export const GET_APPLICANTS_BY_USER = gql`
 `;
 
 export const PERSONAL_INFO_BY_APPLICANT_ID = gql`
-  query PERSONAL_INFO_BY_APPLICANT_ID($applicantId: String!) {
-    personalInfos(where: { applicant: { id: $applicantId } }) {
+  query PERSONAL_INFO_BY_APPLICANT_ID($applicant: ApplicantWhereUniqueInput) {
+    personalInfos(where: { applicant: $applicant }) {
       id
       firstName
       lastName
