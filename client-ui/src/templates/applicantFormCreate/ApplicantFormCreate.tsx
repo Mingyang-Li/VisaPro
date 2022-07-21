@@ -76,7 +76,10 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
         {
           query: GET_APPLICANTS_BY_USER,
           variables: {
-            id: sessionStorage.getItem('userId'),
+            where: {
+              createdBy: { id: sessionStorage.getItem('userId') },
+              archived: { equals: null },
+            },
           },
         },
       ],

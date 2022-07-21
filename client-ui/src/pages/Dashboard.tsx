@@ -33,7 +33,10 @@ const UpdatingCurrUser: React.FC = () => {
 const Contents: React.FC = () => {
   const { data } = useQuery<Query>(GET_APPLICANTS_BY_USER, {
     variables: {
-      id: sessionStorage.getItem('userId'),
+      where: {
+        createdBy: { id: sessionStorage.getItem('userId') },
+        archived: { equals: null },
+      },
     },
   });
 
