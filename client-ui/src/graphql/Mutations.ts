@@ -83,36 +83,12 @@ export const CREATE_EDUCATION_HISTORY = gql`
 
 export const UPDATE_EDUCATION_HISTORY_BY_ID = gql`
   mutation UPDATE_EDUCATION_HISTORY_BY_ID(
-    # pk
-    $id: String!
-    # args
-    $institutionName: String
-    $city: String
-    $country: String
-    $isCurrentInstitution: Boolean
-    $qualificationGained: String
-    $startDate: DateTime
-    $endDate: DateTime
-    $archived: Boolean
-    $archivedBy: UserWhereUniqueInput
-    $additionalInfo: String
-    $updatedBy: UserWhereUniqueInput!
+    $where: EducationHistoryWhereUniqueInput!
+    $data: EducationHistoryUpdateInput!
   ) {
     updateEducationHistory(
-      where: { id: $id }
-      data: {
-        institutionName: $institutionName
-        city: $city
-        country: $country
-        isCurrentInstitution: $isCurrentInstitution
-        qualificationGained: $qualificationGained
-        startDate: $startDate
-        endDate: $endDate
-        archived: $archived
-        archivedBy: $archivedBy
-        additionalInfo: $additionalInfo
-        updatedBy: $updatedBy
-      }
+      where: $where
+      data: $data
     ) {
       id
       updatedAt
@@ -125,39 +101,8 @@ export const UPDATE_EDUCATION_HISTORY_BY_ID = gql`
 `;
 
 export const CREATE_EMPLOYMENT_HISOTRY = gql`
-  mutation CREATE_EMPLOYMENT_HISOTRY(
-    # data
-    $jobTitle: String
-    $companyName: String
-    $duties: String
-    $cityOfWork: String
-    $countryOfWork: String
-    $employmentType: String
-    $startDate: DateTime
-    $endDate: DateTime
-    $nzBusinessNumber: String
-    $additionalInfo: String
-    # relations
-    $applicant: ApplicantWhereUniqueInput!
-    $createdBy: UserWhereUniqueInput!
-  ) {
-    createEmploymentHistory(
-      data: {
-        jobTitle: $jobTitle
-        companyName: $companyName
-        duties: $duties
-        cityOfWork: $cityOfWork
-        countryOfWork: $countryOfWork
-        employmentType: $employmentType
-        startDate: $startDate
-        endDate: $endDate
-        nzBusinessNumber: $nzBusinessNumber
-        additionalInfo: $additionalInfo
-        archived: false
-        applicant: $applicant
-        createdBy: $createdBy
-      }
-    ) {
+  mutation CREATE_EMPLOYMENT_HISOTRY($data: EmploymentHistoryCreateInput!) {
+    createEmploymentHistory(data: $data) {
       id
       createdAt
       createdBy {
