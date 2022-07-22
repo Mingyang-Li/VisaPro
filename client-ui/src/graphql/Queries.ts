@@ -68,3 +68,103 @@ export const PERSONAL_INFO_BY_APPLICANT_ID = gql`
     }
   }
 `;
+
+export const EDUCATION_HISTORIES = gql`
+  query EDUCATION_HISTORIES (
+    $orderBy: [EducationHistoryOrderByInput!]
+    $skip: Float
+    $take: Float
+    $where: EducationHistoryWhereInput
+  ) {
+    educationHistories (
+      orderBy: $orderBy
+      skip: $skip
+      take: $take
+      where: $where
+    ) {
+      id
+      institutionName
+      isCurrentInstitution
+      qualificationGained
+      startDate
+      endDate
+      city
+      country
+      additionalInfo
+      createdAt
+      updatedAt
+      createdBy {
+        id
+        username
+      }
+      updatedBy {
+        id
+        username
+      }
+    }
+  }
+`;
+
+export const EDUCATION_HISTORY = gql`
+  query EDUCATION_HISTORY ($where: EducationHistoryWhereUniqueInput!) {
+    educationHistory (
+      where: $where
+    ) {
+      id
+      institutionName
+      isCurrentInstitution
+      qualificationGained
+      startDate
+      endDate
+      city
+      country
+      additionalInfo
+      createdAt
+      updatedAt
+      createdBy {
+        id
+        username
+      }
+      updatedBy {
+        id
+        username
+      }
+    }
+  }
+`;
+
+export const EMPLOYMENT_HISTORIES = gql`
+  query EMPLOYMENT_HISTORIES (
+    $orderBy: [EmploymentHistoryOrderByInput!]
+    $skip: Float
+    $take: Float
+    $where: EmploymentHistoryWhereInput
+  ) {
+    employmentHistories (
+      orderBy: $orderBy
+      skip: $skip
+      take: $take
+      where: $where
+    ) {
+      id
+      jobTitle
+      duties
+      employmentType
+      startDate
+      endDate
+      cityOfWork
+      countryOfWork
+      additionalInfo
+      createdAt
+      updatedAt
+      createdBy {
+        id
+        username
+      }
+      updatedBy {
+        id
+        username
+      }
+    }
+  }
+`;
