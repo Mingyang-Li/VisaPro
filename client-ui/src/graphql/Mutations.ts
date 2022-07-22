@@ -67,33 +67,9 @@ export const UPDATE_PERSONAL_INFO_BY_ID = gql`
 `;
 
 export const CREATE_EDUCATION_HISTORY = gql`
-  mutation CREATE_EDUCATION_HISTORY(
-    $institutionName: String
-    $city: String
-    $country: String
-    $isCurrentInstitution: Boolean
-    $qualificationGained: String
-    $startDate: DateTime
-    $endDate: DateTime
-    $additionalInfo: String
-    # relations
-    $applicant: ApplicantWhereUniqueInput!
-    $createdBy: UserWhereUniqueInput!
-  ) {
+  mutation CREATE_EDUCATION_HISTORY($data: EducationHistoryCreateInput!) {
     createEducationHistory(
-      data: {
-        institutionName: $institutionName
-        city: $city
-        country: $country
-        isCurrentInstitution: $isCurrentInstitution
-        qualificationGained: $qualificationGained
-        startDate: $startDate
-        endDate: $endDate
-        archived: false
-        additionalInfo: $additionalInfo
-        applicant: $applicant
-        createdBy: $createdBy
-      }
+      data: $$data
     ) {
       id
       createdAt
