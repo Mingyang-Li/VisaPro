@@ -176,3 +176,21 @@ export const EMPLOYMENT_HISTORY = gql`
     }
   }
 `;
+
+export const TRAVEL_HISTORIES = gql`
+  query TRAVEL_HISTORIES (
+    $orderBy: [TravelHistoryOrderByInput!]
+    $skip: Float
+    $take: Float
+    $where: TravelHistoryWhereInput
+  ) {
+    travelHistories (
+      orderBy: $orderBy
+      skip: $skip
+      take: $take
+      where: $where
+    ) {
+      id
+    }
+  }
+`;
