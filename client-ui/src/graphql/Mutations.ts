@@ -151,3 +151,12 @@ export const UPDATE_TRAVEL_HISTORY = gql`
     }
   }
 `;
+
+export const CREATE_FAMILY_MEMBER = gql`
+  mutation CREATE_FAMILY_MEMBER ($data: FamilyMemberCreateInput!) {
+    createFamilyMember (data: $data) {
+      id
+      createdAt
+    }
+  }
+`;
