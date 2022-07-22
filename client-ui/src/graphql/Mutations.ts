@@ -127,3 +127,12 @@ export const UPDATE_EMOLOYMENT_HISTORY = gql`
     }
   }
 `;
+
+export const CREATE_TRAVEL_HISTORY = gql`
+  mutation CREATE_TRAVEL_HISTORY ($data: TravelHistoryCreateInput!) {
+    createTravelHistory(data: $data) {
+      id
+      createdAt
+    }
+  }
+`;
