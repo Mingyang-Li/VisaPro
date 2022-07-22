@@ -136,3 +136,18 @@ export const CREATE_TRAVEL_HISTORY = gql`
     }
   }
 `;
+
+export const UPDATE_TRAVEL_HISTORY = gql`
+  mutation UPDATE_TRAVEL_HISTORY (
+    $where: TravelHistoryWhereUniqueInput!
+    $data: TravelHistoryUpdateInput!
+  ) {
+    updateTravelHistory (
+      where: $where
+      data: $data
+    ) {
+      id
+      updatedAt
+    }
+  }
+`;
