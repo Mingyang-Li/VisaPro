@@ -194,3 +194,37 @@ export const TRAVEL_HISTORIES = gql`
     }
   }
 `;
+
+export const TRAVEL_HISTORY = gql`
+  query TRAVEL_HISTORY ($where: TravelHistoryWhereUniqueInput!) {
+    travelHistory (where: $where) {
+      id
+    }
+  }
+`;
+
+export const FAMILY_MEMBERS = gql`
+  query FAMILY_MEMBERS (
+    $orderBy: [FamilyMemberOrderByInput!]
+    $skip: Float
+    $take: Float
+    $where: FamilyMemberWhereInput
+  ) {
+    familyMembers (
+      orderBy: $orderBy
+      skip: $skip
+      take: $take
+      where: $where
+    ) {
+      id
+    }
+  }
+`;
+
+export const FAMILY_MEMBER = gql`
+  query FAMILY_MEMBER ($where: FamilyMemberWhereUniqueInput!) {
+    familyMember (where: $where) {
+      id
+    }
+  }
+`;
