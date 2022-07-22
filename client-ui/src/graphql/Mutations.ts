@@ -160,3 +160,18 @@ export const CREATE_FAMILY_MEMBER = gql`
     }
   }
 `;
+
+export const UPDATE_FAMILY_MEMBER = gql`
+  mutation UPDATE_FAMILY_MEMBER (
+    $data: FamilyMemberUpdateInput!
+    $where: FamilyMemberWhereUniqueInput!
+  ) {
+    updateFamilyMember (
+      where: $where
+      data: $data
+    ) {
+      id
+      updatedAt
+    }
+  }
+`;
