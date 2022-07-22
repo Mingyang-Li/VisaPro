@@ -112,3 +112,18 @@ export const CREATE_EMPLOYMENT_HISOTRY = gql`
     }
   }
 `;
+
+export const UPDATE_EMOLOYMENT_HISTORY = gql`
+  mutation UPDATE_EMOLOYMENT_HISTORY (
+    $where: EmploymentHistoryWhereUniqueInput!
+    $data: EmploymentHistoryUpdateInput!
+  ) {
+    updateEmploymentHistory(
+      where: $where
+      data: $data
+    ) {
+      id
+      updatedAt
+    }
+  }
+`;
