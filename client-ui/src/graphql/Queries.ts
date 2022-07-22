@@ -168,3 +168,11 @@ export const EMPLOYMENT_HISTORIES = gql`
     }
   }
 `;
+
+export const EMPLOYMENT_HISTORY = gql`
+  query EMPLOYMENT_HISTORY ($where: EmploymentHistoryWhereUniqueInput!) {
+    employmentHistory (where: $where) {
+      id
+    }
+  }
+`;
