@@ -34,7 +34,7 @@ const Contents: React.FC = () => {
   const { data } = useQuery<Query>(GET_APPLICANTS_BY_USER, {
     variables: {
       where: {
-        createdBy: { id: sessionStorage.getItem('userId') },
+        createdBy: { id: sessionStorage.getItem('userId') || '' },
         archived: { equals: null },
       },
     },
