@@ -7,51 +7,61 @@ import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { applicantIdCurrEditing } from '../../graphql/Store';
 import { Mutation, PersonalInfo, Query } from '../../generated/graphql';
-import {
-  GET_APPLICANTS_BY_USER,
-  PERSONAL_INFO_BY_APPLICANT_ID,
-} from '../../graphql/Queries';
+import { GET_APPLICANTS_BY_USER, PERSONAL_INFOS } from '../../graphql/Queries';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import { countryList } from '../../utils/countries';
-import { UPDATE_PERSONAL_INFO_BY_ID } from '../../graphql/Mutations';
+import { UPDATE_PERSONAL_INFO } from '../../graphql/Mutations';
 
 export const PersonalInfoForm: React.FC = () => {
   const [edit, setEdit] = useState(false);
   const applicantId = useReactiveVar(applicantIdCurrEditing);
-  const { data, loading, error } = useQuery<Query>(
-    PERSONAL_INFO_BY_APPLICANT_ID,
-    {
-      variables: {
-        applicantId,
+  const { data, loading, error } = useQuery<Query>(PERSONAL_INFOS, {
+    variables: {
+      where: {
+        applicant: {
+          id: applicantId,
+        },
       },
     },
-  );
+  });
 
   const [formInfo, setFormInfo] = useState<PersonalInfo>(
     data?.personalInfos[0] as PersonalInfo,
   );
 
   const [initiateMutation, { loading: updating, error: updateError }] =
-    useMutation<Mutation>(UPDATE_PERSONAL_INFO_BY_ID, {
+    useMutation<Mutation>(UPDATE_PERSONAL_INFO, {
       variables: {
-        id: formInfo?.id,
-        firstName: formInfo?.firstName,
-        lastName: formInfo?.lastName,
-        email: formInfo?.email,
-        mobile: formInfo?.mobile,
-        nzAddress: formInfo?.nzAddress,
-        homeCountryAddress: formInfo?.homeCountryAddress,
-        inzClientNumber: formInfo?.inzClientNumber,
-        passportNumber: formInfo?.passportNumber,
-        countriesOfCitizenship: formInfo?.countriesOfCitizenship,
-        countryOfBirth: formInfo?.countryOfBirth,
-        dateOfBirth: formInfo?.dateOfBirth,
-        updatedById: window.sessionStorage.getItem('userId'),
+        where: {
+          id: formInfo?.id ?? '',
+        },
+        data: {
+          firstName: formInfo?.firstName,
+          lastName: formInfo?.lastName,
+          email: formInfo?.email,
+          mobile: formInfo?.mobile,
+          nzAddress: formInfo?.nzAddress,
+          homeCountryAddress: formInfo?.homeCountryAddress,
+          inzClientNumber: formInfo?.inzClientNumber,
+          passportNumber: formInfo?.passportNumber,
+          countriesOfCitizenship: formInfo?.countriesOfCitizenship,
+          countryOfBirth: formInfo?.countryOfBirth,
+          dateOfBirth: formInfo?.dateOfBirth,
+          updatedBy: {
+            id: window.sessionStorage.getItem('userId') ?? '',
+          },
+        },
       },
       refetchQueries: [
         {
-          query: PERSONAL_INFO_BY_APPLICANT_ID,
-          variables: { applicantId },
+          query: PERSONAL_INFOS,
+          variables: {
+            where: {
+              applicant: {
+                id: applicantId,
+              },
+            },
+          },
         },
         {
           query: GET_APPLICANTS_BY_USER,

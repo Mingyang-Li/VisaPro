@@ -49,9 +49,14 @@ export const GET_APPLICANTS_BY_USER = gql`
   }
 `;
 
-export const PERSONAL_INFO_BY_APPLICANT_ID = gql`
-  query PERSONAL_INFO_BY_APPLICANT_ID($applicant: ApplicantWhereUniqueInput) {
-    personalInfos(where: { applicant: $applicant }) {
+export const PERSONAL_INFOS = gql`
+  query PERSONAL_INFOS(
+    $orderBy: [PersonalInfoOrderByInput!]
+    $skip: Float
+    $take: Float
+    $where: PersonalInfoWhereInput
+  ) {
+    personalInfos(orderBy: $orderBy, skip: $skip, take: $take, where: $where) {
       id
       firstName
       lastName
@@ -70,13 +75,13 @@ export const PERSONAL_INFO_BY_APPLICANT_ID = gql`
 `;
 
 export const EDUCATION_HISTORIES = gql`
-  query EDUCATION_HISTORIES (
+  query EDUCATION_HISTORIES(
     $orderBy: [EducationHistoryOrderByInput!]
     $skip: Float
     $take: Float
     $where: EducationHistoryWhereInput
   ) {
-    educationHistories (
+    educationHistories(
       orderBy: $orderBy
       skip: $skip
       take: $take
@@ -106,10 +111,8 @@ export const EDUCATION_HISTORIES = gql`
 `;
 
 export const EDUCATION_HISTORY = gql`
-  query EDUCATION_HISTORY ($where: EducationHistoryWhereUniqueInput!) {
-    educationHistory (
-      where: $where
-    ) {
+  query EDUCATION_HISTORY($where: EducationHistoryWhereUniqueInput!) {
+    educationHistory(where: $where) {
       id
       institutionName
       isCurrentInstitution
@@ -134,13 +137,13 @@ export const EDUCATION_HISTORY = gql`
 `;
 
 export const EMPLOYMENT_HISTORIES = gql`
-  query EMPLOYMENT_HISTORIES (
+  query EMPLOYMENT_HISTORIES(
     $orderBy: [EmploymentHistoryOrderByInput!]
     $skip: Float
     $take: Float
     $where: EmploymentHistoryWhereInput
   ) {
-    employmentHistories (
+    employmentHistories(
       orderBy: $orderBy
       skip: $skip
       take: $take
@@ -170,21 +173,21 @@ export const EMPLOYMENT_HISTORIES = gql`
 `;
 
 export const EMPLOYMENT_HISTORY = gql`
-  query EMPLOYMENT_HISTORY ($where: EmploymentHistoryWhereUniqueInput!) {
-    employmentHistory (where: $where) {
+  query EMPLOYMENT_HISTORY($where: EmploymentHistoryWhereUniqueInput!) {
+    employmentHistory(where: $where) {
       id
     }
   }
 `;
 
 export const TRAVEL_HISTORIES = gql`
-  query TRAVEL_HISTORIES (
+  query TRAVEL_HISTORIES(
     $orderBy: [TravelHistoryOrderByInput!]
     $skip: Float
     $take: Float
     $where: TravelHistoryWhereInput
   ) {
-    travelHistories (
+    travelHistories(
       orderBy: $orderBy
       skip: $skip
       take: $take
@@ -196,34 +199,29 @@ export const TRAVEL_HISTORIES = gql`
 `;
 
 export const TRAVEL_HISTORY = gql`
-  query TRAVEL_HISTORY ($where: TravelHistoryWhereUniqueInput!) {
-    travelHistory (where: $where) {
+  query TRAVEL_HISTORY($where: TravelHistoryWhereUniqueInput!) {
+    travelHistory(where: $where) {
       id
     }
   }
 `;
 
 export const FAMILY_MEMBERS = gql`
-  query FAMILY_MEMBERS (
+  query FAMILY_MEMBERS(
     $orderBy: [FamilyMemberOrderByInput!]
     $skip: Float
     $take: Float
     $where: FamilyMemberWhereInput
   ) {
-    familyMembers (
-      orderBy: $orderBy
-      skip: $skip
-      take: $take
-      where: $where
-    ) {
+    familyMembers(orderBy: $orderBy, skip: $skip, take: $take, where: $where) {
       id
     }
   }
 `;
 
 export const FAMILY_MEMBER = gql`
-  query FAMILY_MEMBER ($where: FamilyMemberWhereUniqueInput!) {
-    familyMember (where: $where) {
+  query FAMILY_MEMBER($where: FamilyMemberWhereUniqueInput!) {
+    familyMember(where: $where) {
       id
     }
   }

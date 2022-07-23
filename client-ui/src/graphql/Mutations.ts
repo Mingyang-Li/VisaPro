@@ -26,41 +26,12 @@ export const CREATE_APPLICANT = gql`
   }
 `;
 
-export const UPDATE_PERSONAL_INFO_BY_ID = gql`
-  mutation UPDATE_PERSONAL_INFO_BY_ID(
-    # pk
-    $id: String!
-    # data
-    $firstName: String
-    $lastName: String
-    $email: String
-    $mobile: String
-    $nzAddress: String
-    $homeCountryAddress: String
-    $inzClientNumber: String
-    $passportNumber: String
-    $countriesOfCitizenship: String
-    $countryOfBirth: String
-    $dateOfBirth: DateTime
-    $updatedById: String!
+export const UPDATE_PERSONAL_INFO = gql`
+  mutation UPDATE_PERSONAL_INFO(
+    $where: PersonalInfoWhereUniqueInput!
+    $data: PersonalInfoUpdateInput!
   ) {
-    updatePersonalInfo(
-      where: { id: $id }
-      data: {
-        firstName: $firstName
-        lastName: $lastName
-        email: $email
-        mobile: $mobile
-        nzAddress: $nzAddress
-        homeCountryAddress: $homeCountryAddress
-        inzClientNumber: $inzClientNumber
-        passportNumber: $passportNumber
-        countriesOfCitizenship: $countriesOfCitizenship
-        countryOfBirth: $countryOfBirth
-        dateOfBirth: $dateOfBirth
-        updatedBy: { id: $updatedById }
-      }
-    ) {
+    updatePersonalInfo(where: $where, data: $data) {
       updatedAt
     }
   }
