@@ -18,6 +18,12 @@ import { Mutation, PersonalInfo, Query } from '../../generated/graphql';
 import { GET_APPLICANTS_BY_USER, PERSONAL_INFOS } from '../../graphql/Queries';
 import { countryList } from '../../utils/countries';
 import { UPDATE_PERSONAL_INFO } from '../../graphql/Mutations';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { PersonalInfoSchema } from '../../utils/zod.schemas';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { TypeOf } from 'zod';
+
+type PersonalInfoInput = TypeOf<typeof PersonalInfoSchema>;
 
 export const PersonalInfoForm: React.FC = () => {
   const [edit, setEdit] = useState(false);
@@ -112,6 +118,19 @@ export const PersonalInfoForm: React.FC = () => {
     setFormInfo({ ...formInfo, dateOfBirth: d });
   };
 
+  const {
+    register: schema,
+    formState: { errors, isSubmitSuccessful },
+    reset,
+    handleSubmit,
+  } = useForm<PersonalInfoInput>({
+    resolver: zodResolver(PersonalInfoSchema),
+  });
+
+  const onSubmitHandler: SubmitHandler<PersonalInfoInput> = async () => {
+    initiateMutation();
+  };
+
   return (
     <Card variant="outlined">
       <CardContent>
@@ -129,6 +148,11 @@ export const PersonalInfoForm: React.FC = () => {
               id={'firstName'}
               label={'First name'}
               defaultValue={formInfo?.firstName}
+              error={!!errors['firstName']}
+              helperText={
+                errors['firstName'] ? errors['firstName'].message : ''
+              }
+              {...schema('firstName')}
               onChange={(e: any) =>
                 setFormInfo({ ...formInfo, firstName: e.currentTarget.value })
               }
@@ -341,7 +365,7 @@ export const PersonalInfoForm: React.FC = () => {
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <Button
-              onClick={() => initiateMutation()}
+              onClick={handleSubmit(onSubmitHandler)}
               disabled={!edit}
               variant="contained"
               fullWidth
