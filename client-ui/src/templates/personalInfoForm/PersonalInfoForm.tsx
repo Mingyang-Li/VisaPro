@@ -227,6 +227,7 @@ export const PersonalInfoForm: React.FC = () => {
                   label="Country of citizenship"
                   fullWidth
                   variant={!edit ? 'filled' : 'outlined'}
+                  defaultValue={formInfo?.countriesOfCitizenship}
                 />
               )}
             />
@@ -256,6 +257,7 @@ export const PersonalInfoForm: React.FC = () => {
                   label="Country of birth"
                   fullWidth
                   variant={!edit ? 'filled' : 'outlined'}
+                  defaultValue={formInfo?.countryOfBirth}
                 />
               )}
             />
@@ -265,6 +267,7 @@ export const PersonalInfoForm: React.FC = () => {
               label="Date of birth"
               disabled={!edit}
               updateParentDateValue={updateDateValue}
+              defaultValue={new Date(formInfo?.dateOfBirth) as Date}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>

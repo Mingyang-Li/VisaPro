@@ -8,6 +8,7 @@ interface IDatePicker {
   label?: string;
   value?: Date;
   disabled?: boolean;
+  defaultValue?: Date;
   updateParentDateValue: (d: Date) => void;
 }
 
@@ -19,7 +20,7 @@ export const BasicDatePicker: React.FC<IDatePicker> = (props: IDatePicker) => {
       <DatePicker
         inputFormat="yyyy/MM/dd"
         label={props.label ?? 'Date'}
-        value={value}
+        value={props.defaultValue ?? value}
         onChange={(newValue) => {
           setValue(newValue);
           props.updateParentDateValue(newValue as Date);

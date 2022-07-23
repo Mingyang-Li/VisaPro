@@ -63,6 +63,7 @@ export const PERSONAL_INFOS = gql`
       email
       mobile
       countryOfBirth
+      dateOfBirth
       countriesOfCitizenship
       inzClientNumber
       nzAddress
