@@ -205,6 +205,7 @@ export const PersonalInfoForm: React.FC = () => {
           <Grid item md={4} sm={12} xs={12}>
             <Autocomplete
               id="countriesOfCitizenship"
+              defaultValue={formInfo?.countriesOfCitizenship}
               freeSolo
               disablePortal
               options={countryList.map((c) => c)}
@@ -227,7 +228,6 @@ export const PersonalInfoForm: React.FC = () => {
                   label="Country of citizenship"
                   fullWidth
                   variant={!edit ? 'filled' : 'outlined'}
-                  defaultValue={formInfo?.countriesOfCitizenship}
                 />
               )}
             />
@@ -236,6 +236,7 @@ export const PersonalInfoForm: React.FC = () => {
           <Grid item md={4} sm={12} xs={12}>
             <Autocomplete
               id="countryOfBirth"
+              defaultValue={formInfo?.countryOfBirth}
               disablePortal
               disabled={!edit}
               options={countryList.map((c) => c)}
@@ -257,7 +258,6 @@ export const PersonalInfoForm: React.FC = () => {
                   label="Country of birth"
                   fullWidth
                   variant={!edit ? 'filled' : 'outlined'}
-                  defaultValue={formInfo?.countryOfBirth}
                 />
               )}
             />
