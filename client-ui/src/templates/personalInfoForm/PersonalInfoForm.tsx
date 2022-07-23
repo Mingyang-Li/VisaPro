@@ -93,8 +93,20 @@ export const PersonalInfoForm: React.FC = () => {
   }, [updating]);
 
   useEffect(() => {
-    setShowOverlay(!showOverlay);
-  }, [updating]);
+    if (updatedData) {
+      setShowAlert(true);
+    }
+  }, [updatedData]);
+
+  useEffect(() => {
+    if (edit) {
+      setShowAlert(false);
+    }
+  }, [edit]);
+
+  useEffect(() => {
+    setShowAlert(true);
+  }, [updateError]);
 
   const updateDateValue = (d: Date) => {
     setFormInfo({ ...formInfo, dateOfBirth: d });
