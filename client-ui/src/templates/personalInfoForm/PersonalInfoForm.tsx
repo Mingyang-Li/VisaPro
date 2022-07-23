@@ -7,7 +7,10 @@ import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { applicantIdCurrEditing } from '../../graphql/Store';
 import { Mutation, PersonalInfo, Query } from '../../generated/graphql';
-import { PERSONAL_INFO_BY_APPLICANT_ID } from '../../graphql/Queries';
+import {
+  GET_APPLICANTS_BY_USER,
+  PERSONAL_INFO_BY_APPLICANT_ID,
+} from '../../graphql/Queries';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import { countryList } from '../../utils/countries';
 import { UPDATE_PERSONAL_INFO_BY_ID } from '../../graphql/Mutations';
@@ -31,24 +34,33 @@ export const PersonalInfoForm: React.FC = () => {
   const [initiateMutation, { loading: updating, error: updateError }] =
     useMutation<Mutation>(UPDATE_PERSONAL_INFO_BY_ID, {
       variables: {
-        id: formInfo.id,
-        firstName: formInfo.firstName,
-        lastName: formInfo.lastName,
-        email: formInfo.email,
-        mobile: formInfo.mobile,
-        nzAddress: formInfo.nzAddress,
-        homeCountryAddress: formInfo.homeCountryAddress,
-        inzClientNumber: formInfo.inzClientNumber,
-        passportNumber: formInfo.passportNumber,
-        countriesOfCitizenship: formInfo.countriesOfCitizenship,
-        countryOfBirth: formInfo.countryOfBirth,
-        dateOfBirth: formInfo.dateOfBirth,
+        id: formInfo?.id,
+        firstName: formInfo?.firstName,
+        lastName: formInfo?.lastName,
+        email: formInfo?.email,
+        mobile: formInfo?.mobile,
+        nzAddress: formInfo?.nzAddress,
+        homeCountryAddress: formInfo?.homeCountryAddress,
+        inzClientNumber: formInfo?.inzClientNumber,
+        passportNumber: formInfo?.passportNumber,
+        countriesOfCitizenship: formInfo?.countriesOfCitizenship,
+        countryOfBirth: formInfo?.countryOfBirth,
+        dateOfBirth: formInfo?.dateOfBirth,
         updatedById: window.sessionStorage.getItem('userId'),
       },
       refetchQueries: [
         {
           query: PERSONAL_INFO_BY_APPLICANT_ID,
           variables: { applicantId },
+        },
+        {
+          query: GET_APPLICANTS_BY_USER,
+          variables: {
+            where: {
+              createdBy: { id: sessionStorage.getItem('userId') || '' },
+              archived: { equals: null },
+            },
+          },
         },
       ],
     });
@@ -251,7 +263,7 @@ export const PersonalInfoForm: React.FC = () => {
               variant="filled"
               disabled
               fullWidth
-              value={new Date(formInfo.createdAt).toUTCString()}
+              value={new Date(formInfo?.createdAt).toUTCString()}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
@@ -261,7 +273,7 @@ export const PersonalInfoForm: React.FC = () => {
               variant="filled"
               disabled
               fullWidth
-              value={new Date(formInfo.updatedAt).toUTCString()}
+              value={new Date(formInfo?.updatedAt).toUTCString()}
             />
           </Grid>
         </Grid>
