@@ -127,8 +127,14 @@ export const PersonalInfoForm: React.FC = () => {
     resolver: zodResolver(PersonalInfoSchema),
   });
 
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful]);
+
   const onSubmitHandler: SubmitHandler<PersonalInfoInput> = async () => {
-    initiateMutation();
+    await initiateMutation();
   };
 
   return (
