@@ -1,11 +1,8 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Maybe } from '../../generated/graphql';
-import ApplicantFormEdit from '../applicantFormEdit/ApplicantFormEdit';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
@@ -54,7 +51,6 @@ export default function BasicCard(props: IBasicCard) {
         <Grid container spacing={2}>
           <Grid item md={6}>
             <Button onClick={props.onEditRequest}>Edit</Button>
-            {/* <ApplicantFormEdit /> */}
           </Grid>
         </Grid>
       </CardActions>
