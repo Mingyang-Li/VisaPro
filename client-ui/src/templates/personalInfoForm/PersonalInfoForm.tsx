@@ -22,6 +22,7 @@ import { UPDATE_PERSONAL_INFO } from '../../graphql/Mutations';
 export const PersonalInfoForm: React.FC = () => {
   const [edit, setEdit] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const applicantId = useReactiveVar(applicantIdCurrEditing);
   const user = useReactiveVar(User);
   const { data, loading, error } = useQuery<Query>(PERSONAL_INFOS, {
@@ -87,8 +88,9 @@ export const PersonalInfoForm: React.FC = () => {
   });
 
   useEffect(() => {
-    console.log(formInfo);
-  }, [formInfo]);
+    setShowOverlay((showOverlay) => !showOverlay);
+    setEdit(false);
+  }, [updating]);
 
   useEffect(() => {
     setShowOverlay(!showOverlay);
@@ -106,7 +108,8 @@ export const PersonalInfoForm: React.FC = () => {
           open={showOverlay}
         >
           <CircularProgress color="inherit" />
-          {updating ? 'Updating' : 'Loading'}
+          {updating ? 'Updating' : ''}
+          {loading ? 'Loading' : ''}
         </Backdrop>
         <Grid container spacing={2}>
           <Grid item md={6} sm={12} xs={12}>
@@ -326,11 +329,7 @@ export const PersonalInfoForm: React.FC = () => {
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <Button
-              onClick={() =>
-                initiateMutation().then(() => {
-                  setEdit(!edit);
-                })
-              }
+              onClick={() => initiateMutation()}
               disabled={!edit}
               variant="contained"
               fullWidth
@@ -338,6 +337,19 @@ export const PersonalInfoForm: React.FC = () => {
               Save
             </Button>
           </Grid>
+          {showAlert ? (
+            <Grid item md={12} sm={12} xs={12}>
+              {updateError ? (
+                <Alert severity="error">
+                  Failed to update personal information, please try again later
+                </Alert>
+              ) : (
+                <Alert severity="success">Personal Infomation updated</Alert>
+              )}
+            </Grid>
+          ) : (
+            <></>
+          )}
         </Grid>
       </CardActions>
     </Card>
