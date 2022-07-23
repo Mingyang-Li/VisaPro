@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import Autocomplete from '@mui/material/Autocomplete';
 import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
-import { applicantIdCurrEditing } from '../../graphql/Store';
+import { applicantIdCurrEditing, user as User } from '../../graphql/Store';
 import { Mutation, PersonalInfo, Query } from '../../generated/graphql';
 import { GET_APPLICANTS_BY_USER, PERSONAL_INFOS } from '../../graphql/Queries';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
@@ -15,6 +15,7 @@ import { UPDATE_PERSONAL_INFO } from '../../graphql/Mutations';
 export const PersonalInfoForm: React.FC = () => {
   const [edit, setEdit] = useState(false);
   const applicantId = useReactiveVar(applicantIdCurrEditing);
+  const user = useReactiveVar(User);
   const { data, loading, error } = useQuery<Query>(PERSONAL_INFOS, {
     variables: {
       where: {
@@ -48,7 +49,7 @@ export const PersonalInfoForm: React.FC = () => {
           countryOfBirth: formInfo?.countryOfBirth,
           dateOfBirth: formInfo?.dateOfBirth,
           updatedBy: {
-            id: window.sessionStorage.getItem('userId') ?? '',
+            id: user.id,
           },
         },
       },
