@@ -107,6 +107,8 @@ export const PersonalInfoForm: React.FC = () => {
   useEffect(() => {
     if (edit) {
       setShowAlert(false);
+    } else if (!edit) {
+      setFormInfo((formInfo) => data?.personalInfos[0] as PersonalInfo);
     }
   }, [edit]);
 
@@ -220,6 +222,11 @@ export const PersonalInfoForm: React.FC = () => {
               id={'nzAddress'}
               label={'NZ address'}
               defaultValue={formInfo?.nzAddress}
+              error={!!errors['nzAddress']}
+              helperText={
+                errors['nzAddress'] ? errors['nzAddress'].message : ''
+              }
+              {...schema('nzAddress')}
               onChange={(e: any) =>
                 setFormInfo({ ...formInfo, nzAddress: e.currentTarget.value })
               }
@@ -233,6 +240,13 @@ export const PersonalInfoForm: React.FC = () => {
               id={'homeCountryAddress'}
               label={'Home Country Address'}
               defaultValue={formInfo?.homeCountryAddress}
+              error={!!errors['homeCountryAddress']}
+              helperText={
+                errors['homeCountryAddress']
+                  ? errors['homeCountryAddress'].message
+                  : ''
+              }
+              {...schema('homeCountryAddress')}
               onChange={(e: any) =>
                 setFormInfo({
                   ...formInfo,
@@ -249,6 +263,13 @@ export const PersonalInfoForm: React.FC = () => {
               id={'inzClientNumber'}
               label={'Immigration NZ Client number'}
               defaultValue={formInfo?.inzClientNumber}
+              error={!!errors['inzClientNumber']}
+              helperText={
+                errors['inzClientNumber']
+                  ? errors['inzClientNumber'].message
+                  : ''
+              }
+              {...schema('inzClientNumber')}
               onChange={(e: any) =>
                 setFormInfo({
                   ...formInfo,
@@ -307,6 +328,13 @@ export const PersonalInfoForm: React.FC = () => {
                   label="Country of citizenship"
                   fullWidth
                   variant={!edit ? 'filled' : 'outlined'}
+                  error={!!errors['countriesOfCitizenship']}
+                  helperText={
+                    errors['countriesOfCitizenship']
+                      ? errors['countriesOfCitizenship'].message
+                      : ''
+                  }
+                  {...schema('countriesOfCitizenship')}
                 />
               )}
             />
