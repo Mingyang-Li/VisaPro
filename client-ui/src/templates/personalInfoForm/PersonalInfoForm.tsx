@@ -172,6 +172,9 @@ export const PersonalInfoForm: React.FC = () => {
               id={'lastName'}
               label={'Last name'}
               defaultValue={formInfo?.lastName}
+              error={!!errors['lastName']}
+              helperText={errors['lastName'] ? errors['lastName'].message : ''}
+              {...schema('lastName')}
               onChange={(e: any) =>
                 setFormInfo({ ...formInfo, lastName: e.currentTarget.value })
               }
@@ -185,6 +188,9 @@ export const PersonalInfoForm: React.FC = () => {
               id={'email'}
               label={'Email'}
               defaultValue={formInfo?.email}
+              error={!!errors['email']}
+              helperText={errors['email'] ? errors['email'].message : ''}
+              {...schema('email')}
               onChange={(e: any) =>
                 setFormInfo({ ...formInfo, email: e.currentTarget.value })
               }
@@ -198,6 +204,9 @@ export const PersonalInfoForm: React.FC = () => {
               id={'mobile'}
               label={'Mobile'}
               defaultValue={formInfo?.mobile}
+              error={!!errors['mobile']}
+              helperText={errors['mobile'] ? errors['mobile'].message : ''}
+              {...schema('mobile')}
               onChange={(e: any) =>
                 setFormInfo({ ...formInfo, mobile: e.currentTarget.value })
               }
@@ -256,6 +265,11 @@ export const PersonalInfoForm: React.FC = () => {
               id={'passportNumber'}
               label={'Passport number'}
               defaultValue={formInfo?.passportNumber}
+              error={!!errors['passportNumber']}
+              helperText={
+                errors['passportNumber'] ? errors['passportNumber'].message : ''
+              }
+              {...schema('passportNumber')}
               onChange={(e: any) =>
                 setFormInfo({
                   ...formInfo,
