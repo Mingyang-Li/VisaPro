@@ -10,6 +10,23 @@ export const LOGIN = gql`
   }
 `;
 
+export const CREATE_APPLICANT_AND_PERSONAL_INFO = gql`
+  mutation CREATE_APPLICANT_AND_PERSONAL_INFO (
+    $ApplicantCreateInput: ApplicantCreateInput!
+    $PersonalInfoCreateInput: PersonalInfoCreateInput!
+  ) {
+    createApplicant(data: $ApplicantCreateInput) {
+      id
+      createdAt
+    }
+    
+    createPersonalInfo (data: $PersonalInfoCreateInput) {
+      id
+      createdAt
+    }
+  }
+`;
+
 export const CREATE_PERSONAL_INFO = gql`
   mutation CREATE_PERSONAL_INFO($data: PersonalInfoCreateInput!) {
     createPersonalInfo(data: $data) {
