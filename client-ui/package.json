@@ -38,7 +38,9 @@
     "eject": "react-scripts eject",
     "codegen": "graphql-codegen --config codegen.yml",
     "lint": "eslint --fix --ext .js,.jsx .",
-    "find-deadcode": "ts-prune"
+    "find-deadcode": "ts-prune",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "browserslist": {
     "production": [
@@ -60,8 +62,19 @@
     "@graphql-codegen/typescript": "2.4.8",
     "@graphql-codegen/typescript-operations": "2.3.5",
     "@graphql-codegen/typescript-react-apollo": "3.2.11",
+    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-interactions": "^6.5.9",
+    "@storybook/addon-links": "^6.5.9",
+    "@storybook/builder-webpack5": "^6.5.9",
+    "@storybook/manager-webpack5": "^6.5.9",
+    "@storybook/node-logger": "^6.5.9",
+    "@storybook/preset-create-react-app": "^4.1.2",
+    "@storybook/react": "^6.5.9",
+    "@storybook/testing-library": "^0.0.13",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
+    "babel-plugin-named-exports-order": "^0.0.2",
     "date-fns": "^2.28.0",
     "eslint": "^8.13.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -69,11 +82,26 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
-    "ts-prune": "^0.10.3"
+    "eslint-plugin-storybook": "^0.6.1",
+    "prop-types": "^15.8.1",
+    "ts-prune": "^0.10.3",
+    "webpack": "^5.74.0"
   },
   "browser": {
     "fs": false,
     "path": false,
     "os": false
+  },
+  "eslintConfig": {
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
   }
 }
