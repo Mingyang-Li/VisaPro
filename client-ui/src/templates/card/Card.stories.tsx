@@ -12,8 +12,8 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Default = Template.bind({});
+Default.args = {
   id: 'NCIYWRNC74349NC',
   updatedAt: new Date('2022-05-09').toLocaleDateString(),
   fullName: 'YOUR_FULL_NAME',

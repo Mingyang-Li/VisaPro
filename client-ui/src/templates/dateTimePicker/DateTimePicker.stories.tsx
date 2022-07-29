@@ -12,8 +12,8 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof BasicDatePicker> = (args) => <BasicDatePicker {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Default = Template.bind({});
+Default.args = {
   label: 'Date',
   disabled: false,
   defaultValue: new Date(),
