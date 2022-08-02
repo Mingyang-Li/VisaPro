@@ -2,14 +2,16 @@ import { PrismaClient, Prisma } from "@prisma/client";
 import { hash } from "bcrypt";
 import { parseSalt } from "../src/auth/password.service";
 import { CreateUserArgs } from '../src/user/base/CreateUserArgs';
+import Chance from 'Chance';
 
 const client = new PrismaClient();
+const chance = new Chance();
 
 export async function customSeed() {
 
   //replace this sample code to populate your database
   //with data that is required for your application to start
-  await seedPersonalInfos();
+  await seedUsers();
 
   client.$disconnect();
 }
@@ -117,7 +119,6 @@ export const seedApplicants = async () => {
 export const seedPersonalInfos = async () => {
   console.log(`🚀 Started seeding PersonalInfos`);
   const applicants = await client.applicant.findMany({});
-  console.log(`Num of applicants: ${applicants.length}`);
 
   for (let k = 0; k < applicants.length; k++) {
     const applicant = applicants[k];
@@ -144,13 +145,58 @@ export const seedPersonalInfos = async () => {
         nzAddress: randomAddress(),
         passportNumber: generateId(9),
       }
-    }
+    };
     try {
-      // console.log(personalInfo);
       await client.personalInfo.create(personalInfo);
     } catch (error) {
       throw error;
     }
+    console.log(`❎ ${ENTITY_CT} PersonalInfo for ${applicant.userId} seeded to DB`);
+  }
+}
+
+const seedEducationHistories = async () => {
+  console.log(`🚀 Started seeding EducationHistories`);
+  const applicants = await client.applicant.findMany({});
+
+  for (let i = 0; i < applicants.length; i++) {
+    const applicant = applicants[i];
+    
+    for (let k = 0; k < ENTITY_CT; k++)  {
+      const educationHistory: Prisma.EducationHistoryCreateArgs = {
+        data: {
+          // system
+          archived: false,
+          applicant: {
+            connect: {
+              id: applicant.id
+            }
+          },
+          createdBy: {
+            connect: {
+              id: applicant.createdById as string | undefined,
+            }
+          },
+
+          // specific
+          additionalInfo: 'None',
+          city: chance.city(),
+          country: countries[generateRandomNumBetween(0, countries.length)],
+          endDate: randomDate(new Date('1960-01-01'), new Date('2021-12-31')),
+          institutionName: `Random School of ${countries[generateRandomNumBetween(0, countries.length)]}`,
+          isCurrentInstitution: false,
+          qualificationGained: `Bloody good one`,
+          startDate: randomDate(new Date('1960-01-01'), new Date('2021-12-31')),
+        }
+      };
+
+      try {
+        await client.personalInfo.create(educationHistory);
+      } catch (error) {
+        throw error;
+      }
+    }
+
     console.log(`❎ ${ENTITY_CT} PersonalInfo for ${applicant.userId} seeded to DB`);
   }
 }
