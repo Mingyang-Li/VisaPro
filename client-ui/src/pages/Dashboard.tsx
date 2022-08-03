@@ -1,20 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { user, applicantIdCurrEditing, userInfo } from '../graphql/Store';
 import { useQuery, useReactiveVar } from '@apollo/client';
+import { Grid } from '@mui/material';
+import { user, applicantIdCurrEditing, userInfo } from '../graphql/Store';
 import AppContainer from '../templates/appContainer/AppContainer';
 import BasicCard from '../templates/card/Card';
-import { Grid } from '@mui/material';
 import ApplicantFormCreate from '../templates/applicantFormCreate/ApplicantFormCreate';
 import { Query } from '../generated/graphql';
 import { GET_APPLICANTS_BY_USER, GET_CURR_USER } from '../graphql/Queries';
 
 const UpdatingCurrUser: React.FC = () => {
   const info = useReactiveVar(userInfo);
-  const username = info.username;
+  const { username } = info;
   const { data } = useQuery<Query>(GET_CURR_USER, {
     variables: {
-      username: username,
+      username,
     },
   });
 
@@ -35,7 +35,7 @@ const Contents: React.FC = () => {
     variables: {
       where: {
         createdBy: { id: sessionStorage.getItem('userId') || '' },
-        archived: { equals: null },
+        archived: { equals: false },
       },
     },
   });
@@ -50,7 +50,7 @@ const Contents: React.FC = () => {
   return (
     <>
       <UpdatingCurrUser />
-      <ApplicantFormCreate open={false} title={'New applicant'} />
+      <ApplicantFormCreate open={false} title="New applicant" />
       <Grid container spacing={2}>
         {data?.applicants.map((a) => (
           <Grid item lg={3} md={4} xs={12} key={a.id}>
@@ -58,7 +58,7 @@ const Contents: React.FC = () => {
               key={a.id}
               updatedAt={a.updatedAt}
               fullName={
-                a.personalInfo?.firstName + ' ' + a.personalInfo?.lastName
+                `${a.personalInfo?.firstName} ${a.personalInfo?.lastName}`
               }
               email={a.personalInfo?.email}
               educationHistoriesCt={a.educationHistories.length}
