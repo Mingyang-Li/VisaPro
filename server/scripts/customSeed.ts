@@ -9,7 +9,7 @@ export async function customSeed() {
 
   //replace this sample code to populate your database
   //with data that is required for your application to start
-  await seedEmploymentHistories();
+  await seedFamilyMembers();
 
   client.$disconnect();
 }
@@ -56,6 +56,9 @@ const randomMobile = (length: number) => {
 
 const IEmployment = ['Full-time', 'Part-time', 'Contract', 'Freelance', 'Self-employed'];
 const IJob = ['Software Engineer', 'Product Manager', 'Site Manager', 'Solution Architect', 'Account Manager', 'Investor', 'Cashier', 'Chef', 'Store Manager', 'Consultant', 'Executive Assistant', 'Director'];
+const IDestinationHub = ['Airport', 'Port', 'Train-Station'];
+const ITravelReason = ['Work', 'Business', 'Travel', 'Visiting friends and family'];
+const IRelationship = ['Mother', 'Father', 'Step-mum', 'Step-dad', 'Brother', 'Sister', 'Son', 'Daughter', 'Step-son', 'Step-daughter', 'Girlfriend', 'Boyfriend', 'Husband', 'Wife'];
 
 // DB seeding plan for dev work on a new machine
 // Create 5 users, roles: ['user'] => DONE
@@ -104,6 +107,16 @@ export const seedApplicants = async () => {
             connect: {
               id: user.id,
             }
+          },
+          updatedBy: {
+            connect: {
+              id: user.id,
+            }
+          },
+          user: {
+            connect: {
+              id: user.id,
+            }
           }
         }
       }
@@ -133,6 +146,11 @@ export const seedPersonalInfos = async () => {
           }
         },
         createdBy: {
+          connect: {
+            id: applicant.createdById ?? 'none',
+          }
+        },
+        updatedBy: {
           connect: {
             id: applicant.createdById ?? 'none',
           }
@@ -183,6 +201,11 @@ export const seedEducationHistories = async () => {
               id: applicant.createdById ?? 'none',
             }
           },
+          updatedBy: {
+            connect: {
+              id: applicant.createdById ?? 'none',
+            }
+          },
 
           // specific
           additionalInfo: 'None',
@@ -228,6 +251,11 @@ export const seedEmploymentHistories = async () => {
               id: applicant.createdById ?? 'none',
             }
           },
+          updatedBy: {
+            connect: {
+              id: applicant.createdById ?? 'none',
+            }
+          },
 
           // specific
           additionalInfo: 'None',
@@ -251,5 +279,101 @@ export const seedEmploymentHistories = async () => {
       }
     }
     console.log(`✅ ${ENTITY_CT} EmploymentHistories for ${applicant.createdById} seeded to DB`);
+  }
+}
+
+export const seedTravelHistories = async () => {
+  console.log(`🚀 Started seeding TravelHistory`);
+  const applicants = await client.applicant.findMany({});
+
+  for (let i = 0; i < applicants.length; i++) {
+    const applicant = applicants[i];
+    
+    for (let k = 0; k < ENTITY_CT; k++)  {
+      const travelHistory: Prisma.TravelHistoryCreateArgs = {
+        data: {
+          // system
+          archived: false,
+          applicant: {
+            connect: {
+              id: applicant.id
+            }
+          },
+          createdBy: {
+            connect: {
+              id: applicant.createdById ?? 'none',
+            }
+          },
+          updatedBy: {
+            connect: {
+              id: applicant.createdById ?? 'none',
+            }
+          },
+
+          // specific
+          dateDeparted: randomDate(new Date('1960-01-01'), new Date('2021-12-31')),
+          dateEntered: randomDate(new Date('1960-01-01'), new Date('2021-12-31')),
+          destinationCity: `City-${generateRandomNumBetween(0, 500)}`,
+          destinationCountry: countries[generateRandomNumBetween(0, countries.length)],
+          destinationHub: `${IDestinationHub[generateRandomNumBetween(0, IDestinationHub.length)]}-${generateRandomNumBetween(0, 100)}`,
+          reasonOfTravel: ITravelReason[generateRandomNumBetween(0, ITravelReason.length)],
+        }
+      };
+
+      try {
+        await client.travelHistory.create(travelHistory);
+      } catch (error) {
+        throw error;
+      }
+    }
+    console.log(`✅ ${ENTITY_CT} TravelHistories for ${applicant.createdById} seeded to DB`);
+  }
+}
+
+export const seedFamilyMembers = async () => {
+  console.log(`🚀 Started seeding FamilyMember`);
+  const applicants = await client.applicant.findMany({});
+
+  for (let i = 0; i < applicants.length; i++) {
+    const applicant = applicants[i];
+    
+    for (let k = 0; k < ENTITY_CT; k++)  {
+      const familyMember: Prisma.FamilyMemberCreateArgs = {
+        data: {
+          // system
+          archived: false,
+          applicants: {
+            connect: {
+              id: applicant.id
+            }
+          },
+          createdBy: {
+            connect: {
+              id: applicant.createdById ?? 'none',
+            }
+          },
+          updatedBy: {
+            connect: {
+              id: applicant.createdById ?? 'none',
+            }
+          },
+
+          // specific
+          countriesOfCitizenship: countries[generateRandomNumBetween(0, countries.length)],
+          countryOfBirth: countries[generateRandomNumBetween(0, countries.length)],
+          dateOfBirth: randomDate(new Date('1960-01-01'), new Date('2021-12-31')),
+          firstName: `Firstname-${generateRandomNumBetween(0, 5)}`,
+          lastName: `Lastname-${generateRandomNumBetween(0, 5)}`,
+          relationshipToApplicant: IRelationship[generateRandomNumBetween(0, IRelationship.length)],
+        }
+      };
+
+      try {
+        await client.familyMember.create(familyMember);
+      } catch (error) {
+        throw error;
+      }
+    }
+    console.log(`✅ ${ENTITY_CT} FamilyMembers for ${applicant.createdById} seeded to DB`);
   }
 }
