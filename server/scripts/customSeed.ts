@@ -9,7 +9,7 @@ export async function customSeed() {
 
   //replace this sample code to populate your database
   //with data that is required for your application to start
-  await seedFamilyMembers();
+  // await seedFamilyMembers();
 
   client.$disconnect();
 }
