@@ -2,16 +2,14 @@ import { PrismaClient, Prisma } from "@prisma/client";
 import { hash } from "bcrypt";
 import { parseSalt } from "../src/auth/password.service";
 import { CreateUserArgs } from '../src/user/base/CreateUserArgs';
-import Chance from 'Chance';
 
 const client = new PrismaClient();
-const chance = new Chance();
 
 export async function customSeed() {
 
   //replace this sample code to populate your database
   //with data that is required for your application to start
-  await seedUsers();
+  await seedEmploymentHistories();
 
   client.$disconnect();
 }
@@ -56,6 +54,9 @@ const randomMobile = (length: number) => {
  return prefixs[generateRandomNumBetween(0, prefixs.length)] + result;
 }
 
+const IEmployment = ['Full-time', 'Part-time', 'Contract', 'Freelance', 'Self-employed'];
+const IJob = ['Software Engineer', 'Product Manager', 'Site Manager', 'Solution Architect', 'Account Manager', 'Investor', 'Cashier', 'Chef', 'Store Manager', 'Consultant', 'Executive Assistant', 'Director'];
+
 // DB seeding plan for dev work on a new machine
 // Create 5 users, roles: ['user'] => DONE
 // Create 10 Applicants for each user => DOING
@@ -88,7 +89,7 @@ export const seedUsers = async () => {
       throw(error);
     }
   }
-  console.log(`❎ ${USER_CT} Users seeded to DB`);
+  console.log(`✅ ${USER_CT} Users seeded to DB`);
 }
 
 export const seedApplicants = async () => {
@@ -111,7 +112,7 @@ export const seedApplicants = async () => {
       } catch (error) {
         throw error;
       }
-      console.log(`❎ ${ENTITY_CT} Applicants for ${user.username} seeded to DB`);
+      console.log(`✅ ${ENTITY_CT} Applicants for ${user.username} seeded to DB`);
     }
   }
 }
@@ -129,6 +130,11 @@ export const seedPersonalInfos = async () => {
         applicant: {
           connect: {
             id: applicant.id,
+          }
+        },
+        createdBy: {
+          connect: {
+            id: applicant.createdById ?? 'none',
           }
         },
 
@@ -151,11 +157,11 @@ export const seedPersonalInfos = async () => {
     } catch (error) {
       throw error;
     }
-    console.log(`❎ ${ENTITY_CT} PersonalInfo for ${applicant.userId} seeded to DB`);
+    console.log(`✅ ${ENTITY_CT} PersonalInfo for ${applicant.createdById} seeded to DB`);
   }
 }
 
-const seedEducationHistories = async () => {
+export const seedEducationHistories = async () => {
   console.log(`🚀 Started seeding EducationHistories`);
   const applicants = await client.applicant.findMany({});
 
@@ -174,13 +180,13 @@ const seedEducationHistories = async () => {
           },
           createdBy: {
             connect: {
-              id: applicant.createdById as string | undefined,
+              id: applicant.createdById ?? 'none',
             }
           },
 
           // specific
           additionalInfo: 'None',
-          city: chance.city(),
+          city: 'Random city',
           country: countries[generateRandomNumBetween(0, countries.length)],
           endDate: randomDate(new Date('1960-01-01'), new Date('2021-12-31')),
           institutionName: `Random School of ${countries[generateRandomNumBetween(0, countries.length)]}`,
@@ -191,12 +197,59 @@ const seedEducationHistories = async () => {
       };
 
       try {
-        await client.personalInfo.create(educationHistory);
+        await client.educationHistory.create(educationHistory);
       } catch (error) {
         throw error;
       }
     }
+    console.log(`✅ ${ENTITY_CT} EducationHistories for ${applicant.createdById} seeded to DB`);
+  }
+}
 
-    console.log(`❎ ${ENTITY_CT} PersonalInfo for ${applicant.userId} seeded to DB`);
+export const seedEmploymentHistories = async () => {
+  console.log(`🚀 Started seeding EmploymentHistories`);
+  const applicants = await client.applicant.findMany({});
+
+  for (let i = 0; i < applicants.length; i++) {
+    const applicant = applicants[i];
+    
+    for (let k = 0; k < ENTITY_CT; k++)  {
+      const employmentHistory: Prisma.EmploymentHistoryCreateArgs = {
+        data: {
+          // system
+          archived: false,
+          applicant: {
+            connect: {
+              id: applicant.id
+            }
+          },
+          createdBy: {
+            connect: {
+              id: applicant.createdById ?? 'none',
+            }
+          },
+
+          // specific
+          additionalInfo: 'None',
+          cityOfWork: `City-${generateRandomNumBetween(0, 500)}`,
+          companyName: `Company-${generateRandomNumBetween(0, 500)}`,
+          countryOfWork: countries[generateRandomNumBetween(0, countries.length)],
+          duties: `${generateRandomNumBetween(0, 500)} number of things`,
+          employmentType: IEmployment[generateRandomNumBetween(0, IEmployment.length)],
+          endDate: randomDate(new Date('1960-01-01'), new Date('2021-12-31')),
+          isCurrentJob: false,
+          jobTitle: IJob[generateRandomNumBetween(0, IJob.length)],
+          nzBusinessNumber: generateId(11),
+          startDate: randomDate(new Date('1960-01-01'), new Date('2021-12-31')),
+        }
+      };
+
+      try {
+        await client.employmentHistory.create(employmentHistory);
+      } catch (error) {
+        throw error;
+      }
+    }
+    console.log(`✅ ${ENTITY_CT} EmploymentHistories for ${applicant.createdById} seeded to DB`);
   }
 }
