@@ -58,6 +58,7 @@ export const countryList = [
   'Cyprus',
   'Czechia',
   "Côte d'Ivoire",
+  'Dubai',
   'Denmark',
   'Djibouti',
   'Dominica',

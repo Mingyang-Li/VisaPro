@@ -423,7 +423,7 @@ export const PersonalInfoForm: React.FC = () => {
               disabled={!edit}
               variant="contained"
               fullWidth
-              onClick={() => onSubmitHandler}
+              onClick={handleSubmit(onSubmitHandler)}
             >
               Save
             </Button>
