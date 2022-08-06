@@ -155,7 +155,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'firstName'}
               label={'First name'}
-              defaultValue={formInfo?.firstName}
+              value={formInfo?.firstName}
               error={!!errors['firstName']}
               helperText={
                 errors['firstName'] ? errors['firstName'].message : ''
@@ -173,7 +173,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'lastName'}
               label={'Last name'}
-              defaultValue={formInfo?.lastName}
+              value={formInfo?.lastName}
               error={!!errors['lastName']}
               helperText={errors['lastName'] ? errors['lastName'].message : ''}
               {...schema('lastName')}
@@ -189,7 +189,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'email'}
               label={'Email'}
-              defaultValue={formInfo?.email}
+              value={formInfo?.email}
               error={!!errors['email']}
               helperText={errors['email'] ? errors['email'].message : ''}
               {...schema('email')}
@@ -205,7 +205,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'mobile'}
               label={'Mobile'}
-              defaultValue={formInfo?.mobile}
+              value={formInfo?.mobile}
               error={!!errors['mobile']}
               helperText={errors['mobile'] ? errors['mobile'].message : ''}
               {...schema('mobile')}
@@ -221,7 +221,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'nzAddress'}
               label={'NZ address'}
-              defaultValue={formInfo?.nzAddress}
+              value={formInfo?.nzAddress}
               error={!!errors['nzAddress']}
               helperText={
                 errors['nzAddress'] ? errors['nzAddress'].message : ''
@@ -239,7 +239,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'homeCountryAddress'}
               label={'Home Country Address'}
-              defaultValue={formInfo?.homeCountryAddress}
+              value={formInfo?.homeCountryAddress}
               error={!!errors['homeCountryAddress']}
               helperText={
                 errors['homeCountryAddress']
@@ -262,7 +262,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'inzClientNumber'}
               label={'Immigration NZ Client number'}
-              defaultValue={formInfo?.inzClientNumber}
+              value={formInfo?.inzClientNumber}
               error={!!errors['inzClientNumber']}
               helperText={
                 errors['inzClientNumber']
@@ -285,7 +285,7 @@ export const PersonalInfoForm: React.FC = () => {
             <TextField
               id={'passportNumber'}
               label={'Passport number'}
-              defaultValue={formInfo?.passportNumber}
+              value={formInfo?.passportNumber}
               error={!!errors['passportNumber']}
               helperText={
                 errors['passportNumber'] ? errors['passportNumber'].message : ''
