@@ -1,10 +1,57 @@
 import { gql } from '@apollo/client';
 
+export const GET_USER_AND_APPLICANTS = gql`
+  query GET_USER($username: String) {
+    users(where: { username: { equals: $username } }) {
+      id
+      username
+      email
+      roles
+      firstName
+      lastName
+    }
+  }
+
+  query GET_APPLICANTS_BY_USER($where: ApplicantWhereInput) {
+    applicants(where: $where, orderBy: { updatedAt: Desc }) {
+      id
+      personalInfo {
+        id
+        firstName
+        lastName
+        email
+        mobile
+        countryOfBirth
+        countriesOfCitizenship
+        inzClientNumber
+        nzAddress
+        homeCountryAddress
+        passportNumber
+        createdAt
+        updatedAt
+      }
+      educationHistories {
+        id
+      }
+      employmentHistories {
+        id
+      }
+      familyMembers {
+        id
+      }
+      travelHistories {
+        id
+      }
+    }
+  }
+`;
+
 export const GET_CURR_USER = gql`
   query GET_CURR_USER($username: String) {
     users(where: { username: { equals: $username } }) {
       id
       username
+      email
       roles
       firstName
       lastName

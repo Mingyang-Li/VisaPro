@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useReactiveVar } from '@apollo/client';
-import { Grid } from '@mui/material';
+import { Grid, CircularProgress, Backdrop } from '@mui/material';
 import { user, applicantIdCurrEditing, userInfo } from '../graphql/Store';
 import AppContainer from '../templates/appContainer/AppContainer';
 import BasicCard from '../templates/card/Card';
@@ -31,17 +31,17 @@ const UpdatingCurrUser: React.FC = () => {
 };
 
 const Contents: React.FC = () => {
-  const { data } = useQuery<Query>(GET_APPLICANTS_BY_USER, {
+  const currUser = useReactiveVar(user);
+  const { data, loading } = useQuery<Query>(GET_APPLICANTS_BY_USER, {
     variables: {
       where: {
-        createdBy: { id: sessionStorage.getItem('userId') || '' },
+        createdBy: { id: currUser.id || '' },
         archived: { equals: false },
       },
     },
   });
 
   const navigate = useNavigate();
-
   const onEditRequest = (id: string) => {
     applicantIdCurrEditing(id);
     navigate(`/applicants/${id}`);
@@ -51,15 +51,21 @@ const Contents: React.FC = () => {
     <>
       <UpdatingCurrUser />
       <ApplicantFormCreate open={false} title="New applicant" />
+      <h1>Welcome: {currUser.email}</h1>
       <Grid container spacing={2}>
+        <Backdrop
+          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+        >
+          <CircularProgress color="inherit" />
+          {loading ? 'Loading' : ''}
+        </Backdrop>
         {data?.applicants.map((a) => (
           <Grid item lg={3} md={4} xs={12} key={a.id}>
             <BasicCard
               key={a.id}
               updatedAt={a.updatedAt}
-              fullName={
-                `${a.personalInfo?.firstName} ${a.personalInfo?.lastName}`
-              }
+              fullName={`${a.personalInfo?.firstName} ${a.personalInfo?.lastName}`}
               email={a.personalInfo?.email}
               educationHistoriesCt={a.educationHistories.length}
               employmentHistoriesCt={a.employmentHistories.length}
