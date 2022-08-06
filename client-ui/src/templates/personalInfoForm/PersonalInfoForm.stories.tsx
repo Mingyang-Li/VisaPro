@@ -10,7 +10,9 @@ export default {
 } as ComponentMeta<typeof PersonalInfoForm>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof PersonalInfoForm> = (args) => <PersonalInfoForm {...args} />;
+const Template: ComponentStory<typeof PersonalInfoForm> = (args: any) => (
+  <PersonalInfoForm {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {};

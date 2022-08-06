@@ -7,13 +7,14 @@ export default {
   component: BasicDatePicker,
 } as ComponentMeta<typeof BasicDatePicker>;
 
-const Template: ComponentStory<typeof BasicDatePicker> = (args) => <BasicDatePicker {...args} />;
+const Template: ComponentStory<typeof BasicDatePicker> = (args: any) => (
+  <BasicDatePicker {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {
   label: 'Date',
   disabled: false,
   defaultValue: new Date(),
-  updateParentDateValue: (d: Date) => console.log('date changed')
+  updateParentDateValue: (d: Date) => console.log('date changed'),
 };
-

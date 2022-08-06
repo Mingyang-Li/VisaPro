@@ -1,13 +1,14 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Card from './Card';
+import { AnyNsRecord } from 'dns';
 
 export default {
   title: 'Card',
   component: Card,
 } as ComponentMeta<typeof Card>;
 
-const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
+const Template: ComponentStory<typeof Card> = (args: any) => <Card {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
@@ -20,4 +21,3 @@ Default.args = {
   travelHistoriesCt: 23,
   familyMembersCt: 6,
 };
-

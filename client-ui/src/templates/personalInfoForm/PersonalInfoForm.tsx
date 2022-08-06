@@ -365,6 +365,13 @@ export const PersonalInfoForm: React.FC = () => {
                   label="Country of birth"
                   fullWidth
                   variant={!edit ? 'filled' : 'outlined'}
+                  error={!!errors['countryOfBirth']}
+                  helperText={
+                    errors['countryOfBirth']
+                      ? errors['countryOfBirth'].message
+                      : ''
+                  }
+                  {...schema('countryOfBirth')}
                 />
               )}
             />
@@ -413,10 +420,10 @@ export const PersonalInfoForm: React.FC = () => {
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <Button
-              onClick={handleSubmit(onSubmitHandler)}
               disabled={!edit}
               variant="contained"
               fullWidth
+              onClick={() => onSubmitHandler}
             >
               Save
             </Button>
