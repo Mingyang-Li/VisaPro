@@ -31,7 +31,11 @@ export const PersonalInfoForm: React.FC = () => {
   const [showAlert, setShowAlert] = useState(false);
   const applicantId = useReactiveVar(applicantIdCurrEditing);
   const user = useReactiveVar(User);
-  const { data, loading, error } = useQuery<Query>(PERSONAL_INFOS, {
+  const {
+    data,
+    loading,
+    error: loadError,
+  } = useQuery<Query>(PERSONAL_INFOS, {
     variables: {
       where: {
         applicant: {
