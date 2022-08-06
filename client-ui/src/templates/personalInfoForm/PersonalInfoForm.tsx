@@ -305,7 +305,7 @@ export const PersonalInfoForm: React.FC = () => {
           <Grid item md={4} sm={12} xs={12}>
             <Autocomplete
               id="countriesOfCitizenship"
-              defaultValue={formInfo?.countriesOfCitizenship}
+              value={formInfo?.countriesOfCitizenship}
               freeSolo
               disablePortal
               options={countryList.map((c) => c)}
@@ -343,7 +343,7 @@ export const PersonalInfoForm: React.FC = () => {
           <Grid item md={4} sm={12} xs={12}>
             <Autocomplete
               id="countryOfBirth"
-              defaultValue={formInfo?.countryOfBirth}
+              value={formInfo?.countryOfBirth}
               disablePortal
               disabled={!edit}
               options={countryList.map((c) => c)}
