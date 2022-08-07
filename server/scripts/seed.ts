@@ -3,7 +3,6 @@ import { PrismaClient, Prisma } from "@prisma/client";
 import { Salt, parseSalt } from "../src/auth/password.service";
 import { hash } from "bcrypt";
 import { customSeed } from "./customSeed";
-import { last } from "rxjs";
 
 if (require.main === module) {
   dotenv.config();
