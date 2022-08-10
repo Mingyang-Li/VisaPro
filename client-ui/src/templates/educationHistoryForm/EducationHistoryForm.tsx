@@ -14,7 +14,7 @@ export const EducationHistoryForm: React.FC = () => {
   return (
     <Card variant="outlined">
       <CardContent>
-        <<DataTable />
+        <DataTable />
       </CardContent>
       <CardActions></CardActions>
     </Card>
