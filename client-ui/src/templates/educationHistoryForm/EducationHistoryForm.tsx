@@ -8,13 +8,13 @@ import {
 } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent'; 
-import DataTable from '../dataTable/DataTable';
+import EducationHistoryTable from '../educationHistoryTable/EducationHistoryTable';
 
 export const EducationHistoryForm: React.FC = () => {
   return (
     <Card variant="outlined">
       <CardContent>
-        <DataTable />
+        <EducationHistoryTable />
       </CardContent>
       <CardActions></CardActions>
     </Card>

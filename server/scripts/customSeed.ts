@@ -277,7 +277,7 @@ export const seedEducationHistories = async () => {
 
           // specific
           additionalInfo: "None",
-          city: "Random city",
+          city: `City-${k+1}`,
           country: countries[generateRandomNumBetween(0, countries.length)],
           endDate: randomDate(new Date("1960-01-01"), new Date("2021-12-31")),
           institutionName: `Random School of ${
