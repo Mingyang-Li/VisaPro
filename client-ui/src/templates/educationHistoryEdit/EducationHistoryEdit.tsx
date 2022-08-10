@@ -1,0 +1,1 @@
+export const EducationHistoryEdit = () => <h1>EducationHistoryEdit</h1>
