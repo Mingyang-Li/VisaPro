@@ -13,7 +13,7 @@ interface IDatePicker {
 }
 
 export const BasicDatePicker: React.FC<IDatePicker> = (props: IDatePicker) => {
-  const [value, setValue] = React.useState<Date | null>(null);
+  const [value, setValue] = React.useState<Date | null>(new Date());
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
