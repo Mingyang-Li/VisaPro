@@ -260,7 +260,7 @@ export const seedPersonalInfos = async () => {
         countryOfBirth:
           countries[generateRandomNumBetween(0, countries.length)],
         dateOfBirth: randomDate(new Date("1950-01-01"), new Date("2000-01-01")),
-        email: `applicant-${applicant.id}@gmail.com`,
+        email: `applicant-${generateRandomNumBetween(1, 10000)}@gmail.com`,
         firstName: `${randomCap(1)}${randomLowChar(5)}`,
         homeCountryAddress: randomAddress(),
         inzClientNumber: generateId(12),
