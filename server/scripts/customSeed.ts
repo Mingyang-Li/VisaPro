@@ -23,6 +23,40 @@ export async function customSeed() {
 
 const USER_CT = 5;
 const ENTITY_CT = 5;
+const ALL_CAP = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const ALL_LOW = "abcdefghijklmnopqrstuvwxyz";
+const ALL_INTS = "0123456789";
+
+const randomCap = (length: number) => {
+  let result = "";
+  let characters = ALL_CAP;
+  let charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};
+
+const randomLowChar = (length: number) => {
+  let result = "";
+  let characters = ALL_LOW;
+  let charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};
+
+const randomInts = (length: number) => {
+  let result = "";
+  let characters = ALL_INTS;
+  let charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};
+
 const generateId = (length: number) => {
   let result = "";
   let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -227,10 +261,10 @@ export const seedPersonalInfos = async () => {
           countries[generateRandomNumBetween(0, countries.length)],
         dateOfBirth: randomDate(new Date("1950-01-01"), new Date("2000-01-01")),
         email: `applicant-${applicant.id}@gmail.com`,
-        firstName: `Firstname-${k+1}`,
+        firstName: `${randomCap(1)}${randomLowChar(5)}`,
         homeCountryAddress: randomAddress(),
         inzClientNumber: generateId(12),
-        lastName: `Lastname-${k+1}`,
+        lastName: `${randomCap(1)}${randomLowChar(5)}`,
         mobile: randomMobile(8),
         nzAddress: randomAddress(),
         passportNumber: generateId(9),
@@ -277,14 +311,12 @@ export const seedEducationHistories = async () => {
 
           // specific
           additionalInfo: "None",
-          city: `City-${k+1}`,
+          city: `City-${k + 1}`,
           country: countries[generateRandomNumBetween(0, countries.length)],
           endDate: randomDate(new Date("1960-01-01"), new Date("2021-12-31")),
-          institutionName: `Random School of ${
-            countries[generateRandomNumBetween(0, countries.length)]
-          }`,
+          institutionName: `Institution-${k + 1}`,
           isCurrentInstitution: false,
-          qualificationGained: `Bloody good one`,
+          qualificationGained: `Qualification-${k + 1}`,
           startDate: randomDate(new Date("1960-01-01"), new Date("2021-12-31")),
         },
       };
@@ -455,8 +487,8 @@ export const seedFamilyMembers = async () => {
             new Date("1960-01-01"),
             new Date("2021-12-31")
           ),
-          firstName: `Firstname-${generateRandomNumBetween(0, 5)}`,
-          lastName: `Lastname-${generateRandomNumBetween(0, 5)}`,
+          firstName: `${randomCap(1)}${randomLowChar(5)}`,
+          lastName: `${randomCap(1)}${randomLowChar(5)}`,
           relationshipToApplicant:
             IRelationship[generateRandomNumBetween(0, IRelationship.length)],
         },

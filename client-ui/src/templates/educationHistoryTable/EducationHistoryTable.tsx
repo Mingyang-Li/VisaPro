@@ -14,73 +14,46 @@ import { EducationHistory, Query } from '../../generated/graphql';
 import { Alert, Backdrop, CircularProgress } from '@mui/material';
 
 interface Column {
-  id: 'name' | 'code' | 'population' | 'size' | 'density';
+  id:
+    | 'institutionName'
+    | 'country'
+    | 'city'
+    | 'qualificationGained'
+    | 'startDate'
+    | 'endDate';
   label: string;
   minWidth?: number;
   align?: 'right';
-  format?: (value: number) => string;
+  format?: (value: any) => string;
 }
 
 const columns: readonly Column[] = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+  { id: 'institutionName', label: 'institutionName', minWidth: 170 },
+  { id: 'country', label: 'country', minWidth: 100 },
   {
-    id: 'population',
-    label: 'Population',
+    id: 'city',
+    label: 'city',
     minWidth: 170,
     align: 'right',
-    format: (value: number) => value.toLocaleString('en-US'),
   },
   {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
+    id: 'qualificationGained',
+    label: 'qualificationGained',
     minWidth: 170,
     align: 'right',
-    format: (value: number) => value.toLocaleString('en-US'),
   },
   {
-    id: 'density',
-    label: 'Density',
+    id: 'startDate',
+    label: 'startDate',
     minWidth: 170,
     align: 'right',
-    format: (value: number) => value.toFixed(2),
   },
-];
-
-interface Data {
-  name: string;
-  code: string;
-  population: number;
-  size: number;
-  density: number;
-}
-
-function createData(
-  name: string,
-  code: string,
-  population: number,
-  size: number,
-): Data {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
-
-const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
+  {
+    id: 'endDate',
+    label: 'endDate',
+    minWidth: 170,
+    align: 'right',
+  },
 ];
 
 export default function EducationHistoryTable() {
@@ -91,31 +64,39 @@ export default function EducationHistoryTable() {
         applicant: {
           id: applicantId,
         },
-      }
-    }
-  })
+      },
+    },
+  });
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [showOverlay, setShowOverlay] = React.useState(false);
+  const [showOverlay, setShowOverlay] = React.useState(true);
 
   React.useEffect(() => {
-    setShowOverlay((showOverlay) => !showOverlay);
+    if (data) setShowOverlay((showOverlay) => false);
   }, [loading]);
 
-  const dataset = data?.educationHistories as EducationHistory[];
+  const rows = data?.educationHistories as EducationHistory[];
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      { error ? <Alert severity="error">Ah Sh-t! Failed to load your education history.</Alert> : <></> }
+      {error ? (
+        <Alert severity="error">
+          Ah Sh-t! Failed to load your education history.
+        </Alert>
+      ) : (
+        <></>
+      )}
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={showOverlay}
@@ -139,24 +120,18 @@ export default function EducationHistoryTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+            {rows.map((row) => (
+              <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                {columns.map((column) => {
+                  const i = column['id'];
+                  return (
+                    <TableCell key={column.id} align={column.align}>
+                      {row[`${i}`]}
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
