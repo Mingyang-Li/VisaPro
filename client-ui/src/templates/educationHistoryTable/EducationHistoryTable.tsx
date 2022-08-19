@@ -14,6 +14,7 @@ import { EDUCATION_HISTORIES } from '../../graphql/Queries';
 import { applicantIdCurrEditing } from '../../graphql/Store';
 import { EducationHistory, Query } from '../../generated/graphql';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
+import EducationHistoryEdit from '../educationHistoryEdit/EducationHistoryEdit';
 
 interface Column {
   id:
@@ -68,6 +69,8 @@ const EducationHistoryTable = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [showOverlay, setShowOverlay] = React.useState(true);
+  const [edit, setEdit] = React.useState(true);
+  const [editId, setEditId] = React.useState('');
 
   React.useEffect(() => {
     if (data) setShowOverlay(() => false);
@@ -85,6 +88,12 @@ const EducationHistoryTable = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const rowOnclickHandler = (rowId: string) => {
+    setEditId(rowId);
+    setEdit(!edit);
+  };
+
   if (loading) return <LoadingSpinner show text={'Getting education histories'} />;
 
   return (
@@ -96,6 +105,7 @@ const EducationHistoryTable = () => {
       ) : (
         null
       )}
+      <EducationHistoryEdit open={edit} educationHistoryId={'sjd'} handleClose={setEdit} />
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -113,11 +123,11 @@ const EducationHistoryTable = () => {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+              <TableRow key={row.id} hover role="checkbox" tabIndex={-1}>
                 {columns.map((column) => {
                   const i = column.id;
                   return (
-                    <TableCell key={column.id} align={column.align}>
+                    <TableCell key={column.id} align={column.align} onClick={() => rowOnclickHandler(row.id)}>
                       {row[`${i}`]}
                     </TableCell>
                   );
