@@ -120,17 +120,26 @@ const IEmployment = [
 ];
 const IJob = [
   "Software Engineer",
+  "Android Engineer",
+  "iOS Engineer",
+  "Product Designer",
+  "Business Development Representative",
+  "DevOps Engineer",
+  "Business Analyst",
   "Product Manager",
-  "Site Manager",
+  "Engineering Manager",
   "Solution Architect",
+  "Enterprise Architect",
+  "Salesforce Architect",
   "Account Manager",
+  "Account Executive",
   "Investor",
   "Cashier",
   "Chef",
   "Store Manager",
   "Consultant",
   "Executive Assistant",
-  "Director",
+  "Managing Director",
 ];
 const IDestinationHub = ["Airport", "Port", "Train-Station"];
 const ITravelReason = [

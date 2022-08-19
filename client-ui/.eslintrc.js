@@ -14,7 +14,15 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
-    'react/function-component-definition': false,
+    'react/destructuring-assignment': false,
+    'linebreak-style': 0,
+    'react/function-component-definition': [
+        2,
+        {
+          "namedComponents": "arrow-function",
+          "unnamedComponents": "arrow-function"
+        }
+    ],
     'import/prefer-default-export': 'off',
     'react/prop-types': 'off',
     'react/jsx-filename-extension': [2, {
