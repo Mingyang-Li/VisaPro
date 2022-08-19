@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -8,10 +9,10 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useQuery, useReactiveVar } from '@apollo/client';
+import { Alert, Backdrop, CircularProgress } from '@mui/material';
 import { EDUCATION_HISTORIES } from '../../graphql/Queries';
 import { applicantIdCurrEditing } from '../../graphql/Store';
 import { EducationHistory, Query } from '../../generated/graphql';
-import { Alert, Backdrop, CircularProgress } from '@mui/material';
 
 interface Column {
   id:
@@ -56,7 +57,7 @@ const columns: readonly Column[] = [
   },
 ];
 
-export default function EducationHistoryTable() {
+const EducationHistoryTable = () => {
   const applicantId = useReactiveVar(applicantIdCurrEditing);
   const { data, loading, error } = useQuery<Query>(EDUCATION_HISTORIES, {
     variables: {
@@ -72,7 +73,7 @@ export default function EducationHistoryTable() {
   const [showOverlay, setShowOverlay] = React.useState(true);
 
   React.useEffect(() => {
-    if (data) setShowOverlay((showOverlay) => false);
+    if (data) setShowOverlay(() => false);
   }, [loading]);
 
   const rows = data?.educationHistories as EducationHistory[];
@@ -95,7 +96,7 @@ export default function EducationHistoryTable() {
           Ah Sh-t! Failed to load your education history.
         </Alert>
       ) : (
-        <></>
+        null
       )}
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -123,7 +124,7 @@ export default function EducationHistoryTable() {
             {rows.map((row) => (
               <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                 {columns.map((column) => {
-                  const i = column['id'];
+                  const i = column.id;
                   return (
                     <TableCell key={column.id} align={column.align}>
                       {row[`${i}`]}
@@ -146,4 +147,6 @@ export default function EducationHistoryTable() {
       />
     </Paper>
   );
-}
+};
+
+export default EducationHistoryTable;
