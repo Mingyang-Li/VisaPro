@@ -69,7 +69,7 @@ const EducationHistoryTable = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [showOverlay, setShowOverlay] = React.useState(true);
-  const [edit, setEdit] = React.useState(true);
+  const [edit, setEdit] = React.useState(false);
   const [editId, setEditId] = React.useState('');
 
   React.useEffect(() => {
@@ -105,7 +105,7 @@ const EducationHistoryTable = () => {
       ) : (
         null
       )}
-      <EducationHistoryEdit open={edit} educationHistoryId={'sjd'} handleClose={setEdit} />
+      <EducationHistoryEdit open={edit} educationHistoryId={editId} handleClose={setEdit} />
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
