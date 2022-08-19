@@ -14,6 +14,7 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
+    'react/no-unused-prop-types': 0,
     'react/jsx-props-no-spreading': 0,
     'react/destructuring-assignment': 0,
     'react/jsx-curly-brace-presence': 0,

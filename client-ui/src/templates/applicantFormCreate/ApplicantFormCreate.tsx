@@ -14,7 +14,7 @@ import { entityCreated, user } from '../../graphql/Store';
 
 interface IApplicantFormCreate {
   open: boolean;
-  title?: string;
+  title: string;
 }
 
 interface IValues {
@@ -50,11 +50,10 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
     setOpen(false);
   };
 
-  const enableCreation =
-    values.firstName === '' ||
-    values.lastName === '' ||
-    values.email === '' ||
-    values.disableInput;
+  const enableCreation = values.firstName === ''
+    || values.lastName === ''
+    || values.email === ''
+    || values.disableInput;
 
   const applicantId = useReactiveVar(entityCreated);
 
@@ -72,7 +71,7 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
     },
   });
 
-  const [createPersonalInfo, { loading }] = useMutation<Mutation>(
+  const [createPersonalInfo] = useMutation<Mutation>(
     CREATE_PERSONAL_INFO,
     {
       variables: {
@@ -105,7 +104,6 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
   const handleSubmit = () => {
     setValues({ ...values, disableInput: true });
     createApplicant().then(() => {
-      console.log(`newapplicant_id: ${applicantId}`);
       createPersonalInfo().then(() => {
         setTimeout(() => {
           handleClose();
@@ -125,7 +123,7 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle>{props.title}</DialogTitle>
-        <br></br>
+        <br />
         <DialogContent>
           <Grid container spacing={2}>
             <Grid item md={6} sm={12} xs={12}>
@@ -134,9 +132,7 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
                 label="First name"
                 variant="outlined"
                 value={values.firstName}
-                onChange={(e) =>
-                  setValues({ ...values, firstName: e.currentTarget.value })
-                }
+                onChange={(e) => setValues({ ...values, firstName: e.currentTarget.value })}
                 fullWidth
                 required
                 disabled={values.disableInput}
@@ -148,9 +144,7 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
                 label="Last name"
                 variant="outlined"
                 value={values.lastName}
-                onChange={(e) =>
-                  setValues({ ...values, lastName: e.currentTarget.value })
-                }
+                onChange={(e) => setValues({ ...values, lastName: e.currentTarget.value })}
                 fullWidth
                 required
                 disabled={values.disableInput}
@@ -162,9 +156,7 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
                 label="Email"
                 variant="outlined"
                 value={values.email}
-                onChange={(e) =>
-                  setValues({ ...values, email: e.currentTarget.value })
-                }
+                onChange={(e) => setValues({ ...values, email: e.currentTarget.value })}
                 fullWidth
                 required
                 disabled={values.disableInput}
