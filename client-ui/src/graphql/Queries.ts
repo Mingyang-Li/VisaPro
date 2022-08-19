@@ -172,14 +172,6 @@ export const EDUCATION_HISTORY = gql`
       additionalInfo
       createdAt
       updatedAt
-      createdBy {
-        id
-        username
-      }
-      updatedBy {
-        id
-        username
-      }
     }
   }
 `;
