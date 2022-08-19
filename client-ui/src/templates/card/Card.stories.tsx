@@ -1,7 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Card from './Card';
-import { AnyNsRecord } from 'dns';
 
 export default {
   title: 'Card',
