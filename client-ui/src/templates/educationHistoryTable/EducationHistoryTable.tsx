@@ -121,7 +121,7 @@ const EducationHistoryTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {/* {rows.map((row) => (
               <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                 {columns.map((column) => {
                   const i = column.id;
@@ -132,14 +132,14 @@ const EducationHistoryTable = () => {
                   );
                 })}
               </TableRow>
-            ))}
+            ))} */}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={1}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

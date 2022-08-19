@@ -23,12 +23,13 @@ import { GET_APPLICANTS_BY_USER, PERSONAL_INFOS } from '../../graphql/Queries';
 import { countryList } from '../../utils/countries';
 import { UPDATE_PERSONAL_INFO } from '../../graphql/Mutations';
 import { PersonalInfoSchema } from '../../utils/zod.schemas';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 type PersonalInfoInput = TypeOf<typeof PersonalInfoSchema>;
 
 export const PersonalInfoForm: React.FC = () => {
   const [edit, setEdit] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const applicantId = useReactiveVar(applicantIdCurrEditing);
   const user = useReactiveVar(User);
@@ -99,9 +100,9 @@ export const PersonalInfoForm: React.FC = () => {
   });
 
   useEffect(() => {
-    setShowOverlay(() => !showOverlay);
+    if (!updating || !loading) setShowOverlay(false);
     setEdit(false);
-  }, [updating]);
+  }, [updating, loading]);
 
   useEffect(() => {
     if (updatedData) {
@@ -115,7 +116,7 @@ export const PersonalInfoForm: React.FC = () => {
     } else if (!edit) {
       setFormInfo(() => data?.personalInfos[0] as PersonalInfo);
     }
-  }, [edit]);
+  }, [edit, data]);
 
   useEffect(() => {
     setShowAlert(true);
@@ -146,6 +147,7 @@ export const PersonalInfoForm: React.FC = () => {
 
   return (
     <Card variant="outlined">
+      <LoadingSpinner show={loading} text={'Loading personal information'} />
       <CardContent>
         <Backdrop
           sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -153,7 +155,6 @@ export const PersonalInfoForm: React.FC = () => {
         >
           <CircularProgress color="inherit" />
           {updating ? 'Updating' : ''}
-          {loading ? 'Loading' : ''}
         </Backdrop>
         <Grid container spacing={2}>
           <Grid item md={6} sm={12} xs={12}>
