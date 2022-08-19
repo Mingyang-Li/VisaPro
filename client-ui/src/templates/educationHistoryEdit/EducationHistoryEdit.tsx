@@ -106,9 +106,10 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                   </Grid>
                   <Grid item md={12} sm={12} xs={12}>
                     <Autocomplete
+                      id="isCurrentInstitution"
+                      value={formInfo?.isCurrentInstitution ? 'Yes' : 'No'}
                       fullWidth
                       disablePortal
-                      id="isCurrentInstitution"
                       options={['Yes', 'No']}
                       onChange={(event: any, newValue: string | null) => {
                         setFormInfo({
@@ -121,20 +122,20 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>
                     <TextField
-                      id="Created At"
+                      id="createdAt"
                       fullWidth
                       disabled
-                      label="createdAt"
+                      label="Created At"
                       variant="filled"
                       value={formInfo?.createdAt}
                     />
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>
                     <TextField
-                      id="Updated At"
+                      id="updatedAt"
                       fullWidth
                       disabled
-                      label="updatedAt"
+                      label="Updated At"
                       variant="filled"
                       value={formInfo?.updatedAt}
                     />
