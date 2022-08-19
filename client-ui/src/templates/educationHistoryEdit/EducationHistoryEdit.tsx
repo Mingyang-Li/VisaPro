@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import {
+  Autocomplete,
   Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField,
 } from '@mui/material';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
@@ -15,7 +16,7 @@ interface IEducationHistoryEdit {
   educationHistoryId: string;
   handleClose: (value: boolean) => void;
 }
-// id = cl6zvte3820725ku243x8hva2
+
 const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducationHistoryEdit) => {
   const [getData, { data, loading, error }] = useLazyQuery<Query>(EDUCATION_HISTORY, {
     variables: {
@@ -104,7 +105,19 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                     />
                   </Grid>
                   <Grid item md={12} sm={12} xs={12}>
-                    <TextField id="isCurrentInstitution" fullWidth disabled label="Is current institution" variant="filled" value={'No'} />
+                    <Autocomplete
+                      fullWidth
+                      disablePortal
+                      id="isCurrentInstitution"
+                      options={['Yes', 'No']}
+                      onChange={(event: any, newValue: string | null) => {
+                        setFormInfo({
+                          ...formInfo,
+                          isCurrentInstitution: newValue === 'Yes',
+                        });
+                      }}
+                      renderInput={(params) => <TextField {...params} fullWidth label="Is current institution" />}
+                    />
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>
                     <TextField
@@ -132,7 +145,7 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                       fullWidth
                       multiline
                       rows={4}
-                      label="additionalInfo"
+                      label="Additional Info"
                       variant="outlined"
                       value={data?.educationHistory?.additionalInfo}
                       onChange={(e: any) => setFormInfo({ ...formInfo, additionalInfo: e.target.value })}
