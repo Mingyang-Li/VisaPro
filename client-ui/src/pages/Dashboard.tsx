@@ -27,7 +27,7 @@ const UpdatingCurrUser: React.FC = () => {
     user(currUser);
     sessionStorage.setItem('userId', currUser.id);
   }
-  return <></>;
+  return null;
 };
 
 const Contents: React.FC = () => {
@@ -51,7 +51,11 @@ const Contents: React.FC = () => {
     <>
       <UpdatingCurrUser />
       <ApplicantFormCreate open={false} title="New applicant" />
-      <h1>Welcome: {currUser.email}</h1>
+      <h1>
+        Welcome:
+        {' '}
+        {currUser.email}
+      </h1>
       <Grid container spacing={2}>
         <Backdrop
           sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
