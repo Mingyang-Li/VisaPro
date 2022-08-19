@@ -63,6 +63,9 @@ const EducationHistoryTable = () => {
         applicant: {
           id: applicantId,
         },
+        archived: {
+          equals: false,
+        },
       },
     },
   });
