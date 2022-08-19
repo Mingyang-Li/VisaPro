@@ -157,10 +157,18 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
             </Card>
           </DialogContent>
           <DialogActions>
-            <Button onClick={(event) => props.handleClose(!open)}>
-              Cancel
-            </Button>
-            {/* <Button>Update</Button> */}
+            <Grid container spacing={1}>
+              <Grid item md={6} sm={12} xs={12}>
+                <Button fullWidth onClick={(event) => props.handleClose(!open)} color={'error'} variant={'contained'}>
+                  Discard
+                </Button>
+              </Grid>
+              <Grid item md={6} sm={12} xs={12}>
+                <Button fullWidth onClick={(event) => props.handleClose(!open)} color={'primary'} variant={'contained'}>
+                  Update
+                </Button>
+              </Grid>
+            </Grid>
           </DialogActions>
         </>
       )}
