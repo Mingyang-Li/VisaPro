@@ -11,12 +11,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useMutation } from '@apollo/client';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import { LOGIN } from '../graphql/Mutations';
-import { userInfo } from '../graphql/Store';
-import { Mutation } from '../generated/graphql';
 import { useNavigate } from 'react-router-dom';
 import { TypeOf } from 'zod';
-import { loginSchema } from '../utils/zod.schemas';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemeProvider } from '@emotion/react';
@@ -30,6 +26,10 @@ import IconButton from '@mui/material/IconButton';
 import Alert from '@mui/material/Alert';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import CircularProgress from '@mui/material/CircularProgress';
+import { loginSchema } from '../utils/zod.schemas';
+import { Mutation } from '../generated/graphql';
+import { userInfo } from '../graphql/Store';
+import { LOGIN } from '../graphql/Mutations';
 
 const theme = createTheme();
 
@@ -72,7 +72,7 @@ const Login: React.FC = () => {
     showPassword: false,
     loginError: {},
   });
-  const [initiateLogin, { data, loading }] = useMutation<Mutation>(LOGIN, {
+  const [initiateLogin, { loading }] = useMutation<Mutation>(LOGIN, {
     update(proxy, result) {
       userInfo(result?.data?.login);
       sessionStorage.setItem(
@@ -104,8 +104,6 @@ const Login: React.FC = () => {
     } catch (e) {
       setLoginError(!loginError);
       setValues({ ...values, email: '', password: '' });
-    } finally {
-      console.log({ loading, data });
     }
   };
 
@@ -123,10 +121,9 @@ const Login: React.FC = () => {
               // eslint-disable-next-line max-len
               'url(https://onechelofanadventure.com/wp-content/uploads/2017/05/New-Zealand-South-Island-Things-to-Do.png)',
             backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light'
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
+            backgroundColor: (t) => (t.palette.mode === 'light'
+              ? t.palette.grey[50]
+              : t.palette.grey[900]),
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -160,8 +157,8 @@ const Login: React.FC = () => {
                 id="email"
                 label="Email Address"
                 autoFocus
-                error={!!errors['email']}
-                helperText={errors['email'] ? errors['email'].message : ''}
+                error={!!errors.email}
+                helperText={errors.email ? errors.email.message : ''}
                 {...login('email')}
                 onChange={(e: any) => updateEmail(e)}
               />
@@ -175,7 +172,7 @@ const Login: React.FC = () => {
                   id="outlined-adornment-password"
                   type={values.showPassword ? 'text' : 'password'}
                   value={values.password}
-                  endAdornment={
+                  endAdornment={(
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
@@ -189,14 +186,14 @@ const Login: React.FC = () => {
                         )}
                       </IconButton>
                     </InputAdornment>
-                  }
+                  )}
                   label="Password"
-                  error={!!errors['password']}
+                  error={!!errors.password}
                   {...login('password')}
                   onChange={(e) => updatePassword(e)}
                 />
                 <FormHelperText error id="password-error">
-                  {errors['password'] ? errors['password'].message : ''}
+                  {errors.password ? errors.password.message : ''}
                 </FormHelperText>
               </FormControl>
               {loginError ? (
@@ -204,7 +201,7 @@ const Login: React.FC = () => {
                   The email or password you entered is incorrect, try again
                 </Alert>
               ) : (
-                <></>
+                null
               )}
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
