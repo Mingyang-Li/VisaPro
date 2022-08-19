@@ -36,7 +36,11 @@ const Contents: React.FC = () => {
 
   return (
     <Grid container spacing={2}>
-      <h1>Applicant ID: {id}</h1>
+      <h1>
+        Applicant ID:
+        {' '}
+        {id}
+      </h1>
       <BasicTabs tabs={contents} />
     </Grid>
   );
