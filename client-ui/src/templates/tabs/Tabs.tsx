@@ -10,8 +10,10 @@ interface TabPanelProps {
   value: number;
 }
 
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+const TabPanel = (props: TabPanelProps) => {
+  const {
+    children, value, index, ...other
+  } = props;
 
   return (
     <div
@@ -28,7 +30,7 @@ function TabPanel(props: TabPanelProps) {
       )}
     </div>
   );
-}
+};
 
 function a11yProps(index: number) {
   return {
@@ -37,13 +39,13 @@ function a11yProps(index: number) {
   };
 }
 
-export interface Tab {
+export interface ITab {
   label: string;
   component: React.ReactElement;
 }
 
 interface IBasicTabs {
-  tabs: Tab[];
+  tabs: ITab[];
 }
 
 export const BasicTabs: React.FC<IBasicTabs> = (props: IBasicTabs) => {
@@ -58,15 +60,17 @@ export const BasicTabs: React.FC<IBasicTabs> = (props: IBasicTabs) => {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="tabs">
           {props.tabs.map((t, i) => (
-            <Tab key={i} label={t.label} {...a11yProps(i)} />
+            <Tab label={t.label} {...a11yProps(i)} />
           ))}
         </Tabs>
       </Box>
       {props.tabs.map((t, i) => (
-        <TabPanel key={i} value={value} index={i}>
+        <TabPanel value={value} index={i}>
           {t.component}
         </TabPanel>
       ))}
     </Box>
   );
 };
+
+export default TabPanel;

@@ -6,12 +6,12 @@ import { EducationHistoryForm } from '../templates/educationHistoryForm/Educatio
 import { EmploymentHistoryForm } from '../templates/employmentHistoryForm/EmploymentHistoryForm';
 import { FamilyMemberForm } from '../templates/familyMemberForm/FamilyMemberForm';
 import { PersonalInfoForm } from '../templates/personalInfoForm/PersonalInfoForm';
-import { BasicTabs, Tab } from '../templates/tabs/Tabs';
+import { BasicTabs, ITab } from '../templates/tabs/Tabs';
 import { TravelHistoryForm } from '../templates/travelHistoryForm/TravelHistoryForm';
 
 const Contents: React.FC = () => {
   const { id } = useParams();
-  const contents: Tab[] = [
+  const contents: ITab[] = [
     {
       label: 'Personal Info',
       component: <PersonalInfoForm />,
