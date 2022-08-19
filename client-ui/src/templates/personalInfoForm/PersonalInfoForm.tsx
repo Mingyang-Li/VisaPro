@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
 import {
   Alert,
@@ -11,17 +12,17 @@ import {
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Autocomplete from '@mui/material/Autocomplete';
-import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { TypeOf } from 'zod';
+import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
 import { applicantIdCurrEditing, user as User } from '../../graphql/Store';
 import { Mutation, PersonalInfo, Query } from '../../generated/graphql';
 import { GET_APPLICANTS_BY_USER, PERSONAL_INFOS } from '../../graphql/Queries';
 import { countryList } from '../../utils/countries';
 import { UPDATE_PERSONAL_INFO } from '../../graphql/Mutations';
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { PersonalInfoSchema } from '../../utils/zod.schemas';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { TypeOf } from 'zod';
 
 type PersonalInfoInput = TypeOf<typeof PersonalInfoSchema>;
 
@@ -34,7 +35,7 @@ export const PersonalInfoForm: React.FC = () => {
   const {
     data,
     loading,
-    error: loadError,
+    // error: loadError,
   } = useQuery<Query>(PERSONAL_INFOS, {
     variables: {
       where: {
@@ -98,7 +99,7 @@ export const PersonalInfoForm: React.FC = () => {
   });
 
   useEffect(() => {
-    setShowOverlay((showOverlay) => !showOverlay);
+    setShowOverlay(() => !showOverlay);
     setEdit(false);
   }, [updating]);
 
@@ -112,7 +113,7 @@ export const PersonalInfoForm: React.FC = () => {
     if (edit) {
       setShowAlert(false);
     } else if (!edit) {
-      setFormInfo((formInfo) => data?.personalInfos[0] as PersonalInfo);
+      setFormInfo(() => data?.personalInfos[0] as PersonalInfo);
     }
   }, [edit]);
 
@@ -157,17 +158,15 @@ export const PersonalInfoForm: React.FC = () => {
         <Grid container spacing={2}>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
-              id={'firstName'}
-              label={'First name'}
+              id="firstName"
+              label="First name"
               value={formInfo?.firstName}
-              error={!!errors['firstName']}
+              error={!!errors.firstName}
               helperText={
-                errors['firstName'] ? errors['firstName'].message : ''
+                errors.firstName ? errors.firstName.message : ''
               }
               {...schema('firstName')}
-              onChange={(e: any) =>
-                setFormInfo({ ...formInfo, firstName: e.currentTarget.value })
-              }
+              onChange={(e: any) => setFormInfo({ ...formInfo, firstName: e.currentTarget.value })}
               fullWidth
               disabled={!edit}
               variant={!edit ? 'filled' : 'outlined'}
@@ -175,15 +174,13 @@ export const PersonalInfoForm: React.FC = () => {
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
-              id={'lastName'}
-              label={'Last name'}
+              id="lastName"
+              label="Last name"
               value={formInfo?.lastName}
-              error={!!errors['lastName']}
-              helperText={errors['lastName'] ? errors['lastName'].message : ''}
+              error={!!errors.lastName}
+              helperText={errors.lastName ? errors.lastName.message : ''}
               {...schema('lastName')}
-              onChange={(e: any) =>
-                setFormInfo({ ...formInfo, lastName: e.currentTarget.value })
-              }
+              onChange={(e: any) => setFormInfo({ ...formInfo, lastName: e.currentTarget.value })}
               fullWidth
               disabled={!edit}
               variant={!edit ? 'filled' : 'outlined'}
@@ -191,15 +188,13 @@ export const PersonalInfoForm: React.FC = () => {
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
-              id={'email'}
-              label={'Email'}
+              id="email"
+              label="Email"
               value={formInfo?.email}
-              error={!!errors['email']}
-              helperText={errors['email'] ? errors['email'].message : ''}
+              error={!!errors.email}
+              helperText={errors.email ? errors.email.message : ''}
               {...schema('email')}
-              onChange={(e: any) =>
-                setFormInfo({ ...formInfo, email: e.currentTarget.value })
-              }
+              onChange={(e: any) => setFormInfo({ ...formInfo, email: e.currentTarget.value })}
               fullWidth
               disabled={!edit}
               variant={!edit ? 'filled' : 'outlined'}
@@ -207,15 +202,13 @@ export const PersonalInfoForm: React.FC = () => {
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
-              id={'mobile'}
-              label={'Mobile'}
+              id="mobile"
+              label="Mobile"
               value={formInfo?.mobile}
-              error={!!errors['mobile']}
-              helperText={errors['mobile'] ? errors['mobile'].message : ''}
+              error={!!errors.mobile}
+              helperText={errors.mobile ? errors.mobile.message : ''}
               {...schema('mobile')}
-              onChange={(e: any) =>
-                setFormInfo({ ...formInfo, mobile: e.currentTarget.value })
-              }
+              onChange={(e: any) => setFormInfo({ ...formInfo, mobile: e.currentTarget.value })}
               fullWidth
               disabled={!edit}
               variant={!edit ? 'filled' : 'outlined'}
@@ -223,17 +216,15 @@ export const PersonalInfoForm: React.FC = () => {
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
-              id={'nzAddress'}
-              label={'NZ address'}
+              id="nzAddress"
+              label="NZ address"
               value={formInfo?.nzAddress}
-              error={!!errors['nzAddress']}
+              error={!!errors.nzAddress}
               helperText={
-                errors['nzAddress'] ? errors['nzAddress'].message : ''
+                errors.nzAddress ? errors.nzAddress.message : ''
               }
               {...schema('nzAddress')}
-              onChange={(e: any) =>
-                setFormInfo({ ...formInfo, nzAddress: e.currentTarget.value })
-              }
+              onChange={(e: any) => setFormInfo({ ...formInfo, nzAddress: e.currentTarget.value })}
               fullWidth
               disabled={!edit}
               variant={!edit ? 'filled' : 'outlined'}
@@ -241,22 +232,20 @@ export const PersonalInfoForm: React.FC = () => {
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
-              id={'homeCountryAddress'}
-              label={'Home Country Address'}
+              id="homeCountryAddress"
+              label="Home Country Address"
               value={formInfo?.homeCountryAddress}
-              error={!!errors['homeCountryAddress']}
+              error={!!errors.homeCountryAddress}
               helperText={
-                errors['homeCountryAddress']
-                  ? errors['homeCountryAddress'].message
+                errors.homeCountryAddress
+                  ? errors.homeCountryAddress.message
                   : ''
               }
               {...schema('homeCountryAddress')}
-              onChange={(e: any) =>
-                setFormInfo({
-                  ...formInfo,
-                  homeCountryAddress: e.currentTarget.value,
-                })
-              }
+              onChange={(e: any) => setFormInfo({
+                ...formInfo,
+                homeCountryAddress: e.currentTarget.value,
+              })}
               fullWidth
               disabled={!edit}
               variant={!edit ? 'filled' : 'outlined'}
@@ -264,22 +253,20 @@ export const PersonalInfoForm: React.FC = () => {
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
-              id={'inzClientNumber'}
-              label={'Immigration NZ Client number'}
+              id="inzClientNumber"
+              label="Immigration NZ Client number"
               value={formInfo?.inzClientNumber}
-              error={!!errors['inzClientNumber']}
+              error={!!errors.inzClientNumber}
               helperText={
-                errors['inzClientNumber']
-                  ? errors['inzClientNumber'].message
+                errors.inzClientNumber
+                  ? errors.inzClientNumber.message
                   : ''
               }
               {...schema('inzClientNumber')}
-              onChange={(e: any) =>
-                setFormInfo({
-                  ...formInfo,
-                  inzClientNumber: e.currentTarget.value,
-                })
-              }
+              onChange={(e: any) => setFormInfo({
+                ...formInfo,
+                inzClientNumber: e.currentTarget.value,
+              })}
               fullWidth
               disabled={!edit}
               variant={!edit ? 'filled' : 'outlined'}
@@ -287,20 +274,18 @@ export const PersonalInfoForm: React.FC = () => {
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
-              id={'passportNumber'}
-              label={'Passport number'}
+              id="passportNumber"
+              label="Passport number"
               value={formInfo?.passportNumber}
-              error={!!errors['passportNumber']}
+              error={!!errors.passportNumber}
               helperText={
-                errors['passportNumber'] ? errors['passportNumber'].message : ''
+                errors.passportNumber ? errors.passportNumber.message : ''
               }
               {...schema('passportNumber')}
-              onChange={(e: any) =>
-                setFormInfo({
-                  ...formInfo,
-                  passportNumber: e.currentTarget.value,
-                })
-              }
+              onChange={(e: any) => setFormInfo({
+                ...formInfo,
+                passportNumber: e.currentTarget.value,
+              })}
               fullWidth
               disabled={!edit}
               variant={!edit ? 'filled' : 'outlined'}
@@ -332,10 +317,10 @@ export const PersonalInfoForm: React.FC = () => {
                   label="Country of citizenship"
                   fullWidth
                   variant={!edit ? 'filled' : 'outlined'}
-                  error={!!errors['countriesOfCitizenship']}
+                  error={!!errors.countriesOfCitizenship}
                   helperText={
-                    errors['countriesOfCitizenship']
-                      ? errors['countriesOfCitizenship'].message
+                    errors.countriesOfCitizenship
+                      ? errors.countriesOfCitizenship.message
                       : ''
                   }
                   {...schema('countriesOfCitizenship')}
@@ -369,10 +354,10 @@ export const PersonalInfoForm: React.FC = () => {
                   label="Country of birth"
                   fullWidth
                   variant={!edit ? 'filled' : 'outlined'}
-                  error={!!errors['countryOfBirth']}
+                  error={!!errors.countryOfBirth}
                   helperText={
-                    errors['countryOfBirth']
-                      ? errors['countryOfBirth'].message
+                    errors.countryOfBirth
+                      ? errors.countryOfBirth.message
                       : ''
                   }
                   {...schema('countryOfBirth')}
@@ -432,7 +417,7 @@ export const PersonalInfoForm: React.FC = () => {
               Save
             </Button>
           </Grid>
-          {showAlert ? (
+          {showAlert ?? (
             <Grid item md={12} sm={12} xs={12}>
               {updateError ? (
                 <Alert severity="error">
@@ -442,8 +427,6 @@ export const PersonalInfoForm: React.FC = () => {
                 <Alert severity="success">Personal Infomation updated</Alert>
               )}
             </Grid>
-          ) : (
-            <></>
           )}
         </Grid>
       </CardActions>
