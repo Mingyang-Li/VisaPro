@@ -1,5 +1,9 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
+/* eslint-disable no-use-before-define */
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
+
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -34,14 +38,12 @@ export type Applicant = {
   user?: Maybe<User>;
 };
 
-
 export type ApplicantEducationHistoriesArgs = {
   orderBy?: InputMaybe<Array<EducationHistoryOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
   where?: InputMaybe<EducationHistoryWhereInput>;
 };
-
 
 export type ApplicantEmploymentHistoriesArgs = {
   orderBy?: InputMaybe<Array<EmploymentHistoryOrderByInput>>;
@@ -50,14 +52,12 @@ export type ApplicantEmploymentHistoriesArgs = {
   where?: InputMaybe<EmploymentHistoryWhereInput>;
 };
 
-
 export type ApplicantFamilyMembersArgs = {
   orderBy?: InputMaybe<Array<FamilyMemberOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
   where?: InputMaybe<FamilyMemberWhereInput>;
 };
-
 
 export type ApplicantTravelHistoriesArgs = {
   orderBy?: InputMaybe<Array<TravelHistoryOrderByInput>>;
@@ -442,7 +442,6 @@ export type FamilyMember = {
   updatedBy?: Maybe<User>;
 };
 
-
 export type FamilyMemberApplicantsArgs = {
   orderBy?: InputMaybe<Array<ApplicantOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
@@ -570,117 +569,95 @@ export type Mutation = {
   updateUser: User;
 };
 
-
 export type MutationCreateApplicantArgs = {
   data: ApplicantCreateInput;
 };
-
 
 export type MutationCreateEducationHistoryArgs = {
   data: EducationHistoryCreateInput;
 };
 
-
 export type MutationCreateEmploymentHistoryArgs = {
   data: EmploymentHistoryCreateInput;
 };
-
 
 export type MutationCreateFamilyMemberArgs = {
   data: FamilyMemberCreateInput;
 };
 
-
 export type MutationCreatePersonalInfoArgs = {
   data: PersonalInfoCreateInput;
 };
-
 
 export type MutationCreateTravelHistoryArgs = {
   data: TravelHistoryCreateInput;
 };
 
-
 export type MutationCreateUserArgs = {
   data: UserCreateInput;
 };
-
 
 export type MutationDeleteApplicantArgs = {
   where: ApplicantWhereUniqueInput;
 };
 
-
 export type MutationDeleteEducationHistoryArgs = {
   where: EducationHistoryWhereUniqueInput;
 };
-
 
 export type MutationDeleteEmploymentHistoryArgs = {
   where: EmploymentHistoryWhereUniqueInput;
 };
 
-
 export type MutationDeleteFamilyMemberArgs = {
   where: FamilyMemberWhereUniqueInput;
 };
-
 
 export type MutationDeletePersonalInfoArgs = {
   where: PersonalInfoWhereUniqueInput;
 };
 
-
 export type MutationDeleteTravelHistoryArgs = {
   where: TravelHistoryWhereUniqueInput;
 };
-
 
 export type MutationDeleteUserArgs = {
   where: UserWhereUniqueInput;
 };
 
-
 export type MutationLoginArgs = {
   credentials: Credentials;
 };
-
 
 export type MutationUpdateApplicantArgs = {
   data: ApplicantUpdateInput;
   where: ApplicantWhereUniqueInput;
 };
 
-
 export type MutationUpdateEducationHistoryArgs = {
   data: EducationHistoryUpdateInput;
   where: EducationHistoryWhereUniqueInput;
 };
-
 
 export type MutationUpdateEmploymentHistoryArgs = {
   data: EmploymentHistoryUpdateInput;
   where: EmploymentHistoryWhereUniqueInput;
 };
 
-
 export type MutationUpdateFamilyMemberArgs = {
   data: FamilyMemberUpdateInput;
   where: FamilyMemberWhereUniqueInput;
 };
-
 
 export type MutationUpdatePersonalInfoArgs = {
   data: PersonalInfoUpdateInput;
   where: PersonalInfoWhereUniqueInput;
 };
 
-
 export type MutationUpdateTravelHistoryArgs = {
   data: TravelHistoryUpdateInput;
   where: TravelHistoryWhereUniqueInput;
 };
-
 
 export type MutationUpdateUserArgs = {
   data: UserUpdateInput;
@@ -836,14 +813,12 @@ export type Query = {
   users: Array<User>;
 };
 
-
 export type Query_ApplicantsMetaArgs = {
   orderBy?: InputMaybe<Array<ApplicantOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
   where?: InputMaybe<ApplicantWhereInput>;
 };
-
 
 export type Query_EducationHistoriesMetaArgs = {
   orderBy?: InputMaybe<Array<EducationHistoryOrderByInput>>;
@@ -852,14 +827,12 @@ export type Query_EducationHistoriesMetaArgs = {
   where?: InputMaybe<EducationHistoryWhereInput>;
 };
 
-
 export type Query_EmploymentHistoriesMetaArgs = {
   orderBy?: InputMaybe<Array<EmploymentHistoryOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
   where?: InputMaybe<EmploymentHistoryWhereInput>;
 };
-
 
 export type Query_FamilyMembersMetaArgs = {
   orderBy?: InputMaybe<Array<FamilyMemberOrderByInput>>;
@@ -868,14 +841,12 @@ export type Query_FamilyMembersMetaArgs = {
   where?: InputMaybe<FamilyMemberWhereInput>;
 };
 
-
 export type Query_PersonalInfosMetaArgs = {
   orderBy?: InputMaybe<Array<PersonalInfoOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
   where?: InputMaybe<PersonalInfoWhereInput>;
 };
-
 
 export type Query_TravelHistoriesMetaArgs = {
   orderBy?: InputMaybe<Array<TravelHistoryOrderByInput>>;
@@ -884,7 +855,6 @@ export type Query_TravelHistoriesMetaArgs = {
   where?: InputMaybe<TravelHistoryWhereInput>;
 };
 
-
 export type Query_UsersMetaArgs = {
   orderBy?: InputMaybe<Array<UserOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
@@ -892,11 +862,9 @@ export type Query_UsersMetaArgs = {
   where?: InputMaybe<UserWhereInput>;
 };
 
-
 export type QueryApplicantArgs = {
   where: ApplicantWhereUniqueInput;
 };
-
 
 export type QueryApplicantsArgs = {
   orderBy?: InputMaybe<Array<ApplicantOrderByInput>>;
@@ -905,7 +873,6 @@ export type QueryApplicantsArgs = {
   where?: InputMaybe<ApplicantWhereInput>;
 };
 
-
 export type QueryEducationHistoriesArgs = {
   orderBy?: InputMaybe<Array<EducationHistoryOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
@@ -913,11 +880,9 @@ export type QueryEducationHistoriesArgs = {
   where?: InputMaybe<EducationHistoryWhereInput>;
 };
 
-
 export type QueryEducationHistoryArgs = {
   where: EducationHistoryWhereUniqueInput;
 };
-
 
 export type QueryEmploymentHistoriesArgs = {
   orderBy?: InputMaybe<Array<EmploymentHistoryOrderByInput>>;
@@ -926,16 +891,13 @@ export type QueryEmploymentHistoriesArgs = {
   where?: InputMaybe<EmploymentHistoryWhereInput>;
 };
 
-
 export type QueryEmploymentHistoryArgs = {
   where: EmploymentHistoryWhereUniqueInput;
 };
 
-
 export type QueryFamilyMemberArgs = {
   where: FamilyMemberWhereUniqueInput;
 };
-
 
 export type QueryFamilyMembersArgs = {
   orderBy?: InputMaybe<Array<FamilyMemberOrderByInput>>;
@@ -944,11 +906,9 @@ export type QueryFamilyMembersArgs = {
   where?: InputMaybe<FamilyMemberWhereInput>;
 };
 
-
 export type QueryPersonalInfoArgs = {
   where: PersonalInfoWhereUniqueInput;
 };
-
 
 export type QueryPersonalInfosArgs = {
   orderBy?: InputMaybe<Array<PersonalInfoOrderByInput>>;
@@ -957,7 +917,6 @@ export type QueryPersonalInfosArgs = {
   where?: InputMaybe<PersonalInfoWhereInput>;
 };
 
-
 export type QueryTravelHistoriesArgs = {
   orderBy?: InputMaybe<Array<TravelHistoryOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
@@ -965,16 +924,13 @@ export type QueryTravelHistoriesArgs = {
   where?: InputMaybe<TravelHistoryWhereInput>;
 };
 
-
 export type QueryTravelHistoryArgs = {
   where: TravelHistoryWhereUniqueInput;
 };
 
-
 export type QueryUserArgs = {
   where: UserWhereUniqueInput;
 };
-
 
 export type QueryUsersArgs = {
   orderBy?: InputMaybe<Array<UserOrderByInput>>;
@@ -1162,14 +1118,12 @@ export type User = {
   username: Scalars['String'];
 };
 
-
 export type UserApplicantsArgs = {
   orderBy?: InputMaybe<Array<ApplicantOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
   where?: InputMaybe<ApplicantWhereInput>;
 };
-
 
 export type UserApplicantsArchivedArgs = {
   orderBy?: InputMaybe<Array<ApplicantOrderByInput>>;
@@ -1178,14 +1132,12 @@ export type UserApplicantsArchivedArgs = {
   where?: InputMaybe<ApplicantWhereInput>;
 };
 
-
 export type UserApplicantsCreatedArgs = {
   orderBy?: InputMaybe<Array<ApplicantOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
   where?: InputMaybe<ApplicantWhereInput>;
 };
-
 
 export type UserApplicantsUpdatedArgs = {
   orderBy?: InputMaybe<Array<ApplicantOrderByInput>>;
@@ -1194,14 +1146,12 @@ export type UserApplicantsUpdatedArgs = {
   where?: InputMaybe<ApplicantWhereInput>;
 };
 
-
 export type UserEducationHistoriesArchivedArgs = {
   orderBy?: InputMaybe<Array<EducationHistoryOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
   where?: InputMaybe<EducationHistoryWhereInput>;
 };
-
 
 export type UserEducationHistoriesCreatedArgs = {
   orderBy?: InputMaybe<Array<EducationHistoryOrderByInput>>;
@@ -1210,14 +1160,12 @@ export type UserEducationHistoriesCreatedArgs = {
   where?: InputMaybe<EducationHistoryWhereInput>;
 };
 
-
 export type UserEducationHistoriesUpdatedArgs = {
   orderBy?: InputMaybe<Array<EducationHistoryOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
   where?: InputMaybe<EducationHistoryWhereInput>;
 };
-
 
 export type UserEmploymentHistoriesArchivedArgs = {
   orderBy?: InputMaybe<Array<EmploymentHistoryOrderByInput>>;
@@ -1226,14 +1174,12 @@ export type UserEmploymentHistoriesArchivedArgs = {
   where?: InputMaybe<EmploymentHistoryWhereInput>;
 };
 
-
 export type UserEmploymentHistoriesCreatedArgs = {
   orderBy?: InputMaybe<Array<EmploymentHistoryOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
   where?: InputMaybe<EmploymentHistoryWhereInput>;
 };
-
 
 export type UserEmploymentHistoriesUpdatedArgs = {
   orderBy?: InputMaybe<Array<EmploymentHistoryOrderByInput>>;
@@ -1242,14 +1188,12 @@ export type UserEmploymentHistoriesUpdatedArgs = {
   where?: InputMaybe<EmploymentHistoryWhereInput>;
 };
 
-
 export type UserFamilyMembersArchivedArgs = {
   orderBy?: InputMaybe<Array<FamilyMemberOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
   where?: InputMaybe<FamilyMemberWhereInput>;
 };
-
 
 export type UserFamilyMembersCreatedArgs = {
   orderBy?: InputMaybe<Array<FamilyMemberOrderByInput>>;
@@ -1258,14 +1202,12 @@ export type UserFamilyMembersCreatedArgs = {
   where?: InputMaybe<FamilyMemberWhereInput>;
 };
 
-
 export type UserFamilyMembersUpdatedArgs = {
   orderBy?: InputMaybe<Array<FamilyMemberOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
   where?: InputMaybe<FamilyMemberWhereInput>;
 };
-
 
 export type UserPersonalInfosArchivedArgs = {
   orderBy?: InputMaybe<Array<PersonalInfoOrderByInput>>;
@@ -1274,14 +1216,12 @@ export type UserPersonalInfosArchivedArgs = {
   where?: InputMaybe<PersonalInfoWhereInput>;
 };
 
-
 export type UserPersonalInfosCreatedArgs = {
   orderBy?: InputMaybe<Array<PersonalInfoOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
   where?: InputMaybe<PersonalInfoWhereInput>;
 };
-
 
 export type UserPersonalInfosUpdatedArgs = {
   orderBy?: InputMaybe<Array<PersonalInfoOrderByInput>>;
@@ -1290,7 +1230,6 @@ export type UserPersonalInfosUpdatedArgs = {
   where?: InputMaybe<PersonalInfoWhereInput>;
 };
 
-
 export type UserTravelHistoriesArchivedArgs = {
   orderBy?: InputMaybe<Array<TravelHistoryOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
@@ -1298,14 +1237,12 @@ export type UserTravelHistoriesArchivedArgs = {
   where?: InputMaybe<TravelHistoryWhereInput>;
 };
 
-
 export type UserTravelHistoriesCreatedArgs = {
   orderBy?: InputMaybe<Array<TravelHistoryOrderByInput>>;
   skip?: InputMaybe<Scalars['Float']>;
   take?: InputMaybe<Scalars['Float']>;
   where?: InputMaybe<TravelHistoryWhereInput>;
 };
-
 
 export type UserTravelHistoriesUpdatedArgs = {
   orderBy?: InputMaybe<Array<TravelHistoryOrderByInput>>;
@@ -1422,9 +1359,7 @@ export type UserWhereUniqueInput = {
 
 export type LoginMutationVariables = Exact<{ [key: string]: never; }>;
 
-
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'UserInfo', accessToken?: string | null } };
-
 
 export const LoginDocument = gql`
     mutation LOGIN {
@@ -1452,9 +1387,9 @@ export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutati
  * });
  */
 export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
+}
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;

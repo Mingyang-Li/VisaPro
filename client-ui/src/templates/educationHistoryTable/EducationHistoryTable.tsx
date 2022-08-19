@@ -9,10 +9,11 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useQuery, useReactiveVar } from '@apollo/client';
-import { Alert, Backdrop, CircularProgress } from '@mui/material';
+import { Alert } from '@mui/material';
 import { EDUCATION_HISTORIES } from '../../graphql/Queries';
 import { applicantIdCurrEditing } from '../../graphql/Store';
 import { EducationHistory, Query } from '../../generated/graphql';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 interface Column {
   id:
@@ -29,30 +30,26 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: 'institutionName', label: 'institutionName', minWidth: 170 },
-  { id: 'country', label: 'country', minWidth: 100 },
+  { id: 'institutionName', label: 'Institution Name' },
+  { id: 'country', label: 'Country', align: 'right' },
   {
     id: 'city',
-    label: 'city',
-    minWidth: 170,
+    label: 'City',
     align: 'right',
   },
   {
     id: 'qualificationGained',
-    label: 'qualificationGained',
-    minWidth: 170,
+    label: 'Qualification Gained',
     align: 'right',
   },
   {
     id: 'startDate',
-    label: 'startDate',
-    minWidth: 170,
+    label: 'Start Date',
     align: 'right',
   },
   {
     id: 'endDate',
-    label: 'endDate',
-    minWidth: 170,
+    label: 'End Date',
     align: 'right',
   },
 ];
@@ -88,6 +85,7 @@ const EducationHistoryTable = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  if (loading) return <LoadingSpinner show text={'Getting education histories'} />;
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -98,13 +96,6 @@ const EducationHistoryTable = () => {
       ) : (
         null
       )}
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={showOverlay}
-      >
-        <CircularProgress color="inherit" />
-        {loading ? 'Loading' : ''}
-      </Backdrop>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -121,7 +112,7 @@ const EducationHistoryTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {rows.map((row) => (
+            {rows.map((row) => (
               <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                 {columns.map((column) => {
                   const i = column.id;
@@ -132,7 +123,7 @@ const EducationHistoryTable = () => {
                   );
                 })}
               </TableRow>
-            ))} */}
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
