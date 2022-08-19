@@ -31,6 +31,10 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
 
   const [formInfo, setFormInfo] = useState<EducationHistory>(data?.educationHistory as EducationHistory);
 
+  useEffect(() => {
+    setFormInfo(data?.educationHistory as EducationHistory);
+  }, [data]);
+
   if (error) return <h1>An error occured</h1>;
   return (
     <Dialog open={props.open}>
@@ -88,14 +92,14 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                   <Grid item md={6} sm={12} xs={12}>
                     <BasicDatePicker
                       label={'Start date'}
-                      defaultValue={new Date(formInfo?.startDate)}
+                      defaultValue={new Date(formInfo?.startDate) as Date}
                       updateParentDateValue={(d: Date) => setFormInfo({ ...formInfo, startDate: d })}
                     />
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>
                     <BasicDatePicker
                       label={'End date'}
-                      defaultValue={new Date(formInfo?.endDate)}
+                      defaultValue={new Date(formInfo?.endDate) as Date}
                       updateParentDateValue={(d: Date) => setFormInfo({ ...formInfo, endDate: d })}
                     />
                   </Grid>
