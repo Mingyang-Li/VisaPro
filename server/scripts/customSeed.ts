@@ -8,6 +8,11 @@ const client = new PrismaClient();
 export async function customSeed() {
   //replace this sample code to populate your database
   //with data that is required for your application to start
+  await seedAllTables();
+  client.$disconnect();
+}
+
+export const seedAllTables = async () => {
   await seedUsers().then(async () => {
     await seedApplicants().then(async () => {
       await seedPersonalInfos().then(async () => {
@@ -18,7 +23,16 @@ export async function customSeed() {
       });
     });
   });
-  client.$disconnect();
+}
+
+export const clearAllTables = async () => {
+  await client.user.deleteMany({}).then(() => console.log('✅ Cleared User table'));
+  await client.applicant.deleteMany({}).then(() => console.log('✅ Cleared Applicanter table'));
+  await client.personalInfo.deleteMany({}).then(() => console.log('✅ Cleared PersonalInfo table'));
+  await client.educationHistory.deleteMany({}).then(() => console.log('✅ Cleared EducationHistory table'));
+  await client.employmentHistory.deleteMany({}).then(() => console.log('✅ Cleared EmploymentHistory table'));
+  await client.travelHistory.deleteMany({}).then(() => console.log('✅ Cleared TravelHistory table'));
+  await client.familyMember.deleteMany({}).then(() => console.log('✅ Cleared FamilyMember table'));
 }
 
 const USER_CT = 5;
