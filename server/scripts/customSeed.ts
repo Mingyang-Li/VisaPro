@@ -75,6 +75,8 @@ const generateRandomNumBetween = (min = 0, max = 100) => {
   return rand;
 };
 
+const nzMobilePrefixes = ['021', '022', '027', '020'];
+
 const countries = [
   "China",
   "India",
@@ -98,17 +100,6 @@ const randomDate = (start: Date, end: Date) => {
   return new Date(
     start.getTime() + Math.random() * (end.getTime() - start.getTime())
   );
-};
-
-const randomMobile = (length: number) => {
-  const prefixs = ["021", "022", "027"];
-  let result = "";
-  let characters = "0123456789";
-  let charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return prefixs[generateRandomNumBetween(0, prefixs.length)] + result;
 };
 
 const qualifications = [
@@ -278,7 +269,7 @@ export const seedPersonalInfos = async () => {
         homeCountryAddress: randomAddress(),
         inzClientNumber: generateId(12),
         lastName: `${randomCap(1)}${randomLowChar(5)}`,
-        mobile: randomMobile(8),
+        mobile: `${nzMobilePrefixes[generateRandomNumBetween(0, nzMobilePrefixes.length)]}${randomInts(6)}`,
         nzAddress: randomAddress(),
         passportNumber: generateId(9),
       },
