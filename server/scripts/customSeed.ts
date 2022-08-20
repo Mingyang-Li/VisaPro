@@ -111,6 +111,10 @@ const randomMobile = (length: number) => {
   return prefixs[generateRandomNumBetween(0, prefixs.length)] + result;
 };
 
+const qualifications = [
+  'Secondary school', 'NCEA', 'IB', 'AP', 'A-Level', 'GCSE', 'Bachelors', 'Diploma', 'Certificate', 'Honnors', 'Masters', 'PhD', 'Postgraduate'
+]
+
 const IEmployment = [
   "Full-time",
   "Part-time",
@@ -325,7 +329,7 @@ export const seedEducationHistories = async () => {
           endDate: randomDate(new Date("1960-01-01"), new Date("2021-12-31")),
           institutionName: `Institution-${k + 1}`,
           isCurrentInstitution: false,
-          qualificationGained: `Qualification-${k + 1}`,
+          qualificationGained: `${qualifications[generateRandomNumBetween(0, qualifications.length)]}`,
           startDate: randomDate(new Date("1960-01-01"), new Date("2021-12-31")),
         },
       };
