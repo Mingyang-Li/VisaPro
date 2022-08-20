@@ -1,15 +1,17 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import { useLazyQuery } from '@apollo/client';
+import { useLazyQuery, useMutation, useReactiveVar } from '@apollo/client';
 import {
   Autocomplete,
   Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField,
 } from '@mui/material';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
-import { EDUCATION_HISTORY } from '../../graphql/Queries';
+import { EDUCATION_HISTORIES, EDUCATION_HISTORY } from '../../graphql/Queries';
 import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
-import { EducationHistory, Query } from '../../generated/graphql';
+import { EducationHistory, Mutation, Query } from '../../generated/graphql';
+import { UPDATE_EDUCATION_HISTORY } from '../../graphql/Mutations';
+import { applicantIdCurrEditing } from '../../graphql/Store';
 
 interface IEducationHistoryEdit {
   open: boolean;
@@ -18,6 +20,7 @@ interface IEducationHistoryEdit {
 }
 
 const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducationHistoryEdit) => {
+  const applicantId = useReactiveVar(applicantIdCurrEditing);
   const [getData, { data, loading, error }] = useLazyQuery<Query>(EDUCATION_HISTORY, {
     variables: {
       where: {
@@ -36,12 +39,56 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
     setFormInfo(data?.educationHistory as EducationHistory);
   }, [data]);
 
+  const [initiateUpdate, { loading: updating, error: updateError }] = useMutation<Mutation>(
+    UPDATE_EDUCATION_HISTORY,
+    {
+      variables: {
+        where: {
+          id: props.educationHistoryId,
+        },
+        data: {
+          institutionName: formInfo?.institutionName,
+          country: formInfo?.country,
+          city: formInfo?.city,
+          qualificationGained: formInfo?.qualificationGained,
+          startDate: formInfo?.startDate,
+          endDate: formInfo?.endDate,
+          isCurrentInstitution: formInfo?.isCurrentInstitution,
+          additionalInfo: formInfo?.additionalInfo,
+        },
+      },
+      refetchQueries: [
+        {
+          query: EDUCATION_HISTORIES,
+          variables: {
+            where: {
+              applicant: {
+                id: applicantId,
+              },
+              archived: {
+                equals: false,
+              },
+            },
+          },
+        },
+        {
+          query: EDUCATION_HISTORY,
+          variables: {
+            where: {
+              id: props.educationHistoryId,
+            },
+          },
+        },
+      ],
+    },
+  );
+
   if (error) return <h1>An error occured</h1>;
   return (
     <Dialog open={props.open}>
-      {loading ? (
+      {loading || updating ? (
         <DialogContent>
-          <LoadingSpinner show text={'Getting more details about your education'} />
+          <LoadingSpinner show text={loading ? 'Getting more details about your education' : 'Updating education history...'} />
         </DialogContent>
       ) : (
         <>
@@ -56,7 +103,7 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                       fullWidth
                       label="Institution Name"
                       variant="outlined"
-                      value={data?.educationHistory?.institutionName}
+                      value={formInfo?.institutionName}
                       onChange={(e: any) => setFormInfo({ ...formInfo, institutionName: e.target.value })}
                     />
                   </Grid>
@@ -142,7 +189,7 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                   </Grid>
                   <Grid item md={12} sm={12} xs={12}>
                     <TextField
-                      id="Additional Info"
+                      id="additionalInfo"
                       fullWidth
                       multiline
                       rows={4}
@@ -164,7 +211,7 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                 </Button>
               </Grid>
               <Grid item md={6} sm={12} xs={12}>
-                <Button fullWidth onClick={(event) => props.handleClose(!open)} color={'primary'} variant={'contained'}>
+                <Button fullWidth onClick={() => initiateUpdate()} color={'primary'} variant={'contained'}>
                   Update
                 </Button>
               </Grid>

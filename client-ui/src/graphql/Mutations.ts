@@ -67,8 +67,8 @@ export const CREATE_EDUCATION_HISTORY = gql`
   }
 `;
 
-export const UPDATE_EDUCATION_HISTORY_BY_ID = gql`
-  mutation UPDATE_EDUCATION_HISTORY_BY_ID(
+export const UPDATE_EDUCATION_HISTORY = gql`
+  mutation UPDATE_EDUCATION_HISTORY(
     $where: EducationHistoryWhereUniqueInput!
     $data: EducationHistoryUpdateInput!
   ) {
