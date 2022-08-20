@@ -4,9 +4,9 @@ import {
   List,
   Datagrid,
   ListProps,
+  TextField,
   BooleanField,
   ReferenceField,
-  TextField,
   DateField,
 } from "react-admin";
 
@@ -23,6 +23,7 @@ export const FamilyMemberList = (props: ListProps): React.ReactElement => {
       pagination={<Pagination />}
     >
       <Datagrid rowClick="show">
+        <TextField label="Additional Info" source="additionalInfo" />
         <BooleanField label="Archived" source="archived" />
         <ReferenceField label="Archived By" source="user.id" reference="User">
           <TextField source={USER_TITLE_FIELD} />

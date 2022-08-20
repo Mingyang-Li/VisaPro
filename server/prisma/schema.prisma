@@ -88,6 +88,7 @@ model EducationHistory {
 }
 
 model TravelHistory {
+  additionalInfo     String?
   applicant          Applicant? @relation(fields: [applicantId], references: [id])
   applicantId        String?
   archived           Boolean?
@@ -109,6 +110,7 @@ model TravelHistory {
 }
 
 model FamilyMember {
+  additionalInfo          String?
   applicants              Applicant[]
   archived                Boolean?
   archivedBy              User?       @relation(name: "familyMembersArchived", fields: [archivedById], references: [id])
@@ -129,27 +131,28 @@ model FamilyMember {
 }
 
 model PersonalInfo {
+  additionalInfo         String?
   applicant              Applicant?
   archived               Boolean?
-  archivedBy             User?     @relation(name: "personalInfosArchived", fields: [archivedById], references: [id])
+  archivedBy             User?      @relation(name: "personalInfosArchived", fields: [archivedById], references: [id])
   archivedById           String?
   countriesOfCitizenship String?
   countryOfBirth         String?
-  createdAt              DateTime? @default(now())
-  createdBy              User?     @relation(name: "personalInfosCreated", fields: [createdById], references: [id])
+  createdAt              DateTime?  @default(now())
+  createdBy              User?      @relation(name: "personalInfosCreated", fields: [createdById], references: [id])
   createdById            String?
   dateOfBirth            DateTime?
   email                  String?
   firstName              String?
   homeCountryAddress     String?
-  id                     String    @id @default(cuid())
+  id                     String     @id @default(cuid())
   inzClientNumber        String?
   lastName               String?
   mobile                 String?
   nzAddress              String?
   passportNumber         String?
-  updatedAt              DateTime? @updatedAt
-  updatedBy              User?     @relation(name: "personalInfosUpdated", fields: [updatedById], references: [id])
+  updatedAt              DateTime?  @updatedAt
+  updatedBy              User?      @relation(name: "personalInfosUpdated", fields: [updatedById], references: [id])
   updatedById            String?
 }
 

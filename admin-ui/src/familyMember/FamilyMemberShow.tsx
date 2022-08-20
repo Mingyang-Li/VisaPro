@@ -4,9 +4,9 @@ import {
   Show,
   SimpleShowLayout,
   ShowProps,
+  TextField,
   BooleanField,
   ReferenceField,
-  TextField,
   DateField,
 } from "react-admin";
 
@@ -16,6 +16,7 @@ export const FamilyMemberShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
+        <TextField label="Additional Info" source="additionalInfo" />
         <BooleanField label="Archived" source="archived" />
         <ReferenceField label="Archived By" source="user.id" reference="User">
           <TextField source={USER_TITLE_FIELD} />

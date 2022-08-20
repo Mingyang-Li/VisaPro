@@ -1,6 +1,7 @@
 import { SortOrder } from "../../util/SortOrder";
 
 export type TravelHistoryOrderByInput = {
+  additionalInfo?: SortOrder;
   applicantId?: SortOrder;
   archived?: SortOrder;
   archivedById?: SortOrder;

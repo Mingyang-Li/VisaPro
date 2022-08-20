@@ -11,18 +11,29 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { Applicant } from "../../applicant/base/Applicant";
 import {
-  ValidateNested,
-  IsOptional,
-  IsBoolean,
   IsString,
+  IsOptional,
+  ValidateNested,
+  IsBoolean,
   IsDate,
 } from "class-validator";
+import { Applicant } from "../../applicant/base/Applicant";
 import { Type } from "class-transformer";
 import { User } from "../../user/base/User";
 @ObjectType()
 class PersonalInfo {
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  additionalInfo!: string | null;
+
   @ApiProperty({
     required: false,
     type: () => Applicant,
@@ -30,7 +41,7 @@ class PersonalInfo {
   @ValidateNested()
   @Type(() => Applicant)
   @IsOptional()
-  applicant?: Applicant;
+  applicant?: Applicant | null;
 
   @ApiProperty({
     required: false,

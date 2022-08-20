@@ -1,11 +1,12 @@
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { ApplicantListRelationFilter } from "../applicant/ApplicantListRelationFilter";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 
 export type FamilyMemberWhereInput = {
+  additionalInfo?: StringNullableFilter;
   applicants?: ApplicantListRelationFilter;
   archived?: BooleanNullableFilter;
   archivedBy?: UserWhereUniqueInput;

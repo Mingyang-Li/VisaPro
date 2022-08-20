@@ -2,7 +2,8 @@ import { ApplicantWhereUniqueInput } from "../applicant/ApplicantWhereUniqueInpu
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type PersonalInfoCreateInput = {
-  applicant?: ApplicantWhereUniqueInput;
+  additionalInfo?: string | null;
+  applicant?: ApplicantWhereUniqueInput | null;
   archived?: boolean | null;
   archivedBy?: UserWhereUniqueInput | null;
   countriesOfCitizenship?: string | null;

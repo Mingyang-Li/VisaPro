@@ -2,6 +2,7 @@ import { ApplicantUpdateManyWithoutFamilyMembersInput } from "./ApplicantUpdateM
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type FamilyMemberUpdateInput = {
+  additionalInfo?: string | null;
   applicants?: ApplicantUpdateManyWithoutFamilyMembersInput;
   archived?: boolean | null;
   archivedBy?: UserWhereUniqueInput | null;

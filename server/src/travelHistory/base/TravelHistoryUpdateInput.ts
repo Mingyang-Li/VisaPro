@@ -11,18 +11,29 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { ApplicantWhereUniqueInput } from "../../applicant/base/ApplicantWhereUniqueInput";
 import {
-  ValidateNested,
+  IsString,
   IsOptional,
+  ValidateNested,
   IsBoolean,
   IsDate,
-  IsString,
 } from "class-validator";
+import { ApplicantWhereUniqueInput } from "../../applicant/base/ApplicantWhereUniqueInput";
 import { Type } from "class-transformer";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 @InputType()
 class TravelHistoryUpdateInput {
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  additionalInfo?: string | null;
+
   @ApiProperty({
     required: false,
     type: () => ApplicantWhereUniqueInput,

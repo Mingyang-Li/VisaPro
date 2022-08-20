@@ -525,6 +525,7 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
           label="Family Members"
         >
           <Datagrid rowClick="show">
+            <TextField label="Additional Info" source="additionalInfo" />
             <BooleanField label="Archived" source="archived" />
             <ReferenceField
               label="Archived By"
@@ -570,6 +571,7 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
           label="Family Members"
         >
           <Datagrid rowClick="show">
+            <TextField label="Additional Info" source="additionalInfo" />
             <BooleanField label="Archived" source="archived" />
             <ReferenceField
               label="Archived By"
@@ -615,6 +617,7 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
           label="Family Members"
         >
           <Datagrid rowClick="show">
+            <TextField label="Additional Info" source="additionalInfo" />
             <BooleanField label="Archived" source="archived" />
             <ReferenceField
               label="Archived By"
@@ -660,6 +663,7 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
           label="Personal Infos"
         >
           <Datagrid rowClick="show">
+            <TextField label="Additional Info" source="additionalInfo" />
             <ReferenceField
               label="Applicant"
               source="applicant.id"
@@ -717,6 +721,7 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
           label="Personal Infos"
         >
           <Datagrid rowClick="show">
+            <TextField label="Additional Info" source="additionalInfo" />
             <ReferenceField
               label="Applicant"
               source="applicant.id"
@@ -774,6 +779,7 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
           label="Personal Infos"
         >
           <Datagrid rowClick="show">
+            <TextField label="Additional Info" source="additionalInfo" />
             <ReferenceField
               label="Applicant"
               source="applicant.id"
@@ -831,6 +837,7 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
           label="Travel Histories"
         >
           <Datagrid rowClick="show">
+            <TextField label="Additional Info" source="additionalInfo" />
             <ReferenceField
               label="Applicant"
               source="applicant.id"
@@ -880,6 +887,7 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
           label="Travel Histories"
         >
           <Datagrid rowClick="show">
+            <TextField label="Additional Info" source="additionalInfo" />
             <ReferenceField
               label="Applicant"
               source="applicant.id"
@@ -929,6 +937,7 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
           label="Travel Histories"
         >
           <Datagrid rowClick="show">
+            <TextField label="Additional Info" source="additionalInfo" />
             <ReferenceField
               label="Applicant"
               source="applicant.id"

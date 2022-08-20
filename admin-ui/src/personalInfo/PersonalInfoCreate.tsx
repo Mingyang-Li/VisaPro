@@ -4,10 +4,10 @@ import {
   Create,
   SimpleForm,
   CreateProps,
+  TextInput,
   ReferenceInput,
   SelectInput,
   BooleanInput,
-  TextInput,
   DateTimeInput,
 } from "react-admin";
 
@@ -18,6 +18,7 @@ export const PersonalInfoCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
+        <TextInput label="Additional Info" multiline source="additionalInfo" />
         <ReferenceInput
           source="applicant.id"
           reference="Applicant"
