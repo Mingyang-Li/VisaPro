@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLazyQuery, useMutation, useReactiveVar } from '@apollo/client';
 import {
+  Alert,
   Autocomplete,
-  Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField,
+  Button, Card, CardContent, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Stack, TextField,
 } from '@mui/material';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import { EDUCATION_HISTORIES, EDUCATION_HISTORY } from '../../graphql/Queries';
@@ -21,6 +22,8 @@ interface IEducationHistoryEdit {
 
 const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducationHistoryEdit) => {
   const applicantId = useReactiveVar(applicantIdCurrEditing);
+  const [edit, setEdit] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
   const [getData, { data, loading, error }] = useLazyQuery<Query>(EDUCATION_HISTORY, {
     variables: {
       where: {
@@ -39,7 +42,7 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
     setFormInfo(data?.educationHistory as EducationHistory);
   }, [data]);
 
-  const [initiateUpdate, { loading: updating, error: updateError }] = useMutation<Mutation>(
+  const [initiateUpdate, { data: updatedData, loading: updating, error: updateError }] = useMutation<Mutation>(
     UPDATE_EDUCATION_HISTORY,
     {
       variables: {
@@ -83,12 +86,27 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
     },
   );
 
-  if (error) return <h1>An error occured</h1>;
+  useEffect(() => {
+    if (updating || loading) {
+      setEdit(() => false);
+    } else {
+      setEdit(() => true);
+    }
+  }, [updating, loading]);
+
+  useEffect(() => {
+    if (updatedData || updateError) setShowAlert(() => true);
+  }, [updatedData, updateError]);
+
+  useEffect(() => {
+    if (edit) setShowAlert(() => false);
+  }, [edit]);
+
   return (
     <Dialog open={props.open}>
-      {loading || updating ? (
+      {loading ? (
         <DialogContent>
-          <LoadingSpinner show text={loading ? 'Getting more details about your education' : 'Updating education history...'} />
+          <LoadingSpinner show text={'Getting more details about your education'} />
         </DialogContent>
       ) : (
         <>
@@ -102,7 +120,8 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                       id="institutionName"
                       fullWidth
                       label="Institution Name"
-                      variant="outlined"
+                      disabled={!edit}
+                      variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.institutionName}
                       onChange={(e: any) => setFormInfo({ ...formInfo, institutionName: e.target.value })}
                     />
@@ -112,7 +131,8 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                       id="country"
                       fullWidth
                       label="Country"
-                      variant="outlined"
+                      disabled={!edit}
+                      variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.country}
                       onChange={(e: any) => setFormInfo({ ...formInfo, country: e.target.value })}
                     />
@@ -122,7 +142,8 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                       id="city"
                       fullWidth
                       label="City"
-                      variant="outlined"
+                      disabled={!edit}
+                      variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.city}
                       onChange={(e: any) => setFormInfo({ ...formInfo, city: e.target.value })}
                     />
@@ -132,7 +153,8 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                       id="qualificationGained"
                       fullWidth
                       label="Qualification Gained"
-                      variant="outlined"
+                      disabled={!edit}
+                      variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.qualificationGained}
                       onChange={(e: any) => setFormInfo({ ...formInfo, qualificationGained: e.target.value })}
                     />
@@ -140,6 +162,7 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                   <Grid item md={6} sm={12} xs={12}>
                     <BasicDatePicker
                       label={'Start date'}
+                      disabled={!edit}
                       defaultValue={new Date(formInfo?.startDate) as Date}
                       updateParentDateValue={(d: Date) => setFormInfo({ ...formInfo, startDate: d })}
                     />
@@ -147,6 +170,7 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                   <Grid item md={6} sm={12} xs={12}>
                     <BasicDatePicker
                       label={'End date'}
+                      disabled={!edit}
                       defaultValue={new Date(formInfo?.endDate) as Date}
                       updateParentDateValue={(d: Date) => setFormInfo({ ...formInfo, endDate: d })}
                     />
@@ -158,13 +182,14 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                       fullWidth
                       disablePortal
                       options={['Yes', 'No']}
+                      disabled={!edit}
                       onChange={(event: any, newValue: string | null) => {
                         setFormInfo({
                           ...formInfo,
                           isCurrentInstitution: newValue === 'Yes',
                         });
                       }}
-                      renderInput={(params) => <TextField {...params} fullWidth label="Is current institution" />}
+                      renderInput={(params) => <TextField {...params} fullWidth label="Is current institution" variant={!edit ? 'filled' : 'outlined'} />}
                     />
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>
@@ -194,10 +219,32 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                       multiline
                       rows={4}
                       label="Additional Info"
-                      variant="outlined"
+                      disabled={!edit}
+                      variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.additionalInfo}
                       onChange={(e: any) => setFormInfo({ ...formInfo, additionalInfo: e.target.value })}
                     />
+                  </Grid>
+                  <Grid item md={12} sm={12} xs={12}>
+                    {error ? (
+                      <Alert severity="error">
+                        Error loading your education history, please try again later!
+                      </Alert>
+                    ) : null}
+                  </Grid>
+                  <Grid item md={12} sm={12} xs={12}>
+                    {updateError ? (
+                      <Alert severity="error">
+                        Error updating education history
+                      </Alert>
+                    ) : null}
+                  </Grid>
+                  <Grid item md={12} sm={12} xs={12}>
+                    {updatedData ? (
+                      <Alert severity="success">
+                        Education history updated!
+                      </Alert>
+                    ) : null}
                   </Grid>
                 </Grid>
               </CardContent>
@@ -206,13 +253,29 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
           <DialogActions>
             <Grid container spacing={1}>
               <Grid item md={6} sm={12} xs={12}>
-                <Button fullWidth onClick={(event) => props.handleClose(!open)} color={'error'} variant={'contained'}>
-                  Discard
+                <Button
+                  fullWidth
+                  onClick={(event) => props.handleClose(!open)}
+                  color={'error'}
+                  variant={'contained'}
+                  disabled={!edit}
+                >
+                  close
                 </Button>
               </Grid>
               <Grid item md={6} sm={12} xs={12}>
-                <Button fullWidth onClick={() => initiateUpdate()} color={'primary'} variant={'contained'}>
-                  Update
+                <Button
+                  fullWidth
+                  onClick={() => initiateUpdate()}
+                  color={'primary'}
+                  variant={'contained'}
+                  disabled={!edit}
+                >
+                  {updating ? (
+                    <CircularProgress color="warning" />
+                  ) : (
+                    'Update'
+                  )}
                 </Button>
               </Grid>
             </Grid>
