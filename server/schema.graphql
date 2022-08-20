@@ -381,6 +381,7 @@ input EmploymentHistoryWhereUniqueInput {
 }
 
 type FamilyMember {
+  additionalInfo: String
   applicants(orderBy: [ApplicantOrderByInput!], skip: Float, take: Float, where: ApplicantWhereInput): [Applicant!]!
   archived: Boolean
   archivedBy: User
@@ -398,6 +399,7 @@ type FamilyMember {
 }
 
 input FamilyMemberCreateInput {
+  additionalInfo: String
   applicants: ApplicantCreateNestedManyWithoutFamilyMembersInput
   archived: Boolean
   archivedBy: UserWhereUniqueInput
@@ -426,6 +428,7 @@ input FamilyMemberListRelationFilter {
 }
 
 input FamilyMemberOrderByInput {
+  additionalInfo: SortOrder
   archived: SortOrder
   archivedById: SortOrder
   countriesOfCitizenship: SortOrder
@@ -442,6 +445,7 @@ input FamilyMemberOrderByInput {
 }
 
 input FamilyMemberUpdateInput {
+  additionalInfo: String
   applicants: ApplicantUpdateManyWithoutFamilyMembersInput
   archived: Boolean
   archivedBy: UserWhereUniqueInput
@@ -468,6 +472,7 @@ input FamilyMemberUpdateManyWithoutUsersInput {
 }
 
 input FamilyMemberWhereInput {
+  additionalInfo: StringNullableFilter
   applicants: ApplicantListRelationFilter
   archived: BooleanNullableFilter
   archivedBy: UserWhereUniqueInput
@@ -516,6 +521,7 @@ type Mutation {
 }
 
 type PersonalInfo {
+  additionalInfo: String
   applicant: Applicant
   archived: Boolean
   archivedBy: User
@@ -538,6 +544,7 @@ type PersonalInfo {
 }
 
 input PersonalInfoCreateInput {
+  additionalInfo: String
   applicant: ApplicantWhereUniqueInput
   archived: Boolean
   archivedBy: UserWhereUniqueInput
@@ -567,6 +574,7 @@ input PersonalInfoListRelationFilter {
 }
 
 input PersonalInfoOrderByInput {
+  additionalInfo: SortOrder
   applicantId: SortOrder
   archived: SortOrder
   archivedById: SortOrder
@@ -589,6 +597,7 @@ input PersonalInfoOrderByInput {
 }
 
 input PersonalInfoUpdateInput {
+  additionalInfo: String
   applicant: ApplicantWhereUniqueInput
   archived: Boolean
   archivedBy: UserWhereUniqueInput
@@ -614,6 +623,7 @@ input PersonalInfoUpdateManyWithoutUsersInput {
 }
 
 input PersonalInfoWhereInput {
+  additionalInfo: StringNullableFilter
   applicant: ApplicantWhereUniqueInput
   archived: BooleanNullableFilter
   archivedBy: UserWhereUniqueInput
@@ -703,6 +713,7 @@ input StringNullableFilter {
 }
 
 type TravelHistory {
+  additionalInfo: String
   applicant: Applicant
   archived: Boolean
   archivedBy: User
@@ -720,6 +731,7 @@ type TravelHistory {
 }
 
 input TravelHistoryCreateInput {
+  additionalInfo: String
   applicant: ApplicantWhereUniqueInput
   archived: Boolean
   archivedBy: UserWhereUniqueInput
@@ -748,6 +760,7 @@ input TravelHistoryListRelationFilter {
 }
 
 input TravelHistoryOrderByInput {
+  additionalInfo: SortOrder
   applicantId: SortOrder
   archived: SortOrder
   archivedById: SortOrder
@@ -765,6 +778,7 @@ input TravelHistoryOrderByInput {
 }
 
 input TravelHistoryUpdateInput {
+  additionalInfo: String
   applicant: ApplicantWhereUniqueInput
   archived: Boolean
   archivedBy: UserWhereUniqueInput
@@ -791,6 +805,7 @@ input TravelHistoryUpdateManyWithoutUsersInput {
 }
 
 input TravelHistoryWhereInput {
+  additionalInfo: StringNullableFilter
   applicant: ApplicantWhereUniqueInput
   archived: BooleanNullableFilter
   archivedBy: UserWhereUniqueInput
