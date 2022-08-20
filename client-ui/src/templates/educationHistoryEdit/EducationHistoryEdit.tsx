@@ -113,7 +113,7 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                       fullWidth
                       label="Country"
                       variant="outlined"
-                      value={data?.educationHistory?.country}
+                      value={formInfo?.country}
                       onChange={(e: any) => setFormInfo({ ...formInfo, country: e.target.value })}
                     />
                   </Grid>
@@ -123,7 +123,7 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                       fullWidth
                       label="City"
                       variant="outlined"
-                      value={data?.educationHistory?.city}
+                      value={formInfo?.city}
                       onChange={(e: any) => setFormInfo({ ...formInfo, city: e.target.value })}
                     />
                   </Grid>
@@ -133,7 +133,7 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                       fullWidth
                       label="Qualification Gained"
                       variant="outlined"
-                      value={data?.educationHistory?.qualificationGained}
+                      value={formInfo?.qualificationGained}
                       onChange={(e: any) => setFormInfo({ ...formInfo, qualificationGained: e.target.value })}
                     />
                   </Grid>
@@ -195,7 +195,7 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                       rows={4}
                       label="Additional Info"
                       variant="outlined"
-                      value={data?.educationHistory?.additionalInfo}
+                      value={formInfo?.additionalInfo}
                       onChange={(e: any) => setFormInfo({ ...formInfo, additionalInfo: e.target.value })}
                     />
                   </Grid>
