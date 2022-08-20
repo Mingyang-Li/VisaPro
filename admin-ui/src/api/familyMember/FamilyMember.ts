@@ -2,6 +2,7 @@ import { Applicant } from "../applicant/Applicant";
 import { User } from "../user/User";
 
 export type FamilyMember = {
+  additionalInfo: string | null;
   applicants?: Array<Applicant>;
   archived: boolean | null;
   archivedBy?: User | null;

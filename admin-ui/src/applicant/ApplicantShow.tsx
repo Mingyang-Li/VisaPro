@@ -155,6 +155,7 @@ export const ApplicantShow = (props: ShowProps): React.ReactElement => {
           label="Travel Histories"
         >
           <Datagrid rowClick="show">
+            <TextField label="Additional Info" source="additionalInfo" />
             <ReferenceField
               label="Applicant"
               source="applicant.id"

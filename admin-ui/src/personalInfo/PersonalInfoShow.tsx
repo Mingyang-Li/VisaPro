@@ -4,8 +4,8 @@ import {
   Show,
   SimpleShowLayout,
   ShowProps,
-  ReferenceField,
   TextField,
+  ReferenceField,
   BooleanField,
   DateField,
 } from "react-admin";
@@ -17,6 +17,7 @@ export const PersonalInfoShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
+        <TextField label="Additional Info" source="additionalInfo" />
         <ReferenceField
           label="Applicant"
           source="applicant.id"

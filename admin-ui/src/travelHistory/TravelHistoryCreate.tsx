@@ -4,11 +4,11 @@ import {
   Create,
   SimpleForm,
   CreateProps,
+  TextInput,
   ReferenceInput,
   SelectInput,
   BooleanInput,
   DateTimeInput,
-  TextInput,
 } from "react-admin";
 
 import { ApplicantTitle } from "../applicant/ApplicantTitle";
@@ -18,6 +18,7 @@ export const TravelHistoryCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
+        <TextInput label="Additional Info" multiline source="additionalInfo" />
         <ReferenceInput
           source="applicant.id"
           reference="Applicant"

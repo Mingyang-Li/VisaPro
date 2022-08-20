@@ -2,6 +2,7 @@ import { ApplicantCreateNestedManyWithoutFamilyMembersInput } from "./ApplicantC
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type FamilyMemberCreateInput = {
+  additionalInfo?: string | null;
   applicants?: ApplicantCreateNestedManyWithoutFamilyMembersInput;
   archived?: boolean | null;
   archivedBy?: UserWhereUniqueInput | null;

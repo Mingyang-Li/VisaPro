@@ -2,7 +2,8 @@ import { Applicant } from "../applicant/Applicant";
 import { User } from "../user/User";
 
 export type PersonalInfo = {
-  applicant?: Applicant;
+  additionalInfo: string | null;
+  applicant?: Applicant | null;
   archived: boolean | null;
   archivedBy?: User | null;
   countriesOfCitizenship: string | null;

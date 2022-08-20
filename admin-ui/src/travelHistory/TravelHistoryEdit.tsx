@@ -4,11 +4,11 @@ import {
   Edit,
   SimpleForm,
   EditProps,
+  TextInput,
   ReferenceInput,
   SelectInput,
   BooleanInput,
   DateTimeInput,
-  TextInput,
 } from "react-admin";
 
 import { ApplicantTitle } from "../applicant/ApplicantTitle";
@@ -18,6 +18,7 @@ export const TravelHistoryEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
+        <TextInput label="Additional Info" multiline source="additionalInfo" />
         <ReferenceInput
           source="applicant.id"
           reference="Applicant"

@@ -11,18 +11,29 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { ApplicantWhereUniqueInput } from "../../applicant/base/ApplicantWhereUniqueInput";
 import {
-  ValidateNested,
-  IsOptional,
-  IsBoolean,
   IsString,
+  IsOptional,
+  ValidateNested,
+  IsBoolean,
   IsDate,
 } from "class-validator";
+import { ApplicantWhereUniqueInput } from "../../applicant/base/ApplicantWhereUniqueInput";
 import { Type } from "class-transformer";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 @InputType()
 class PersonalInfoUpdateInput {
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  additionalInfo?: string | null;
+
   @ApiProperty({
     required: false,
     type: () => ApplicantWhereUniqueInput,
@@ -33,7 +44,7 @@ class PersonalInfoUpdateInput {
   @Field(() => ApplicantWhereUniqueInput, {
     nullable: true,
   })
-  applicant?: ApplicantWhereUniqueInput;
+  applicant?: ApplicantWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,

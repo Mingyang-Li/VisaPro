@@ -2,6 +2,7 @@ import { ApplicantWhereUniqueInput } from "../applicant/ApplicantWhereUniqueInpu
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type TravelHistoryCreateInput = {
+  additionalInfo?: string | null;
   applicant?: ApplicantWhereUniqueInput | null;
   archived?: boolean | null;
   archivedBy?: UserWhereUniqueInput | null;

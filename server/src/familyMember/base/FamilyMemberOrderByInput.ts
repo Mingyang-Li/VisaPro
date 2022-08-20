@@ -25,6 +25,15 @@ class FamilyMemberOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  additionalInfo?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   archived?: SortOrder;
 
   @ApiProperty({

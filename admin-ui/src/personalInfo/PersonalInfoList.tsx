@@ -4,8 +4,8 @@ import {
   List,
   Datagrid,
   ListProps,
-  ReferenceField,
   TextField,
+  ReferenceField,
   BooleanField,
   DateField,
 } from "react-admin";
@@ -24,6 +24,7 @@ export const PersonalInfoList = (props: ListProps): React.ReactElement => {
       pagination={<Pagination />}
     >
       <Datagrid rowClick="show">
+        <TextField label="Additional Info" source="additionalInfo" />
         <ReferenceField
           label="Applicant"
           source="applicant.id"

@@ -4,10 +4,10 @@ import {
   Edit,
   SimpleForm,
   EditProps,
+  TextInput,
   ReferenceInput,
   SelectInput,
   BooleanInput,
-  TextInput,
   DateTimeInput,
 } from "react-admin";
 
@@ -18,6 +18,7 @@ export const PersonalInfoEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
+        <TextInput label="Additional Info" multiline source="additionalInfo" />
         <ReferenceInput
           source="applicant.id"
           reference="Applicant"
