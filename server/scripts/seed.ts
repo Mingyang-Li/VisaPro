@@ -1,5 +1,5 @@
 import * as dotenv from "dotenv";
-import { PrismaClient, Prisma } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { Salt, parseSalt } from "../src/auth/password.service";
 import { hash } from "bcrypt";
 import { customSeed } from "./customSeed";
@@ -25,15 +25,10 @@ async function seed(bcryptSalt: Salt) {
   console.info("Seeding database...");
 
   const client = new PrismaClient();
-  const data: Prisma.UserCreateInput = {
+  const data = {
     username: "admin",
     password: await hash("admin", bcryptSalt),
     roles: ["user"],
-
-    // optional
-    firstName: 'admin',
-    lastName: 'admin',
-    email: 'admin@gmail.com',
   };
   await client.user.upsert({
     where: { username: data.username },

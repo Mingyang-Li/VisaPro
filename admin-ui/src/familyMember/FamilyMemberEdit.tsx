@@ -4,12 +4,12 @@ import {
   Edit,
   SimpleForm,
   EditProps,
+  TextInput,
   ReferenceArrayInput,
   SelectArrayInput,
   BooleanInput,
   ReferenceInput,
   SelectInput,
-  TextInput,
   DateTimeInput,
 } from "react-admin";
 
@@ -20,6 +20,7 @@ export const FamilyMemberEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
+        <TextInput label="Additional Info" multiline source="additionalInfo" />
         <ReferenceArrayInput
           source="applicants"
           reference="Applicant"

@@ -2,6 +2,7 @@ import { Applicant } from "../applicant/Applicant";
 import { User } from "../user/User";
 
 export type TravelHistory = {
+  additionalInfo: string | null;
   applicant?: Applicant | null;
   archived: boolean | null;
   archivedBy?: User | null;

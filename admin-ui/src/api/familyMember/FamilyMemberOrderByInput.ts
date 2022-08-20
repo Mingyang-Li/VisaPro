@@ -1,6 +1,7 @@
 import { SortOrder } from "../../util/SortOrder";
 
 export type FamilyMemberOrderByInput = {
+  additionalInfo?: SortOrder;
   archived?: SortOrder;
   archivedById?: SortOrder;
   countriesOfCitizenship?: SortOrder;
