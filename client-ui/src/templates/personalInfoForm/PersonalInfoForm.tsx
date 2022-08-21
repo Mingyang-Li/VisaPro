@@ -397,6 +397,19 @@ export const PersonalInfoForm: React.FC = () => {
                   value={new Date(formInfo?.updatedAt).toUTCString()}
                 />
               </Grid>
+              <Grid item md={12} sm={12} xs={12}>
+                <TextField
+                  id="additionalInfo"
+                  fullWidth
+                  multiline
+                  rows={4}
+                  label="Additional Info"
+                  disabled={!edit}
+                  variant={!edit ? 'filled' : 'outlined'}
+                  value={formInfo?.additionalInfo}
+                  onChange={(e: any) => setFormInfo({ ...formInfo, additionalInfo: e.target.value })}
+                />
+              </Grid>
             </Grid>
           </CardContent>
           <CardActions>

@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 /* eslint-disable no-use-before-define */
+/* eslint-disable import/newline-after-import */
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
-
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -426,6 +426,7 @@ export type EmploymentHistoryWhereUniqueInput = {
 
 export type FamilyMember = {
   __typename?: 'FamilyMember';
+  additionalInfo?: Maybe<Scalars['String']>;
   applicants: Array<Applicant>;
   archived?: Maybe<Scalars['Boolean']>;
   archivedBy?: Maybe<User>;
@@ -450,6 +451,7 @@ export type FamilyMemberApplicantsArgs = {
 };
 
 export type FamilyMemberCreateInput = {
+  additionalInfo?: InputMaybe<Scalars['String']>;
   applicants?: InputMaybe<ApplicantCreateNestedManyWithoutFamilyMembersInput>;
   archived?: InputMaybe<Scalars['Boolean']>;
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
@@ -478,6 +480,7 @@ export type FamilyMemberListRelationFilter = {
 };
 
 export type FamilyMemberOrderByInput = {
+  additionalInfo?: InputMaybe<SortOrder>;
   archived?: InputMaybe<SortOrder>;
   archivedById?: InputMaybe<SortOrder>;
   countriesOfCitizenship?: InputMaybe<SortOrder>;
@@ -494,6 +497,7 @@ export type FamilyMemberOrderByInput = {
 };
 
 export type FamilyMemberUpdateInput = {
+  additionalInfo?: InputMaybe<Scalars['String']>;
   applicants?: InputMaybe<ApplicantUpdateManyWithoutFamilyMembersInput>;
   archived?: InputMaybe<Scalars['Boolean']>;
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
@@ -520,6 +524,7 @@ export type FamilyMemberUpdateManyWithoutUsersInput = {
 };
 
 export type FamilyMemberWhereInput = {
+  additionalInfo?: InputMaybe<StringNullableFilter>;
   applicants?: InputMaybe<ApplicantListRelationFilter>;
   archived?: InputMaybe<BooleanNullableFilter>;
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
@@ -666,6 +671,7 @@ export type MutationUpdateUserArgs = {
 
 export type PersonalInfo = {
   __typename?: 'PersonalInfo';
+  additionalInfo?: Maybe<Scalars['String']>;
   applicant?: Maybe<Applicant>;
   archived?: Maybe<Scalars['Boolean']>;
   archivedBy?: Maybe<User>;
@@ -688,6 +694,7 @@ export type PersonalInfo = {
 };
 
 export type PersonalInfoCreateInput = {
+  additionalInfo?: InputMaybe<Scalars['String']>;
   applicant?: InputMaybe<ApplicantWhereUniqueInput>;
   archived?: InputMaybe<Scalars['Boolean']>;
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
@@ -717,6 +724,7 @@ export type PersonalInfoListRelationFilter = {
 };
 
 export type PersonalInfoOrderByInput = {
+  additionalInfo?: InputMaybe<SortOrder>;
   applicantId?: InputMaybe<SortOrder>;
   archived?: InputMaybe<SortOrder>;
   archivedById?: InputMaybe<SortOrder>;
@@ -739,6 +747,7 @@ export type PersonalInfoOrderByInput = {
 };
 
 export type PersonalInfoUpdateInput = {
+  additionalInfo?: InputMaybe<Scalars['String']>;
   applicant?: InputMaybe<ApplicantWhereUniqueInput>;
   archived?: InputMaybe<Scalars['Boolean']>;
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
@@ -764,6 +773,7 @@ export type PersonalInfoUpdateManyWithoutUsersInput = {
 };
 
 export type PersonalInfoWhereInput = {
+  additionalInfo?: InputMaybe<StringNullableFilter>;
   applicant?: InputMaybe<ApplicantWhereUniqueInput>;
   archived?: InputMaybe<BooleanNullableFilter>;
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
@@ -981,6 +991,7 @@ export type StringNullableFilter = {
 
 export type TravelHistory = {
   __typename?: 'TravelHistory';
+  additionalInfo?: Maybe<Scalars['String']>;
   applicant?: Maybe<Applicant>;
   archived?: Maybe<Scalars['Boolean']>;
   archivedBy?: Maybe<User>;
@@ -998,6 +1009,7 @@ export type TravelHistory = {
 };
 
 export type TravelHistoryCreateInput = {
+  additionalInfo?: InputMaybe<Scalars['String']>;
   applicant?: InputMaybe<ApplicantWhereUniqueInput>;
   archived?: InputMaybe<Scalars['Boolean']>;
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
@@ -1026,6 +1038,7 @@ export type TravelHistoryListRelationFilter = {
 };
 
 export type TravelHistoryOrderByInput = {
+  additionalInfo?: InputMaybe<SortOrder>;
   applicantId?: InputMaybe<SortOrder>;
   archived?: InputMaybe<SortOrder>;
   archivedById?: InputMaybe<SortOrder>;
@@ -1043,6 +1056,7 @@ export type TravelHistoryOrderByInput = {
 };
 
 export type TravelHistoryUpdateInput = {
+  additionalInfo?: InputMaybe<Scalars['String']>;
   applicant?: InputMaybe<ApplicantWhereUniqueInput>;
   archived?: InputMaybe<Scalars['Boolean']>;
   archivedBy?: InputMaybe<UserWhereUniqueInput>;
@@ -1069,6 +1083,7 @@ export type TravelHistoryUpdateManyWithoutUsersInput = {
 };
 
 export type TravelHistoryWhereInput = {
+  additionalInfo?: InputMaybe<StringNullableFilter>;
   applicant?: InputMaybe<ApplicantWhereUniqueInput>;
   archived?: InputMaybe<BooleanNullableFilter>;
   archivedBy?: InputMaybe<UserWhereUniqueInput>;

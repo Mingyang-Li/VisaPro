@@ -4126,6 +4126,18 @@
         "description": null,
         "fields": [
           {
+            "name": "additionalInfo",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "applicants",
             "description": null,
             "args": [
@@ -4379,6 +4391,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "additionalInfo",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "applicants",
             "description": null,
             "type": {
@@ -4631,6 +4655,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "additionalInfo",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "archived",
             "description": null,
             "type": {
@@ -4797,6 +4833,18 @@
         "description": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "additionalInfo",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "applicants",
             "description": null,
@@ -5082,6 +5130,18 @@
         "description": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "additionalInfo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "applicants",
             "description": null,
@@ -6150,6 +6210,18 @@
         "description": null,
         "fields": [
           {
+            "name": "additionalInfo",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "applicant",
             "description": null,
             "args": [],
@@ -6393,6 +6465,18 @@
         "description": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "additionalInfo",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "applicant",
             "description": null,
@@ -6675,6 +6759,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "additionalInfo",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "applicantId",
             "description": null,
             "type": {
@@ -6913,6 +7009,18 @@
         "description": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "additionalInfo",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "applicant",
             "description": null,
@@ -7187,6 +7295,18 @@
         "description": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "additionalInfo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "applicant",
             "description": null,
@@ -9135,6 +9255,18 @@
         "description": null,
         "fields": [
           {
+            "name": "additionalInfo",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "applicant",
             "description": null,
             "args": [],
@@ -9318,6 +9450,18 @@
         "description": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "additionalInfo",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "applicant",
             "description": null,
@@ -9571,6 +9715,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "additionalInfo",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "applicantId",
             "description": null,
             "type": {
@@ -9749,6 +9905,18 @@
         "description": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "additionalInfo",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "applicant",
             "description": null,
@@ -10034,6 +10202,18 @@
         "description": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "additionalInfo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "applicant",
             "description": null,

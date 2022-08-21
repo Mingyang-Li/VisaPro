@@ -118,6 +118,7 @@ export const PERSONAL_INFOS = gql`
       passportNumber
       createdAt
       updatedAt
+      additionalInfo
     }
   }
 `;
