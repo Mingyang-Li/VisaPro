@@ -101,6 +101,7 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
     },
   );
 
+  // fire createPersonalInfo then fire createApplicant using ID of PersonalInfo created
   const handleSubmit = () => {
     setValues({ ...values, disableInput: true });
     createApplicant().then(() => {
