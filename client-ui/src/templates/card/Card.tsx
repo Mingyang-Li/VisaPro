@@ -59,7 +59,10 @@ const BasicCard: React.FC<IBasicCard> = (props: IBasicCard) => (
     <CardActions>
       <Grid container spacing={2}>
         <Grid item md={6}>
-          <Button onClick={props.onEditRequest}>Edit</Button>
+          <Button fullWidth variant={'outlined'} color={'error'}>Archive</Button>
+        </Grid>
+        <Grid item md={6}>
+          <Button fullWidth onClick={props.onEditRequest} variant={'contained'}>Edit</Button>
         </Grid>
       </Grid>
     </CardActions>
