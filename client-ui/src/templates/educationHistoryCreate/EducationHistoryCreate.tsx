@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { useMutation, useReactiveVar } from '@apollo/client';
 import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
-import { EducationHistory } from '../../generated/graphql';
+import { EducationHistory, EducationHistoryCreateInput } from '../../generated/graphql';
 import { CREATE_EDUCATION_HISTORY } from '../../graphql/Mutations';
 import { EDUCATION_HISTORIES } from '../../graphql/Queries';
 import { applicantIdCurrEditing, user } from '../../graphql/Store';
@@ -27,33 +27,36 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
 const EducationHistoryCreate: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(true);
-  const [formInfo, setFormInfo] = useState<EducationHistory>({ id: '' });
+  const [formInfo, setFormInfo] = useState<EducationHistory>({ id: '', startDate: new Date().toString(), endDate: new Date().toString() });
   const applicantId = useReactiveVar(applicantIdCurrEditing);
   const currUser = useReactiveVar(user);
+
+  const educationHistoryCreateInput: EducationHistoryCreateInput = {
+    institutionName: formInfo?.institutionName,
+    country: formInfo?.country,
+    city: formInfo?.city,
+    qualificationGained: formInfo?.qualificationGained,
+    startDate: formInfo?.startDate,
+    endDate: formInfo?.endDate,
+    isCurrentInstitution: formInfo?.isCurrentInstitution,
+    additionalInfo: formInfo?.additionalInfo,
+    createdBy: {
+      id: currUser.id,
+    },
+    updatedBy: {
+      id: currUser.id,
+    },
+    applicant: {
+      id: applicantId,
+    },
+    archived: false,
+  };
+
   const [createEducationHistory, { loading }] = useMutation(
     CREATE_EDUCATION_HISTORY,
     {
       variables: {
-        data: {
-          institutionName: formInfo?.institutionName,
-          country: formInfo?.country,
-          city: formInfo?.city,
-          qualificationGained: formInfo?.qualificationGained,
-          startDate: formInfo?.startDate,
-          endDate: formInfo?.endDate,
-          isCurrentInstitution: formInfo?.isCurrentInstitution,
-          additionalInfo: formInfo?.additionalInfo,
-          createdBy: {
-            id: currUser.id,
-          },
-          updatedBy: {
-            id: currUser.id,
-          },
-          applicant: {
-            id: applicantId,
-          },
-          archived: false,
-        },
+        data: educationHistoryCreateInput,
       },
       refetchQueries: [
         {
@@ -110,6 +113,8 @@ const EducationHistoryCreate: React.FC = () => {
                     id="institutionName"
                     fullWidth
                     label="Institution Name"
+                    disabled={!edit}
+                    variant={!edit ? 'filled' : 'outlined'}
                     value={formInfo?.institutionName}
                     onChange={(e: any) => setFormInfo({ ...formInfo, institutionName: e.target.value })}
                   />
@@ -119,6 +124,8 @@ const EducationHistoryCreate: React.FC = () => {
                     id="country"
                     fullWidth
                     label="Country"
+                    disabled={!edit}
+                    variant={!edit ? 'filled' : 'outlined'}
                     value={formInfo?.country}
                     onChange={(e: any) => setFormInfo({ ...formInfo, country: e.target.value })}
                   />
@@ -128,6 +135,8 @@ const EducationHistoryCreate: React.FC = () => {
                     id="city"
                     fullWidth
                     label="City"
+                    disabled={!edit}
+                    variant={!edit ? 'filled' : 'outlined'}
                     value={formInfo?.city}
                     onChange={(e: any) => setFormInfo({ ...formInfo, city: e.target.value })}
                   />
@@ -137,6 +146,8 @@ const EducationHistoryCreate: React.FC = () => {
                     id="qualificationGained"
                     fullWidth
                     label="Qualification Gained"
+                    disabled={!edit}
+                    variant={!edit ? 'filled' : 'outlined'}
                     value={formInfo?.qualificationGained}
                     onChange={(e: any) => setFormInfo({ ...formInfo, qualificationGained: e.target.value })}
                   />
@@ -144,14 +155,16 @@ const EducationHistoryCreate: React.FC = () => {
                 <Grid item md={6} sm={12} xs={12}>
                   <BasicDatePicker
                     label={'Start date'}
-                    defaultValue={new Date() as Date}
+                    disabled={!edit}
+                    defaultValue={new Date(formInfo?.startDate ?? '') as Date}
                     updateParentDateValue={(d: Date) => setFormInfo({ ...formInfo, startDate: d })}
                   />
                 </Grid>
                 <Grid item md={6} sm={12} xs={12}>
                   <BasicDatePicker
                     label={'End date'}
-                    defaultValue={new Date() as Date}
+                    disabled={!edit}
+                    defaultValue={new Date(formInfo?.endDate ?? '') as Date}
                     updateParentDateValue={(d: Date) => setFormInfo({ ...formInfo, endDate: d })}
                   />
                 </Grid>
@@ -162,6 +175,8 @@ const EducationHistoryCreate: React.FC = () => {
                     label="Additional Info"
                     multiline
                     rows={4}
+                    disabled={!edit}
+                    variant={!edit ? 'filled' : 'outlined'}
                     value={formInfo?.additionalInfo}
                     onChange={(e: any) => setFormInfo({ ...formInfo, additionalInfo: e.target.value })}
                   />
