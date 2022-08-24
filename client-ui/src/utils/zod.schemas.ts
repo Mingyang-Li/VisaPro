@@ -24,3 +24,23 @@ export const PersonalInfoSchema = object({
   countryOfBirth: string().min(1, { message: 'Country of birth is required' }),
   dateOfBirth: date(),
 });
+
+export const EducationHistoryCreateInputSchema = object({
+  institutionName: string().min(1, { message: 'Please enter the name of the institution where you studies' }),
+  country: string().min(1, { message: 'Country is required' }),
+  city: string().min(1, { message: 'City is required' }),
+  qualificationGained: string().min(1, { message: 'Please tell us about the qualification you obtained' }),
+  startDate: date(),
+  endDate: date(),
+  additionalInfo: string(),
+});
+
+export const EducationHistoryUpdateInputSchema = object({
+  institutionName: string().min(1, { message: 'Please enter the name of the institution where you studies' }),
+  country: string().min(1, { message: 'Country is required' }),
+  city: string().min(1, { message: 'City is required' }),
+  qualificationGained: string().min(1, { message: 'Please tell us about the qualification you obtained' }),
+  startDate: date(),
+  endDate: date(),
+  additionalInfo: string(),
+});

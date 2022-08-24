@@ -51,7 +51,7 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
     qualificationGained: formInfo?.qualificationGained,
     startDate: formInfo?.startDate,
     endDate: formInfo?.endDate,
-    isCurrentInstitution: formInfo?.isCurrentInstitution,
+    isCurrentInstitution: new Date(formInfo?.endDate).getTime() > new Date().getTime(),
     additionalInfo: formInfo?.additionalInfo,
   };
 
@@ -182,20 +182,13 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                     />
                   </Grid>
                   <Grid item md={12} sm={12} xs={12}>
-                    <Autocomplete
+                    <TextField
                       id="isCurrentInstitution"
-                      value={formInfo?.isCurrentInstitution ? 'Yes' : 'No'}
                       fullWidth
-                      disablePortal
-                      options={['Yes', 'No']}
-                      disabled={!edit}
-                      onChange={(event: any, newValue: string | null) => {
-                        setFormInfo({
-                          ...formInfo,
-                          isCurrentInstitution: newValue === 'Yes',
-                        });
-                      }}
-                      renderInput={(params) => <TextField {...params} fullWidth label="Is current institution" variant={!edit ? 'filled' : 'outlined'} />}
+                      label="I currently study here"
+                      disabled
+                      variant={!edit ? 'filled' : 'outlined'}
+                      value={new Date(formInfo?.endDate).getTime() > new Date().getTime() ? 'Yes' : 'No'}
                     />
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>
