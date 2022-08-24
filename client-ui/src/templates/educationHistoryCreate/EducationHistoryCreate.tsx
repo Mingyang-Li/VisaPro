@@ -42,7 +42,7 @@ const EducationHistoryCreate: React.FC = () => {
     qualificationGained: formInfo?.qualificationGained,
     startDate: formInfo?.startDate,
     endDate: formInfo?.endDate,
-    isCurrentInstitution: formInfo?.isCurrentInstitution,
+    isCurrentInstitution: new Date(formInfo?.endDate).getTime() > new Date().getTime(),
     additionalInfo: formInfo?.additionalInfo,
     createdBy: {
       id: currUser.id,
