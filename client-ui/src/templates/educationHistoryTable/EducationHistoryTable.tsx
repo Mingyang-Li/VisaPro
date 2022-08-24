@@ -10,8 +10,6 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useQuery, useReactiveVar } from '@apollo/client';
 import { Alert } from '@mui/material';
-import LoadingButton from '@mui/lab/LoadingButton';
-import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { EDUCATION_HISTORIES } from '../../graphql/Queries';
 import { applicantIdCurrEditing, user } from '../../graphql/Store';
 import {
@@ -122,15 +120,6 @@ const EducationHistoryTable = () => {
       ) : (
         null
       )}
-      <LoadingButton
-        size="small"
-        endIcon={<AutorenewIcon />}
-        loading={loading}
-        loadingPosition="end"
-        variant="contained"
-      >
-        Refresh
-      </LoadingButton>
       <EducationHistoryEdit open={edit} educationHistoryId={editId} handleClose={setEdit} />
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
