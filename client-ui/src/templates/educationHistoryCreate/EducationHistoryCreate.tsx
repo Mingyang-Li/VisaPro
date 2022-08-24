@@ -27,7 +27,11 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
 const EducationHistoryCreate: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(true);
-  const [formInfo, setFormInfo] = useState<EducationHistory>({ id: '', startDate: new Date().toString(), endDate: new Date().toString() });
+  const [formInfo, setFormInfo] = useState<EducationHistory>({
+    id: '',
+    startDate: new Date().toString(),
+    endDate: new Date().toString(),
+  });
   const applicantId = useReactiveVar(applicantIdCurrEditing);
   const currUser = useReactiveVar(user);
 

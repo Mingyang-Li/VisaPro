@@ -10,7 +10,9 @@ import {
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import { EDUCATION_HISTORIES, EDUCATION_HISTORY } from '../../graphql/Queries';
 import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
-import { EducationHistory, Mutation, Query } from '../../generated/graphql';
+import {
+  EducationHistoryUpdateInput, EducationHistoryWhereUniqueInput, EducationHistory, EducationHistoryWhereInput, Mutation, Query,
+} from '../../generated/graphql';
 import { UPDATE_EDUCATION_HISTORY } from '../../graphql/Mutations';
 import { applicantIdCurrEditing } from '../../graphql/Store';
 
@@ -42,44 +44,48 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
     setFormInfo(data?.educationHistory as EducationHistory);
   }, [data]);
 
+  const educationHistoryUpdateInput: EducationHistoryUpdateInput = {
+    institutionName: formInfo?.institutionName,
+    country: formInfo?.country,
+    city: formInfo?.city,
+    qualificationGained: formInfo?.qualificationGained,
+    startDate: formInfo?.startDate,
+    endDate: formInfo?.endDate,
+    isCurrentInstitution: formInfo?.isCurrentInstitution,
+    additionalInfo: formInfo?.additionalInfo,
+  };
+
+  const educationHistoryWhereUniqueInput: EducationHistoryWhereUniqueInput = {
+    id: props.educationHistoryId,
+  };
+
+  const educationHistoryWhereInput: EducationHistoryWhereInput = {
+    applicant: {
+      id: applicantId,
+    },
+    archived: {
+      equals: false,
+    },
+  };
+
   const [initiateUpdate, { data: updatedData, loading: updating, error: updateError }] = useMutation<Mutation>(
     UPDATE_EDUCATION_HISTORY,
     {
       variables: {
-        where: {
-          id: props.educationHistoryId,
-        },
-        data: {
-          institutionName: formInfo?.institutionName,
-          country: formInfo?.country,
-          city: formInfo?.city,
-          qualificationGained: formInfo?.qualificationGained,
-          startDate: formInfo?.startDate,
-          endDate: formInfo?.endDate,
-          isCurrentInstitution: formInfo?.isCurrentInstitution,
-          additionalInfo: formInfo?.additionalInfo,
-        },
+        where: educationHistoryWhereUniqueInput,
+        data: educationHistoryUpdateInput,
       },
       refetchQueries: [
         {
           query: EDUCATION_HISTORIES,
           variables: {
-            where: {
-              applicant: {
-                id: applicantId,
-              },
-              archived: {
-                equals: false,
-              },
-            },
+            where: educationHistoryWhereInput,
           },
         },
         {
           query: EDUCATION_HISTORY,
           variables: {
-            where: {
-              id: props.educationHistoryId,
-            },
+            where: educationHistoryWhereUniqueInput,
           },
         },
       ],
