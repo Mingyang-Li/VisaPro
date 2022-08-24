@@ -121,7 +121,7 @@ const Login: React.FC = () => {
               // eslint-disable-next-line max-len
               'url(https://onechelofanadventure.com/wp-content/uploads/2017/05/New-Zealand-South-Island-Things-to-Do.png)',
             backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) => (t.palette.mode === 'light'
+            backgroundColor: (t: any) => (t.palette.mode === 'light'
               ? t.palette.grey[50]
               : t.palette.grey[900]),
             backgroundSize: 'cover',

@@ -8,6 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import styled from '@emotion/styled';
 import { blue } from '@mui/material/colors';
 import {
+  Alert,
   Card, CardContent, CircularProgress, Grid,
 } from '@mui/material';
 import { useMutation, useReactiveVar } from '@apollo/client';
@@ -56,7 +57,7 @@ const EducationHistoryCreate: React.FC = () => {
     archived: false,
   };
 
-  const [createEducationHistory, { loading }] = useMutation(
+  const [createEducationHistory, { data: dataCreated, loading: creating, error: creationError }] = useMutation(
     CREATE_EDUCATION_HISTORY,
     {
       variables: {
@@ -84,12 +85,14 @@ const EducationHistoryCreate: React.FC = () => {
   );
 
   useEffect(() => {
-    if (loading) {
+    if (creating) {
       setEdit(() => false);
+    } else if (dataCreated?.createEducationHistory) {
+      setOpen(() => false);
     } else {
       setEdit(() => true);
     }
-  }, [loading]);
+  }, [creating, dataCreated, creationError]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -185,6 +188,20 @@ const EducationHistoryCreate: React.FC = () => {
                     onChange={(e: any) => setFormInfo({ ...formInfo, additionalInfo: e.target.value })}
                   />
                 </Grid>
+                <Grid item md={12} sm={12} xs={12}>
+                  {creationError ? (
+                    <Alert severity="error">
+                      Error creating education history, please try again later
+                    </Alert>
+                  ) : null}
+                </Grid>
+                <Grid item md={12} sm={12} xs={12}>
+                  {dataCreated?.createEducationHistory ? (
+                    <Alert severity="success">
+                      Education history created!
+                    </Alert>
+                  ) : null}
+                </Grid>
               </Grid>
             </CardContent>
           </Card>
@@ -196,7 +213,7 @@ const EducationHistoryCreate: React.FC = () => {
             variant={'contained'}
             disabled={!edit}
           >
-            {loading ? (
+            {creating ? (
               <CircularProgress color="warning" />
             ) : (
               'Create'
