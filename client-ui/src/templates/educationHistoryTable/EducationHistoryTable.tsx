@@ -11,7 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import { useQuery, useReactiveVar } from '@apollo/client';
 import { Alert } from '@mui/material';
 import { EDUCATION_HISTORIES } from '../../graphql/Queries';
-import { applicantIdCurrEditing } from '../../graphql/Store';
+import { applicantIdCurrEditing, user } from '../../graphql/Store';
 import { EducationHistory, Query } from '../../generated/graphql';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import EducationHistoryEdit from '../educationHistoryEdit/EducationHistoryEdit';
@@ -57,9 +57,13 @@ const columns: readonly Column[] = [
 
 const EducationHistoryTable = () => {
   const applicantId = useReactiveVar(applicantIdCurrEditing);
+  const currUser = useReactiveVar(user);
   const { data, loading, error } = useQuery<Query>(EDUCATION_HISTORIES, {
     variables: {
       where: {
+        createdBy: {
+          id: currUser.id,
+        },
         applicant: {
           id: applicantId,
         },

@@ -63,6 +63,10 @@ export const CREATE_EDUCATION_HISTORY = gql`
         id
         username
       }
+      updatedBy {
+        id
+        username
+      }
     }
   }
 `;
