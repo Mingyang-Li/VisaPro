@@ -68,7 +68,10 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
     },
   };
 
-  const [initiateUpdate, { data: updatedData, loading: updating, error: updateError }] = useMutation<Mutation>(
+  const [
+    initiateUpdate,
+    { data: updatedData, loading: updating, error: updateError },
+  ] = useMutation<Mutation>(
     UPDATE_EDUCATION_HISTORY,
     {
       variables: {
