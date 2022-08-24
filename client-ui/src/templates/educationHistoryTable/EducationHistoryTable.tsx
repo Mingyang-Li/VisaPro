@@ -71,6 +71,9 @@ const EducationHistoryTable = () => {
           equals: false,
         },
       },
+      orderBy: {
+        updatedAt: 'Desc',
+      },
     },
   });
   const [page, setPage] = React.useState(0);

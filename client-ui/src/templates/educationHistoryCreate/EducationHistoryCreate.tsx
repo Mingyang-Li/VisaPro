@@ -89,6 +89,7 @@ const EducationHistoryCreate: React.FC = () => {
   };
 
   const handleClose = () => {
+    setFormInfo({ id: '' });
     setOpen(false);
   };
 
