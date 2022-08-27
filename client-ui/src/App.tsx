@@ -65,7 +65,11 @@ const App: React.FC = () => {
       <Router>
         <Routes>
           {routes.map((r) => (
-            <Route path={r.path} element={r.component} />
+            <Route
+              key={r.path.length * Math.random() * 10}
+              path={r.path}
+              element={r.component}
+            />
           ))}
         </Routes>
       </Router>

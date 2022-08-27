@@ -81,7 +81,7 @@ const generateId = (length: number) => {
   return result;
 };
 
-const generateRandomNumBetween = (min = 0, max = 100) => {
+const randomIntBetween = (min = 0, max = 100) => {
   let difference = max - min;
   let rand = Math.random();
   rand = Math.floor(rand * difference);
@@ -105,9 +105,7 @@ const countries = [
   "Dubai",
 ];
 const randomAddress = () => {
-  return `${generateRandomNumBetween(1, 300)} Random Street, ${
-    countries[generateRandomNumBetween(0, countries.length)]
-  }`;
+  return `${randomIntBetween(1, 300)} Random Street`;
 };
 
 const randomDate = (start: Date, end: Date) => {
@@ -172,6 +170,21 @@ const IRelationship = [
   "Boyfriend",
   "Husband",
   "Wife",
+];
+
+const INZCities = [
+  'Auckland',
+  'Wellington',
+  'Christchurch',
+  'Dunedin',
+  'Hamilton',
+  'Palmerston North',
+  'Tauranga',
+  'Queenstown',
+  'Invercargill',
+  'Napier',
+  'Nelson',
+  'Gisborne'
 ];
 
 // DB seeding plan for dev work on a new machine
@@ -274,17 +287,17 @@ export const seedPersonalInfos = async () => {
 
         // personalInfo_specific
         countriesOfCitizenship:
-          countries[generateRandomNumBetween(0, countries.length)],
+          countries[randomIntBetween(0, countries.length)],
         countryOfBirth:
-          countries[generateRandomNumBetween(0, countries.length)],
+          countries[randomIntBetween(0, countries.length)],
         dateOfBirth: randomDate(new Date("1950-01-01"), new Date("2000-01-01")),
-        email: `applicant-${generateRandomNumBetween(1, 10000)}@gmail.com`,
+        email: `applicant-${randomIntBetween(1, 10000)}@gmail.com`,
         firstName: `${randomCap(1)}${randomLowChar(5)}`,
         homeCountryAddress: randomAddress(),
         inzClientNumber: generateId(12),
         lastName: `${randomCap(1)}${randomLowChar(5)}`,
-        mobile: `${nzMobilePrefixes[generateRandomNumBetween(0, nzMobilePrefixes.length)]}${randomInts(6)}`,
-        nzAddress: randomAddress(),
+        mobile: `${nzMobilePrefixes[randomIntBetween(0, nzMobilePrefixes.length)]}${randomInts(6)}`,
+        nzAddress: `${randomAddress()}, ${INZCities[randomIntBetween(0, INZCities.length)]}`,
         passportNumber: generateId(9),
       },
     };
@@ -330,11 +343,11 @@ export const seedEducationHistories = async () => {
           // specific
           additionalInfo: "None",
           city: `City-${k + 1}`,
-          country: countries[generateRandomNumBetween(0, countries.length)],
+          country: countries[randomIntBetween(0, countries.length)],
           endDate: randomDate(new Date("1960-01-01"), new Date("2021-12-31")),
           institutionName: `Institution-${k + 1}`,
           isCurrentInstitution: false,
-          qualificationGained: `${qualifications[generateRandomNumBetween(0, qualifications.length)]}`,
+          qualificationGained: `${qualifications[randomIntBetween(0, qualifications.length)]}`,
           startDate: randomDate(new Date("1960-01-01"), new Date("2021-12-31")),
         },
       };
@@ -381,16 +394,16 @@ export const seedEmploymentHistories = async () => {
 
           // specific
           additionalInfo: "None",
-          cityOfWork: `City-${generateRandomNumBetween(0, 500)}`,
-          companyName: `Company-${generateRandomNumBetween(0, 500)}`,
+          cityOfWork: `City-${randomIntBetween(0, 500)}`,
+          companyName: `Company-${randomIntBetween(0, 500)}`,
           countryOfWork:
-            countries[generateRandomNumBetween(0, countries.length)],
-          duties: `${generateRandomNumBetween(0, 500)} number of things`,
+            countries[randomIntBetween(0, countries.length)],
+          duties: `${randomIntBetween(0, 500)} number of things`,
           employmentType:
-            IEmployment[generateRandomNumBetween(0, IEmployment.length)],
+            IEmployment[randomIntBetween(0, IEmployment.length)],
           endDate: randomDate(new Date("1960-01-01"), new Date("2021-12-31")),
           isCurrentJob: false,
-          jobTitle: IJob[generateRandomNumBetween(0, IJob.length)],
+          jobTitle: IJob[randomIntBetween(0, IJob.length)],
           nzBusinessNumber: generateId(11),
           startDate: randomDate(new Date("1960-01-01"), new Date("2021-12-31")),
         },
@@ -445,14 +458,14 @@ export const seedTravelHistories = async () => {
             new Date("1960-01-01"),
             new Date("2021-12-31")
           ),
-          destinationCity: `City-${generateRandomNumBetween(0, 500)}`,
+          destinationCity: `City-${randomIntBetween(0, 500)}`,
           destinationCountry:
-            countries[generateRandomNumBetween(0, countries.length)],
+            countries[randomIntBetween(0, countries.length)],
           destinationHub: `${
-            IDestinationHub[generateRandomNumBetween(0, IDestinationHub.length)]
-          }-${generateRandomNumBetween(0, 100)}`,
+            IDestinationHub[randomIntBetween(0, IDestinationHub.length)]
+          }-${randomIntBetween(0, 100)}`,
           reasonOfTravel:
-            ITravelReason[generateRandomNumBetween(0, ITravelReason.length)],
+            ITravelReason[randomIntBetween(0, ITravelReason.length)],
         },
       };
 
@@ -498,9 +511,9 @@ export const seedFamilyMembers = async () => {
 
           // specific
           countriesOfCitizenship:
-            countries[generateRandomNumBetween(0, countries.length)],
+            countries[randomIntBetween(0, countries.length)],
           countryOfBirth:
-            countries[generateRandomNumBetween(0, countries.length)],
+            countries[randomIntBetween(0, countries.length)],
           dateOfBirth: randomDate(
             new Date("1960-01-01"),
             new Date("2021-12-31")
@@ -508,7 +521,7 @@ export const seedFamilyMembers = async () => {
           firstName: `${randomCap(1)}${randomLowChar(5)}`,
           lastName: `${randomCap(1)}${randomLowChar(5)}`,
           relationshipToApplicant:
-            IRelationship[generateRandomNumBetween(0, IRelationship.length)],
+            IRelationship[randomIntBetween(0, IRelationship.length)],
         },
       };
 

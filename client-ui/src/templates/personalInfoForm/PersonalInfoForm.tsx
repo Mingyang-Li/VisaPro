@@ -141,8 +141,8 @@ export const PersonalInfoForm: React.FC = () => {
     }
   }, [isSubmitSuccessful]);
 
-  const onSubmitHandler: SubmitHandler<PersonalInfoInput> = async () => {
-    await initiateMutation();
+  const onSubmitHandler: SubmitHandler<PersonalInfoInput> = () => {
+    initiateMutation();
   };
 
   return (
