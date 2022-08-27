@@ -261,6 +261,7 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                   color={'error'}
                   variant={'contained'}
                   disabled={!edit}
+                  style={{ textTransform: 'none' }}
                 >
                   close
                 </Button>
@@ -272,6 +273,7 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                   color={'primary'}
                   variant={'contained'}
                   disabled={!edit}
+                  style={{ textTransform: 'none' }}
                 >
                   {updating ? (
                     <CircularProgress color="warning" />

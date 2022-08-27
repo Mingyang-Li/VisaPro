@@ -60,7 +60,7 @@ export const BasicTabs: React.FC<IBasicTabs> = (props: IBasicTabs) => {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="tabs">
           {props.tabs.map((t, i) => (
-            <Tab label={t.label} {...a11yProps(i)} />
+            <Tab label={t.label} {...a11yProps(i)} style={{ textTransform: 'none' }} />
           ))}
         </Tabs>
       </Box>

@@ -236,6 +236,13 @@ export const TRAVEL_HISTORIES = gql`
       where: $where
     ) {
       id
+      dateEntered
+      dateDeparted
+      destinationCity
+      destinationCountry
+      destinationHub
+      reasonOfTravel
+      additionalInfo
     }
   }
 `;

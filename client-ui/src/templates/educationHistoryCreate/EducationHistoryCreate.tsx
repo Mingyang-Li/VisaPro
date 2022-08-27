@@ -105,7 +105,11 @@ const EducationHistoryCreate: React.FC = () => {
 
   return (
     <div>
-      <ColorButton variant="contained" onClick={handleClickOpen}>
+      <ColorButton
+        variant="contained"
+        onClick={handleClickOpen}
+        style={{ textTransform: 'none' }}
+      >
         Create Education History
       </ColorButton>
 

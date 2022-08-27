@@ -9,23 +9,24 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useQuery, useReactiveVar } from '@apollo/client';
-import { Alert } from '@mui/material';
-import { EDUCATION_HISTORIES } from '../../graphql/Queries';
+import Alert from '@mui/material/Alert';
+import { TRAVEL_HISTORIES } from '../../graphql/Queries';
 import { applicantIdCurrEditing, user } from '../../graphql/Store';
 import {
-  EducationHistory, EducationHistoryWhereInput, Query,
+  TravelHistory, TravelHistoryWhereInput, Query,
 } from '../../generated/graphql';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
-import EducationHistoryEdit from '../educationHistoryEdit/EducationHistoryEdit';
 
 interface Column {
   id:
-    | 'institutionName'
-    | 'country'
-    | 'city'
-    | 'qualificationGained'
-    | 'startDate'
-    | 'endDate';
+    | 'additionalInfo'
+    | 'dateDeparted'
+    | 'dateEntered'
+    | 'destinationCity'
+    | 'destinationCountry'
+    | 'destinationHub'
+    | 'reasonOfTravel';
+
   label: string;
   minWidth?: number;
   align?: 'right';
@@ -33,35 +34,47 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: 'institutionName', label: 'Institution Name' },
-  { id: 'country', label: 'Country', align: 'right' },
   {
-    id: 'city',
-    label: 'City',
+    id: 'destinationHub',
+    label: 'destinationHub',
+  },
+  {
+    id: 'destinationCity',
+    label: 'destinationCity',
     align: 'right',
   },
   {
-    id: 'qualificationGained',
-    label: 'Qualification Gained',
+    id: 'destinationCountry',
+    label: 'destinationCountry',
     align: 'right',
   },
   {
-    id: 'startDate',
-    label: 'Start Date',
+    id: 'dateEntered',
+    label: 'dateEntered',
     align: 'right',
   },
   {
-    id: 'endDate',
-    label: 'End Date',
+    id: 'dateDeparted',
+    label: 'dateDeparted',
+    align: 'right',
+  },
+  {
+    id: 'reasonOfTravel',
+    label: 'reasonOfTravel',
+    align: 'right',
+  },
+  {
+    id: 'additionalInfo',
+    label: 'additionalInfo',
     align: 'right',
   },
 ];
 
-const EducationHistoryTable = () => {
+const TravelHistoryTable = () => {
   const applicantId = useReactiveVar(applicantIdCurrEditing);
   const currUser = useReactiveVar(user);
 
-  const educationHistoryWhereInput: EducationHistoryWhereInput = {
+  const travelHistoryWhereInput: TravelHistoryWhereInput = {
     createdBy: {
       id: currUser.id,
     },
@@ -73,11 +86,11 @@ const EducationHistoryTable = () => {
     },
   };
 
-  const { data, loading, error } = useQuery<Query>(EDUCATION_HISTORIES, {
+  const { data, loading, error } = useQuery<Query>(TRAVEL_HISTORIES, {
     variables: {
-      where: educationHistoryWhereInput,
+      where: travelHistoryWhereInput,
       orderBy: {
-        updatedAt: 'Desc',
+        dateEntered: 'Desc',
       },
     },
   });
@@ -91,7 +104,7 @@ const EducationHistoryTable = () => {
     if (data) setShowOverlay(() => false);
   }, [loading]);
 
-  const rows = data?.educationHistories as EducationHistory[];
+  const rows = data?.travelHistories as TravelHistory[];
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -115,12 +128,11 @@ const EducationHistoryTable = () => {
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       {error ? (
         <Alert severity="error">
-          Ah Sh-t! Failed to load your education history.
+          Ah Sh-t! Failed to load your employment history.
         </Alert>
       ) : (
         null
       )}
-      <EducationHistoryEdit open={edit} educationHistoryId={editId} handleClose={setEdit} />
       <TableContainer sx={{ maxHeight: 630 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -144,6 +156,7 @@ const EducationHistoryTable = () => {
                   return (
                     <TableCell key={column.id} align={column.align} onClick={() => rowOnclickHandler(row.id)}>
                       {row[`${i}`]}
+                      {/* test */}
                     </TableCell>
                   );
                 })}
@@ -165,4 +178,4 @@ const EducationHistoryTable = () => {
   );
 };
 
-export default EducationHistoryTable;
+export default TravelHistoryTable;

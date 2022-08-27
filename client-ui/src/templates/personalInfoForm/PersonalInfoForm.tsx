@@ -418,6 +418,7 @@ export const PersonalInfoForm: React.FC = () => {
                   fullWidth
                   onClick={() => setEdit(!edit)}
                   color={edit ? 'error' : 'primary'}
+                  style={{ textTransform: 'none' }}
                 >
                   {edit ? 'Discard' : 'Edit'}
                 </Button>
@@ -428,6 +429,7 @@ export const PersonalInfoForm: React.FC = () => {
                   variant="contained"
                   fullWidth
                   onClick={handleSubmit(onSubmitHandler)}
+                  style={{ textTransform: 'none' }}
                 >
                   Save
                 </Button>

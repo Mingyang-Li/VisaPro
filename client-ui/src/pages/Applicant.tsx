@@ -17,19 +17,19 @@ const Contents: React.FC = () => {
       component: <PersonalInfoForm />,
     },
     {
-      label: 'Education History',
+      label: 'Education Histories',
       component: <EducationHistoryForm />,
     },
     {
-      label: 'Employment History',
+      label: 'Employment Histories',
       component: <EmploymentHistoryForm />,
     },
     {
-      label: 'Travel History',
+      label: 'Travel Histories',
       component: <TravelHistoryForm />,
     },
     {
-      label: 'Family Member',
+      label: 'Family Members',
       component: <FamilyMemberForm />,
     },
   ];
