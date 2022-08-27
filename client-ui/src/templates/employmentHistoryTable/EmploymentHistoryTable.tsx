@@ -38,7 +38,11 @@ interface Column {
 
 const columns: readonly Column[] = [
   { id: 'jobTitle', label: 'jobTitle' },
-  { id: 'companyName', label: 'companyName', align: 'right' },
+  {
+    id: 'companyName',
+    label: 'companyName',
+    align: 'right',
+  },
   {
     id: 'employmentType',
     label: 'employmentType',
