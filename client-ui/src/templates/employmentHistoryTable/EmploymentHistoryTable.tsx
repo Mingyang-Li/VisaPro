@@ -28,7 +28,6 @@ interface Column {
     | 'endDate'
     | 'cityOfWork'
     | 'countryOfWork'
-    | 'additionalInfo';
 
   label: string;
   minWidth?: number;
@@ -67,11 +66,6 @@ const columns: readonly Column[] = [
   {
     id: 'countryOfWork',
     label: 'Country of work',
-    align: 'right',
-  },
-  {
-    id: 'additionalInfo',
-    label: 'Additional info',
     align: 'right',
   },
 ];

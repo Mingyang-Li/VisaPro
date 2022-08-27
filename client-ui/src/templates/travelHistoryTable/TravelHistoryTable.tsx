@@ -19,7 +19,6 @@ import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 interface Column {
   id:
-    | 'additionalInfo'
     | 'dateDeparted'
     | 'dateEntered'
     | 'destinationCity'
@@ -61,11 +60,6 @@ const columns: readonly Column[] = [
   {
     id: 'reasonOfTravel',
     label: 'reasonOfTravel',
-    align: 'right',
-  },
-  {
-    id: 'additionalInfo',
-    label: 'additionalInfo',
     align: 'right',
   },
 ];
