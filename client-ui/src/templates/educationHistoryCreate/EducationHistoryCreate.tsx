@@ -124,6 +124,7 @@ const EducationHistoryCreate: React.FC = () => {
                     id="institutionName"
                     fullWidth
                     label="Institution Name"
+                    placeholder="E.g, University of Auckland, Dunedin Girls High School, etc"
                     disabled={!edit}
                     variant={!edit ? 'filled' : 'outlined'}
                     value={formInfo?.institutionName}

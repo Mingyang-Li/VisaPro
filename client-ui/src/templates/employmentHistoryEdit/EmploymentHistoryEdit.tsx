@@ -122,7 +122,7 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
   }, [edit]);
 
   return (
-    <Dialog open={props.open}>
+    <Dialog open={props.open} maxWidth="md">
       {loading ? (
         <DialogContent>
           <LoadingSpinner show text={'Getting more details about your education'} />
@@ -145,7 +145,7 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       onChange={(e: any) => setFormInfo({ ...formInfo, jobTitle: e.target.value })}
                     />
                   </Grid>
-                  <Grid item md={12} sm={12} xs={12}>
+                  <Grid item md={7} sm={12} xs={12}>
                     <TextField
                       id="companyName"
                       fullWidth
@@ -156,7 +156,7 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       onChange={(e: any) => setFormInfo({ ...formInfo, companyName: e.target.value })}
                     />
                   </Grid>
-                  <Grid item md={12} sm={12} xs={12}>
+                  <Grid item md={5} sm={12} xs={12}>
                     <TextField
                       id="employmentType"
                       fullWidth
@@ -198,7 +198,7 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                     <TextField
                       id="cityOfWork"
                       fullWidth
-                      label="cityOfWork"
+                      label="City of work"
                       disabled={!edit}
                       variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.cityOfWork}
@@ -209,7 +209,7 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                     <TextField
                       id="countryOfWork"
                       fullWidth
-                      label="countryOfWork"
+                      label="Country of work"
                       disabled={!edit}
                       variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.countryOfWork}
