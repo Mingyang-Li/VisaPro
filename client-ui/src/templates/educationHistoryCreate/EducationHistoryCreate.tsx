@@ -211,11 +211,17 @@ const EducationHistoryCreate: React.FC = () => {
           </Card>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Discard</Button>
+          <Button
+            onClick={handleClose}
+            style={{ textTransform: 'none' }}
+          >
+            Discard
+          </Button>
           <Button
             onClick={() => createEducationHistory()}
             variant={'contained'}
             disabled={!edit}
+            style={{ textTransform: 'none' }}
           >
             {creating ? (
               <CircularProgress color="warning" />

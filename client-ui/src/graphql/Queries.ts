@@ -202,14 +202,6 @@ export const EMPLOYMENT_HISTORIES = gql`
       additionalInfo
       createdAt
       updatedAt
-      createdBy {
-        id
-        username
-      }
-      updatedBy {
-        id
-        username
-      }
     }
   }
 `;
@@ -218,6 +210,25 @@ export const EMPLOYMENT_HISTORY = gql`
   query EMPLOYMENT_HISTORY($where: EmploymentHistoryWhereUniqueInput!) {
     employmentHistory(where: $where) {
       id
+      jobTitle
+      companyName
+      duties
+      employmentType
+      startDate
+      endDate
+      cityOfWork
+      countryOfWork
+      additionalInfo
+      createdAt
+      updatedAt
+      createdBy {
+        id
+        username
+      }
+      updatedBy {
+        id
+        username
+      }
     }
   }
 `;

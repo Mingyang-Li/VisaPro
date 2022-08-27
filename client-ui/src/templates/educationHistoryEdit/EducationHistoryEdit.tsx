@@ -4,8 +4,17 @@ import React, { useState, useEffect } from 'react';
 import { useLazyQuery, useMutation, useReactiveVar } from '@apollo/client';
 import {
   Alert,
-  Autocomplete,
-  Button, Card, CardContent, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Stack, TextField,
+  Button,
+  Card,
+  CardContent,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Grid,
+  Stack,
+  TextField,
 } from '@mui/material';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import { EDUCATION_HISTORIES, EDUCATION_HISTORY } from '../../graphql/Queries';
@@ -15,6 +24,7 @@ import {
 } from '../../generated/graphql';
 import { UPDATE_EDUCATION_HISTORY } from '../../graphql/Mutations';
 import { applicantIdCurrEditing } from '../../graphql/Store';
+import { numDatesBetweenTwoDates } from '../../services/helper.service';
 
 interface IEducationHistoryEdit {
   open: boolean;
@@ -192,6 +202,16 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                       disabled
                       variant={!edit ? 'filled' : 'outlined'}
                       value={new Date(formInfo?.endDate).getTime() > new Date().getTime() ? 'Yes' : 'No'}
+                    />
+                  </Grid>
+                  <Grid item md={12} sm={12} xs={12}>
+                    <TextField
+                      id="duration"
+                      fullWidth
+                      label={new Date(formInfo?.endDate).getTime() > new Date().getTime() ? 'I have been studying here for:' : 'I have studied here for:'}
+                      disabled
+                      variant={'filled'}
+                      value={`${numDatesBetweenTwoDates(new Date(formInfo?.startDate), new Date())} days`}
                     />
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>

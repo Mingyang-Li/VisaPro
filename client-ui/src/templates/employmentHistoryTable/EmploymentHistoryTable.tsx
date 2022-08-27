@@ -37,41 +37,41 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: 'jobTitle', label: 'jobTitle' },
+  { id: 'jobTitle', label: 'Job title' },
   {
     id: 'companyName',
-    label: 'companyName',
+    label: 'Company name',
     align: 'right',
   },
   {
     id: 'employmentType',
-    label: 'employmentType',
+    label: 'Employment type',
     align: 'right',
   },
   {
     id: 'startDate',
-    label: 'Start Date',
+    label: 'Start date',
     align: 'right',
   },
   {
     id: 'endDate',
-    label: 'End Date',
+    label: 'End date',
     align: 'right',
   },
 
   {
     id: 'cityOfWork',
-    label: 'cityOfWork',
+    label: 'City of work',
     align: 'right',
   },
   {
     id: 'countryOfWork',
-    label: 'countryOfWork',
+    label: 'Country of work',
     align: 'right',
   },
   {
     id: 'additionalInfo',
-    label: 'additionalInfo',
+    label: 'Additional info',
     align: 'right',
   },
 ];
@@ -139,7 +139,7 @@ const EmploymentHistoryTable = () => {
       ) : (
         null
       )}
-      <EmploymentHistoryEdit />
+      <EmploymentHistoryEdit open={edit} employmentHistoryId={editId} handleClose={setEdit} />
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
