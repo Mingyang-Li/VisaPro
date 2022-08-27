@@ -159,7 +159,7 @@ export const PersonalInfoForm: React.FC = () => {
         <>
           <CardContent>
             <Grid container spacing={2}>
-              <Grid item md={3} sm={12} xs={12}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
                 <TextField
                   id="firstName"
                   label="First name"
@@ -175,7 +175,7 @@ export const PersonalInfoForm: React.FC = () => {
                   variant={!edit ? 'filled' : 'outlined'}
                 />
               </Grid>
-              <Grid item md={3} sm={12} xs={12}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
                 <TextField
                   id="lastName"
                   label="Last name"
@@ -189,7 +189,7 @@ export const PersonalInfoForm: React.FC = () => {
                   variant={!edit ? 'filled' : 'outlined'}
                 />
               </Grid>
-              <Grid item md={3} sm={12} xs={12}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
                 <TextField
                   id="email"
                   label="Email"
@@ -203,7 +203,7 @@ export const PersonalInfoForm: React.FC = () => {
                   variant={!edit ? 'filled' : 'outlined'}
                 />
               </Grid>
-              <Grid item md={3} sm={12} xs={12}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
                 <TextField
                   id="mobile"
                   label="Mobile"
@@ -217,7 +217,7 @@ export const PersonalInfoForm: React.FC = () => {
                   variant={!edit ? 'filled' : 'outlined'}
                 />
               </Grid>
-              <Grid item md={3} sm={12} xs={12}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
                 <TextField
                   id="nzAddress"
                   label="NZ address"
@@ -233,7 +233,7 @@ export const PersonalInfoForm: React.FC = () => {
                   variant={!edit ? 'filled' : 'outlined'}
                 />
               </Grid>
-              <Grid item md={3} sm={12} xs={12}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
                 <TextField
                   id="homeCountryAddress"
                   label="Home Country Address"
@@ -254,7 +254,7 @@ export const PersonalInfoForm: React.FC = () => {
                   variant={!edit ? 'filled' : 'outlined'}
                 />
               </Grid>
-              <Grid item md={3} sm={12} xs={12}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
                 <TextField
                   id="inzClientNumber"
                   label="Immigration NZ Client number"
@@ -275,7 +275,7 @@ export const PersonalInfoForm: React.FC = () => {
                   variant={!edit ? 'filled' : 'outlined'}
                 />
               </Grid>
-              <Grid item md={3} sm={12} xs={12}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
                 <TextField
                   id="passportNumber"
                   label="Passport number"
@@ -294,7 +294,7 @@ export const PersonalInfoForm: React.FC = () => {
                   variant={!edit ? 'filled' : 'outlined'}
                 />
               </Grid>
-              <Grid item md={3} sm={12} xs={12}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
                 <Autocomplete
                   id="countriesOfCitizenship"
                   value={formInfo?.countriesOfCitizenship}
@@ -332,7 +332,7 @@ export const PersonalInfoForm: React.FC = () => {
                 />
               </Grid>
 
-              <Grid item md={3} sm={12} xs={12}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
                 <Autocomplete
                   id="countryOfBirth"
                   value={formInfo?.countryOfBirth}
@@ -368,7 +368,7 @@ export const PersonalInfoForm: React.FC = () => {
                   )}
                 />
               </Grid>
-              <Grid item md={3} sm={12} xs={12}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
                 <BasicDatePicker
                   label="Date of birth"
                   disabled={!edit}
@@ -376,7 +376,7 @@ export const PersonalInfoForm: React.FC = () => {
                   defaultValue={new Date(formInfo?.dateOfBirth) as Date}
                 />
               </Grid>
-              <Grid item md={3} sm={12} xs={12}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
                 <TextField
                   id="durationOnEarth"
                   label="I have been living for:"

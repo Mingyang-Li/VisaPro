@@ -200,7 +200,6 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                       fullWidth
                       label="I currently study here"
                       disabled
-                      variant={!edit ? 'filled' : 'outlined'}
                       value={new Date(formInfo?.endDate).getTime() > new Date().getTime() ? 'Yes' : 'No'}
                     />
                   </Grid>
@@ -210,7 +209,6 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (props: IEducation
                       fullWidth
                       label={new Date(formInfo?.endDate).getTime() > new Date().getTime() ? 'I have been studying here for:' : 'I have studied here for:'}
                       disabled
-                      variant={'filled'}
                       value={`${numDatesBetweenTwoDates(new Date(formInfo?.startDate), new Date())} days`}
                     />
                   </Grid>

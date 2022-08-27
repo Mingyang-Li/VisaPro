@@ -190,7 +190,6 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       fullWidth
                       label="Is this my current job?"
                       disabled
-                      variant={'filled'}
                       value={new Date(formInfo?.endDate).getTime() > new Date().getTime() ? 'Yes' : 'No'}
                     />
                   </Grid>
@@ -200,7 +199,6 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       fullWidth
                       label="I've been on this role for: "
                       disabled
-                      variant={'filled'}
                       value={`${numDatesBetweenTwoDates(new Date(formInfo?.startDate), new Date(formInfo?.endDate))} days`}
                       onChange={(e: any) => setFormInfo({ ...formInfo, cityOfWork: e.target.value })}
                     />
