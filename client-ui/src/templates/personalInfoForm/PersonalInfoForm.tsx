@@ -141,9 +141,7 @@ export const PersonalInfoForm: React.FC = () => {
     }
   }, [isSubmitSuccessful]);
 
-  const onSubmitHandler: SubmitHandler<PersonalInfoInput> = () => {
-    initiateMutation();
-  };
+  const onSubmitHandler: SubmitHandler<PersonalInfoInput> = () => initiateMutation();
 
   return (
     <Card variant="outlined">
