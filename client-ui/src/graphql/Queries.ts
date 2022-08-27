@@ -216,7 +216,6 @@ export const EMPLOYMENT_HISTORY = gql`
       employmentType
       startDate
       endDate
-      isCurrentJob
       cityOfWork
       countryOfWork
       additionalInfo

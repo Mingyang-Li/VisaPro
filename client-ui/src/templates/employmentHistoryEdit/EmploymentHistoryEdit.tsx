@@ -60,6 +60,7 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
     employmentType: formInfo?.employmentType,
     startDate: formInfo?.startDate,
     endDate: formInfo?.endDate,
+    isCurrentJob: new Date(formInfo?.endDate).getTime() > new Date().getTime(),
     cityOfWork: formInfo?.cityOfWork,
     countryOfWork: formInfo?.countryOfWork,
     additionalInfo: formInfo?.additionalInfo,
@@ -181,6 +182,16 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       disabled={!edit}
                       defaultValue={new Date(formInfo?.endDate) as Date}
                       updateParentDateValue={(d: Date) => setFormInfo({ ...formInfo, endDate: d })}
+                    />
+                  </Grid>
+                  <Grid item md={12} sm={12} xs={12}>
+                    <TextField
+                      id="isCurrentJob"
+                      fullWidth
+                      label="Is this my current job?"
+                      disabled
+                      variant={'filled'}
+                      value={new Date(formInfo?.endDate).getTime() > new Date().getTime() ? 'Yes' : 'No'}
                     />
                   </Grid>
                   <Grid item md={12} sm={12} xs={12}>
