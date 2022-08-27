@@ -192,6 +192,7 @@ export const EMPLOYMENT_HISTORIES = gql`
     ) {
       id
       jobTitle
+      companyName
       duties
       employmentType
       startDate
