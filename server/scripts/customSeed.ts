@@ -141,8 +141,6 @@ const IJob = [
   "Account Manager",
   "Account Executive",
   "Investor",
-  "Cashier",
-  "Chef",
   "Store Manager",
   "Consultant",
   "Executive Assistant",
@@ -371,7 +369,7 @@ export const seedEmploymentHistories = async () => {
   for (let i = 0; i < applicants.length; i++) {
     const applicant = applicants[i];
 
-    for (let k = 0; k < ENTITY_CT; k++) {
+    for (let k = 0; k < randomIntBetween(5, 20); k++) {
       const employmentHistory: Prisma.EmploymentHistoryCreateArgs = {
         data: {
           // system
@@ -428,7 +426,7 @@ export const seedTravelHistories = async () => {
   for (let i = 0; i < applicants.length; i++) {
     const applicant = applicants[i];
 
-    for (let k = 0; k < ENTITY_CT; k++) {
+    for (let k = 0; k < randomIntBetween(10, 30); k++) {
       const travelHistory: Prisma.TravelHistoryCreateArgs = {
         data: {
           // system
@@ -488,7 +486,7 @@ export const seedFamilyMembers = async () => {
   for (let i = 0; i < applicants.length; i++) {
     const applicant = applicants[i];
 
-    for (let k = 0; k < ENTITY_CT; k++) {
+    for (let k = 0; k < randomIntBetween(5, 10); k++) {
       const familyMember: Prisma.FamilyMemberCreateArgs = {
         data: {
           // system
