@@ -264,6 +264,13 @@ export const FAMILY_MEMBERS = gql`
   ) {
     familyMembers(orderBy: $orderBy, skip: $skip, take: $take, where: $where) {
       id
+      firstName
+      lastName
+      countriesOfCitizenship
+      countryOfBirth
+      relationshipToApplicant
+      dateOfBirth
+      additionalInfo
     }
   }
 `;
