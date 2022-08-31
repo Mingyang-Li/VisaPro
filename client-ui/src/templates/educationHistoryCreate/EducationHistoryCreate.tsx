@@ -12,11 +12,15 @@ import {
   Card, CardContent, CircularProgress, Grid,
 } from '@mui/material';
 import { useMutation, useReactiveVar } from '@apollo/client';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { TypeOf } from 'zod';
 import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
 import { EducationHistory, EducationHistoryCreateInput } from '../../generated/graphql';
 import { CREATE_EDUCATION_HISTORY } from '../../graphql/Mutations';
 import { EDUCATION_HISTORIES } from '../../graphql/Queries';
 import { applicantIdCurrEditing, user } from '../../graphql/Store';
+import { EducationHistoryCreateInputSchema } from '../../utils/zod.schemas';
 
 const ColorButton = styled(Button)<ButtonProps>(() => ({
   backgroundColor: blue[500],
@@ -24,6 +28,8 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
     backgroundColor: blue[700],
   },
 }));
+
+type SchemaType = TypeOf<typeof EducationHistoryCreateInputSchema>;
 
 const EducationHistoryCreate: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -103,6 +109,23 @@ const EducationHistoryCreate: React.FC = () => {
     setOpen(false);
   };
 
+  const {
+    register: schema,
+    formState: { errors, isSubmitSuccessful },
+    reset,
+    handleSubmit,
+  } = useForm<SchemaType>({
+    resolver: zodResolver(EducationHistoryCreateInputSchema),
+  });
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful]);
+
+  const onSubmitHandler: SubmitHandler<SchemaType> = () => createEducationHistory();
+
   return (
     <div>
       <ColorButton
@@ -128,6 +151,11 @@ const EducationHistoryCreate: React.FC = () => {
                     disabled={!edit}
                     variant={!edit ? 'filled' : 'outlined'}
                     value={formInfo?.institutionName}
+                    error={!!errors.institutionName}
+                    helperText={
+                      errors.institutionName ? errors.institutionName.message : ''
+                    }
+                    {...schema('institutionName')}
                     onChange={(e: any) => setFormInfo({ ...formInfo, institutionName: e.target.value })}
                   />
                 </Grid>
@@ -139,6 +167,11 @@ const EducationHistoryCreate: React.FC = () => {
                     disabled={!edit}
                     variant={!edit ? 'filled' : 'outlined'}
                     value={formInfo?.country}
+                    error={!!errors.country}
+                    helperText={
+                      errors.country ? errors.country.message : ''
+                    }
+                    {...schema('country')}
                     onChange={(e: any) => setFormInfo({ ...formInfo, country: e.target.value })}
                   />
                 </Grid>
@@ -150,6 +183,11 @@ const EducationHistoryCreate: React.FC = () => {
                     disabled={!edit}
                     variant={!edit ? 'filled' : 'outlined'}
                     value={formInfo?.city}
+                    error={!!errors.city}
+                    helperText={
+                      errors.city ? errors.city.message : ''
+                    }
+                    {...schema('city')}
                     onChange={(e: any) => setFormInfo({ ...formInfo, city: e.target.value })}
                   />
                 </Grid>
@@ -161,6 +199,11 @@ const EducationHistoryCreate: React.FC = () => {
                     disabled={!edit}
                     variant={!edit ? 'filled' : 'outlined'}
                     value={formInfo?.qualificationGained}
+                    error={!!errors.qualificationGained}
+                    helperText={
+                      errors.qualificationGained ? errors.qualificationGained.message : ''
+                    }
+                    {...schema('qualificationGained')}
                     onChange={(e: any) => setFormInfo({ ...formInfo, qualificationGained: e.target.value })}
                   />
                 </Grid>
@@ -219,7 +262,7 @@ const EducationHistoryCreate: React.FC = () => {
             Discard
           </Button>
           <Button
-            onClick={() => createEducationHistory()}
+            onClick={handleSubmit(onSubmitHandler)}
             variant={'contained'}
             disabled={!edit}
             style={{ textTransform: 'none' }}

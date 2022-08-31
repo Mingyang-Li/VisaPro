@@ -26,7 +26,7 @@ export const PersonalInfoSchema = object({
 });
 
 export const EducationHistoryCreateInputSchema = object({
-  institutionName: string().min(1, { message: 'Please enter the name of the institution where you studies' }),
+  institutionName: string().min(1, { message: 'Please enter the name of the institution where you studied' }),
   country: string().min(1, { message: 'Country is required' }),
   city: string().min(1, { message: 'City is required' }),
   qualificationGained: string().min(1, { message: 'Please tell us about the qualification you obtained' }),
@@ -42,5 +42,4 @@ export const EducationHistoryUpdateInputSchema = object({
   qualificationGained: string().min(1, { message: 'Please tell us about the qualification you obtained' }),
   startDate: date(),
   endDate: date(),
-  additionalInfo: string(),
 });
