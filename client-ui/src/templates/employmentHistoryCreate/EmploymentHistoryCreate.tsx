@@ -9,6 +9,7 @@ import styled from '@emotion/styled';
 import { blue } from '@mui/material/colors';
 import {
   Alert,
+  Autocomplete,
   Card, CardContent, CircularProgress, Grid,
 } from '@mui/material';
 import { useMutation, useReactiveVar } from '@apollo/client';
@@ -17,6 +18,8 @@ import { EmploymentHistory, EmploymentHistoryCreateInput } from '../../generated
 import { CREATE_EMPLOYMENT_HISOTRY } from '../../graphql/Mutations';
 import { EMPLOYMENT_HISTORIES } from '../../graphql/Queries';
 import { applicantIdCurrEditing, user } from '../../graphql/Store';
+import { countryList } from '../../utils/countries';
+import { IEmploymentTypes } from '../../utils/collections';
 
 const ColorButton = styled(Button)<ButtonProps>(() => ({
   backgroundColor: blue[500],
@@ -143,25 +146,61 @@ const EmploymentHistoryCreate: React.FC = () => {
                   />
                 </Grid>
                 <Grid item md={12} sm={12} xs={12}>
-                  <TextField
+                  <Autocomplete
                     id="employmentType"
-                    fullWidth
-                    label="Employment type"
-                    disabled={!edit}
-                    variant={!edit ? 'filled' : 'outlined'}
                     value={formInfo?.employmentType}
-                    onChange={(e: any) => setFormInfo({ ...formInfo, employmentType: e.target.value })}
+                    disablePortal
+                    disabled={!edit}
+                    options={IEmploymentTypes.map((c) => c)}
+                    onChange={(event: any, newValue: string | null) => {
+                      setFormInfo({
+                        ...formInfo,
+                        employmentType: newValue,
+                      });
+                    }}
+                    onInputChange={(event, newInputValue) => {
+                      setFormInfo({
+                        ...formInfo,
+                        employmentType: newInputValue,
+                      });
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Employment type"
+                        fullWidth
+                        variant={!edit ? 'filled' : 'outlined'}
+                      />
+                    )}
                   />
                 </Grid>
                 <Grid item md={6} sm={12} xs={12}>
-                  <TextField
+                  <Autocomplete
                     id="countryOfWork"
-                    fullWidth
-                    label="Country of work"
-                    disabled={!edit}
-                    variant={!edit ? 'filled' : 'outlined'}
                     value={formInfo?.countryOfWork}
-                    onChange={(e: any) => setFormInfo({ ...formInfo, countryOfWork: e.target.value })}
+                    disablePortal
+                    disabled={!edit}
+                    options={countryList.map((c) => c)}
+                    onChange={(event: any, newValue: string | null) => {
+                      setFormInfo({
+                        ...formInfo,
+                        countryOfWork: newValue,
+                      });
+                    }}
+                    onInputChange={(event, newInputValue) => {
+                      setFormInfo({
+                        ...formInfo,
+                        countryOfWork: newInputValue,
+                      });
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Country of work"
+                        fullWidth
+                        variant={!edit ? 'filled' : 'outlined'}
+                      />
+                    )}
                   />
                 </Grid>
                 <Grid item md={6} sm={12} xs={12}>
