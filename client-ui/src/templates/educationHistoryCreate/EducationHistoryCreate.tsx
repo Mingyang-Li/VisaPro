@@ -104,11 +104,6 @@ const EducationHistoryCreate: React.FC = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
-    setFormInfo({ id: '' });
-    setOpen(false);
-  };
-
   const {
     register: schema,
     formState: { errors, isSubmitSuccessful },
@@ -125,6 +120,12 @@ const EducationHistoryCreate: React.FC = () => {
   }, [isSubmitSuccessful]);
 
   const onSubmitHandler: SubmitHandler<SchemaType> = () => createEducationHistory();
+
+  const handleClose = () => {
+    setFormInfo({ id: '' });
+    setOpen(false);
+    reset();
+  };
 
   return (
     <div>
