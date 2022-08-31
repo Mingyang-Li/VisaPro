@@ -117,11 +117,6 @@ export const CREATE_EMPLOYMENT_HISOTRY = gql`
   ) {
     createEmploymentHistory(data: $data) {
       id
-      createdAt
-      createdBy {
-        id
-        username
-      }
     }
   }
 `;
