@@ -1,11 +1,3 @@
-This project was generated with [Amplication](https://amplication.com)
+# VisaPro
 
-It consists of two packages:
-
-### [Server](./server/README.md)
-
-### [Admin UI](./admin-ui/README.md)
-
-### Learn more
-
-You can learn more in the [Amplication documentation](https://docs.amplication.com/guides/getting-started).
+Current version demo - https://www.loom.com/share/1b04e807ff7b46deb34fa835f5037000
