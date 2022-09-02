@@ -369,7 +369,8 @@ export const seedEmploymentHistories = async () => {
   for (let i = 0; i < applicants.length; i++) {
     const applicant = applicants[i];
 
-    for (let k = 0; k < randomIntBetween(5, 20); k++) {
+    const randomLen = randomIntBetween(5, 20);
+    for (let k = 0; k < randomLen; k++) {
       const employmentHistory: Prisma.EmploymentHistoryCreateArgs = {
         data: {
           // system
@@ -414,7 +415,7 @@ export const seedEmploymentHistories = async () => {
       }
     }
     console.log(
-      `✅ ${ENTITY_CT} EmploymentHistories for ${applicant.createdById} seeded to DB`
+      `✅ ${randomLen} EmploymentHistories for ${applicant.createdById} seeded to DB`
     );
   }
 };
@@ -426,7 +427,8 @@ export const seedTravelHistories = async () => {
   for (let i = 0; i < applicants.length; i++) {
     const applicant = applicants[i];
 
-    for (let k = 0; k < randomIntBetween(10, 30); k++) {
+    const randomLen = randomIntBetween(10, 30);
+    for (let k = 0; k < randomLen; k++) {
       const travelHistory: Prisma.TravelHistoryCreateArgs = {
         data: {
           // system
@@ -474,7 +476,7 @@ export const seedTravelHistories = async () => {
       }
     }
     console.log(
-      `✅ ${ENTITY_CT} TravelHistories for ${applicant.createdById} seeded to DB`
+      `✅ ${randomLen} TravelHistories for ${applicant.createdById} seeded to DB`
     );
   }
 };
@@ -486,7 +488,8 @@ export const seedFamilyMembers = async () => {
   for (let i = 0; i < applicants.length; i++) {
     const applicant = applicants[i];
 
-    for (let k = 0; k < randomIntBetween(5, 10); k++) {
+    const randomLen = randomIntBetween(5, 10);
+    for (let k = 0; k < randomLen; k++) {
       const familyMember: Prisma.FamilyMemberCreateArgs = {
         data: {
           // system
@@ -530,7 +533,7 @@ export const seedFamilyMembers = async () => {
       }
     }
     console.log(
-      `✅ ${ENTITY_CT} FamilyMembers for ${applicant.createdById} seeded to DB`
+      `✅ ${randomLen} FamilyMembers for ${applicant.createdById} seeded to DB`
     );
   }
 };
