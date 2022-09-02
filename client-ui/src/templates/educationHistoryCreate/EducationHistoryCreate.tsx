@@ -63,7 +63,14 @@ const EducationHistoryCreate: React.FC = () => {
     archived: false,
   };
 
-  const [createEducationHistory, { data: dataCreated, loading: creating, error: creationError }] = useMutation(
+  const [
+    createEducationHistory,
+    {
+      data: dataCreated,
+      loading: creating,
+      error: creationError,
+    },
+  ] = useMutation(
     CREATE_EDUCATION_HISTORY,
     {
       variables: {
