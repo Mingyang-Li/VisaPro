@@ -3,7 +3,12 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb', 'plugin:storybook/recommended'],
+  extends: [
+    'plugin:react/recommended',
+    'airbnb',
+    'plugin:storybook/recommended',
+    'prettier',
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -12,8 +17,14 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint'],
+  plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
+    'prettier/prettier': [
+      1,
+      {
+        endOfLine: 'auto',
+      },
+    ],
     'react/require-default-props': 0,
     'react/no-unused-prop-types': 0,
     'react/jsx-props-no-spreading': 0,
@@ -29,18 +40,28 @@ module.exports = {
     ],
     'import/prefer-default-export': 'off',
     'react/prop-types': 'off',
-    'react/jsx-filename-extension': [2, {
-      extensions: ['.js', '.jsx', '.ts', '.tsx'],
-    }],
-    'max-len': ['warn', {
-      code: 300,
-    }],
-    'import/extensions': ['error', 'ignorePackages', {
-      js: 'never',
-      jsx: 'never',
-      ts: 'never',
-      tsx: 'never',
-    }],
+    'react/jsx-filename-extension': [
+      2,
+      {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    ],
+    'max-len': [
+      'warn',
+      {
+        code: 300,
+      },
+    ],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
   },
   settings: {
     'import/resolver': {
