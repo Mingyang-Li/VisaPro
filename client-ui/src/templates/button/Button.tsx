@@ -9,12 +9,10 @@ interface IButton {
 
 interface IDeleteButton extends IButton {}
 
-export const DeleteButton: React.FC = (props: IDeleteButton) => {
-  return (
-    <Tooltip title="Delete" onClick={props.delete}>
-      <IconButton>
-        <DeleteIcon />
-      </IconButton>
-    </Tooltip>
-  );
-};
+export const DeleteButton: React.FC = (props: IDeleteButton) => (
+  <Tooltip title="Delete" onClick={props.delete}>
+    <IconButton>
+      <DeleteIcon />
+    </IconButton>
+  </Tooltip>
+);
