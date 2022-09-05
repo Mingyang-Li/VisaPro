@@ -20,17 +20,10 @@ import {
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import EmploymentHistoryEdit from '../employmentHistoryEdit/EmploymentHistoryEdit';
 
-interface Column {
-  id:
-    | 'jobTitle'
-    | 'companyName'
-    | 'duties'
-    | 'employmentType'
-    | 'startDate'
-    | 'endDate'
-    | 'cityOfWork'
-    | 'countryOfWork';
+type ID = keyof EmploymentHistory;
 
+interface Column {
+  id: ID;
   label: string;
   minWidth?: number;
   align?: 'right';
