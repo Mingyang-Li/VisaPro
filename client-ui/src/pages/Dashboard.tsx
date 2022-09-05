@@ -51,14 +51,13 @@ const Contents: React.FC = () => {
     <>
       <UpdatingCurrUser />
       <ApplicantFormCreate open={false} title="New applicant" />
-      <h1>
-        Welcome
-        {' '}
-        {currUser?.username}
-      </h1>
+      <h1>Welcome {currUser?.username}</h1>
       <Grid container spacing={2}>
         <Backdrop
-          sx={{ color: '#fff', zIndex: (theme: any) => theme.zIndex.drawer + 1 }}
+          sx={{
+            color: '#fff',
+            zIndex: (theme: any) => theme.zIndex.drawer + 1,
+          }}
           open={loading}
         >
           <CircularProgress color="inherit" />

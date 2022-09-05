@@ -6,7 +6,7 @@ export const stringHasEmptyChar = (s: string) => {
 };
 
 export const numDatesBetweenTwoDates = (d1: Date, d2: Date) => {
-  const diffTime = (d2.getTime() - d1.getTime());
+  const diffTime = d2.getTime() - d1.getTime();
   const daysDiff = diffTime / (1000 * 3600 * 24);
   return Math.abs(Math.round(daysDiff));
 };

@@ -121,9 +121,10 @@ const Login: React.FC = () => {
               // eslint-disable-next-line max-len
               'url(https://onechelofanadventure.com/wp-content/uploads/2017/05/New-Zealand-South-Island-Things-to-Do.png)',
             backgroundRepeat: 'no-repeat',
-            backgroundColor: (t: any) => (t.palette.mode === 'light'
-              ? t.palette.grey[50]
-              : t.palette.grey[900]),
+            backgroundColor: (t: any) =>
+              t.palette.mode === 'light'
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -172,7 +173,7 @@ const Login: React.FC = () => {
                   id="outlined-adornment-password"
                   type={values.showPassword ? 'text' : 'password'}
                   value={values.password}
-                  endAdornment={(
+                  endAdornment={
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
@@ -186,7 +187,7 @@ const Login: React.FC = () => {
                         )}
                       </IconButton>
                     </InputAdornment>
-                  )}
+                  }
                   label="Password"
                   error={!!errors.password}
                   {...login('password')}
@@ -200,9 +201,7 @@ const Login: React.FC = () => {
                 <Alert severity="error">
                   The email or password you entered is incorrect, try again
                 </Alert>
-              ) : (
-                null
-              )}
+              ) : null}
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
