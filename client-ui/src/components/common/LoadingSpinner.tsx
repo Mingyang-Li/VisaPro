@@ -1,6 +1,7 @@
 import React from 'react';
 
-const loadingImg = 'https://cdn.auth0.com/blog/auth0-react-sample/assets/loading.svg';
+const loadingImg =
+  'https://cdn.auth0.com/blog/auth0-react-sample/assets/loading.svg';
 
 interface ILoadingSpinner {
   show: boolean;
@@ -19,7 +20,11 @@ const LoadingSpinner: React.FC<ILoadingSpinner> = (props: ILoadingSpinner) => (
       height: '100%',
     }}
   >
-    <img src={loadingImg} alt="Loading..." style={{ top: '30%', left: '45%' }} />
+    <img
+      src={loadingImg}
+      alt="Loading..."
+      style={{ top: '30%', left: '45%' }}
+    />
     <h3>{props.text ? props.text : 'Loading...'}</h3>
   </div>
 );
