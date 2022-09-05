@@ -13,7 +13,9 @@ import { Alert } from '@mui/material';
 import { EMPLOYMENT_HISTORIES } from '../../graphql/Queries';
 import { applicantIdCurrEditing, user } from '../../graphql/Store';
 import {
-  EmploymentHistory, EmploymentHistoryWhereInput, Query,
+  EmploymentHistory,
+  EmploymentHistoryWhereInput,
+  Query,
 } from '../../generated/graphql';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import EmploymentHistoryEdit from '../employmentHistoryEdit/EmploymentHistoryEdit';
@@ -27,7 +29,7 @@ interface Column {
     | 'startDate'
     | 'endDate'
     | 'cityOfWork'
-    | 'countryOfWork'
+    | 'countryOfWork';
 
   label: string;
   minWidth?: number;
@@ -122,7 +124,8 @@ const EmploymentHistoryTable = () => {
     setEdit(!edit);
   };
 
-  if (loading) return <LoadingSpinner show text={'Getting education histories'} />;
+  if (loading)
+    return <LoadingSpinner show text={'Getting education histories'} />;
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -130,10 +133,12 @@ const EmploymentHistoryTable = () => {
         <Alert severity="error">
           Ah Sh-t! Failed to load your employment history.
         </Alert>
-      ) : (
-        null
-      )}
-      <EmploymentHistoryEdit open={edit} employmentHistoryId={editId} handleClose={setEdit} />
+      ) : null}
+      <EmploymentHistoryEdit
+        open={edit}
+        employmentHistoryId={editId}
+        handleClose={setEdit}
+      />
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -155,7 +160,11 @@ const EmploymentHistoryTable = () => {
                 {columns.map((column) => {
                   const i = column.id;
                   return (
-                    <TableCell key={column.id} align={column.align} onClick={() => rowOnclickHandler(row.id)}>
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      onClick={() => rowOnclickHandler(row.id)}
+                    >
                       {row[`${i}`]}
                       {/* test */}
                     </TableCell>

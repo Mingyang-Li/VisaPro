@@ -16,10 +16,18 @@ import {
   TextField,
 } from '@mui/material';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
-import { EMPLOYMENT_HISTORIES, EMPLOYMENT_HISTORY } from '../../graphql/Queries';
+import {
+  EMPLOYMENT_HISTORIES,
+  EMPLOYMENT_HISTORY,
+} from '../../graphql/Queries';
 import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
 import {
-  EmploymentHistoryUpdateInput, EmploymentHistoryWhereUniqueInput, EmploymentHistory, EmploymentHistoryWhereInput, Mutation, Query,
+  EmploymentHistoryUpdateInput,
+  EmploymentHistoryWhereUniqueInput,
+  EmploymentHistory,
+  EmploymentHistoryWhereInput,
+  Mutation,
+  Query,
 } from '../../generated/graphql';
 import { UPDATE_EMOLOYMENT_HISTORY } from '../../graphql/Mutations';
 import { applicantIdCurrEditing } from '../../graphql/Store';
@@ -31,23 +39,30 @@ interface IEmploymentHistoryEdit {
   handleClose: (value: boolean) => void;
 }
 
-const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploymentHistoryEdit) => {
+const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (
+  props: IEmploymentHistoryEdit,
+) => {
   const applicantId = useReactiveVar(applicantIdCurrEditing);
   const [edit, setEdit] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
-  const [getData, { data, loading, error }] = useLazyQuery<Query>(EMPLOYMENT_HISTORY, {
-    variables: {
-      where: {
-        id: props.employmentHistoryId,
+  const [getData, { data, loading, error }] = useLazyQuery<Query>(
+    EMPLOYMENT_HISTORY,
+    {
+      variables: {
+        where: {
+          id: props.employmentHistoryId,
+        },
       },
     },
-  });
+  );
 
   useEffect(() => {
     if (props.open || props.employmentHistoryId) getData();
   }, [props.open, props.employmentHistoryId]);
 
-  const [formInfo, setFormInfo] = useState<EmploymentHistory>(data?.employmentHistory as EmploymentHistory);
+  const [formInfo, setFormInfo] = useState<EmploymentHistory>(
+    data?.employmentHistory as EmploymentHistory,
+  );
 
   useEffect(() => {
     setFormInfo(data?.employmentHistory as EmploymentHistory);
@@ -82,29 +97,26 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
   const [
     initiateUpdate,
     { data: updatedData, loading: updating, error: updateError },
-  ] = useMutation<Mutation>(
-    UPDATE_EMOLOYMENT_HISTORY,
-    {
-      variables: {
-        where: employmentHistoryWhereUniqueInput,
-        data: employmentHistoryUpdateInput,
-      },
-      refetchQueries: [
-        {
-          query: EMPLOYMENT_HISTORIES,
-          variables: {
-            where: employmentHistoryWhereInput,
-          },
-        },
-        {
-          query: EMPLOYMENT_HISTORY,
-          variables: {
-            where: employmentHistoryWhereUniqueInput,
-          },
-        },
-      ],
+  ] = useMutation<Mutation>(UPDATE_EMOLOYMENT_HISTORY, {
+    variables: {
+      where: employmentHistoryWhereUniqueInput,
+      data: employmentHistoryUpdateInput,
     },
-  );
+    refetchQueries: [
+      {
+        query: EMPLOYMENT_HISTORIES,
+        variables: {
+          where: employmentHistoryWhereInput,
+        },
+      },
+      {
+        query: EMPLOYMENT_HISTORY,
+        variables: {
+          where: employmentHistoryWhereUniqueInput,
+        },
+      },
+    ],
+  });
 
   useEffect(() => {
     if (updating || loading) {
@@ -126,7 +138,10 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
     <Dialog open={props.open} maxWidth="md">
       {loading ? (
         <DialogContent>
-          <LoadingSpinner show text={'Getting more details about your education'} />
+          <LoadingSpinner
+            show
+            text={'Getting more details about your education'}
+          />
         </DialogContent>
       ) : (
         <>
@@ -143,7 +158,9 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       disabled={!edit}
                       variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.jobTitle}
-                      onChange={(e: any) => setFormInfo({ ...formInfo, jobTitle: e.target.value })}
+                      onChange={(e: any) =>
+                        setFormInfo({ ...formInfo, jobTitle: e.target.value })
+                      }
                     />
                   </Grid>
                   <Grid item md={7} sm={12} xs={12}>
@@ -154,7 +171,12 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       disabled={!edit}
                       variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.companyName}
-                      onChange={(e: any) => setFormInfo({ ...formInfo, companyName: e.target.value })}
+                      onChange={(e: any) =>
+                        setFormInfo({
+                          ...formInfo,
+                          companyName: e.target.value,
+                        })
+                      }
                     />
                   </Grid>
                   <Grid item md={5} sm={12} xs={12}>
@@ -165,7 +187,12 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       disabled={!edit}
                       variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.employmentType}
-                      onChange={(e: any) => setFormInfo({ ...formInfo, employmentType: e.target.value })}
+                      onChange={(e: any) =>
+                        setFormInfo({
+                          ...formInfo,
+                          employmentType: e.target.value,
+                        })
+                      }
                     />
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>
@@ -173,7 +200,9 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       label={'Start date'}
                       disabled={!edit}
                       defaultValue={new Date(formInfo?.startDate) as Date}
-                      updateParentDateValue={(d: Date) => setFormInfo({ ...formInfo, startDate: d })}
+                      updateParentDateValue={(d: Date) =>
+                        setFormInfo({ ...formInfo, startDate: d })
+                      }
                     />
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>
@@ -181,7 +210,9 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       label={'End date'}
                       disabled={!edit}
                       defaultValue={new Date(formInfo?.endDate) as Date}
-                      updateParentDateValue={(d: Date) => setFormInfo({ ...formInfo, endDate: d })}
+                      updateParentDateValue={(d: Date) =>
+                        setFormInfo({ ...formInfo, endDate: d })
+                      }
                     />
                   </Grid>
                   <Grid item md={12} sm={12} xs={12}>
@@ -190,7 +221,12 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       fullWidth
                       label="Is this my current job?"
                       disabled
-                      value={new Date(formInfo?.endDate).getTime() > new Date().getTime() ? 'Yes' : 'No'}
+                      value={
+                        new Date(formInfo?.endDate).getTime() >
+                        new Date().getTime()
+                          ? 'Yes'
+                          : 'No'
+                      }
                     />
                   </Grid>
                   <Grid item md={12} sm={12} xs={12}>
@@ -199,8 +235,13 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       fullWidth
                       label="I've been on this role for: "
                       disabled
-                      value={`${numDatesBetweenTwoDates(new Date(formInfo?.startDate), new Date(formInfo?.endDate))} days`}
-                      onChange={(e: any) => setFormInfo({ ...formInfo, cityOfWork: e.target.value })}
+                      value={`${numDatesBetweenTwoDates(
+                        new Date(formInfo?.startDate),
+                        new Date(formInfo?.endDate),
+                      )} days`}
+                      onChange={(e: any) =>
+                        setFormInfo({ ...formInfo, cityOfWork: e.target.value })
+                      }
                     />
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>
@@ -211,7 +252,9 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       disabled={!edit}
                       variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.cityOfWork}
-                      onChange={(e: any) => setFormInfo({ ...formInfo, cityOfWork: e.target.value })}
+                      onChange={(e: any) =>
+                        setFormInfo({ ...formInfo, cityOfWork: e.target.value })
+                      }
                     />
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>
@@ -222,7 +265,12 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       disabled={!edit}
                       variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.countryOfWork}
-                      onChange={(e: any) => setFormInfo({ ...formInfo, countryOfWork: e.target.value })}
+                      onChange={(e: any) =>
+                        setFormInfo({
+                          ...formInfo,
+                          countryOfWork: e.target.value,
+                        })
+                      }
                     />
                   </Grid>
                   <Grid item md={12} sm={12} xs={12}>
@@ -235,7 +283,9 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       disabled={!edit}
                       variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.duties}
-                      onChange={(e: any) => setFormInfo({ ...formInfo, duties: e.target.value })}
+                      onChange={(e: any) =>
+                        setFormInfo({ ...formInfo, duties: e.target.value })
+                      }
                     />
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>
@@ -268,13 +318,19 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                       disabled={!edit}
                       variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.additionalInfo}
-                      onChange={(e: any) => setFormInfo({ ...formInfo, additionalInfo: e.target.value })}
+                      onChange={(e: any) =>
+                        setFormInfo({
+                          ...formInfo,
+                          additionalInfo: e.target.value,
+                        })
+                      }
                     />
                   </Grid>
                   <Grid item md={12} sm={12} xs={12}>
                     {error ? (
                       <Alert severity="error">
-                        Error loading your education history, please try again later!
+                        Error loading your education history, please try again
+                        later!
                       </Alert>
                     ) : null}
                   </Grid>
@@ -319,11 +375,7 @@ const EmploymentHistoryEdit: React.FC<IEmploymentHistoryEdit> = (props: IEmploym
                   disabled={!edit}
                   style={{ textTransform: 'none' }}
                 >
-                  {updating ? (
-                    <CircularProgress color="warning" />
-                  ) : (
-                    'Update'
-                  )}
+                  {updating ? <CircularProgress color="warning" /> : 'Update'}
                 </Button>
               </Grid>
             </Grid>
