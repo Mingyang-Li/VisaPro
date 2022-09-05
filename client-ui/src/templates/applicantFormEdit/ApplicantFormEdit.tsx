@@ -19,7 +19,7 @@ interface TabPanelProps {
   value: number;
 }
 
-function TabPanel(props: TabPanelProps) {
+const TabPanel = (props: TabPanelProps) => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -37,7 +37,7 @@ function TabPanel(props: TabPanelProps) {
       )}
     </div>
   );
-}
+};
 
 function a11yProps(index: number) {
   return {
@@ -46,7 +46,7 @@ function a11yProps(index: number) {
   };
 }
 
-export function BasicTabs() {
+export const BasicTabs = () => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -85,13 +85,9 @@ export function BasicTabs() {
       </TabPanel>
     </Box>
   );
-}
+};
 
-interface IApplicantFormEdit {
-  id?: string;
-}
-
-const ApplicantFormEdit: React.FC = (props: IApplicantFormEdit) => {
+const ApplicantFormEdit: React.FC = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -100,10 +96,6 @@ const ApplicantFormEdit: React.FC = (props: IApplicantFormEdit) => {
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleSubmit = () => {
-    console.log('handleSubmit clicked');
   };
 
   return (
