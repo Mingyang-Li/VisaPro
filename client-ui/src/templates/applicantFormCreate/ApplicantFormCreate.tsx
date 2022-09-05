@@ -50,10 +50,11 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
     setOpen(false);
   };
 
-  const enableCreation = values.firstName === ''
-    || values.lastName === ''
-    || values.email === ''
-    || values.disableInput;
+  const enableCreation =
+    values.firstName === '' ||
+    values.lastName === '' ||
+    values.email === '' ||
+    values.disableInput;
 
   const applicantId = useReactiveVar(entityCreated);
 
@@ -71,35 +72,32 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
     },
   });
 
-  const [createPersonalInfo] = useMutation<Mutation>(
-    CREATE_PERSONAL_INFO,
-    {
-      variables: {
-        data: {
-          firstName: values.firstName,
-          lastName: values.lastName,
-          email: values.email,
-          createdBy: {
-            id: u.id,
-          },
-          applicant: {
-            id: applicantId,
+  const [createPersonalInfo] = useMutation<Mutation>(CREATE_PERSONAL_INFO, {
+    variables: {
+      data: {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        createdBy: {
+          id: u.id,
+        },
+        applicant: {
+          id: applicantId,
+        },
+      },
+    },
+    refetchQueries: [
+      {
+        query: GET_APPLICANTS_BY_USER,
+        variables: {
+          where: {
+            createdBy: { id: sessionStorage.getItem('userId') },
+            archived: { equals: null },
           },
         },
       },
-      refetchQueries: [
-        {
-          query: GET_APPLICANTS_BY_USER,
-          variables: {
-            where: {
-              createdBy: { id: sessionStorage.getItem('userId') },
-              archived: { equals: null },
-            },
-          },
-        },
-      ],
-    },
-  );
+    ],
+  });
 
   // fire createPersonalInfo then fire createApplicant using ID of PersonalInfo created
   const handleSubmit = () => {
@@ -133,7 +131,9 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
                 label="First name"
                 variant="outlined"
                 value={values.firstName}
-                onChange={(e) => setValues({ ...values, firstName: e.currentTarget.value })}
+                onChange={(e) =>
+                  setValues({ ...values, firstName: e.currentTarget.value })
+                }
                 fullWidth
                 required
                 disabled={values.disableInput}
@@ -145,7 +145,9 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
                 label="Last name"
                 variant="outlined"
                 value={values.lastName}
-                onChange={(e) => setValues({ ...values, lastName: e.currentTarget.value })}
+                onChange={(e) =>
+                  setValues({ ...values, lastName: e.currentTarget.value })
+                }
                 fullWidth
                 required
                 disabled={values.disableInput}
@@ -157,7 +159,9 @@ const ApplicantFormCreate: React.FC<IApplicantFormCreate> = (
                 label="Email"
                 variant="outlined"
                 value={values.email}
-                onChange={(e) => setValues({ ...values, email: e.currentTarget.value })}
+                onChange={(e) =>
+                  setValues({ ...values, email: e.currentTarget.value })
+                }
                 fullWidth
                 required
                 disabled={values.disableInput}
