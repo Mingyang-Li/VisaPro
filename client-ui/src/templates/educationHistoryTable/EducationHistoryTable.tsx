@@ -13,7 +13,9 @@ import { Alert } from '@mui/material';
 import { EDUCATION_HISTORIES } from '../../graphql/Queries';
 import { applicantIdCurrEditing, user } from '../../graphql/Store';
 import {
-  EducationHistory, EducationHistoryWhereInput, Query,
+  EducationHistory,
+  EducationHistoryWhereInput,
+  Query,
 } from '../../generated/graphql';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import EducationHistoryEdit from '../educationHistoryEdit/EducationHistoryEdit';
@@ -109,7 +111,8 @@ const EducationHistoryTable = () => {
     setEdit(!edit);
   };
 
-  if (loading) return <LoadingSpinner show text={'Getting education histories'} />;
+  if (loading)
+    return <LoadingSpinner show text={'Getting education histories'} />;
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -117,10 +120,12 @@ const EducationHistoryTable = () => {
         <Alert severity="error">
           Ah Sh-t! Failed to load your education history.
         </Alert>
-      ) : (
-        null
-      )}
-      <EducationHistoryEdit open={edit} educationHistoryId={editId} handleClose={setEdit} />
+      ) : null}
+      <EducationHistoryEdit
+        open={edit}
+        educationHistoryId={editId}
+        handleClose={setEdit}
+      />
       <TableContainer sx={{ maxHeight: 630 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -142,7 +147,11 @@ const EducationHistoryTable = () => {
                 {columns.map((column) => {
                   const i = column.id;
                   return (
-                    <TableCell key={column.id} align={column.align} onClick={() => rowOnclickHandler(row.id)}>
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      onClick={() => rowOnclickHandler(row.id)}
+                    >
                       {row[`${i}`]}
                     </TableCell>
                   );
