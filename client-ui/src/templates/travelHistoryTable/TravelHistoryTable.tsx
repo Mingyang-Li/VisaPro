@@ -19,15 +19,10 @@ import {
 } from '../../generated/graphql';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
-interface Column {
-  id:
-    | 'dateDeparted'
-    | 'dateEntered'
-    | 'destinationCity'
-    | 'destinationCountry'
-    | 'destinationHub'
-    | 'reasonOfTravel';
+type ID = keyof TravelHistory;
 
+interface Column {
+  id: ID;
   label: string;
   minWidth?: number;
   align?: 'right';
