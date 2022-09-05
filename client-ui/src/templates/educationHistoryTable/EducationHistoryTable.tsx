@@ -20,14 +20,10 @@ import {
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import EducationHistoryEdit from '../educationHistoryEdit/EducationHistoryEdit';
 
+type ID = keyof EducationHistory;
+
 interface Column {
-  id:
-    | 'institutionName'
-    | 'country'
-    | 'city'
-    | 'qualificationGained'
-    | 'startDate'
-    | 'endDate';
+  id: ID;
   label: string;
   minWidth?: number;
   align?: 'right';
