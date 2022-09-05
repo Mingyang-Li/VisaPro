@@ -155,10 +155,12 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (
                       disabled={!edit}
                       variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.institutionName}
-                      onChange={(e: any) => setFormInfo({
-                        ...formInfo,
-                        institutionName: e.target.value,
-                      })}
+                      onChange={(e: any) =>
+                        setFormInfo({
+                          ...formInfo,
+                          institutionName: e.target.value,
+                        })
+                      }
                     />
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>
@@ -169,7 +171,9 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (
                       disabled={!edit}
                       variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.country}
-                      onChange={(e: any) => setFormInfo({ ...formInfo, country: e.target.value })}
+                      onChange={(e: any) =>
+                        setFormInfo({ ...formInfo, country: e.target.value })
+                      }
                     />
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>
@@ -180,7 +184,9 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (
                       disabled={!edit}
                       variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.city}
-                      onChange={(e: any) => setFormInfo({ ...formInfo, city: e.target.value })}
+                      onChange={(e: any) =>
+                        setFormInfo({ ...formInfo, city: e.target.value })
+                      }
                     />
                   </Grid>
                   <Grid item md={12} sm={12} xs={12}>
@@ -191,10 +197,12 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (
                       disabled={!edit}
                       variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.qualificationGained}
-                      onChange={(e: any) => setFormInfo({
-                        ...formInfo,
-                        qualificationGained: e.target.value,
-                      })}
+                      onChange={(e: any) =>
+                        setFormInfo({
+                          ...formInfo,
+                          qualificationGained: e.target.value,
+                        })
+                      }
                     />
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>
@@ -202,7 +210,9 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (
                       label={'Start date'}
                       disabled={!edit}
                       defaultValue={new Date(formInfo?.startDate) as Date}
-                      updateParentDateValue={(d: Date) => setFormInfo({ ...formInfo, startDate: d })}
+                      updateParentDateValue={(d: Date) =>
+                        setFormInfo({ ...formInfo, startDate: d })
+                      }
                     />
                   </Grid>
                   <Grid item md={6} sm={12} xs={12}>
@@ -210,7 +220,9 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (
                       label={'End date'}
                       disabled={!edit}
                       defaultValue={new Date(formInfo?.endDate) as Date}
-                      updateParentDateValue={(d: Date) => setFormInfo({ ...formInfo, endDate: d })}
+                      updateParentDateValue={(d: Date) =>
+                        setFormInfo({ ...formInfo, endDate: d })
+                      }
                     />
                   </Grid>
                   <Grid item md={12} sm={12} xs={12}>
@@ -220,8 +232,8 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (
                       label="I currently study here"
                       disabled
                       value={
-                        new Date(formInfo?.endDate).getTime()
-                        > new Date().getTime()
+                        new Date(formInfo?.endDate).getTime() >
+                        new Date().getTime()
                           ? 'Yes'
                           : 'No'
                       }
@@ -269,10 +281,12 @@ const EducationHistoryEdit: React.FC<IEducationHistoryEdit> = (
                       disabled={!edit}
                       variant={!edit ? 'filled' : 'outlined'}
                       value={formInfo?.additionalInfo}
-                      onChange={(e: any) => setFormInfo({
-                        ...formInfo,
-                        additionalInfo: e.target.value,
-                      })}
+                      onChange={(e: any) =>
+                        setFormInfo({
+                          ...formInfo,
+                          additionalInfo: e.target.value,
+                        })
+                      }
                     />
                   </Grid>
                   <Grid item md={12} sm={12} xs={12}>

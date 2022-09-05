@@ -23,11 +23,7 @@ interface IBasicCard {
 const BasicCard: React.FC<IBasicCard> = (props: IBasicCard) => (
   <Card variant="outlined">
     <CardContent>
-      <p>
-        Updated at:
-        {' '}
-        {props.updatedAt}
-      </p>
+      <p>Updated at: {props.updatedAt}</p>
       <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
         {props.email ? `Email: ${props.email}` : 'Email:'}
       </Typography>
@@ -35,34 +31,33 @@ const BasicCard: React.FC<IBasicCard> = (props: IBasicCard) => (
         {props.fullName ? props.fullName : 'Name'}
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.primary">
-        Education Histories:
-        {' '}
+        Education Histories:{' '}
         {props.educationHistoriesCt ? props.educationHistoriesCt : '0'}
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.primary">
-        Employment Histories:
-        {' '}
+        Employment Histories:{' '}
         {props.employmentHistoriesCt ? props.employmentHistoriesCt : '0'}
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.primary">
-        Travel Histories:
-        {' '}
+        Travel Histories:{' '}
         {props.travelHistoriesCt ? props.travelHistoriesCt : '0'}
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.primary">
-        Family Members:
-        {' '}
-        {props.familyMembersCt ? props.familyMembersCt : '0'}
+        Family Members: {props.familyMembersCt ? props.familyMembersCt : '0'}
       </Typography>
     </CardContent>
     <Divider />
     <CardActions>
       <Grid container spacing={2}>
         <Grid item md={6}>
-          <Button fullWidth variant={'outlined'} color={'error'}>Archive</Button>
+          <Button fullWidth variant={'outlined'} color={'error'}>
+            Archive
+          </Button>
         </Grid>
         <Grid item md={6}>
-          <Button fullWidth onClick={props.onEditRequest} variant={'contained'}>Edit</Button>
+          <Button fullWidth onClick={props.onEditRequest} variant={'contained'}>
+            Edit
+          </Button>
         </Grid>
       </Grid>
     </CardActions>

@@ -9,14 +9,20 @@ import styled from '@emotion/styled';
 import { blue } from '@mui/material/colors';
 import {
   Alert,
-  Card, CardContent, CircularProgress, Grid,
+  Card,
+  CardContent,
+  CircularProgress,
+  Grid,
 } from '@mui/material';
 import { useMutation, useReactiveVar } from '@apollo/client';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TypeOf } from 'zod';
 import { BasicDatePicker } from '../dateTimePicker/DateTimePicker';
-import { EducationHistory, EducationHistoryCreateInput } from '../../generated/graphql';
+import {
+  EducationHistory,
+  EducationHistoryCreateInput,
+} from '../../generated/graphql';
 import { CREATE_EDUCATION_HISTORY } from '../../graphql/Mutations';
 import { EDUCATION_HISTORIES } from '../../graphql/Queries';
 import { applicantIdCurrEditing, user } from '../../graphql/Store';
@@ -49,7 +55,8 @@ const EducationHistoryCreate: React.FC = () => {
     qualificationGained: formInfo?.qualificationGained,
     startDate: formInfo?.startDate,
     endDate: formInfo?.endDate,
-    isCurrentInstitution: new Date(formInfo?.endDate).getTime() > new Date().getTime(),
+    isCurrentInstitution:
+      new Date(formInfo?.endDate).getTime() > new Date().getTime(),
     additionalInfo: formInfo?.additionalInfo,
     createdBy: {
       id: currUser.id,
@@ -65,37 +72,30 @@ const EducationHistoryCreate: React.FC = () => {
 
   const [
     createEducationHistory,
-    {
-      data: dataCreated,
-      loading: creating,
-      error: creationError,
+    { data: dataCreated, loading: creating, error: creationError },
+  ] = useMutation(CREATE_EDUCATION_HISTORY, {
+    variables: {
+      data: educationHistoryCreateInput,
     },
-  ] = useMutation(
-    CREATE_EDUCATION_HISTORY,
-    {
-      variables: {
-        data: educationHistoryCreateInput,
-      },
-      refetchQueries: [
-        {
-          query: EDUCATION_HISTORIES,
-          variables: {
-            where: {
-              createdBy: {
-                id: currUser.id,
-              },
-              applicant: {
-                id: applicantId,
-              },
-              archived: {
-                equals: false,
-              },
+    refetchQueries: [
+      {
+        query: EDUCATION_HISTORIES,
+        variables: {
+          where: {
+            createdBy: {
+              id: currUser.id,
+            },
+            applicant: {
+              id: applicantId,
+            },
+            archived: {
+              equals: false,
             },
           },
         },
-      ],
-    },
-  );
+      },
+    ],
+  });
 
   useEffect(() => {
     if (creating) {
@@ -126,7 +126,8 @@ const EducationHistoryCreate: React.FC = () => {
     }
   }, [isSubmitSuccessful]);
 
-  const onSubmitHandler: SubmitHandler<SchemaType> = () => createEducationHistory();
+  const onSubmitHandler: SubmitHandler<SchemaType> = () =>
+    createEducationHistory();
 
   const handleClose = () => {
     setFormInfo({ id: '' });
@@ -161,10 +162,17 @@ const EducationHistoryCreate: React.FC = () => {
                     value={formInfo?.institutionName}
                     error={!!errors.institutionName}
                     helperText={
-                      errors.institutionName ? errors.institutionName.message : ''
+                      errors.institutionName
+                        ? errors.institutionName.message
+                        : ''
                     }
                     {...schema('institutionName')}
-                    onChange={(e: any) => setFormInfo({ ...formInfo, institutionName: e.target.value })}
+                    onChange={(e: any) =>
+                      setFormInfo({
+                        ...formInfo,
+                        institutionName: e.target.value,
+                      })
+                    }
                   />
                 </Grid>
                 <Grid item md={6} sm={12} xs={12}>
@@ -176,11 +184,11 @@ const EducationHistoryCreate: React.FC = () => {
                     variant={!edit ? 'filled' : 'outlined'}
                     value={formInfo?.country}
                     error={!!errors.country}
-                    helperText={
-                      errors.country ? errors.country.message : ''
-                    }
+                    helperText={errors.country ? errors.country.message : ''}
                     {...schema('country')}
-                    onChange={(e: any) => setFormInfo({ ...formInfo, country: e.target.value })}
+                    onChange={(e: any) =>
+                      setFormInfo({ ...formInfo, country: e.target.value })
+                    }
                   />
                 </Grid>
                 <Grid item md={6} sm={12} xs={12}>
@@ -192,11 +200,11 @@ const EducationHistoryCreate: React.FC = () => {
                     variant={!edit ? 'filled' : 'outlined'}
                     value={formInfo?.city}
                     error={!!errors.city}
-                    helperText={
-                      errors.city ? errors.city.message : ''
-                    }
+                    helperText={errors.city ? errors.city.message : ''}
                     {...schema('city')}
-                    onChange={(e: any) => setFormInfo({ ...formInfo, city: e.target.value })}
+                    onChange={(e: any) =>
+                      setFormInfo({ ...formInfo, city: e.target.value })
+                    }
                   />
                 </Grid>
                 <Grid item md={12} sm={12} xs={12}>
@@ -209,10 +217,17 @@ const EducationHistoryCreate: React.FC = () => {
                     value={formInfo?.qualificationGained}
                     error={!!errors.qualificationGained}
                     helperText={
-                      errors.qualificationGained ? errors.qualificationGained.message : ''
+                      errors.qualificationGained
+                        ? errors.qualificationGained.message
+                        : ''
                     }
                     {...schema('qualificationGained')}
-                    onChange={(e: any) => setFormInfo({ ...formInfo, qualificationGained: e.target.value })}
+                    onChange={(e: any) =>
+                      setFormInfo({
+                        ...formInfo,
+                        qualificationGained: e.target.value,
+                      })
+                    }
                   />
                 </Grid>
                 <Grid item md={6} sm={12} xs={12}>
@@ -220,7 +235,9 @@ const EducationHistoryCreate: React.FC = () => {
                     label={'Start date'}
                     disabled={!edit}
                     defaultValue={new Date(formInfo?.startDate ?? '') as Date}
-                    updateParentDateValue={(d: Date) => setFormInfo({ ...formInfo, startDate: d })}
+                    updateParentDateValue={(d: Date) =>
+                      setFormInfo({ ...formInfo, startDate: d })
+                    }
                   />
                 </Grid>
                 <Grid item md={6} sm={12} xs={12}>
@@ -228,7 +245,9 @@ const EducationHistoryCreate: React.FC = () => {
                     label={'End date'}
                     disabled={!edit}
                     defaultValue={new Date(formInfo?.endDate ?? '') as Date}
-                    updateParentDateValue={(d: Date) => setFormInfo({ ...formInfo, endDate: d })}
+                    updateParentDateValue={(d: Date) =>
+                      setFormInfo({ ...formInfo, endDate: d })
+                    }
                   />
                 </Grid>
                 <Grid item md={12} sm={12} xs={12}>
@@ -241,7 +260,12 @@ const EducationHistoryCreate: React.FC = () => {
                     disabled={!edit}
                     variant={!edit ? 'filled' : 'outlined'}
                     value={formInfo?.additionalInfo}
-                    onChange={(e: any) => setFormInfo({ ...formInfo, additionalInfo: e.target.value })}
+                    onChange={(e: any) =>
+                      setFormInfo({
+                        ...formInfo,
+                        additionalInfo: e.target.value,
+                      })
+                    }
                   />
                 </Grid>
                 <Grid item md={12} sm={12} xs={12}>
@@ -253,9 +277,7 @@ const EducationHistoryCreate: React.FC = () => {
                 </Grid>
                 <Grid item md={12} sm={12} xs={12}>
                   {dataCreated?.createEducationHistory ? (
-                    <Alert severity="success">
-                      Education history created!
-                    </Alert>
+                    <Alert severity="success">Education history created!</Alert>
                   ) : null}
                 </Grid>
               </Grid>
@@ -263,10 +285,7 @@ const EducationHistoryCreate: React.FC = () => {
           </Card>
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={handleClose}
-            style={{ textTransform: 'none' }}
-          >
+          <Button onClick={handleClose} style={{ textTransform: 'none' }}>
             Discard
           </Button>
           <Button
@@ -275,11 +294,7 @@ const EducationHistoryCreate: React.FC = () => {
             disabled={!edit}
             style={{ textTransform: 'none' }}
           >
-            {creating ? (
-              <CircularProgress color="warning" />
-            ) : (
-              'Create'
-            )}
+            {creating ? <CircularProgress color="warning" /> : 'Create'}
           </Button>
         </DialogActions>
       </Dialog>
