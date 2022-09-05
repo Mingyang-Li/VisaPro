@@ -13,7 +13,9 @@ import Alert from '@mui/material/Alert';
 import { TRAVEL_HISTORIES } from '../../graphql/Queries';
 import { applicantIdCurrEditing, user } from '../../graphql/Store';
 import {
-  TravelHistory, TravelHistoryWhereInput, Query,
+  TravelHistory,
+  TravelHistoryWhereInput,
+  Query,
 } from '../../generated/graphql';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
@@ -116,7 +118,8 @@ const TravelHistoryTable = () => {
     setEdit(!edit);
   };
 
-  if (loading) return <LoadingSpinner show text={'Getting education histories'} />;
+  if (loading)
+    return <LoadingSpinner show text={'Getting education histories'} />;
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -124,9 +127,7 @@ const TravelHistoryTable = () => {
         <Alert severity="error">
           Ah Sh-t! Failed to load your employment history.
         </Alert>
-      ) : (
-        null
-      )}
+      ) : null}
       <TableContainer sx={{ maxHeight: 630 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -148,9 +149,12 @@ const TravelHistoryTable = () => {
                 {columns.map((column) => {
                   const i = column.id;
                   return (
-                    <TableCell key={column.id} align={column.align} onClick={() => rowOnclickHandler(row.id)}>
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      onClick={() => rowOnclickHandler(row.id)}
+                    >
                       {row[`${i}`]}
-                      {/* test */}
                     </TableCell>
                   );
                 })}

@@ -142,7 +142,8 @@ export const PersonalInfoForm: React.FC = () => {
     }
   }, [isSubmitSuccessful]);
 
-  const onSubmitHandler: SubmitHandler<PersonalInfoInput> = () => initiateMutation();
+  const onSubmitHandler: SubmitHandler<PersonalInfoInput> = () =>
+    initiateMutation();
 
   return (
     <Card variant="outlined">
@@ -165,11 +166,14 @@ export const PersonalInfoForm: React.FC = () => {
                   label="First name"
                   value={formInfo?.firstName}
                   error={!!errors.firstName}
-                  helperText={
-                    errors.firstName ? errors.firstName.message : ''
-                  }
+                  helperText={errors.firstName ? errors.firstName.message : ''}
                   {...schema('firstName')}
-                  onChange={(e: any) => setFormInfo({ ...formInfo, firstName: e.currentTarget.value })}
+                  onChange={(e: any) =>
+                    setFormInfo({
+                      ...formInfo,
+                      firstName: e.currentTarget.value,
+                    })
+                  }
                   fullWidth
                   disabled={!edit}
                   variant={!edit ? 'filled' : 'outlined'}
@@ -183,7 +187,12 @@ export const PersonalInfoForm: React.FC = () => {
                   error={!!errors.lastName}
                   helperText={errors.lastName ? errors.lastName.message : ''}
                   {...schema('lastName')}
-                  onChange={(e: any) => setFormInfo({ ...formInfo, lastName: e.currentTarget.value })}
+                  onChange={(e: any) =>
+                    setFormInfo({
+                      ...formInfo,
+                      lastName: e.currentTarget.value,
+                    })
+                  }
                   fullWidth
                   disabled={!edit}
                   variant={!edit ? 'filled' : 'outlined'}
@@ -197,7 +206,9 @@ export const PersonalInfoForm: React.FC = () => {
                   error={!!errors.email}
                   helperText={errors.email ? errors.email.message : ''}
                   {...schema('email')}
-                  onChange={(e: any) => setFormInfo({ ...formInfo, email: e.currentTarget.value })}
+                  onChange={(e: any) =>
+                    setFormInfo({ ...formInfo, email: e.currentTarget.value })
+                  }
                   fullWidth
                   disabled={!edit}
                   variant={!edit ? 'filled' : 'outlined'}
@@ -211,7 +222,9 @@ export const PersonalInfoForm: React.FC = () => {
                   error={!!errors.mobile}
                   helperText={errors.mobile ? errors.mobile.message : ''}
                   {...schema('mobile')}
-                  onChange={(e: any) => setFormInfo({ ...formInfo, mobile: e.currentTarget.value })}
+                  onChange={(e: any) =>
+                    setFormInfo({ ...formInfo, mobile: e.currentTarget.value })
+                  }
                   fullWidth
                   disabled={!edit}
                   variant={!edit ? 'filled' : 'outlined'}
@@ -223,11 +236,14 @@ export const PersonalInfoForm: React.FC = () => {
                   label="NZ address"
                   value={formInfo?.nzAddress}
                   error={!!errors.nzAddress}
-                  helperText={
-                    errors.nzAddress ? errors.nzAddress.message : ''
-                  }
+                  helperText={errors.nzAddress ? errors.nzAddress.message : ''}
                   {...schema('nzAddress')}
-                  onChange={(e: any) => setFormInfo({ ...formInfo, nzAddress: e.currentTarget.value })}
+                  onChange={(e: any) =>
+                    setFormInfo({
+                      ...formInfo,
+                      nzAddress: e.currentTarget.value,
+                    })
+                  }
                   fullWidth
                   disabled={!edit}
                   variant={!edit ? 'filled' : 'outlined'}
@@ -245,10 +261,12 @@ export const PersonalInfoForm: React.FC = () => {
                       : ''
                   }
                   {...schema('homeCountryAddress')}
-                  onChange={(e: any) => setFormInfo({
-                    ...formInfo,
-                    homeCountryAddress: e.currentTarget.value,
-                  })}
+                  onChange={(e: any) =>
+                    setFormInfo({
+                      ...formInfo,
+                      homeCountryAddress: e.currentTarget.value,
+                    })
+                  }
                   fullWidth
                   disabled={!edit}
                   variant={!edit ? 'filled' : 'outlined'}
@@ -261,15 +279,15 @@ export const PersonalInfoForm: React.FC = () => {
                   value={formInfo?.inzClientNumber}
                   error={!!errors.inzClientNumber}
                   helperText={
-                    errors.inzClientNumber
-                      ? errors.inzClientNumber.message
-                      : ''
+                    errors.inzClientNumber ? errors.inzClientNumber.message : ''
                   }
                   {...schema('inzClientNumber')}
-                  onChange={(e: any) => setFormInfo({
-                    ...formInfo,
-                    inzClientNumber: e.currentTarget.value,
-                  })}
+                  onChange={(e: any) =>
+                    setFormInfo({
+                      ...formInfo,
+                      inzClientNumber: e.currentTarget.value,
+                    })
+                  }
                   fullWidth
                   disabled={!edit}
                   variant={!edit ? 'filled' : 'outlined'}
@@ -285,10 +303,12 @@ export const PersonalInfoForm: React.FC = () => {
                     errors.passportNumber ? errors.passportNumber.message : ''
                   }
                   {...schema('passportNumber')}
-                  onChange={(e: any) => setFormInfo({
-                    ...formInfo,
-                    passportNumber: e.currentTarget.value,
-                  })}
+                  onChange={(e: any) =>
+                    setFormInfo({
+                      ...formInfo,
+                      passportNumber: e.currentTarget.value,
+                    })
+                  }
                   fullWidth
                   disabled={!edit}
                   variant={!edit ? 'filled' : 'outlined'}
@@ -380,7 +400,17 @@ export const PersonalInfoForm: React.FC = () => {
                 <TextField
                   id="durationOnEarth"
                   label="I have been living for:"
-                  value={`${Math.floor(numDatesBetweenTwoDates(new Date(formInfo?.dateOfBirth), new Date()) / 365)} years and ${numDatesBetweenTwoDates(new Date(formInfo?.dateOfBirth), new Date()) % 365} days`}
+                  value={`${Math.floor(
+                    numDatesBetweenTwoDates(
+                      new Date(formInfo?.dateOfBirth),
+                      new Date(),
+                    ) / 365,
+                  )} years and ${
+                    numDatesBetweenTwoDates(
+                      new Date(formInfo?.dateOfBirth),
+                      new Date(),
+                    ) % 365
+                  } days`}
                   fullWidth
                   disabled
                   variant={'filled'}
@@ -416,7 +446,9 @@ export const PersonalInfoForm: React.FC = () => {
                   disabled={!edit}
                   variant={!edit ? 'filled' : 'outlined'}
                   value={formInfo?.additionalInfo}
-                  onChange={(e: any) => setFormInfo({ ...formInfo, additionalInfo: e.target.value })}
+                  onChange={(e: any) =>
+                    setFormInfo({ ...formInfo, additionalInfo: e.target.value })
+                  }
                 />
               </Grid>
             </Grid>
@@ -449,10 +481,13 @@ export const PersonalInfoForm: React.FC = () => {
                 <Grid item md={12} sm={12} xs={12}>
                   {updateError ? (
                     <Alert severity="error">
-                      Failed to update personal information, please try again later
+                      Failed to update personal information, please try again
+                      later
                     </Alert>
                   ) : (
-                    <Alert severity="success">Personal Infomation updated</Alert>
+                    <Alert severity="success">
+                      Personal Infomation updated
+                    </Alert>
                   )}
                 </Grid>
               )}
