@@ -19,16 +19,10 @@ import {
 } from '../../generated/graphql';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
-interface Column {
-  id:
-    | 'additionalInfo'
-    | 'countriesOfCitizenship'
-    | 'countryOfBirth'
-    | 'dateOfBirth'
-    | 'firstName'
-    | 'lastName'
-    | 'relationshipToApplicant';
+type ID = keyof FamilyMember;
 
+interface Column {
+  id: ID;
   label: string;
   minWidth?: number;
   align?: 'right';
